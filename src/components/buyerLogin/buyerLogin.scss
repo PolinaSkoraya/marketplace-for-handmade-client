@@ -1,0 +1,15 @@
+.buyerLogin {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+}
+
+.buyerLogin-form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 10px;
+  margin: 10px;
+}

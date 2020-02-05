@@ -1,0 +1,15 @@
+.buyerRegistration {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+}
+
+.buyerRegistration-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.buyerRegistration-form__input {
+  padding: 10px;
+  margin: 10px;
+}
