@@ -1,0 +1,8 @@
+.navigation-list{
+  list-style-type: none;
+  display: flex;
+}
+
+.navigation-list__item{
+  flex-basis: 25%;
+}
