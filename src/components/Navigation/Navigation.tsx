@@ -1,44 +1,28 @@
 import './Navigation.scss'
 import React, {Component} from "react";
-import {Switch, Route, NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
 import {ROUTES} from "../../routes/routes";
-import BuyerLogin from '../BuyerLogin/BuyerLogin';
-import Goods from '../Goods/Goods';
-import Sellers from '../Sellers/Sellers';
-import BuyerRegistration from '../BuyerRegistration/BuyerRegistration';
+
+import logo from "../../static/icons/diy.svg"
+
 
 class Navigation extends Component {
     render () {
-        return(
+        return (
             <div className='navigation'>
-                <ul className='navigation-list'>
-                    <li className='navigation-list__item'>
-                        <NavLink to={ROUTES.root}>Home</NavLink>
-                    </li>
+                <div className='navigation-list'>
+                    <NavLink to={ROUTES.root} className="navigation-list__link">
+                        <img src={logo} alt="logo" className="navigation-list__image"/>
+                    </NavLink>
 
-                    <li className='navigation-list__item'>
-                        <NavLink to={ROUTES.goods}>Goods</NavLink>
-                    </li>
+                    <NavLink to={ROUTES.goods.goods} className="navigation-list__link">Goods</NavLink>
 
-                    <li className='navigation-list__item'>
-                        <NavLink to={ROUTES.sellers}>Sellers</NavLink>
-                    </li>
+                    <NavLink to={ROUTES.sellers.sellers} className="navigation-list__link">Sellers</NavLink>
 
-                    <li className='navigation-list__item'>
-                        <NavLink to={ROUTES.buyer.login}>Log in</NavLink>
-                    </li>
+                    <NavLink to={ROUTES.buyer.login} className="navigation-list__link">Log in</NavLink>
 
-                    <li className='navigation-list__item'>
-                        <NavLink to={ROUTES.buyer.registration}>Registration</NavLink>
-                    </li>
-                </ul>
-
-                <Switch>
-                    <Route path={ROUTES.goods} component={Goods}/>
-                    <Route path={ROUTES.sellers} component={Sellers}/>
-                    <Route path={ROUTES.buyer.login} component={BuyerLogin}/>
-                    <Route path={ROUTES.buyer.registration} component={BuyerRegistration}/>
-                </Switch>
+                    <NavLink to={ROUTES.buyer.registration} className="navigation-list__link">Registration</NavLink>
+                </div>
             </div>
         );
     }

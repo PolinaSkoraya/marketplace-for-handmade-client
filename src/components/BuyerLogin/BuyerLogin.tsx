@@ -29,7 +29,7 @@ class BuyerLogin extends Component {
 
                 <form onSubmit={this.store.onSubmit} className="buyerLogin-form">
                    <input
-                       className = 'buyerRegistration-form__input'
+                       className = 'buyerLogin-input'
                        type='text'
                        onChange={this.store.onChangeEmail}
                        placeholder='email'
@@ -37,7 +37,7 @@ class BuyerLogin extends Component {
                    />
 
                    <input
-                       className = 'buyerRegistration-form__input'
+                       className = 'buyerLogin-input'
                        type='text'
                        onChange={this.store.onChangePassword}
                        placeholder='password'

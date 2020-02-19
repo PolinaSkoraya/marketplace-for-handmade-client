@@ -1,0 +1,34 @@
+@import "src/styles/variables";
+
+.header{
+  min-height: 90vh;
+  position: relative;
+  display: flex;
+}
+
+.header::after{
+  content: "";
+  background-image: url("../../static/images/header-home-1.jpg");
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100%;
+
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.main-photo:hover {
+  transition-property: opacity;
+  transition-duration: .8s;
+  opacity: 0.4;
+}
+
+.goodsContainer{
+  height: 500px;
+  margin: 0 20px;
+}

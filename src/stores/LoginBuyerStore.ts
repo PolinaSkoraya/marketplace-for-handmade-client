@@ -5,8 +5,9 @@ import {URLS} from '../http/urls';
 const TOKEN = 'token';
 
 class LoginBuyerStore {
-    @observable email = '';
-    @observable password = '';
+    name = "";
+    @observable email = "";
+    @observable password = "";
 
     @action.bound
     onChangeEmail (event) {

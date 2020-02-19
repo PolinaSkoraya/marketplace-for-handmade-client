@@ -1,8 +1,11 @@
 const URLS = {
-    goods: '/Goods',
+    goods: '/goods/',
     loginBuyer: '/buyers/login',
     buyers: '/buyers',
-    registerBuyer: '/buyers/register'
+    registerBuyer: '/buyers/register',
+    sellers: "/sellers/"
 }
 
-export {URLS}
+const STATIC_IMAGES = "http://localhost:9000/static/images/";
+
+export {URLS, STATIC_IMAGES}

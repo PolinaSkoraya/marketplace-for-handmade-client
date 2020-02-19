@@ -1,0 +1,50 @@
+@import "../../styles/variables";
+
+$box-shadow-good: rgba(80, 57, 76, 0.3) 2px 2px 8px 1px;
+$box-shadow-good-hover: $color-grey 2px 2px 8px 1px;
+
+.good{
+  display: flex;
+  flex-direction: column;
+  box-shadow: $box-shadow-good;
+  padding: 8px;
+  //max-height: 300px;
+}
+
+.good:hover{
+  box-shadow: $box-shadow-good-hover;
+
+}
+
+.good__about{
+}
+
+.good__image img{
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.good__shop-info{
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  padding: 0 10px;
+}
+
+.good__title{
+  font-size: $font-size-sub-title;
+}
+
+.good__link{
+  color: $color-basic-dark;
+}
+
+.good__link:hover{
+  color: $color-grey;
+}
+
+.good__link:active{
+  color: $color-secondary-dark;
+}
+
+

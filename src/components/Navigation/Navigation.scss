@@ -1,8 +1,23 @@
+@import 'src/styles/variables';
+
 .navigation-list{
-  list-style-type: none;
   display: flex;
+  background-color: $color-basic-light;
+  height: 10vh;
+  align-items: center;
 }
 
-.navigation-list__item{
-  flex-basis: 25%;
+.navigation-list__link{
+  flex-basis: 10%;
+  color: $color-basic-dark;
+  font-size: $font-size-buttons;
+}
+
+.navigation-list__link:hover{
+  color: $color-secondary-light;
+}
+
+.navigation-list__image{
+  height: 9vh;
+  width: 9vh;
 }

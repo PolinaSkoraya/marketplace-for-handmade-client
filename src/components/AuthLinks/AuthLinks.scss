@@ -1,0 +1,21 @@
+@import "src/styles/variables";
+
+.links{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  flex-basis: 40%;
+}
+
+.auth-link{
+  opacity: 1;
+  font-size: $font-size-title;
+  color: $color-basic-dark;
+  padding-bottom: 20px;
+}
+
+.auth-link:hover{
+  color: $color-active;
+}

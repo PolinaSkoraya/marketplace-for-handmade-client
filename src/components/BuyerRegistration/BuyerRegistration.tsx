@@ -5,7 +5,7 @@ import {observer} from 'mobx-react';
 import RegisterBuyerStore from '../../stores/RegisterBuyerStore';
 
 @observer
-class BuyerRegistration extends Component <{}, {name: string, email: string, password: string}> {
+class BuyerRegistration extends Component{
     store: RegisterBuyerStore = new RegisterBuyerStore();
 
     render(){
@@ -15,7 +15,7 @@ class BuyerRegistration extends Component <{}, {name: string, email: string, pas
 
                 <form onSubmit={this.store.onSubmit} className="buyerRegistration-form">
                     <input
-                        className="buyerRegistration-form__input"
+                        className="buyerRegistration-input"
                         type="text"
                         value={this.store.name}
                         onChange={this.store.onChangeName}
@@ -23,7 +23,7 @@ class BuyerRegistration extends Component <{}, {name: string, email: string, pas
                     />
 
                     <input
-                        className="buyerRegistration-form__input"
+                        className="buyerRegistration-input"
                         type="text"
                         value={this.store.email}
                         onChange={this.store.onChangeEmail}
@@ -31,7 +31,7 @@ class BuyerRegistration extends Component <{}, {name: string, email: string, pas
                     />
 
                     <input
-                        className="buyerRegistration-form__input"
+                        className="buyerRegistration-input"
                         type="text"
                         value={this.store.password}
                         onChange={this.store.onChangePassword}

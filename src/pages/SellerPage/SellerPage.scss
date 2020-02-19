@@ -1,0 +1,55 @@
+@import "src/styles/variables";
+
+.seller-page{
+  padding: 20px 20px;
+}
+
+.seller-profile__info{
+  display: flex;
+}
+
+.seller-profile__back-image {
+  background-image: url("../../static/images/background-for-shop.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 200px;
+}
+
+.seller-profile__logo{
+  margin: -45px 30px 0 30px;
+  background-color: $color-basic-light;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seller-profile__logo-img {
+  height: 80%;
+  width: 80%;
+}
+
+.seller-profile__text {
+  text-align: left;
+  max-width: 70%;
+}
+
+.seller-profile__text-field {
+  padding: 8px 0;
+}
+
+.seller-profile__text-field--name{
+  font-size: 25px;
+}
+
+.seller-profile__description{
+  margin: 8px 0;
+  padding: 4px 8px;
+  border-left: 1px solid $color-basic-light;
+}
+
+.seller-profile__footer{
+  margin: 100px 0 10px 0;
+}

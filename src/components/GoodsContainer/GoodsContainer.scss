@@ -1,0 +1,18 @@
+@import "../../styles/variables";
+
+.goodsContainer{
+  //margin: 0 40px;
+}
+
+.goodsContainer__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  padding-bottom: 40px;
+}
+
+.goodsContainer__title {
+  font-size: $font-size-title;
+  font-weight: 500;
+  padding: 20px 0 30px 0;
+}
