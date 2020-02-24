@@ -1,6 +1,7 @@
 @import "../../styles/variables";
 
 $box-shadow-good: rgba(80, 57, 76, 0.3) 2px 2px 8px 1px;
+$box-shadow-good-active: $color-secondary-light 0px 0px 15px 2px;
 $box-shadow-good-hover: $color-grey 2px 2px 8px 1px;
 
 .good{
@@ -8,12 +9,26 @@ $box-shadow-good-hover: $color-grey 2px 2px 8px 1px;
   flex-direction: column;
   box-shadow: $box-shadow-good;
   padding: 8px;
+  position: relative;
   //max-height: 300px;
 }
 
 .good:hover{
   box-shadow: $box-shadow-good-hover;
+}
 
+.good:active{
+  animation-name: shadow;
+  animation-duration: .4s;
+}
+
+@keyframes shadow {
+  from {
+    box-shadow: $box-shadow-good;
+  }
+  to {
+    box-shadow: $box-shadow-good-active;
+  }
 }
 
 .good__about{

@@ -1,23 +1,30 @@
 @import 'src/styles/variables';
 
-.navigation-list{
+.navigation__list{
   display: flex;
   background-color: $color-basic-light;
   height: 10vh;
+  justify-content: space-between;
   align-items: center;
 }
 
-.navigation-list__link{
-  flex-basis: 10%;
-  color: $color-basic-dark;
-  font-size: $font-size-buttons;
+.navigation__links{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.navigation-list__link:hover{
+.navigation__link{
+  color: $color-basic-dark;
+  font-size: $font-size-buttons;
+  padding: 0 15px;
+}
+
+.navigation__link:hover{
   color: $color-secondary-light;
 }
 
-.navigation-list__image{
+.navigation__image{
   height: 9vh;
   width: 9vh;
 }

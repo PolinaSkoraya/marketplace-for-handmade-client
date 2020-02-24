@@ -58,6 +58,8 @@ class OneGoodPage extends Component<any> {
                                 >
                                     Shop: {this.store.good.seller.name}
                                 </NavLink>
+                            </div>
+                            <div>
 
                             </div>
                         </div>

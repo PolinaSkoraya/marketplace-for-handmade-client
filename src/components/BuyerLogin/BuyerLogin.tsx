@@ -3,18 +3,22 @@ import './BuyerLogin.scss';
 import {observer} from "mobx-react";
 import {instance} from "../../http/instance";
 import {URLS} from "../../http/urls";
-import {LoginBuyerStore} from '../../stores/LoginBuyerStore';
+import {UserStore} from "../../stores/UserStore";
+import RootStore from "../../stores/RootStore";
+import {ROUTES} from "../../routes/routes";
+import {NavLink, Redirect} from 'react-router-dom';
 
 @observer
 class BuyerLogin extends Component {
-    store: LoginBuyerStore = new LoginBuyerStore();
 
     componentDidMount() {
+        const {user} = RootStore;
+
         instance
             .get(URLS.buyers)
             .then(response => {
                 if (response.data.length > 0) {
-                    this.store.email = response.data[0].email;
+                    user.email = response.data[0].email;
                 }
             })
             .catch((error) => {
@@ -23,29 +27,38 @@ class BuyerLogin extends Component {
     }
 
     render () {
-        return(
+        const {user} = RootStore;
+
+        return (
             <div className="buyerLogin">
                 <h4>Login</h4>
 
-                <form onSubmit={this.store.onSubmit} className="buyerLogin-form">
+                <form onSubmit={user.loginBuyer} className="buyerLogin-form">
                    <input
                        className = 'buyerLogin-input'
                        type='text'
-                       onChange={this.store.onChangeEmail}
+                       onChange={user.onChangeEmail}
                        placeholder='email'
-                       value={this.store.email}
+                       value={user.email}
                    />
 
                    <input
                        className = 'buyerLogin-input'
                        type='text'
-                       onChange={this.store.onChangePassword}
+                       onChange={user.onChangePassword}
                        placeholder='password'
-                       value={this.store.password}
+                       value={user.password}
                     />
 
                     <input type="submit" value="Sing in"/>
                  </form>
+
+                <NavLink
+                    to={ROUTES.root}
+                    className="navigation__link navigation__link--user"
+                >
+                    <button onClick={user.logOutBuyer}>log out</button>
+                </NavLink>
             </div>
     );
     }

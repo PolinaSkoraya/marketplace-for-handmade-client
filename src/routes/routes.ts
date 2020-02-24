@@ -8,11 +8,14 @@ export const ROUTES = {
 
     sellers: {
         sellers: '/sellers/',
-        id: '/sellers/:id'
+        id: '/sellers/:id',
+        profile: '/sellers/profile/'
     },
 
-    buyer: {
-        login: '/buyer/login',
-        registration: '/buyer/registration'
+    buyers: {
+        login: '/buyers/login',
+        registration: '/buyers/registration',
+        profile: '/buyers/profile/'
     }
+
 }

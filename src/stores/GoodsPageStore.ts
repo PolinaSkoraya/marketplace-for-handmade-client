@@ -23,7 +23,7 @@ class GoodsPageStore {
     sortByLikes() {
         this.goods = this.goods
             .slice()
-            .sort((a, b) => a.likes > b.likes ? 1 : -1);
+            .sort((a, b) => a.likes > b.likes ? -1 : 1);
     }
 
     @action.bound

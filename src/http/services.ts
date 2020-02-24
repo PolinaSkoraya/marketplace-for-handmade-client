@@ -1,6 +1,6 @@
 import {instance} from "./instance";
 import {URLS} from "./urls";
-import {TOKEN} from "../stores/LoginBuyerStore";
+import {TOKEN} from "../stores/UserStore";
 
 function getGoods() {
     return instance.get(URLS.goods, {
@@ -8,6 +8,10 @@ function getGoods() {
             'auth-token': localStorage.getItem(TOKEN),
         },
     });
+}
+
+function getBuyerById (id) {
+    return instance.get(URLS.buyers + id);
 }
 
 function getSellerById (id) {
@@ -34,4 +38,4 @@ function getGoodWithSellerById (id) {
     });
 }
 
-export {getGoods, getSellerById, getGoodsOfSeller, getGoodById, getGoodWithSellerById};
+export {getGoods, getSellerById, getGoodsOfSeller, getGoodById, getGoodWithSellerById, getBuyerById};

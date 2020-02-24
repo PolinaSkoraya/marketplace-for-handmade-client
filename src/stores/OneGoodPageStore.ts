@@ -1,5 +1,6 @@
 import {action, observable} from 'mobx';
-import {getGoodWithSellerById} from "../http/services";
+import {getGoodsOfSeller, getGoodWithSellerById} from "../http/services";
+import Good from "../components/Good/Good";
 
 class OneGoodPageStore {
     @observable good = {

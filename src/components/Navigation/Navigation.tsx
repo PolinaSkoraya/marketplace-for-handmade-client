@@ -1,31 +1,54 @@
 import './Navigation.scss'
 import React, {Component} from "react";
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import {ROUTES} from "../../routes/routes";
 
 import logo from "../../static/icons/diy.svg"
+import RootStore from "../../stores/RootStore";
+import AuthLinks from "../AuthLinks/AuthLinks";
+import {observer} from "mobx-react";
 
-
+@observer
 class Navigation extends Component {
     render () {
+        const {user} = RootStore;
+
         return (
             <div className='navigation'>
-                <div className='navigation-list'>
-                    <NavLink to={ROUTES.root} className="navigation-list__link">
-                        <img src={logo} alt="logo" className="navigation-list__image"/>
-                    </NavLink>
+                <div className='navigation__list'>
+                    <div className="navigation__links navigation__links--app">
+                        <NavLink to={ROUTES.root} className="navigation__link navigation__link--app">
+                            <img src={logo} alt="logo" className="navigation__image"/>
+                        </NavLink>
 
-                    <NavLink to={ROUTES.goods.goods} className="navigation-list__link">Goods</NavLink>
+                        <NavLink to={ROUTES.goods.goods} className="navigation__link navigation__link--app">Goods</NavLink>
 
-                    <NavLink to={ROUTES.sellers.sellers} className="navigation-list__link">Sellers</NavLink>
+                        <NavLink to={ROUTES.sellers.sellers} className="navigation__link navigation__link--app">Sellers</NavLink>
+                    </div>
 
-                    <NavLink to={ROUTES.buyer.login} className="navigation-list__link">Log in</NavLink>
+                    { user.authenticated ? (
+                        <div className="navigation__links navigation__links--user">
+                            <NavLink
+                                to={ROUTES.root}
+                                className="navigation__link navigation__link--user"
+                            >
+                                <button onClick={user.logOutBuyer}>log out</button>
+                            </NavLink>
 
-                    <NavLink to={ROUTES.buyer.registration} className="navigation-list__link">Registration</NavLink>
+                        </div>
+                    ) : (
+                        <div className="navigation__links navigation__links--user">
+                            <NavLink to={ROUTES.buyers.login} className="navigation__link navigation__link--user">Log in</NavLink>
+
+                        </div>
+                    ) }
+
+
+
                 </div>
             </div>
         );
     }
 }
 
-export default Navigation
+export default Navigation;

@@ -91,6 +91,7 @@
   padding: 15px 10px;
   background-color: $color-basic-light;
   border-radius: 10px;
+  //align-items: center;
 }
 
 .shop-info__image{
@@ -105,4 +106,9 @@
 
 .good__shop-name:hover{
   color: $color-secondary-light;
+}
+
+.shop-info__description{
+  padding: 5px 0;
+
 }

@@ -1,7 +1,7 @@
 const URLS = {
     goods: '/goods/',
     loginBuyer: '/buyers/login',
-    buyers: '/buyers',
+    buyers: '/buyers/',
     registerBuyer: '/buyers/register',
     sellers: "/sellers/"
 }

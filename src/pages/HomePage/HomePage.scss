@@ -32,3 +32,14 @@
   height: 500px;
   margin: 0 20px;
 }
+
+.header__info{
+  display: flex;
+  flex-basis: 40%;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__text{
+  font-size: $font-size-sub-title;
+}
