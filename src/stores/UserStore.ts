@@ -1,9 +1,9 @@
 import {action, computed, observable} from 'mobx';
 import {instance} from '../http/instance';
 import {URLS} from '../http/urls';
-import {getBuyerById} from "../http/services";
-import {Roles} from "./helpers/roles";
+import {getBuyerById, getGoodsInBasket} from "../http/services";
 import jwtDecode from 'jwt-decode';
+import {GoodInterface} from "./helpers/interfaces";
 
 const TOKEN = 'token';
 
@@ -15,6 +15,8 @@ class UserStore {
     @observable role = '';
     @observable basket = [];
 
+    @observable goodsInBasket: GoodInterface[] = [];
+
     constructor() {
         const accessToken  = this.getAuthTokens();
 
@@ -25,14 +27,14 @@ class UserStore {
     }
 
     @action
-    init(token: string) {
+    async init(token: string) {
         const authData = jwtDecode(token);
 
+        this.id = authData._id;
         this.name = authData.name;
         this.role = authData.role;
 
-        console.log("init user");
-        console.log(authData);
+        await this.initBasket();
     }
 
     getAuthTokens = () => {
@@ -65,29 +67,22 @@ class UserStore {
 
         try {
             const response = await instance.post(URLS.loginBuyer, buyer);
-
-            console.log("loginBuyer");
-            console.log(buyer);
-            console.log(response.data);
-
             localStorage.setItem(TOKEN, response.data);
 
             this.init(response.data);
-
 
         } catch (error) {
             console.log(error);
         }
     }
 
-    // @action.bound
-    // async initBuyer(id) {
-    //     let responseBuyer = await getBuyerById(id);
-    //
-    //     this.role = Roles.buyer;
-    //     this.name = responseBuyer.data.name;
-    //     this.basket = responseBuyer.data.basket;
-    // }
+    @action.bound
+    async initBasket() {
+        let responseBuyer = await getBuyerById(this.id);
+        this.basket = responseBuyer.data.basket;
+
+        this.getGoods(); //get goods after getting the basket
+    }
 
     @action.bound
     async logOutBuyer() {
@@ -95,6 +90,18 @@ class UserStore {
 
         this.basket = [];
         this.name = '';
+    }
+
+    @action.bound
+    async getGoods () {
+        try {
+            const responseGoods = await getGoodsInBasket(this.id);
+            this.goodsInBasket = responseGoods.data;
+
+        } catch (error) {
+            console.log(error);
+
+        }
     }
 }
 

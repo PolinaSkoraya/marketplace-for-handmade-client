@@ -2,7 +2,7 @@ import "./GoodsPage.scss"
 import React, {Component} from "react";
 import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
-import GoodsPageStore from "../../stores/GoodsPageStore";
+import GoodsStore from "../../stores/GoodsStore";
 import RootStore from "../../stores/RootStore";
 import AuthLinks from "../../components/AuthLinks/AuthLinks";
 import {ROUTES} from "../../routes/routes";
@@ -10,7 +10,7 @@ import {Redirect} from 'react-router-dom'
 
 @observer
 class GoodsPage extends Component{
-    store: GoodsPageStore = new GoodsPageStore();
+    store: GoodsStore = new GoodsStore();
 
     componentDidMount(): void {
         this.store.loadGoods();

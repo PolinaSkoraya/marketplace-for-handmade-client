@@ -1,13 +1,9 @@
 import "./AuthLinks.scss"
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {ROUTES} from "../../routes/routes";
 import {NavLink} from 'react-router-dom';
-import RootStore from "../../stores/RootStore";
-
-const { user } = RootStore;
 
 class AuthLinks extends Component {
-
 
     render(){
 

@@ -1,24 +1,26 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom'
 import './OneGoodPage.scss';
-import OneGoodPageStore from "../../stores/OneGoodPageStore";
+import OneGoodStore from "../../stores/OneGoodStore";
 import {observer} from "mobx-react";
 
-import likeSVG from "../../static/icons/heart-regular.svg";
-
 import {STATIC_IMAGES} from "../../http/urls";
+import RootStore from "../../stores/RootStore";
+
+const {user} = RootStore;
 
 @observer
 class OneGoodPage extends Component<any> {
-    store = new OneGoodPageStore();
+    store = new OneGoodStore();
 
-    componentDidMount(): void {
+    async componentDidMount() {
         const {match}  = this.props;
-        this.store.initGood(match.params.id);
+        await this.store.initGood(match.params.id);
 
     }
 
     render () {
+
         return(
             <div className="good-page">
                 <div className="good-page__title">
@@ -26,9 +28,25 @@ class OneGoodPage extends Component<any> {
                 </div>
 
                 <div className="good-page__info">
-                    <div className="good-page__info-left">
-                        <img className="good-page__image" src={STATIC_IMAGES + this.store.good.image} alt="image"/>
-                    </div>
+
+                    {/*<div className="card">*/}
+                        <div className="good-page__info-left card-front">
+                            <img className="good-page__image" src={STATIC_IMAGES + this.store.good.image} alt="image"/>
+                        </div>
+
+                        {/*<div className="card-back">*/}
+                        {/*    <div className="">*/}
+                        {/*        <div className="">*/}
+                        {/*            Description:*/}
+                        {/*        </div>*/}
+
+                        {/*        <div className="">*/}
+                        {/*            {this.store.good.description}*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+
+                    {/*</div>*/}
 
                     <div className="good-page__info-right">
                         <div className="good-page__price">
@@ -36,7 +54,16 @@ class OneGoodPage extends Component<any> {
                         </div>
 
                         <div className="good-page__buttons">
-                            <button className="button-addToBasket">Add to basket</button>
+
+                            {
+                                this.store.isInBasket ?
+                                <button className="button-addToBasket" onClick={this.store.removeFromBasket}>Remove from basket</button>
+                                :
+                                <button className="button-addToBasket" onClick={this.store.addToBasket}>Add to basket</button>
+                            }
+
+                            {/*<button className="button-addToBasket" onClick={this.store.addToBasket}>Add to basket</button>*/}
+                            {/*<button className="button-addToBasket" onClick={this.store.isInBasket}>Remove</button>*/}
                             <label>
                                 <input className="button-like"
                                        type="checkbox"
@@ -45,7 +72,6 @@ class OneGoodPage extends Component<any> {
 
                             </label>
                             {this.store.good.likes}
-
 
                         </div>
 
@@ -74,8 +100,8 @@ class OneGoodPage extends Component<any> {
                     <div className="good-page__description-text">
                         {this.store.good.description}
                     </div>
-
                 </div>
+
             </div>
         )
     }

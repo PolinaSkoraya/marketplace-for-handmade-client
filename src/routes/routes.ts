@@ -13,9 +13,10 @@ export const ROUTES = {
     },
 
     buyers: {
+        buyers: '/buyers/',
         login: '/buyers/login',
         registration: '/buyers/registration',
-        profile: '/buyers/profile/'
+        profile: '/buyers/:id'
     }
 
 }

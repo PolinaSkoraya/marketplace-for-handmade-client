@@ -2,7 +2,7 @@ import {instance} from "./instance";
 import {URLS} from "./urls";
 import {TOKEN} from "../stores/UserStore";
 
-function getGoods() {
+function getAllGoods() {
     return instance.get(URLS.goods, {
         headers: {
             'auth-token': localStorage.getItem(TOKEN),
@@ -38,4 +38,46 @@ function getGoodWithSellerById (id) {
     });
 }
 
-export {getGoods, getSellerById, getGoodsOfSeller, getGoodById, getGoodWithSellerById, getBuyerById};
+function getGoodsInBasket (id) {
+    return instance.get(URLS.buyers + id + "/basket",{
+        headers: {
+            'auth-token': localStorage.getItem(TOKEN),
+        },
+    })
+}
+
+function postGoodIntoBasket (idBuyer, idGood) {
+    return instance.post(URLS.buyers + idBuyer + "/basket",{
+        "idGood" : idGood
+    })
+}
+
+function deleteGoodFromBasket (idBuyer, idGood) {
+    return instance.post(URLS.buyers + idBuyer + "/basket/delete",{
+        "idGood" : idGood
+    })
+}
+
+function postGoodIntoLikedGoods (idBuyer, idGood) {
+    return instance.post(URLS.buyers + idBuyer + "/liked",{
+        "idGood" : idGood
+    })
+}
+
+function deleteGoodFromLikedGoods (idBuyer, idGood) {
+    return instance.post(URLS.buyers + idBuyer + "/liked/delete",{
+        "idGood" : idGood
+    })
+}
+
+export {
+    getAllGoods,
+    getSellerById,
+    getGoodsOfSeller,
+    getGoodById,
+    getGoodWithSellerById,
+    getBuyerById,
+    getGoodsInBasket,
+    postGoodIntoBasket,
+    deleteGoodFromBasket
+};

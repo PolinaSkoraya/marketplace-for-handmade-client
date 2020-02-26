@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './HomePage.scss';
-import GoodsPageStore from "../../stores/GoodsPageStore";
+import GoodsStore from "../../stores/GoodsStore";
 import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
 import AuthLinks from "../../components/AuthLinks/AuthLinks";
@@ -9,10 +9,11 @@ import RootStore from "../../stores/RootStore";
 
 @observer
 class HomePage extends Component{
-    store: GoodsPageStore = new GoodsPageStore();
+    store: GoodsStore = new GoodsStore();
 
-    componentDidMount(): void {
-        this.store.loadGoods(8);
+    async componentDidMount() {
+        await this.store.loadGoods();
+
     }
 
     render(){
@@ -22,11 +23,14 @@ class HomePage extends Component{
             <>
                 <div className="header">
                     { user.authenticated ? (
-                        <div className="header__info">
-                            <div className="header__text">
-                                Welcome, {user.name}!
+                        <>
+                            <div className="header__info">
+                                <div className="header__text">
+                                    Welcome, {user.name}!
+                                </div>
                             </div>
-                        </div>
+
+                        </>
                     ) : (
                         <AuthLinks/>
                     ) }
@@ -34,7 +38,7 @@ class HomePage extends Component{
                 </div>
 
                 <div className="goodsContainer">
-                    <GoodsContainer goodsContainerTitle="Top of marketplace" goods={this.store.goods}/>
+                    <GoodsContainer goodsContainerTitle="All goods" goods={this.store.goods}/>
                 </div>
             </>
         )

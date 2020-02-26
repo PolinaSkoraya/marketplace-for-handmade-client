@@ -5,7 +5,7 @@ import {observer} from 'mobx-react';
 import {action, observable} from "mobx";
 import {getSellerById} from "../../http/services";
 import {ROUTES} from "../../routes/routes";
-import {GoodInterface} from "../../stores/interfaces";
+import {GoodInterface} from "../../stores/helpers/interfaces";
 import {STATIC_IMAGES} from "../../http/urls";
 
 @observer

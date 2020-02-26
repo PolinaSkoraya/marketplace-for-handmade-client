@@ -1,6 +1,6 @@
 import {action, observable} from 'mobx';
 import {getGoodsOfSeller, getSellerById} from "../http/services";
-import {GoodInterface, SellerInterface} from "./interfaces";
+import {GoodInterface} from "./helpers/interfaces";
 
 class SellerStore {
     @observable seller = {

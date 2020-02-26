@@ -2,7 +2,7 @@ import "./GoodsContainer.scss"
 import React, {Component} from "react";
 import Good from "../Good/Good";
 import {observer} from "mobx-react";
-import {GoodInterface} from "../../stores/interfaces";
+import {GoodInterface} from "../../stores/helpers/interfaces";
 
 @observer
 class GoodsContainer extends Component <{goodsContainerTitle: string, goods: GoodInterface[]}> {

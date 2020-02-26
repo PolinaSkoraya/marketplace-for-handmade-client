@@ -28,13 +28,14 @@ class Navigation extends Component {
 
                     { user.authenticated ? (
                         <div className="navigation__links navigation__links--user">
+                            <NavLink to={ROUTES.buyers.buyers + user.id} className="navigation__link navigation__link--user">Profile</NavLink>
+
                             <NavLink
                                 to={ROUTES.root}
                                 className="navigation__link navigation__link--user"
                             >
                                 <button onClick={user.logOutBuyer}>log out</button>
                             </NavLink>
-
                         </div>
                     ) : (
                         <div className="navigation__links navigation__links--user">

@@ -15,6 +15,7 @@ import {Switch, Route, NavLink} from 'react-router-dom';
 import OneGoodPage from "./pages/OneGoodPage/OneGoodPage";
 import {observer} from "mobx-react";
 import RootStore from "./stores/RootStore";
+import BuyerPage from "./pages/BuyerPage/BuyerPage";
 
 @observer
 class App extends Component {
@@ -41,7 +42,7 @@ class App extends Component {
                         <Route exact path={ROUTES.goods.id} component={OneGoodPage}/>
 
                         <Route exact path={ROUTES.sellers.profile} component={HomePage}/>
-                        <Route exact path={ROUTES.buyers.profile} component={HomePage}/>
+                        <Route exact path={ROUTES.buyers.profile} component={BuyerPage}/>
 
                     </Switch>
 
