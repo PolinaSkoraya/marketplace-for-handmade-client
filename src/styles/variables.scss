@@ -8,6 +8,12 @@ $color-grey: #adadad;
 
 $color-active: #1b36ce;
 
+$color-button-liked: #a81125;
+
 $font-size-buttons: 18px;
 $font-size-title: 25px;
 $font-size-sub-title: 20px;
+
+$box-shadow-good: rgba(80, 57, 76, 0.3) 2px 2px 8px 1px;
+$box-shadow-good-active: $color-secondary-light 0px 0px 15px 2px;
+$box-shadow-good-hover: $color-grey 2px 2px 8px 1px;

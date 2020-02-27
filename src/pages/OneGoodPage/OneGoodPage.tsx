@@ -7,6 +7,8 @@ import {observer} from "mobx-react";
 import {STATIC_IMAGES} from "../../http/urls";
 import RootStore from "../../stores/RootStore";
 
+import {FaHeart} from "react-icons/fa"
+
 const {user} = RootStore;
 
 @observer
@@ -50,27 +52,28 @@ class OneGoodPage extends Component<any> {
 
                     <div className="good-page__info-right">
                         <div className="good-page__price">
-                            Price: {this.store.good.price}
+                            Price: {this.store.good.price}$
                         </div>
 
                         <div className="good-page__buttons">
 
                             {
                                 this.store.isInBasket ?
-                                <button className="button-addToBasket" onClick={this.store.removeFromBasket}>Remove from basket</button>
-                                :
-                                <button className="button-addToBasket" onClick={this.store.addToBasket}>Add to basket</button>
+                                    <button className="button-addToBasket" onClick={this.store.removeFromBasket}>remove from basket</button>
+                                    :
+                                    <button className="button-addToBasket" onClick={this.store.addToBasket}>add to basket</button>
                             }
 
-                            {/*<button className="button-addToBasket" onClick={this.store.addToBasket}>Add to basket</button>*/}
-                            {/*<button className="button-addToBasket" onClick={this.store.isInBasket}>Remove</button>*/}
-                            <label>
-                                <input className="button-like"
-                                       type="checkbox"
-                                >
-                                </input>
-
-                            </label>
+                            {
+                                this.store.isLiked ?
+                                    <button className="button-like button-like--liked" onClick={this.store.removeFromLikedGoods}>
+                                        <FaHeart />
+                                    </button>
+                                    :
+                                    <button className="button-like button-like--unliked" onClick={this.store.addToLikedGoods}>
+                                        <FaHeart />
+                                    </button>
+                            }
                             {this.store.good.likes}
 
                         </div>

@@ -57,7 +57,6 @@ class BuyerLogin extends Component {
                     to={ROUTES.root}
                     className="navigation__link navigation__link--user"
                 >
-                    <button onClick={user.logOutBuyer}>log out</button>
                 </NavLink>
             </div>
     );

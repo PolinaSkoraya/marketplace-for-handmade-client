@@ -1,7 +1,7 @@
 import {action, computed, observable} from 'mobx';
 import {instance} from '../http/instance';
 import {URLS} from '../http/urls';
-import {getBuyerById, getGoodsInBasket} from "../http/services";
+import {getBuyerById, getGoodsInBasket, getLikedGoods} from "../http/services";
 import jwtDecode from 'jwt-decode';
 import {GoodInterface} from "./helpers/interfaces";
 
@@ -14,8 +14,12 @@ class UserStore {
     @observable password = "";
     @observable role = '';
     @observable basket = [];
+    @observable likedGoods =[];
 
     @observable goodsInBasket: GoodInterface[] = [];
+    @observable goodsInLikedGoods: GoodInterface[] =[];
+
+    // @observable basketCost = 0;
 
     constructor() {
         const accessToken  = this.getAuthTokens();
@@ -35,6 +39,7 @@ class UserStore {
         this.role = authData.role;
 
         await this.initBasket();
+        await this.initLikedGoods();
     }
 
     getAuthTokens = () => {
@@ -85,6 +90,15 @@ class UserStore {
     }
 
     @action.bound
+    async initLikedGoods() {
+        let responseBuyer = await getBuyerById(this.id);
+        this.likedGoods = responseBuyer.data.likedGoods;
+        console.log("responseBuyer.data.likedGoods");
+        console.log(responseBuyer.data.likedGoods);
+        this.setLikedGoods();
+    }
+
+    @action.bound
     async logOutBuyer() {
         localStorage.removeItem(TOKEN);
 
@@ -102,6 +116,27 @@ class UserStore {
             console.log(error);
 
         }
+    }
+
+    @action.bound
+    async setLikedGoods (){
+        try {
+            const responseGoods = await getLikedGoods(this.id);
+            this.goodsInLikedGoods = responseGoods.data;
+            console.log(this.goodsInLikedGoods);
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
+    @computed
+    get basketCost (){
+        let cost = 0;
+        this.goodsInBasket.forEach(good => {
+            cost += good.price;
+        })
+        return cost;
     }
 }
 

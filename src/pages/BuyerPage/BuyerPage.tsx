@@ -11,10 +11,19 @@ class BuyerPage extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <div className="profile-title">Hello, {user.name}</div>
-                <GoodsContainer goodsContainerTitle="Basket" goods={user.goodsInBasket}/>
-            </div>
+                <div className="basket-container">
+                    <GoodsContainer goodsContainerTitle="Basket" goods={user.goodsInBasket}/>
+                    <div className="basket-container__cost">
+                        Basket cost: {user.basketCost}$
+                    </div>
+                </div>
+
+
+
+                <GoodsContainer goodsContainerTitle="Liked" goods={user.goodsInLikedGoods}/>
+            </>
         )
     }
 }

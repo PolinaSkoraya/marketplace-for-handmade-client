@@ -58,6 +58,14 @@ function deleteGoodFromBasket (idBuyer, idGood) {
     })
 }
 
+function getLikedGoods (id) {
+    return instance.get(URLS.buyers + id + "/liked",{
+        headers: {
+            'auth-token': localStorage.getItem(TOKEN),
+        },
+    })
+}
+
 function postGoodIntoLikedGoods (idBuyer, idGood) {
     return instance.post(URLS.buyers + idBuyer + "/liked",{
         "idGood" : idGood
@@ -70,6 +78,12 @@ function deleteGoodFromLikedGoods (idBuyer, idGood) {
     })
 }
 
+function updateLikes (idGood, likes) {
+    return instance.post(URLS.goods + idGood + "/updateLikes", {
+        "likes" : likes
+    })
+}
+
 export {
     getAllGoods,
     getSellerById,
@@ -79,5 +93,9 @@ export {
     getBuyerById,
     getGoodsInBasket,
     postGoodIntoBasket,
-    deleteGoodFromBasket
+    deleteGoodFromBasket,
+    postGoodIntoLikedGoods,
+    deleteGoodFromLikedGoods,
+    getLikedGoods,
+    updateLikes
 };

@@ -7,6 +7,8 @@ import {getSellerById} from "../../http/services";
 import {ROUTES} from "../../routes/routes";
 import {GoodInterface} from "../../stores/helpers/interfaces";
 import {STATIC_IMAGES} from "../../http/urls";
+import OneGoodStore from "../../stores/OneGoodStore";
+import {FaHeart} from "react-icons/fa";
 
 @observer
 class Good extends Component<{good: GoodInterface, idSeller: string}> {
@@ -37,7 +39,6 @@ class Good extends Component<{good: GoodInterface, idSeller: string}> {
                             to={ROUTES.goods.goods+ this.props.good._id}
                         >
                             <img src={STATIC_IMAGES + this.props.good.image } alt="knitting"/>
-
                         </NavLink>
                     </div>
 
@@ -49,7 +50,7 @@ class Good extends Component<{good: GoodInterface, idSeller: string}> {
                             {this.props.good.name}
                         </NavLink>
 
-                        <div className="good__shop-info">
+                        <div className="good__info">
                             <NavLink
                                 to={ROUTES.sellers.sellers + this.props.idSeller}
                                 className="good__shop-name good__link"
@@ -57,8 +58,15 @@ class Good extends Component<{good: GoodInterface, idSeller: string}> {
                                 {this.sellerName}
                             </NavLink>
 
-                            <div className="good__price">{this.props.good.price}</div>
+                            <div className="good__price">{this.props.good.price}$</div>
                         </div>
+
+                        <div className="good__likes">
+                            <div>
+                                Likes: {this.props.good.likes}
+                            </div>
+                        </div>
+
                     </div>
                 </div>
         )

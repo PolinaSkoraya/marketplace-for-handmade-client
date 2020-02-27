@@ -60,8 +60,8 @@
 .button-addToBasket:hover{
   transition-property: background-color;
   transition-duration: .2s;
-  background-color: $color-active;
-  box-shadow: 0 5px 10px rgba(27, 54, 206, 0.45);
+  background-color: $color-grey;
+  box-shadow: 0 5px 10px rgba(38, 35, 28, 0.45);
   color: white;
 }
 
@@ -70,6 +70,48 @@
   transition-duration: .2s;
   background-color: $color-secondary-light;
   box-shadow: none;
+  color: white;
+}
+
+.button-like {
+  margin-right: 10px;
+  border: none;
+  color: white;
+  width: 30px;
+  height:  30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-like:hover {
+  transition-property: background-color;
+  transition-duration: .2s;
+  color: white;
+}
+
+.button-like:active {
+  animation-name: box-shadow-animation;
+  animation-duration: .5s;
+}
+
+.button-like--liked{
+  background-color: $color-button-liked;
+}
+
+.button-like--liked:hover{
+  background-color: $color-grey;
+}
+
+.button-like--unliked {
+  background-color: $color-grey;
+}
+
+.button-like--unliked:hover {
+  transition-property: background-color;
+  transition-duration: .2s;
+  background-color: $color-button-liked;
   color: white;
 }
 
@@ -110,6 +152,13 @@
 
 .shop-info__description{
   padding: 5px 0;
+}
+
+@keyframes box-shadow-animation {
+  from {box-shadow: rgba(80, 57, 76, 0.4) 0 0 0 3px;}
+  to {
+    box-shadow: rgba(80, 57, 76, 0.1) 0 0 10px 5px;
+  }
 }
 
 //.card{

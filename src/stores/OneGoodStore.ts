@@ -1,5 +1,10 @@
 import {action, computed, observable} from 'mobx';
-import {deleteGoodFromBasket, getGoodWithSellerById, postGoodIntoBasket} from "../http/services";
+import {
+    deleteGoodFromBasket,
+    deleteGoodFromLikedGoods,
+    getGoodWithSellerById,
+    postGoodIntoBasket, postGoodIntoLikedGoods, updateLikes
+} from "../http/services";
 import RootStore from "./RootStore";
 
 const {user} = RootStore;
@@ -38,11 +43,6 @@ class OneGoodStore {
     async addToBasket() {
         try {
             await postGoodIntoBasket(user.id, this.good._id);
-
-            // @ts-ignore
-            // user.basket = user.basket.push(this.good._id);
-            // console.log(user.basket);
-
             await user.initBasket();
 
         } catch (error) {
@@ -53,10 +53,38 @@ class OneGoodStore {
     @action.bound
     async removeFromBasket() {
         try {
-            await deleteGoodFromBasket(user.id, this.good._id);
-
-            user.basket = user.basket.filter(idGood => idGood !== this.good._id);
+            const response = await deleteGoodFromBasket(user.id, this.good._id);
+            user.basket = response.data.basket;
             user.goodsInBasket = user.goodsInBasket.filter(good => good._id !== this.good._id);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    @action.bound
+    async addToLikedGoods() {
+        try {
+            await postGoodIntoLikedGoods(user.id, this.good._id);
+            await user.initLikedGoods();
+
+            this.good.likes = this.good.likes + 1;
+            await updateLikes(this.good._id, this.good.likes);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    @action.bound
+    async removeFromLikedGoods() {
+        try {
+            const response = await deleteGoodFromLikedGoods(user.id, this.good._id);
+            user.likedGoods = response.data.likedGoods;
+            user.goodsInLikedGoods = user.goodsInLikedGoods.filter(good => good._id !== this.good._id);
+
+            this.good.likes = this.good.likes - 1;
+            await updateLikes(this.good._id, this.good.likes);
 
         } catch (error) {
             console.log(error);
@@ -65,7 +93,12 @@ class OneGoodStore {
 
     @computed
     get isInBasket() {
-        return (user.basket.filter(idGood => idGood == this.good._id).length > 0);
+        return (user.basket.filter(idGood => idGood === this.good._id).length > 0);
+    }
+
+    @computed
+    get isLiked() {
+        return (user.likedGoods.filter(idGood => idGood === this.good._id).length > 0);
     }
 
 }

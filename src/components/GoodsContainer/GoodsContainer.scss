@@ -1,12 +1,11 @@
 @import "../../styles/variables";
 
 .goodsContainer{
-  //margin: 0 40px;
 }
 
 .goodsContainer__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(210px, 0.5fr));
   grid-gap: 20px;
   padding-bottom: 40px;
 }

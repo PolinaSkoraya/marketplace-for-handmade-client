@@ -1,16 +1,12 @@
 @import "../../styles/variables";
 
-$box-shadow-good: rgba(80, 57, 76, 0.3) 2px 2px 8px 1px;
-$box-shadow-good-active: $color-secondary-light 0px 0px 15px 2px;
-$box-shadow-good-hover: $color-grey 2px 2px 8px 1px;
-
 .good{
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   box-shadow: $box-shadow-good;
   padding: 8px;
   position: relative;
-  //max-height: 300px;
 }
 
 .good:hover{
@@ -32,18 +28,29 @@ $box-shadow-good-hover: $color-grey 2px 2px 8px 1px;
 }
 
 .good__about{
+  margin: 0 10px;
+}
+
+.good__image{
+
+}
+
+.good__link-image{
+  display: inline-block;
 }
 
 .good__image img{
+  object-fit: cover;
+  height: 200px;
   width: 100%;
   margin-bottom: 8px;
 }
 
-.good__shop-info{
+.good__info{
   display: flex;
   justify-content: space-between;
   margin: 8px 0;
-  padding: 0 10px;
+
 }
 
 .good__title{
@@ -60,6 +67,10 @@ $box-shadow-good-hover: $color-grey 2px 2px 8px 1px;
 
 .good__link:active{
   color: $color-secondary-dark;
+}
+
+.good__likes{
+  text-align: left;
 }
 
 
