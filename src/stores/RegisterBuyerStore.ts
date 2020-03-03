@@ -39,6 +39,8 @@ class RegisterBuyerStore {
             console.log(error);
         }
     }
+
+
 }
 
 export default RegisterBuyerStore;

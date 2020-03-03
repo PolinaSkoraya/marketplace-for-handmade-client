@@ -51,12 +51,21 @@ class OneGoodStore {
     }
 
     @action.bound
-    async removeFromBasket() {
+    async removeFromBasket(event) {
+        event.persist();
+
+        let response;
         try {
-            const response = await deleteGoodFromBasket(user.id, this.good._id);
+            if (event.target.parentElement.id) {
+                response = await deleteGoodFromBasket(user.id, event.target.parentElement.id);
+                console.log("deleted");
+            } else {
+                response = await deleteGoodFromBasket(user.id, this.good._id);
+            }
             user.basket = response.data.basket;
             user.goodsInBasket = user.goodsInBasket.filter(good => good._id !== this.good._id);
 
+            console.log(response);
         } catch (error) {
             console.log(error);
         }

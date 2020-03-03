@@ -37,7 +37,8 @@ class BuyerLogin extends Component {
                    <input
                        className = 'buyerLogin-input'
                        type='text'
-                       onChange={user.onChangeEmail}
+                       name="email"
+                       onChange={user.handleInputChange}
                        placeholder='email'
                        value={user.email}
                    />
@@ -45,7 +46,8 @@ class BuyerLogin extends Component {
                    <input
                        className = 'buyerLogin-input'
                        type='text'
-                       onChange={user.onChangePassword}
+                       name="password"
+                       onChange={user.handleInputChange}
                        placeholder='password'
                        value={user.password}
                     />

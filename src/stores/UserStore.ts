@@ -52,14 +52,23 @@ class UserStore {
     }
 
     @action.bound
-    onChangeEmail(event) {
-        this.email = event.target.value;
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this[name] = value;
     }
 
-    @action.bound
-    onChangePassword(event) {
-        this.password = event.target.value;
-    }
+    // @action.bound
+    // onChangeEmail(event) {
+    //     this.email = event.target.value;
+    // }
+    //
+    // @action.bound
+    // onChangePassword(event) {
+    //     this.password = event.target.value;
+    // }
 
     @action.bound
     async loginBuyer(event) {

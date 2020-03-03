@@ -1,8 +1,10 @@
+import './BuyerRegistration.scss'
 import React, {Component} from 'react';
-import './BuyerRegistration.scss';
 import {observer} from 'mobx-react';
-
 import RegisterBuyerStore from '../../stores/RegisterBuyerStore';
+import RootStore from "../../stores/RootStore";
+
+const {user} = RootStore;
 
 @observer
 class BuyerRegistration extends Component{
@@ -40,7 +42,7 @@ class BuyerRegistration extends Component{
 
                     <input type="submit" value="Sing up"/>
                 </form>
-         </div>
+             </div>
      );
     }
 }

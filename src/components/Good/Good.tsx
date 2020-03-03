@@ -1,7 +1,7 @@
 import './Good.scss'
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom'
-import {observer} from 'mobx-react';
+import {inject, observer} from 'mobx-react';
 import {action, observable} from "mobx";
 import {getSellerById} from "../../http/services";
 import {ROUTES} from "../../routes/routes";
@@ -9,9 +9,12 @@ import {GoodInterface} from "../../stores/helpers/interfaces";
 import {STATIC_IMAGES} from "../../http/urls";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {FaHeart} from "react-icons/fa";
+import {GoodsContainerPosition} from "../GoodsContainer/GoodsContainer";
+import {types} from "util";
 
 @observer
-class Good extends Component<{good: GoodInterface, idSeller: string}> {
+class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsContainerPosition?: GoodsContainerPosition}> {
+    store = new OneGoodStore();
     @observable sellerName = "";
 
     constructor (props) {
@@ -32,7 +35,13 @@ class Good extends Component<{good: GoodInterface, idSeller: string}> {
 
     render () {
         return(
-                <div className="good">
+                <div className="good" id={this.props.good._id}>
+                    {
+                        this.props.goodsContainerPosition === GoodsContainerPosition.basket ?
+                            <button className="" onClick={this.store.removeFromBasket}>remove from basket</button>
+                            :
+                            <div>no basket</div>
+                    }
                     <div className="good__image">
                         <NavLink
                             className="good__link-image"
