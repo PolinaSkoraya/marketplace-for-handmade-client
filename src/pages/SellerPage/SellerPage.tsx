@@ -4,8 +4,8 @@ import {observer} from "mobx-react";
 import {SellerStore} from "../../stores/SellerStore";
 import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 
-import shopLogo from "../../static/icons/h.svg"
 import {STATIC_IMAGES} from "../../http/urls";
+import {FormattedMessage} from "react-intl";
 
 @observer
 class SellerPage extends Component {
@@ -32,10 +32,14 @@ class SellerPage extends Component {
                             </div>
 
                             <div className="seller-profile__text">
-                                <div className="seller-profile__text-field seller-profile__text-field--name">{this.store.seller.name}</div>
-                                <div className="seller-profile__text-field seller-profile__text-field--services">Services: {this.store.seller.services}</div>
+                                <div className="seller-profile__text-field seller-profile__text-field--name">
+                                    {this.store.seller.name}
+                                </div>
+                                <div className="seller-profile__text-field seller-profile__text-field--services">
+                                    <FormattedMessage id="services" values={{sellerServices: this.store.seller.services}}/>
+                                </div>
                                 <div className="seller-profile__text-field seller-profile__text-field--about-shop">
-                                    About shop:
+                                    <FormattedMessage id="aboutShop"/>
                                     <div className="seller-profile__description">
                                         {this.store.seller.description}
                                     </div>
@@ -52,7 +56,7 @@ class SellerPage extends Component {
 
                     <div className="seller-profile__footer">
                         <div>
-                            <form onSubmit={this.store.createGood} >
+                            <form onSubmit={this.store.createGood} >     {/*TODO: translate placeholder*/}
                                 <input
                                     className = ''
                                     type='text'

@@ -5,7 +5,7 @@ import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
 import AuthLinks from "../../components/AuthLinks/AuthLinks";
 import RootStore from "../../stores/RootStore";
-
+import {FormattedMessage} from 'react-intl';
 
 @observer
 class HomePage extends Component{
@@ -16,7 +16,7 @@ class HomePage extends Component{
 
     }
 
-    render(){
+    render () {
         const {user} = RootStore;
 
         return(
@@ -26,7 +26,7 @@ class HomePage extends Component{
                         <>
                             <div className="header__info">
                                 <div className="header__text">
-                                    Welcome, {user.name}!
+                                    <FormattedMessage id="hello" values={{name: user.name}}/>
                                 </div>
                             </div>
 

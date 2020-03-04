@@ -1,0 +1,13 @@
+.createGood-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.createGood-form__input{
+  margin-bottom: 10px;
+}
+
+.success{
+  color: rgba(0, 0, 254, 0.66);
+}

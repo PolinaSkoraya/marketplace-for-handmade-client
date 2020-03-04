@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {observer} from 'mobx-react';
 import RegisterBuyerStore from '../../stores/RegisterBuyerStore';
 import RootStore from "../../stores/RootStore";
+import {FormattedMessage} from "react-intl";
 
 const {user} = RootStore;
 
@@ -13,9 +14,11 @@ class BuyerRegistration extends Component{
     render(){
      return(
          <div className="buyerRegistration">
-                <h4>Registration</h4>
+                <h4>
+                    <FormattedMessage id="register"/>
+                </h4>
 
-                <form onSubmit={this.store.onSubmit} className="buyerRegistration-form">
+                <form onSubmit={this.store.onSubmit} className="buyerRegistration-form"> {/*TODO: translate form*/}
                     <input
                         className="buyerRegistration-input"
                         type="text"

@@ -4,7 +4,6 @@ import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
 import GoodsStore from "../../stores/GoodsStore";
 import RootStore from "../../stores/RootStore";
-import AuthLinks from "../../components/AuthLinks/AuthLinks";
 import {ROUTES} from "../../routes/routes";
 import {Redirect} from 'react-router-dom'
 
@@ -24,7 +23,6 @@ class GoodsPage extends Component{
                 { user.authenticated ? (
                     <div className="goods-page">
                         <GoodsContainer goodsContainerTitle="All Goods" goods={this.store.goods}/>
-
                     </div>
                 ) : (
                     <Redirect to={ROUTES.buyers.login}/>

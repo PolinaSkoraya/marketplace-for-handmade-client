@@ -10,7 +10,7 @@ import {STATIC_IMAGES} from "../../http/urls";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {FaHeart} from "react-icons/fa";
 import {GoodsContainerPosition} from "../GoodsContainer/GoodsContainer";
-import {types} from "util";
+import {FormattedMessage} from 'react-intl';
 
 @observer
 class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsContainerPosition?: GoodsContainerPosition}> {
@@ -38,9 +38,11 @@ class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsC
                 <div className="good" id={this.props.good._id}>
                     {
                         this.props.goodsContainerPosition === GoodsContainerPosition.basket ?
-                            <button className="" onClick={this.store.removeFromBasket}>remove from basket</button>
+                            <button className="" onClick={() => this.store.removeFromBasket(this.props.good._id)}>
+                                remove from basket
+                            </button>
                             :
-                            <div>no basket</div>
+                            <></>
                     }
                     <div className="good__image">
                         <NavLink
@@ -72,7 +74,7 @@ class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsC
 
                         <div className="good__likes">
                             <div>
-                                Likes: {this.props.good.likes}
+                                <FormattedMessage id="likes" values={{likes: this.props.good.likes}}/>
                             </div>
                         </div>
 

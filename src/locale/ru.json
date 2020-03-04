@@ -1,0 +1,18 @@
+{
+  "hello": "Доборо пожаловать, {name}",
+  "basketCost": "Сумма: {basketCost}$",
+  "price": "Цена: {price}$",
+  "shop": "Магазин: {shopName}",
+  "description": "Описание: ",
+  "services": "Услуги: {sellerServices}",
+  "aboutShop": "О магазине:",
+  "message.goodAdded": "Товар успешно добавлен!",
+  "signIn": "Войти",
+  "register": "Зарегистрироваться",
+  "likes": "Лайки: {likes}",
+  "myShop": "Мой магазин",
+
+  "startSelling": "Начать продавать",
+  "goods": "Товары",
+  "profile": "Профиль"
+}

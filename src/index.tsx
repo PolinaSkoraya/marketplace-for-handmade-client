@@ -5,12 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {IntlProvider} from 'react-intl';
 
-import "../src/locale/en"
-
 ReactDOM.render (
-    <IntlProvider locale="en">
-        <App />
-    </IntlProvider>,
+    <App />,
     document.getElementById('root')
 );
 

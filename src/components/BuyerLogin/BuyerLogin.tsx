@@ -7,13 +7,13 @@ import {UserStore} from "../../stores/UserStore";
 import RootStore from "../../stores/RootStore";
 import {ROUTES} from "../../routes/routes";
 import {NavLink, Redirect} from 'react-router-dom';
+import {FormattedMessage} from "react-intl";
+
+const {user} = RootStore;
 
 @observer
 class BuyerLogin extends Component {
-
     componentDidMount() {
-        const {user} = RootStore;
-
         instance
             .get(URLS.buyers)
             .then(response => {
@@ -27,13 +27,14 @@ class BuyerLogin extends Component {
     }
 
     render () {
-        const {user} = RootStore;
 
         return (
             <div className="buyerLogin">
-                <h4>Login</h4>
+                <h4>
+                    <FormattedMessage id="signIn"/>
+                </h4>
 
-                <form onSubmit={user.loginBuyer} className="buyerLogin-form">
+                <form className="buyerLogin-form">
                    <input
                        className = 'buyerLogin-input'
                        type='text'
@@ -52,7 +53,7 @@ class BuyerLogin extends Component {
                        value={user.password}
                     />
 
-                    <input type="submit" value="Sing in"/>
+                    <input type="button" value="Sing in" onClick={user.loginBuyer}/>
                  </form>
 
                 <NavLink

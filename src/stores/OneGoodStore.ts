@@ -44,26 +44,19 @@ class OneGoodStore {
         try {
             await postGoodIntoBasket(user.id, this.good._id);
             await user.initBasket();
-
         } catch (error) {
             console.log(error);
         }
     }
 
     @action.bound
-    async removeFromBasket(event) {
-        event.persist();
-
+    async removeFromBasket(id) {
         let response;
         try {
-            if (event.target.parentElement.id) {
-                response = await deleteGoodFromBasket(user.id, event.target.parentElement.id);
-                console.log("deleted");
-            } else {
-                response = await deleteGoodFromBasket(user.id, this.good._id);
-            }
+            response = await deleteGoodFromBasket(user.id, id);
+
             user.basket = response.data.basket;
-            user.goodsInBasket = user.goodsInBasket.filter(good => good._id !== this.good._id);
+            user.goodsInBasket = user.goodsInBasket.filter(good => good._id !== id);
 
             console.log(response);
         } catch (error) {
@@ -74,11 +67,11 @@ class OneGoodStore {
     @action.bound
     async addToLikedGoods() {
         try {
-            await postGoodIntoLikedGoods(user.id, this.good._id);
-            await user.initLikedGoods();
-
             this.good.likes = this.good.likes + 1;
             await updateLikes(this.good._id, this.good.likes);
+
+            await postGoodIntoLikedGoods(user.id, this.good._id);
+            await user.initLikedGoods();
 
         } catch (error) {
             console.log(error);

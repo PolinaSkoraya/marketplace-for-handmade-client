@@ -7,7 +7,7 @@ export enum Roles {
 }
 
 export function getRole(role: Roles) {
-    return RootStore.user.role == role;
+    return RootStore.user.roles.includes(role);
 }
 
 export function getDefaultRouteByRole() {

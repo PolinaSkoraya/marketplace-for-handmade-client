@@ -5,11 +5,9 @@ import OneGoodStore from "../../stores/OneGoodStore";
 import {observer} from "mobx-react";
 
 import {STATIC_IMAGES} from "../../http/urls";
-import RootStore from "../../stores/RootStore";
+import {FaHeart} from "react-icons/fa";
 
-import {FaHeart} from "react-icons/fa"
-
-const {user} = RootStore;
+import {FormattedMessage} from "react-intl";
 
 @observer
 class OneGoodPage extends Component<any> {
@@ -22,6 +20,7 @@ class OneGoodPage extends Component<any> {
     }
 
     render () {
+
 
         return(
             <div className="good-page">
@@ -37,16 +36,20 @@ class OneGoodPage extends Component<any> {
 
                     <div className="good-page__info-right">
                         <div className="good-page__price">
-                            Price: {this.store.good.price}$
+                            <FormattedMessage id="price" values={{price: this.store.good.price}}/>
                         </div>
 
                         <div className="good-page__buttons">
 
                             {
                                 this.store.isInBasket ?
-                                    <button className="button-addToBasket" onClick={this.store.removeFromBasket}>remove from basket</button>
+                                    <button className="button-addToBasket" onClick={() => this.store.removeFromBasket(this.store.good._id)}>
+                                        remove from basket
+                                    </button>
                                     :
-                                    <button className="button-addToBasket" onClick={this.store.addToBasket}>add to basket</button>
+                                    <button className="button-addToBasket" onClick={this.store.addToBasket}>
+                                        add to basket
+                                    </button>
                             }
 
                             {
@@ -70,7 +73,7 @@ class OneGoodPage extends Component<any> {
                                     to={"/sellers/" + this.store.good.idSeller}
                                     className="good__shop-name"
                                 >
-                                    Shop: {this.store.good.seller.name}
+                                    <FormattedMessage id="shop" values={{shopName: this.store.good.seller.name}}/>
                                 </NavLink>
                             </div>
                             <div>
@@ -82,7 +85,7 @@ class OneGoodPage extends Component<any> {
 
                 <div className="good-page__description">
                     <div className="good-page__description-title">
-                        Description:
+                        <FormattedMessage id="description"/>
                     </div>
 
                     <div className="good-page__description-text">

@@ -16,6 +16,8 @@ import {observer} from "mobx-react";
 import RootStore from "./stores/RootStore";
 import BuyerPage from "./pages/BuyerPage/BuyerPage";
 import SellerProfile from "./pages/SellerProfile/SellerProfile";
+import {RawIntlProvider} from 'react-intl'
+
 
 @observer
 class App extends Component {
@@ -24,31 +26,33 @@ class App extends Component {
     // }
 
     render() {
-        const {user} = RootStore;
+        const {user, localization} = RootStore;
 
         return (
-            <div className="App">
-                <BrowserRouter>
-                    <Navigation/>
+            <RawIntlProvider value={localization.intl}>
+                <div className="App">
+                    <BrowserRouter>
+                        <Navigation/>
 
-                    <Switch>
-                        <Route exact path={ROUTES.root} component={HomePage}/>
-                        <Route exact path={ROUTES.goods.goods} component={GoodsPage}/>
-                        <Route exact path={ROUTES.sellers.sellers} component={SellerProfile}/>
-                        <Route path={ROUTES.buyers.login} component={BuyerLogin}/>
-                        <Route path={ROUTES.buyers.registration} component={BuyerRegistration}/>
-                        <Route exact path={ROUTES.sellers.id} component={SellerPage}/>
+                        <Switch>
+                            <Route exact path={ROUTES.root} component={HomePage}/>
+                            <Route exact path={ROUTES.goods.goods} component={GoodsPage}/>
+                            <Route exact path={ROUTES.sellers.sellers} component={SellerProfile}/>
+                            <Route path={ROUTES.buyers.login} component={BuyerLogin}/>
+                            <Route path={ROUTES.buyers.registration} component={BuyerRegistration}/>
+                            <Route exact path={ROUTES.sellers.id} component={SellerPage}/>
 
-                        <Route exact path={ROUTES.goods.id} component={OneGoodPage}/>
+                            <Route exact path={ROUTES.goods.id} component={OneGoodPage}/>
 
-                        <Route exact path={ROUTES.sellers.profile} component={HomePage}/>
-                        <Route exact path={ROUTES.buyers.profile} component={BuyerPage}/>
+                            <Route exact path={ROUTES.sellers.profile} component={SellerProfile}/>
+                            <Route exact path={ROUTES.buyers.profile} component={BuyerPage}/>
 
-                    </Switch>
+                        </Switch>
 
-                    {/*<Redirect to={ROUTES.buyers.login}/>*/}
-                </BrowserRouter>
-            </div>
+                        {/*<Redirect to={ROUTES.buyers.login}/>*/}
+                    </BrowserRouter>
+                </div>
+            </RawIntlProvider>
         );
     }
 }

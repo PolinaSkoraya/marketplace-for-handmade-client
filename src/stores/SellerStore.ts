@@ -1,6 +1,7 @@
 import {action, observable} from 'mobx';
 import {getGoodsOfSeller, getSellerById, postGood} from "../http/services";
 import {GoodInterface} from "./helpers/interfaces";
+import {getRole, Roles} from "./helpers/roles";
 
 class SellerStore {
     @observable seller = {
@@ -62,6 +63,7 @@ class SellerStore {
 
         try {
             const response = await postGood(good);
+
             console.log(response);
             
         } catch (error) {
@@ -69,6 +71,10 @@ class SellerStore {
         }
     }
 
+    @action
+    getSellerRole(){
+
+    }
 }
 
 export {SellerStore};

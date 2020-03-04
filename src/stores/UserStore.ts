@@ -4,6 +4,7 @@ import {URLS} from '../http/urls';
 import {getBuyerById, getGoodsInBasket, getLikedGoods} from "../http/services";
 import jwtDecode from 'jwt-decode';
 import {GoodInterface} from "./helpers/interfaces";
+import {Roles} from "./helpers/roles";
 
 const TOKEN = 'token';
 
@@ -12,14 +13,12 @@ class UserStore {
     @observable name = '';
     @observable email = "";
     @observable password = "";
-    @observable role = '';
+    @observable roles: Roles[] = [];
     @observable basket = [];
     @observable likedGoods =[];
 
     @observable goodsInBasket: GoodInterface[] = [];
     @observable goodsInLikedGoods: GoodInterface[] =[];
-
-    // @observable basketCost = 0;
 
     constructor() {
         const accessToken  = this.getAuthTokens();
@@ -34,9 +33,10 @@ class UserStore {
     async init(token: string) {
         const authData = jwtDecode(token);
 
-        this.id = authData._id;
+        this.id = authData.id;
         this.name = authData.name;
-        this.role = authData.role;
+        this.roles = authData.roles;
+        console.log(authData);
 
         await this.initBasket();
         await this.initLikedGoods();
@@ -60,31 +60,20 @@ class UserStore {
         this[name] = value;
     }
 
-    // @action.bound
-    // onChangeEmail(event) {
-    //     this.email = event.target.value;
-    // }
-    //
-    // @action.bound
-    // onChangePassword(event) {
-    //     this.password = event.target.value;
-    // }
-
     @action.bound
-    async loginBuyer(event) {
-        event.preventDefault();
-
+    async loginBuyer() {
         const buyer = {
             email: this.email,
             password: this.password
         };
 
         try {
+            console.log(buyer);
             const response = await instance.post(URLS.loginBuyer, buyer);
+            console.log(response);
             localStorage.setItem(TOKEN, response.data);
 
             this.init(response.data);
-
         } catch (error) {
             console.log(error);
         }
@@ -102,8 +91,6 @@ class UserStore {
     async initLikedGoods() {
         let responseBuyer = await getBuyerById(this.id);
         this.likedGoods = responseBuyer.data.likedGoods;
-        console.log("responseBuyer.data.likedGoods");
-        console.log(responseBuyer.data.likedGoods);
         this.setLikedGoods();
     }
 
@@ -132,7 +119,6 @@ class UserStore {
         try {
             const responseGoods = await getLikedGoods(this.id);
             this.goodsInLikedGoods = responseGoods.data;
-            console.log(this.goodsInLikedGoods);
         } catch (error) {
             console.log(error);
 
@@ -146,6 +132,11 @@ class UserStore {
             cost += good.price;
         })
         return cost;
+    }
+
+    @action.bound
+    setSellerRole() {
+        this.roles.push(Roles.seller);
     }
 }
 

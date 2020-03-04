@@ -9,7 +9,7 @@ export const ROUTES = {
     sellers: {
         sellers: '/sellers/',
         id: '/sellers/:id',
-        profile: '/sellers/profile/'
+        profile: '/sellers/:id/profile'
     },
 
     buyers: {
