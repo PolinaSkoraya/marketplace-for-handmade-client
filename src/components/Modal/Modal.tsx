@@ -1,7 +1,6 @@
 import './Modal.scss'
 import React, {Component} from "react";
 import {observer} from "mobx-react";
-import {SellerStore} from "../../stores/SellerStore";
 
 @observer
 class Modal extends Component {

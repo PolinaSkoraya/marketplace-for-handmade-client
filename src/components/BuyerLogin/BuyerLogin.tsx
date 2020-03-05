@@ -53,7 +53,7 @@ class BuyerLogin extends Component {
                        value={user.password}
                     />
 
-                    <input type="button" value="Sing in" onClick={user.loginBuyer}/>
+                    <input type="button" value="Sing in" onClick={user.login}/>
                  </form>
 
                 <NavLink

@@ -26,7 +26,7 @@ export function getBuyerById (id) {
     return instance.get(URLS.buyers + id);
 }
 
-export function getSellerById (id) {
+export function getSellerById (id) { //user/id/shop
     return instance.get(URLS.sellers + id);
 }
 

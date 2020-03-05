@@ -1,7 +1,6 @@
 import {observable} from "mobx";
 import {UserStore} from "./UserStore";
 import Localization from "./Localization";
-import {SellerStore} from "./SellerStore";
 
 class RootStore {
     @observable user = new UserStore();

@@ -1,39 +1,38 @@
 import './SellerProfile.scss'
 import React, {Component} from 'react';
-import {SellerStore} from "../../stores/SellerStore";
 import {getRole, Roles} from "../../stores/helpers/roles";
 import RootStore from "../../stores/RootStore";
-
-import {FormattedMessage} from "react-intl";
 import Modal from "../../components/Modal/Modal";
 
-class SellerProfile extends Component {
-    store = new SellerStore();
+const {user} = RootStore;
 
+class SellerProfile extends Component {
     getElem = () => {
-        return (<form onSubmit={this.store.createGood} className="createGood-form">
-            <input
-                className = 'createGood-form__input'
-                type='text'
-                name="name"
-                onChange={this.store.handleInputChange}
-                placeholder='name'
-            />
-            <textarea
-                className = 'createGood-form__input'
-                name="description"
-                onChange={this.store.handleInputChange}
-                placeholder='description'
-            />
-            <input
-                className = 'createGood-form__input'
-                type='text'
-                name="price"
-                onChange={this.store.handleInputChange}
-                placeholder='price'
-            />
-            <input type="submit" value="create good"/>
-        </form>)
+        return (
+            <form onSubmit={user.createGood} className="createGood-form">
+                <input
+                    className = 'createGood-form__input'
+                    type='text'
+                    name="goodName"
+                    onChange={user.handleInputChange}
+                    placeholder='name'
+                />
+                <textarea
+                    className = 'createGood-form__input'
+                    name="description"
+                    onChange={user.handleInputChange}
+                    placeholder='description'
+                />
+                <input
+                    className = 'createGood-form__input'
+                    type='text'
+                    name="price"
+                    onChange={user.handleInputChange}
+                    placeholder='price'
+                />
+                <input type="submit" value="create good"/>
+            </form>
+        )
     }
 
     render() {
@@ -44,25 +43,25 @@ class SellerProfile extends Component {
                 {
                     getRole(Roles.seller) ?
                         <div>
-                            <form onSubmit={this.store.createGood} className="createGood-form">
+                            <form onSubmit={user.createGood} className="createGood-form">
                                 <input
                                     className = 'createGood-form__input'
                                     type='text'
-                                    name="name"
-                                    onChange={this.store.handleInputChange}
+                                    name="goodName"
+                                    onChange={user.handleInputChange}
                                     placeholder='name'
                                 />
                                 <textarea
                                     className = 'createGood-form__input'
                                     name="description"
-                                    onChange={this.store.handleInputChange}
+                                    onChange={user.handleInputChange}
                                     placeholder='description'
                                 />
                                 <input
                                     className = 'createGood-form__input'
                                     type='text'
                                     name="price"
-                                    onChange={this.store.handleInputChange}
+                                    onChange={user.handleInputChange}
                                     placeholder='price'
                                 />
                                 <input type="submit" value="create good"/>
@@ -72,9 +71,9 @@ class SellerProfile extends Component {
                         :
                         <button onClick={user.setSellerRole}>start selling</button>
                 }
-                <div className="success">
-                    <FormattedMessage id="message.goodAdded"/>
-                </div>
+                {/*<div className="success">*/}
+                {/*    <FormattedMessage id="message.goodAdded"/>*/}
+                {/*</div>*/}
             </div>
         )
     }

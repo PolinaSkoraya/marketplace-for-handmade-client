@@ -1,21 +1,21 @@
 import "./SellerPage.scss"
 import React, {Component} from "react";
 import {observer} from "mobx-react";
-import {SellerStore} from "../../stores/SellerStore";
 import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 
 import {STATIC_IMAGES} from "../../http/urls";
 import {FormattedMessage} from "react-intl";
+import {SellerStore} from "../../stores/SellerStore";
 
 @observer
 class SellerPage extends Component {
     store: SellerStore = new SellerStore();
 
-    // componentDidMount(): void {
-    //     let props: any = this.props;
-    //     this.store.initSeller(props.match.params.id);
-    //     this.store.initGoodsOfSeller(props.match.params.id);
-    // }
+    componentDidMount(): void {
+        let props: any = this.props;
+        this.store.initSeller(props.match.params.id);
+        this.store.initGoodsOfSeller(props.match.params.id);
+    }
 
     render () {
         return (
@@ -55,32 +55,7 @@ class SellerPage extends Component {
                     </div>
 
                     <div className="seller-profile__footer">
-                        <div>
-                            <form onSubmit={this.store.createGood} >
-                                <input
-                                    className = ''
-                                    type='text'
-                                    name="name"
-                                    onChange={this.store.handleInputChange}
-                                    placeholder='name'
-                                />
-                                <textarea
-                                    className = ''
-                                    name="description"
-                                    onChange={this.store.handleInputChange}
-                                    placeholder='description'
-                                />
-                                <input
-                                    className = ''
-                                    type='text'
-                                    name="price"
-                                    onChange={this.store.handleInputChange}
-                                    placeholder='price'
-                                />
-                                <input type="submit" value="create good"/>
 
-                            </form>
-                        </div>
                     </div>
 
                 </div>

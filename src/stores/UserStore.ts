@@ -1,7 +1,14 @@
 import {action, computed, observable} from 'mobx';
 import {instance} from '../http/instance';
 import {URLS} from '../http/urls';
-import {getBuyerById, getGoodsInBasket, getLikedGoods} from "../http/services";
+import {
+    getBuyerById,
+    getGoodsInBasket,
+    getGoodsOfSeller,
+    getLikedGoods,
+    getSellerById,
+    postGood
+} from "../http/services";
 import jwtDecode from 'jwt-decode';
 import {GoodInterface} from "./helpers/interfaces";
 import {Roles} from "./helpers/roles";
@@ -10,7 +17,8 @@ const TOKEN = 'token';
 
 class UserStore {
     @observable id: string | undefined;
-    @observable name = '';
+    @observable name = "";
+    @observable nameForRegistration = "";
     @observable email = "";
     @observable password = "";
     @observable roles: Roles[] = [];
@@ -18,13 +26,23 @@ class UserStore {
     @observable likedGoods =[];
 
     @observable goodsInBasket: GoodInterface[] = [];
-    @observable goodsInLikedGoods: GoodInterface[] =[];
+    @observable goodsInLikedGoods: GoodInterface[] = [];
+
+    @observable seller = {
+        _id: "",
+        description: "",
+        name: "",
+        services: [],
+        logo: "",
+    };
+    @observable goodsOfSeller: GoodInterface[] = [];
 
     constructor() {
         const accessToken  = this.getAuthTokens();
 
         if (accessToken) {
             this.init(accessToken);
+
         }
 
     }
@@ -40,6 +58,11 @@ class UserStore {
 
         await this.initBasket();
         await this.initLikedGoods();
+
+        console.log(this.id);
+        this.initSeller("5e318f84d681c93684a0d2e3");
+        this.initGoodsOfSeller("5e318f84d681c93684a0d2e3");
+        console.log(this.seller);
     }
 
     getAuthTokens = () => {
@@ -47,12 +70,12 @@ class UserStore {
     };
 
     @computed
-    get authenticated() {
+    get authenticated () {
         return Boolean(this.name);
     }
 
     @action.bound
-    handleInputChange(event) {
+    handleInputChange (event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -61,16 +84,14 @@ class UserStore {
     }
 
     @action.bound
-    async loginBuyer() {
-        const buyer = {
+    async login () {
+        const user = {
             email: this.email,
             password: this.password
         };
 
         try {
-            console.log(buyer);
-            const response = await instance.post(URLS.loginBuyer, buyer);
-            console.log(response);
+            const response = await instance.post(URLS.loginBuyer, user);
             localStorage.setItem(TOKEN, response.data);
 
             this.init(response.data);
@@ -80,7 +101,25 @@ class UserStore {
     }
 
     @action.bound
-    async initBasket() {
+    async register () {
+        const user = {
+            name: this.nameForRegistration,
+            email: this.email,
+            password: this.password
+        };
+
+        try {
+            const response = await instance.post(URLS.registerBuyer, user);
+            console.log(response.data);
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    @action.bound
+    async initBasket () {
         let responseBuyer = await getBuyerById(this.id);
         this.basket = responseBuyer.data.basket;
 
@@ -88,14 +127,14 @@ class UserStore {
     }
 
     @action.bound
-    async initLikedGoods() {
+    async initLikedGoods () {
         let responseBuyer = await getBuyerById(this.id);
         this.likedGoods = responseBuyer.data.likedGoods;
         this.setLikedGoods();
     }
 
     @action.bound
-    async logOutBuyer() {
+    async logOutBuyer () {
         localStorage.removeItem(TOKEN);
 
         this.basket = [];
@@ -115,7 +154,7 @@ class UserStore {
     }
 
     @action.bound
-    async setLikedGoods (){
+    async setLikedGoods () {
         try {
             const responseGoods = await getLikedGoods(this.id);
             this.goodsInLikedGoods = responseGoods.data;
@@ -125,7 +164,7 @@ class UserStore {
     }
 
     @computed
-    get basketCost (){
+    get basketCost () {
         let cost = 0;
         this.goodsInBasket.forEach(good => {
             cost += good.price;
@@ -134,11 +173,57 @@ class UserStore {
     }
 
     @action.bound
-    async setSellerRole() {
+    async setSellerRole () {
         this.roles.push(Roles.seller);
 
         // const response = updateUserRole(Roles.seller);
         // console.log(response);
+    }
+
+    @action.bound
+    async initSeller (id) {
+        try {
+            const responseSeller = await getSellerById(id);
+            this.seller = responseSeller.data;
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    @action.bound
+    async initGoodsOfSeller (id) {
+        try {
+            const responseGoodsOfSeller = await getGoodsOfSeller(id);
+            this.goodsOfSeller = responseGoodsOfSeller.data;
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    @observable goodName;
+    @observable price;
+    @observable description;
+
+    @action.bound
+    async createGood () {
+        const good = {
+            name: this.goodName,
+            price: this.price,
+            idSeller: this.seller._id,
+            description: this.description,
+            image: "fairy-house.jpg",
+            likes: 0
+        }
+
+        try {
+            const response = await postGood(good);
+            console.log(response);
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 

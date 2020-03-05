@@ -1,52 +1,52 @@
 import './BuyerRegistration.scss'
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
-import RegisterBuyerStore from '../../stores/RegisterBuyerStore';
 import RootStore from "../../stores/RootStore";
 import {FormattedMessage} from "react-intl";
 
-const {user} = RootStore;
-
 @observer
-class BuyerRegistration extends Component{
-    store: RegisterBuyerStore = new RegisterBuyerStore();
+class BuyerRegistration extends Component {
+    render () {
+         const {user} = RootStore;
 
-    render(){
-     return(
-         <div className="buyerRegistration">
+         return (
+             <div className="buyerRegistration">
                 <h4>
                     <FormattedMessage id="register"/>
                 </h4>
 
-                <form onSubmit={this.store.onSubmit} className="buyerRegistration-form"> {/*TODO: translate form*/}
+                <form className="buyerRegistration-form">
                     <input
                         className="buyerRegistration-input"
                         type="text"
-                        value={this.store.name}
-                        onChange={this.store.onChangeName}
+                        name="nameForRegistration"
+                        value={user.nameForRegistration}
+                        onChange={user.handleInputChange}
                         placeholder='name'
                     />
 
                     <input
                         className="buyerRegistration-input"
                         type="text"
-                        value={this.store.email}
-                        onChange={this.store.onChangeEmail}
+                        name="email"
+                        value={user.email}
+                        onChange={user.handleInputChange}
                         placeholder='email'
                     />
 
                     <input
                         className="buyerRegistration-input"
                         type="text"
-                        value={this.store.password}
-                        onChange={this.store.onChangePassword}
+                        name="password"
+                        value={user.password}
+                        onChange={user.handleInputChange}
                         placeholder='password'
                     />
 
-                    <input type="submit" value="Sing up"/>
+                    <input type="button" value="Sing in" onClick={user.register}/>
                 </form>
              </div>
-     );
+         );
     }
 }
 
