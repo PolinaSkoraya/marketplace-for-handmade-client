@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 .createGood-form{
   display: flex;
   flex-direction: column;
@@ -11,3 +13,4 @@
 .success{
   color: rgba(0, 0, 254, 0.66);
 }
+

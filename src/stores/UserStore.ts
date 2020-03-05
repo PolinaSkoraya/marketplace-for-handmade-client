@@ -36,7 +36,7 @@ class UserStore {
         this.id = authData.id;
         this.name = authData.name;
         this.roles = authData.roles;
-        console.log(authData);
+        console.log(authData.roles);
 
         await this.initBasket();
         await this.initLikedGoods();
@@ -121,7 +121,6 @@ class UserStore {
             this.goodsInLikedGoods = responseGoods.data;
         } catch (error) {
             console.log(error);
-
         }
     }
 
@@ -135,8 +134,11 @@ class UserStore {
     }
 
     @action.bound
-    setSellerRole() {
+    async setSellerRole() {
         this.roles.push(Roles.seller);
+
+        // const response = updateUserRole(Roles.seller);
+        // console.log(response);
     }
 }
 

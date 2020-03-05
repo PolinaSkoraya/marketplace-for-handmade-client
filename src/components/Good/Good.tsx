@@ -37,12 +37,10 @@ class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsC
         return(
                 <div className="good" id={this.props.good._id}>
                     {
-                        this.props.goodsContainerPosition === GoodsContainerPosition.basket ?
+                        this.props.goodsContainerPosition === GoodsContainerPosition.basket &&
                             <button className="" onClick={() => this.store.removeFromBasket(this.props.good._id)}>
                                 remove from basket
                             </button>
-                            :
-                            <></>
                     }
                     <div className="good__image">
                         <NavLink

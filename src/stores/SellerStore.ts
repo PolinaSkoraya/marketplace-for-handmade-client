@@ -1,7 +1,7 @@
 import {action, observable} from 'mobx';
 import {getGoodsOfSeller, getSellerById, postGood} from "../http/services";
 import {GoodInterface} from "./helpers/interfaces";
-import {getRole, Roles} from "./helpers/roles";
+import RootStore from "./RootStore";
 
 class SellerStore {
     @observable seller = {
@@ -9,10 +9,20 @@ class SellerStore {
         description: "",
         name: "",
         services: [],
-        logo: ""
+        logo: "",
+        idUser: ""
     };
-
     @observable goodsOfSeller: GoodInterface[] = [];
+
+    constructor () {
+        const {user} = RootStore;
+
+        this.initSeller(user.id);
+        this.initGoodsOfSeller(user.id);
+
+        console.log(this.seller);
+    }
+
 
     @action.bound
     async initSeller (id) {
@@ -51,7 +61,8 @@ class SellerStore {
     }
 
     @action.bound
-    async createGood(){
+    async createGood() {
+        console.log(this.seller);
         const good = {
             name: this.name,
             price: this.price,

@@ -11,11 +11,11 @@ import {FormattedMessage} from "react-intl";
 class SellerPage extends Component {
     store: SellerStore = new SellerStore();
 
-    componentDidMount(): void {
-        let props: any = this.props;
-        this.store.initSeller(props.match.params.id);
-        this.store.initGoodsOfSeller(props.match.params.id);
-    }
+    // componentDidMount(): void {
+    //     let props: any = this.props;
+    //     this.store.initSeller(props.match.params.id);
+    //     this.store.initGoodsOfSeller(props.match.params.id);
+    // }
 
     render () {
         return (
@@ -56,7 +56,7 @@ class SellerPage extends Component {
 
                     <div className="seller-profile__footer">
                         <div>
-                            <form onSubmit={this.store.createGood} >     {/*TODO: translate placeholder*/}
+                            <form onSubmit={this.store.createGood} >
                                 <input
                                     className = ''
                                     type='text'

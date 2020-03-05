@@ -1,5 +1,24 @@
 @import "src/styles/variables";
 
+.profile-container{
+  display: flex;
+}
+
+.profile-container__aside{
+  flex-basis: 20%;
+  background-color: #efefef;
+}
+
+.profile-container__main{
+  flex-basis: 100%;
+}
+
+.aside-list{
+  display: flex;
+  flex-direction: column;
+}
+
+
 .profile-title{
   font-size: $font-size-title;
 }
