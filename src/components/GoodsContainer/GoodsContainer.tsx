@@ -5,17 +5,13 @@ import {observer} from "mobx-react";
 import {GoodInterface} from "../../stores/helpers/interfaces";
 
 export enum GoodsContainerPosition {
-    basket = 'BASKET'
+    basket = 'BASKET',
+    sellerPage = 'SELLER_PAGE',
+    likedGoods = 'LIKED_GOODS'
 }
 
 @observer
 class GoodsContainer extends Component <{ goodsContainerTitle: string, goods: GoodInterface[], goodsContainerPosition?: GoodsContainerPosition }> {
-    componentDidUpdate(prevProps) {
-        if (this.props.goods !== prevProps.goods) {
-            console.log("props was changed");
-        }
-    }
-
     render () {
         return (
             <div className="goodsContainer">

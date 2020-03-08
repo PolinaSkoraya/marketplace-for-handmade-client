@@ -3,7 +3,7 @@ import {
     deleteGoodFromBasket,
     deleteGoodFromLikedGoods,
     getGoodWithSellerById,
-    postGoodIntoBasket, postGoodIntoLikedGoods, updateLikes
+    postGoodIntoBasket, postGoodIntoLikedGoods, updateGood, updateLikes
 } from "../http/services";
 import RootStore from "./RootStore";
 
@@ -32,6 +32,35 @@ class OneGoodStore {
     async initGood (id) {
         try {
             const responseGood = await getGoodWithSellerById(id);
+            this.good = responseGood.data;
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    @observable goodName = "";
+    @observable description = "";
+    @observable price = 0;
+
+    @action.bound
+    handleInputChange (event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this[name] = value;
+    }
+
+    @action.bound
+    async update(id) {
+        try {
+            const newGood = {
+                name: this.goodName,
+                description: this.description,
+                price: this.price
+            }
+            const responseGood = await updateGood(id, newGood);
             this.good = responseGood.data;
 
         } catch (error) {
@@ -73,6 +102,7 @@ class OneGoodStore {
             await postGoodIntoLikedGoods(user.id, this.good._id);
             await user.initLikedGoods();
 
+            await user.getGoods(); //for updating likes in basket
         } catch (error) {
             console.log(error);
         }
@@ -88,6 +118,7 @@ class OneGoodStore {
             this.good.likes = this.good.likes - 1;
             await updateLikes(this.good._id, this.good.likes);
 
+            await user.getGoods();  //for updating likes in basket
         } catch (error) {
             console.log(error);
         }

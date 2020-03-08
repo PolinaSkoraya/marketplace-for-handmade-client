@@ -1,0 +1,23 @@
+@import "src/styles/variables";
+
+.button-label {
+  //position: relative;
+  display: flex;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  transition: all 250ms;
+  justify-content: center;
+  align-items: center;
+  color: $color-grey;
+
+  span {
+    font-size: 10px;
+  }
+
+  &:hover,
+  &:focus {
+    color: $color-secondary-light;
+    background-color: $color-basic-light;
+  }
+}

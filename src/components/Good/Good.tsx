@@ -1,16 +1,20 @@
 import './Good.scss'
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom'
-import {inject, observer} from 'mobx-react';
-import {action, observable} from "mobx";
-import {getSellerById} from "../../http/services";
+import {observer} from 'mobx-react';
+import {action, computed, observable} from "mobx";
+import {getSellerById, postOrder} from "../../http/services";
 import {ROUTES} from "../../routes/routes";
 import {GoodInterface} from "../../stores/helpers/interfaces";
 import {STATIC_IMAGES} from "../../http/urls";
 import OneGoodStore from "../../stores/OneGoodStore";
-import {FaHeart} from "react-icons/fa";
 import {GoodsContainerPosition} from "../GoodsContainer/GoodsContainer";
 import {FormattedMessage} from 'react-intl';
+import Modal from "../Modal/Modal";
+
+import {FaRegLemon, FaTrash} from "react-icons/fa";
+import SmallButton from "../SmallButton/SmallButton";
+import RootStore from "../../stores/RootStore";
 
 @observer
 class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsContainerPosition?: GoodsContainerPosition}> {
@@ -19,7 +23,6 @@ class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsC
 
     constructor (props) {
         super(props);
-
         this.getShopName(this.props.idSeller);
     }
 
@@ -33,15 +36,88 @@ class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsC
         }
     }
 
+    @action.bound
+    update(id) {
+        this.store.update(id);
+    }
+
+    @computed
+    get elem () {
+        return (
+            <>
+                <form className="createGood-form">
+                    <input
+                        className = 'createGood-form__input'
+                        type='text'
+                        name="goodName"
+                        onChange={this.store.handleInputChange}
+                        placeholder='name'
+
+                    />
+                    <textarea
+                        className = 'createGood-form__input'
+                        name="description"
+                        onChange={this.store.handleInputChange}
+                        placeholder='description'
+                    />
+                    <input
+                        className = 'createGood-form__input'
+                        type='text'
+                        name="price"
+                        onChange={this.store.handleInputChange}
+                        placeholder='price'
+                    />
+                    <button onClick={() => this.update(this.props.good._id)}>Update good</button>
+                </form>
+            </>
+        )
+    }
+
+    @action
+    async addOrder (idUser) {
+        try {
+            let response = await postOrder(idUser, this.props.good._id, this.props.idSeller);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     render () {
+        const {user} = RootStore;
+
         return(
                 <div className="good" id={this.props.good._id}>
                     {
-                        this.props.goodsContainerPosition === GoodsContainerPosition.basket &&
-                            <button className="" onClick={() => this.store.removeFromBasket(this.props.good._id)}>
-                                remove from basket
-                            </button>
+                        <div className="good__buttons">
+                            {
+                                this.props.good.idSeller === user.seller._id &&
+                                this.props.goodsContainerPosition === GoodsContainerPosition.sellerPage &&
+                                <Modal children={this.elem} goodName={this.props.good.name}/>
+                            }
+                            {
+                                this.props.goodsContainerPosition === GoodsContainerPosition.basket &&
+                                <>
+                                    <button
+                                        id={this.props.good.name + "-remove"}
+                                        className="removeButton" onClick={() => this.store.removeFromBasket(this.props.good._id)}
+                                    >
+                                    </button>
+                                    <SmallButton htmlFor={this.props.good.name + "-remove"} icon={<FaTrash/>}/>
+
+                                    <button
+                                        id={this.props.good.name + "-addOrder"}
+                                        className="addOrderButton" onClick={() => this.addOrder(user.id)}
+                                    >
+                                    </button>
+                                    <SmallButton htmlFor={this.props.good.name + "-addOrder"} icon={<FaRegLemon/>}/>
+                                </>
+                            }
+                        </div>
                     }
+
+
+
                     <div className="good__image">
                         <NavLink
                             className="good__link-image"

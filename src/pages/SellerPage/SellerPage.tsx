@@ -1,7 +1,7 @@
 import "./SellerPage.scss"
 import React, {Component} from "react";
 import {observer} from "mobx-react";
-import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
+import {GoodsContainer, GoodsContainerPosition} from "../../components/GoodsContainer/GoodsContainer";
 
 import {STATIC_IMAGES} from "../../http/urls";
 import {FormattedMessage} from "react-intl";
@@ -51,7 +51,11 @@ class SellerPage extends Component {
                     </div>
 
                     <div className="seller-profile__body">
-                        <GoodsContainer goodsContainerTitle = {"Goods of " + this.store.seller.name} goods={this.store.goodsOfSeller}/>
+                        <GoodsContainer
+                            goodsContainerTitle = {"Goods of " + this.store.seller.name}
+                            goods={this.store.goodsOfSeller}
+                            goodsContainerPosition={GoodsContainerPosition.sellerPage}
+                        />
                     </div>
 
                     <div className="seller-profile__footer">

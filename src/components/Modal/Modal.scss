@@ -1,9 +1,5 @@
 @import "src/styles/variables";
 
-$color-1: #16a085;
-$color-2: #2980b9;
-$light-black: #333;
-
 label {
   cursor: pointer;
   transition: all 250ms;
@@ -11,17 +7,19 @@ label {
 
 .container {
   position: relative;
+  display: flex;
 
   .modal-button {
     position: relative;
     display: flex;
-    width: 50px;
-    height: 50px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    box-shadow: 0 0 45px rgba(0, 0, 0, 0.2);
+    //box-shadow: 0 0 45px rgba(0, 0, 0, 0.2);
     transition: all 250ms;
     justify-content: center;
     align-items: center;
+    color: $color-grey;
 
     span {
       font-size: 10px;
@@ -29,13 +27,15 @@ label {
 
     &:hover,
     &:focus {
-      color: $color-1;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      color: $color-secondary-light;
+      background-color: $color-basic-light;
+      //box-shadow: 0 0 10px $color-basic-light;
     }
   }
 
   .modal-content,
   .modal-background {
+    z-index: 5;
     visibility: hidden;
     width: 0;
     height: 0;
@@ -53,7 +53,7 @@ label {
     transition: transform 500ms;
   }
 
-  #modal {
+  .modal {
     display: none;
 
     &:checked ~ .modal-background {
@@ -89,15 +89,23 @@ label {
         position: absolute;
         top: 20px;
         right: 20px;
-        font-size: 22px;
-        color: transparentize($light-black,0.6);
+        font-size: 20px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: transparentize($color-basic-dark,0.6);
         transition: color 200ms,
-        transform 500ms;
+        transform 500ms,
+        background-color 500ms;
+
 
         &:hover,
         &:focus {
-          color: $light-black;
-          transform: rotate(360deg);
+          color: lighten($color-basic-dark, 10%);
+          background-color: $color-basic-light;
         }
       }
 
@@ -117,11 +125,11 @@ label {
         color: white;
         font-weight: 100;
         border-radius: 3px;
-        background-color: $color-2;
+        background-color: $color-secondary-light;
 
         &:hover,
         &:focus {
-          background-color: lighten($color-2,10%);
+          background-color: lighten($color-secondary-light,10%);
         }
       }
     }

@@ -6,8 +6,8 @@ import {
     getGoodsInBasket,
     getGoodsOfSeller,
     getLikedGoods,
-    getSellerById,
-    postGood
+    getShopByUserId,
+    postGood, updateUserRole
 } from "../http/services";
 import jwtDecode from 'jwt-decode';
 import {GoodInterface} from "./helpers/interfaces";
@@ -59,10 +59,10 @@ class UserStore {
         await this.initBasket();
         await this.initLikedGoods();
 
-        console.log(this.id);
-        this.initSeller("5e318f84d681c93684a0d2e3");
-        this.initGoodsOfSeller("5e318f84d681c93684a0d2e3");
-        console.log(this.seller);
+        if(this.roles.includes(Roles.seller)) {
+            await this.initSeller(this.id);
+            await this.initGoodsOfSeller(this.seller._id);
+        }
     }
 
     getAuthTokens = () => {
@@ -131,6 +131,7 @@ class UserStore {
         let responseBuyer = await getBuyerById(this.id);
         this.likedGoods = responseBuyer.data.likedGoods;
         this.setLikedGoods();
+
     }
 
     @action.bound
@@ -174,16 +175,17 @@ class UserStore {
 
     @action.bound
     async setSellerRole () {
+        const response = await updateUserRole(this.id, Roles.seller);
+        console.log(response);
+        this.login();
         this.roles.push(Roles.seller);
 
-        // const response = updateUserRole(Roles.seller);
-        // console.log(response);
     }
 
     @action.bound
     async initSeller (id) {
         try {
-            const responseSeller = await getSellerById(id);
+            const responseSeller = await getShopByUserId(id);
             this.seller = responseSeller.data;
 
         } catch (error) {

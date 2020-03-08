@@ -1,32 +1,28 @@
 import React, {Component} from 'react';
 import './BuyerLogin.scss';
 import {observer} from "mobx-react";
-import {instance} from "../../http/instance";
-import {URLS} from "../../http/urls";
-import {UserStore} from "../../stores/UserStore";
 import RootStore from "../../stores/RootStore";
 import {ROUTES} from "../../routes/routes";
-import {NavLink, Redirect} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {FormattedMessage} from "react-intl";
-
-const {user} = RootStore;
 
 @observer
 class BuyerLogin extends Component {
-    componentDidMount() {
-        instance
-            .get(URLS.buyers)
-            .then(response => {
-                if (response.data.length > 0) {
-                    user.email = response.data[0].email;
-                }
-            })
-            .catch((error) => {
-                console.log(error.body);
-            })
-    }
+    // componentDidMount() {
+    //     instance
+    //         .get(URLS.buyers)
+    //         .then(response => {
+    //             if (response.data.length > 0) {
+    //                 user.email = response.data[0].email;
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.log(error.body);
+    //         })
+    // }
 
     render () {
+        const {user} = RootStore;
 
         return (
             <div className="buyerLogin">

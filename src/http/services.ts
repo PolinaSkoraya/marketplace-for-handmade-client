@@ -2,6 +2,7 @@ import {instance} from "./instance";
 import {URLS} from "./urls";
 import {TOKEN} from "../stores/UserStore";
 import {GoodInterface} from "../stores/helpers/interfaces";
+import {Roles} from "../stores/helpers/roles";
 
 export function getAllGoods() {
     return instance.get(URLS.goods, {
@@ -93,5 +94,34 @@ export function deleteGoodFromLikedGoods (idBuyer, idGood) {
 export function updateLikes (idGood, likes) {
     return instance.post(URLS.goods + idGood + "/updateLikes", {
         "likes" : likes
+    })
+}
+
+export function getShopByUserId(idUser) {
+    return instance.get(URLS.buyers + idUser + "/shop", {
+        headers: {
+            'auth-token': localStorage.getItem(TOKEN),
+        },
+    })
+}
+
+export function updateUserRole(idUser, role) {
+    return instance.post(URLS.buyers + idUser, {
+        'roles' : role
+    })
+}
+
+export function updateGood(idGood, good) {
+    return instance.post(URLS.goods + idGood, {
+        'name' : good.name,
+        'description' : good.description,
+        'price' : good.price
+    })
+}
+
+export function postOrder(idUser, idGood, idSeller) {
+    return instance.post(URLS.buyers + idUser + "/orders",{
+        'idGood': idGood,
+        'idSeller': idSeller
     })
 }
