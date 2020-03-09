@@ -7,7 +7,8 @@ import {GoodInterface} from "../../stores/helpers/interfaces";
 export enum GoodsContainerPosition {
     basket = 'BASKET',
     sellerPage = 'SELLER_PAGE',
-    likedGoods = 'LIKED_GOODS'
+    likedGoods = 'LIKED_GOODS',
+    orders = "ORDERS"
 }
 
 @observer

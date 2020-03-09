@@ -5,11 +5,11 @@ import {GoodsContainer, GoodsContainerPosition} from "../../components/GoodsCont
 
 import {STATIC_IMAGES} from "../../http/urls";
 import {FormattedMessage} from "react-intl";
-import {SellerStore} from "../../stores/SellerStore";
+import {ShopStore} from "../../stores/ShopStore";
 
 @observer
 class SellerPage extends Component {
-    store: SellerStore = new SellerStore();
+    store: ShopStore = new ShopStore();
 
     componentDidMount(): void {
         let props: any = this.props;

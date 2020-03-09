@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom'
 import {observer} from 'mobx-react';
 import {action, computed, observable} from "mobx";
-import {getSellerById, postOrder} from "../../http/services";
+import {getSellerById} from "../../http/services";
 import {ROUTES} from "../../routes/routes";
 import {GoodInterface} from "../../stores/helpers/interfaces";
 import {STATIC_IMAGES} from "../../http/urls";
@@ -17,7 +17,7 @@ import SmallButton from "../SmallButton/SmallButton";
 import RootStore from "../../stores/RootStore";
 
 @observer
-class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsContainerPosition?: GoodsContainerPosition}> {
+class Good extends Component<{good: GoodInterface, idSeller: string, goodsContainerPosition?: GoodsContainerPosition}> {
     store = new OneGoodStore();
     @observable sellerName = "";
 
@@ -52,6 +52,7 @@ class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsC
                         name="goodName"
                         onChange={this.store.handleInputChange}
                         placeholder='name'
+                        value={this.props.good.name}
 
                     />
                     <textarea
@@ -73,21 +74,15 @@ class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsC
         )
     }
 
-    @action
-    async addOrder (idUser) {
-        try {
-            let response = await postOrder(idUser, this.props.good._id, this.props.idSeller);
-            console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     render () {
         const {user} = RootStore;
 
         return(
-                <div className="good" id={this.props.good._id}>
+                <div
+                    className="good"
+                    id={this.props.good._id}
+                    style={this.props.good.status === "accepted" ? {backgroundColor: "#efefef"} : {backgroundColor: "white"} }
+                >
                     {
                         <div className="good__buttons">
                             {
@@ -100,18 +95,23 @@ class Good extends Component<{good: GoodInterface, idSeller: string, key, goodsC
                                 <>
                                     <button
                                         id={this.props.good.name + "-remove"}
-                                        className="removeButton" onClick={() => this.store.removeFromBasket(this.props.good._id)}
+                                        className="removeButton" onClick={() => user.removeFromBasket(this.props.good._id)}
                                     >
                                     </button>
                                     <SmallButton htmlFor={this.props.good.name + "-remove"} icon={<FaTrash/>}/>
 
                                     <button
                                         id={this.props.good.name + "-addOrder"}
-                                        className="addOrderButton" onClick={() => this.addOrder(user.id)}
+                                        className="addOrderButton"
+                                        onClick={() => user.addOrder(user.id, this.props.good._id, this.props.idSeller)}
                                     >
                                     </button>
                                     <SmallButton htmlFor={this.props.good.name + "-addOrder"} icon={<FaRegLemon/>}/>
                                 </>
+                            }
+                            {
+                                this.props.goodsContainerPosition === GoodsContainerPosition.orders &&
+                                    <p>status: {this.props.good.status}</p>
                             }
                         </div>
                     }

@@ -125,3 +125,11 @@ export function postOrder(idUser, idGood, idSeller) {
         'idSeller': idSeller
     })
 }
+
+export function getUserOrders(idUser) {
+    return instance.get(URLS.buyers + idUser + "/orders")
+}
+
+export function getSellerOrders(idSeller) {
+    return instance.get(URLS.sellers + idSeller + "/orders")
+}

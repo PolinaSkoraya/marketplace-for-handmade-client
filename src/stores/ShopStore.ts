@@ -2,7 +2,7 @@ import {action, observable} from 'mobx';
 import {getGoodsOfSeller, getSellerById} from "../http/services";
 import {GoodInterface} from "./helpers/interfaces";
 
-class SellerStore {
+class ShopStore {
     @observable seller = {
         _id: "",
         description: "",
@@ -37,4 +37,4 @@ class SellerStore {
     }
 }
 
-export {SellerStore};
+export {ShopStore};

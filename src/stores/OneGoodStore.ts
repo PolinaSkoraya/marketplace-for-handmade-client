@@ -78,20 +78,7 @@ class OneGoodStore {
         }
     }
 
-    @action.bound
-    async removeFromBasket(id) {
-        let response;
-        try {
-            response = await deleteGoodFromBasket(user.id, id);
 
-            user.basket = response.data.basket;
-            user.goodsInBasket = user.goodsInBasket.filter(good => good._id !== id);
-
-            console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     @action.bound
     async addToLikedGoods() {

@@ -8,6 +8,7 @@ import {STATIC_IMAGES} from "../../http/urls";
 import {FaHeart} from "react-icons/fa";
 
 import {FormattedMessage} from "react-intl";
+import RootStore from "../../stores/RootStore";
 
 @observer
 class OneGoodPage extends Component<any> {
@@ -20,7 +21,7 @@ class OneGoodPage extends Component<any> {
     }
 
     render () {
-
+        const {user} = RootStore;
 
         return(
             <div className="good-page">
@@ -43,7 +44,7 @@ class OneGoodPage extends Component<any> {
 
                             {
                                 this.store.isInBasket ?
-                                    <button className="button-addToBasket" onClick={() => this.store.removeFromBasket(this.store.good._id)}>
+                                    <button className="button-addToBasket" onClick={() => user.removeFromBasket(this.store.good._id)}>
                                         remove from basket
                                     </button>
                                     :

@@ -58,6 +58,12 @@ class BuyerPage extends Component {
                                 {/*</NavLink>*/}
                             </div>
                     }
+
+                    <GoodsContainer
+                        goodsContainerTitle="Orders"
+                        goods={user.orders}
+                        goodsContainerPosition={GoodsContainerPosition.orders}
+                    />
                 </div>
             </div>
         )

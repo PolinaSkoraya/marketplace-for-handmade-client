@@ -7,7 +7,8 @@ interface GoodInterface {
     idSeller: string
     description?: string,
     likes: number,
-    image: string
+    image: string,
+    status?: string
 }
 
 interface SellerInterface {

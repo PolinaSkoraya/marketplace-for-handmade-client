@@ -2,6 +2,7 @@ import './SellerProfile.scss'
 import React, {Component} from 'react';
 import {getRole, Roles} from "../../stores/helpers/roles";
 import RootStore from "../../stores/RootStore";
+import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 
 class SellerProfile extends Component {
 
@@ -41,9 +42,12 @@ class SellerProfile extends Component {
                         :
                         <button onClick={user.setSellerRole}>start selling</button>
                 }
-                {/*<div className="success">*/}
-                {/*    <FormattedMessage id="message.goodAdded"/>*/}
-                {/*</div>*/}
+                <div>
+                    <GoodsContainer
+                        goodsContainerTitle="Your orders"
+                        goods={user.ordersOfSeller}
+                    />
+                </div>
             </div>
         )
     }
