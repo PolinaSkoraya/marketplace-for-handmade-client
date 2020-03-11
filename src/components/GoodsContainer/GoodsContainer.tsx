@@ -8,7 +8,8 @@ export enum GoodsContainerPosition {
     basket = 'BASKET',
     sellerPage = 'SELLER_PAGE',
     likedGoods = 'LIKED_GOODS',
-    orders = "ORDERS"
+    ordersBuyer = "ORDERS_BUYER",
+    ordersSeller = "ORDERS_SELLER",
 }
 
 @observer
@@ -24,7 +25,7 @@ class GoodsContainer extends Component <{ goodsContainerTitle: string, goods: Go
                     {
                         this.props.goods.map ( good =>
                                 <Good
-                                    key={good._id}
+                                    key={good._id + good.status}
                                     good={good}
                                     idSeller={good.idSeller}
                                     goodsContainerPosition={this.props.goodsContainerPosition}

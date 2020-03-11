@@ -2,15 +2,24 @@ import './Navigation.scss'
 import React, {Component} from "react";
 import {NavLink, Redirect} from 'react-router-dom';
 import {ROUTES} from "../../routes/routes";
+import { withRouter } from "react-router";
 
 import logo from "../../static/icons/diy.svg"
 import RootStore from "../../stores/RootStore";
 import {observer} from "mobx-react";
 import {getRole, Roles} from "../../stores/helpers/roles";
-import {FormattedMessage} from "react-intl"
+import {FormattedMessage} from "react-intl";
+import {FaRegSquare, FaSignOutAlt} from "react-icons/fa";
+import SmallButton from "../SmallButton/SmallButton";
 
 @observer
 class Navigation extends Component {
+
+    logOut (user) {
+        // this.props.history.push("/");
+        user.logOutUser();
+    }
+
     render () {
         const {user} = RootStore;
 
@@ -44,12 +53,22 @@ class Navigation extends Component {
                                 <FormattedMessage id="profile"/>
                             </NavLink>
 
-                            <NavLink
-                                to={ROUTES.root}
-                                className="navigation__link navigation__link--user"
-                            >
-                                <button onClick={user.logOutBuyer}>log out</button>
-                            </NavLink>
+                            {/*<NavLink*/}
+                            {/*    to={ROUTES.root}*/}
+                            {/*    className="navigation__link navigation__link--user"*/}
+                            {/*>*/}
+                            {/*    link to home*/}
+                            {/*</NavLink>*/}
+                            <div className="navigation__link navigation__link--user">
+                                <button
+                                    id="logOutButton"
+                                    onClick={() => this.logOut(user)}
+                                >
+                                    log out
+                                </button>
+                                <SmallButton htmlFor="logOutButton" icon={<FaSignOutAlt/>} style={{fontSize: "20px"}}/>
+                            </div>
+
                         </div>
                     ) : (
                         <div className="navigation__links navigation__links--user">
@@ -65,4 +84,4 @@ class Navigation extends Component {
     }
 }
 
-export default Navigation;
+export default withRouter(Navigation);

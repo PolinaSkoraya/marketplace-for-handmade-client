@@ -2,10 +2,11 @@ import './SellerProfile.scss'
 import React, {Component} from 'react';
 import {getRole, Roles} from "../../stores/helpers/roles";
 import RootStore from "../../stores/RootStore";
-import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
+import {GoodsContainer, GoodsContainerPosition} from "../../components/GoodsContainer/GoodsContainer";
+import {observer} from "mobx-react";
 
+@observer
 class SellerProfile extends Component {
-
     render() {
         const {user} = RootStore;
 
@@ -15,28 +16,28 @@ class SellerProfile extends Component {
                     getRole(Roles.seller) ?
                         <div>
                             <h1>{user.seller.name}</h1>
-                            <form onSubmit={user.createGood} className="createGood-form">
+                            <form className="createGood-form">
                                 <input
                                     className = 'createGood-form__input'
                                     type='text'
-                                    name="goodName"
+                                    name="newGoodName"
                                     onChange={user.handleInputChange}
                                     placeholder='name'
                                 />
                                 <textarea
                                     className = 'createGood-form__input'
-                                    name="description"
+                                    name="newGoodDescription"
                                     onChange={user.handleInputChange}
                                     placeholder='description'
                                 />
                                 <input
                                     className = 'createGood-form__input'
                                     type='text'
-                                    name="price"
+                                    name="newGoodPrice"
                                     onChange={user.handleInputChange}
                                     placeholder='price'
                                 />
-                                <input type="submit" value="create good"/>
+                                <button onClick={user.createGood}>create new good</button>
                             </form>
                         </div>
                         :
@@ -46,6 +47,7 @@ class SellerProfile extends Component {
                     <GoodsContainer
                         goodsContainerTitle="Your orders"
                         goods={user.ordersOfSeller}
+                        goodsContainerPosition={GoodsContainerPosition.ordersSeller}
                     />
                 </div>
             </div>

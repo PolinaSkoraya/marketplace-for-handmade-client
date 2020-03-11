@@ -8,29 +8,15 @@ import {FormattedMessage} from "react-intl";
 
 @observer
 class BuyerLogin extends Component {
-    // componentDidMount() {
-    //     instance
-    //         .get(URLS.buyers)
-    //         .then(response => {
-    //             if (response.data.length > 0) {
-    //                 user.email = response.data[0].email;
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log(error.body);
-    //         })
-    // }
-
     render () {
         const {user} = RootStore;
 
         return (
             <div className="buyerLogin">
-                <h4>
-                    <FormattedMessage id="signIn"/>
-                </h4>
-
                 <form className="buyerLogin-form">
+                    <h4 className="buyerLogin-form__name">
+                        <FormattedMessage id="signIn"/>
+                    </h4>
                    <input
                        className = 'buyerLogin-input'
                        type='text'
@@ -49,7 +35,11 @@ class BuyerLogin extends Component {
                        value={user.password}
                     />
 
-                    <input type="button" value="Sing in" onClick={user.login}/>
+                    <input type="button" onClick={() => user.login(user.email, user.password)} value="sign in"/>
+                    {/*<label htmlFor="signInButton" className="signIn-label">sign in</label>*/}
+                    <NavLink to={ROUTES.buyers.registration}>
+                        <FormattedMessage id="register"/>
+                    </NavLink>
                  </form>
 
                 <NavLink

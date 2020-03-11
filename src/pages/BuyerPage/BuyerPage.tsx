@@ -62,7 +62,7 @@ class BuyerPage extends Component {
                     <GoodsContainer
                         goodsContainerTitle="Orders"
                         goods={user.orders}
-                        goodsContainerPosition={GoodsContainerPosition.orders}
+                        goodsContainerPosition={GoodsContainerPosition.ordersBuyer}
                     />
                 </div>
             </div>

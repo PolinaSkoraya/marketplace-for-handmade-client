@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import {observer} from 'mobx-react';
 import RootStore from "../../stores/RootStore";
 import {FormattedMessage} from "react-intl";
+import {ROUTES} from "../../routes/routes";
+import {NavLink} from 'react-router-dom';
 
 @observer
 class BuyerRegistration extends Component {
@@ -11,11 +13,10 @@ class BuyerRegistration extends Component {
 
          return (
              <div className="buyerRegistration">
-                <h4>
-                    <FormattedMessage id="register"/>
-                </h4>
-
                 <form className="buyerRegistration-form">
+                    <h4>
+                        <FormattedMessage id="register"/>
+                    </h4>
                     <input
                         className="buyerRegistration-input"
                         type="text"
@@ -43,7 +44,14 @@ class BuyerRegistration extends Component {
                         placeholder='password'
                     />
 
-                    <input type="button" value="Sing in" onClick={user.register}/>
+                    <input
+                        type="button"
+                        value="sign up"
+                        onClick={() => user.register(user.nameForRegistration, user.email, user.password)}
+                    />
+                    <NavLink to={ROUTES.buyers.login}>
+                        <FormattedMessage id="signIn"/>
+                    </NavLink>
                 </form>
              </div>
          );

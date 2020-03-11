@@ -1,9 +1,9 @@
-import './Good.scss'
+import './Good.scss';
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom'
 import {observer} from 'mobx-react';
 import {action, computed, observable} from "mobx";
-import {getSellerById} from "../../http/services";
+import {getSellerById, updateOrderState} from "../../http/services";
 import {ROUTES} from "../../routes/routes";
 import {GoodInterface} from "../../stores/helpers/interfaces";
 import {STATIC_IMAGES} from "../../http/urls";
@@ -12,7 +12,7 @@ import {GoodsContainerPosition} from "../GoodsContainer/GoodsContainer";
 import {FormattedMessage} from 'react-intl';
 import Modal from "../Modal/Modal";
 
-import {FaRegLemon, FaTrash} from "react-icons/fa";
+import {FaRegLemon, FaTrash, FaRegSquare, FaPen} from "react-icons/fa";
 import SmallButton from "../SmallButton/SmallButton";
 import RootStore from "../../stores/RootStore";
 
@@ -20,10 +20,12 @@ import RootStore from "../../stores/RootStore";
 class Good extends Component<{good: GoodInterface, idSeller: string, goodsContainerPosition?: GoodsContainerPosition}> {
     store = new OneGoodStore();
     @observable sellerName = "";
+    @observable show = false;
 
     constructor (props) {
         super(props);
         this.getShopName(this.props.idSeller);
+        this.store.initUpdatingGood(this.props.good);
     }
 
     @action.bound
@@ -37,50 +39,52 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
     }
 
     @action.bound
-    update(id) {
+    update (id) {
         this.store.update(id);
     }
 
-    @computed
-    get elem () {
-        return (
-            <>
-                <form className="createGood-form">
-                    <input
-                        className = 'createGood-form__input'
-                        type='text'
-                        name="goodName"
-                        onChange={this.store.handleInputChange}
-                        placeholder='name'
-                        value={this.props.good.name}
+    showModal = () => {
+        this.show = true;
+    }
 
-                    />
-                    <textarea
-                        className = 'createGood-form__input'
-                        name="description"
-                        onChange={this.store.handleInputChange}
-                        placeholder='description'
-                    />
-                    <input
-                        className = 'createGood-form__input'
-                        type='text'
-                        name="price"
-                        onChange={this.store.handleInputChange}
-                        placeholder='price'
-                    />
-                    <button onClick={() => this.update(this.props.good._id)}>Update good</button>
-                </form>
-            </>
-        )
+    hideModal = () => {
+        this.show = false;
     }
 
     render () {
         const {user} = RootStore;
 
+        const form = <form className="createGood-form">
+            <input
+                className = 'createGood-form__input'
+                type='text'
+                name="goodName"
+                onChange={this.store.handleInputChange}
+                placeholder='name'
+                value={this.store.goodName}
+            />
+            <textarea
+                className = 'createGood-form__input'
+                name="description"
+                onChange={this.store.handleInputChange}
+                placeholder='description'
+                value={this.store.description}
+            />
+            <input
+                className = 'createGood-form__input'
+                type='text'
+                name="price"
+                onChange={this.store.handleInputChange}
+                placeholder='price'
+                value={this.store.price}
+            />
+            <button onClick={() => this.update(this.props.good._id)}>Update good</button>
+        </form>
+
         return(
                 <div
                     className="good"
-                    id={this.props.good._id}
+                    id={this.props.good._id + this.props.good.idOrder}
                     style={this.props.good.status === "accepted" ? {backgroundColor: "#efefef"} : {backgroundColor: "white"} }
                 >
                     {
@@ -88,14 +92,24 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
                             {
                                 this.props.good.idSeller === user.seller._id &&
                                 this.props.goodsContainerPosition === GoodsContainerPosition.sellerPage &&
-                                <Modal children={this.elem} goodName={this.props.good.name}/>
+                                <>
+                                    <button id={this.props.good.name} className="updateGoodButton" onClick={this.showModal}/>
+                                    <SmallButton htmlFor={this.props.good.name} icon={<FaPen/>}/>
+                                    <Modal
+                                        children={form}
+                                        goodName={this.props.good.name}
+                                        handleClose={this.hideModal}
+                                        show={this.show}
+                                    />
+                                </>
                             }
                             {
                                 this.props.goodsContainerPosition === GoodsContainerPosition.basket &&
                                 <>
                                     <button
                                         id={this.props.good.name + "-remove"}
-                                        className="removeButton" onClick={() => user.removeFromBasket(this.props.good._id)}
+                                        className="removeButton"
+                                        onClick={() => user.removeFromBasket(this.props.good._id)}
                                     >
                                     </button>
                                     <SmallButton htmlFor={this.props.good.name + "-remove"} icon={<FaTrash/>}/>
@@ -110,8 +124,29 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
                                 </>
                             }
                             {
-                                this.props.goodsContainerPosition === GoodsContainerPosition.orders &&
+                                this.props.goodsContainerPosition === GoodsContainerPosition.ordersBuyer &&
                                     <p>status: {this.props.good.status}</p>
+                            }
+                            {
+                                this.props.good.status === "accepted" &&
+                                this.props.goodsContainerPosition === GoodsContainerPosition.ordersBuyer &&
+                                <button onClick={()=>{user.deleteOrder(this.props.good.idOrder)}
+                                }>
+                                    done
+                                </button>
+                            }
+                            {
+                                this.props.good.status === "processing" &&
+                                this.props.goodsContainerPosition === GoodsContainerPosition.ordersSeller &&
+                                <>
+                                    <button
+                                        id={this.props.good.idOrder}
+                                        className="updateOrderState"
+                                        onClick={() => user.acceptOrder(this.props.good.idOrder)}
+                                    >
+                                    </button>
+                                    <SmallButton htmlFor={this.props.good.idOrder as string} icon={<FaRegSquare/>}/>
+                                </>
                             }
                         </div>
                     }

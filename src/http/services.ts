@@ -133,3 +133,11 @@ export function getUserOrders(idUser) {
 export function getSellerOrders(idSeller) {
     return instance.get(URLS.sellers + idSeller + "/orders")
 }
+
+export function updateOrderState(idOrder) {
+    return instance.post(URLS.sellers + "orders/" + idOrder);
+}
+
+export function deleteOrders(idOrder) {
+    return instance.delete("/orders/" + idOrder);
+}

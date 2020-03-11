@@ -17,7 +17,6 @@ class OneGoodPage extends Component<any> {
     async componentDidMount() {
         const {match}  = this.props;
         await this.store.initGood(match.params.id);
-
     }
 
     render () {

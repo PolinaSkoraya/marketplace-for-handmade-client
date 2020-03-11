@@ -1,137 +1,165 @@
 @import "src/styles/variables";
 
-label {
-  cursor: pointer;
-  transition: all 250ms;
+//label {
+//  cursor: pointer;
+//  transition: all 250ms;
+//}
+//
+//.container {
+//  position: relative;
+//  display: flex;
+//
+//  .modal-button {
+//    position: relative;
+//    display: flex;
+//    width: 22px;
+//    height: 22px;
+//    border-radius: 50%;
+//    //box-shadow: 0 0 45px rgba(0, 0, 0, 0.2);
+//    transition: all 250ms;
+//    justify-content: center;
+//    align-items: center;
+//    color: $color-grey;
+//
+//    span {
+//      font-size: 10px;
+//    }
+//
+//    &:hover,
+//    &:focus {
+//      color: $color-secondary-light;
+//      background-color: $color-basic-light;
+//      //box-shadow: 0 0 10px $color-basic-light;
+//    }
+//  }
+//
+//  .modal-content,
+//  .modal-background {
+//    z-index: 5;
+//    visibility: hidden;
+//    width: 0;
+//    height: 0;
+//    opacity: 0;
+//    //overflow: hidden;
+//    cursor: pointer;
+//  }
+//
+//  .modal-background {
+//    transition: height 250ms;
+//  }
+//
+//  .modal-content {
+//    transform: scale(0);
+//    transition: transform 500ms;
+//  }
+//
+//  .modal {
+//    display: none;
+//
+//    &:checked ~ .modal-background {
+//      position: fixed;
+//      top: 0;
+//      left: 0;
+//      width: 100%;
+//      height: 100%;
+//      background-color: transparentize(black, 0.2);
+//      visibility: visible;
+//      opacity: 1;
+//      transition: height 250ms;
+//    }
+//
+//    &:checked ~ .modal-content {
+//      position: fixed;
+//      top: 50%;
+//      left: 50%;
+//      margin-top: -15%;
+//      margin-left: -15%;
+//      width: 400px;
+//      height: auto;
+//      padding: 40px;
+//      background-color: white;
+//      border-radius: 3px;
+//      visibility: visible;
+//      opacity: 1;
+//      cursor: auto;
+//      transform: scale(1);
+//      transition: transform 500ms;
+//
+//      .modal-close {
+//        position: absolute;
+//        top: 20px;
+//        right: 20px;
+//        font-size: 20px;
+//        width: 30px;
+//        height: 30px;
+//        border-radius: 50%;
+//        display: flex;
+//        justify-content: center;
+//        align-items: center;
+//        color: transparentize($color-basic-dark,0.6);
+//        transition: color 200ms,
+//        transform 500ms,
+//        background-color 500ms;
+//
+//
+//        &:hover,
+//        &:focus {
+//          color: lighten($color-basic-dark, 10%);
+//          background-color: $color-basic-light;
+//        }
+//      }
+//
+//      p {
+//        position: relative;
+//        margin: 0 0 20px 0;
+//        font-weight: 200;
+//        font-size: 14px;
+//        line-height: 1.6;
+//      }
+//
+//      .modal-content-button {
+//        position: relative;
+//        float: right;
+//        margin: 0;
+//        padding: 10px 20px;
+//        color: white;
+//        font-weight: 100;
+//        border-radius: 3px;
+//        background-color: $color-secondary-light;
+//
+//        &:hover,
+//        &:focus {
+//          background-color: lighten($color-secondary-light,10%);
+//        }
+//      }
+//    }
+//  }
+//}
+
+.modal {
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal-main {
+    position:fixed;
+    background: white;
+    width: 80%;
+    height: auto;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+  }
 }
 
-.container {
-  position: relative;
-  display: flex;
+.display-block {
+  display: block;
+}
 
-  .modal-button {
-    position: relative;
-    display: flex;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    //box-shadow: 0 0 45px rgba(0, 0, 0, 0.2);
-    transition: all 250ms;
-    justify-content: center;
-    align-items: center;
-    color: $color-grey;
-
-    span {
-      font-size: 10px;
-    }
-
-    &:hover,
-    &:focus {
-      color: $color-secondary-light;
-      background-color: $color-basic-light;
-      //box-shadow: 0 0 10px $color-basic-light;
-    }
-  }
-
-  .modal-content,
-  .modal-background {
-    z-index: 5;
-    visibility: hidden;
-    width: 0;
-    height: 0;
-    opacity: 0;
-    //overflow: hidden;
-    cursor: pointer;
-  }
-
-  .modal-background {
-    transition: height 250ms;
-  }
-
-  .modal-content {
-    transform: scale(0);
-    transition: transform 500ms;
-  }
-
-  .modal {
-    display: none;
-
-    &:checked ~ .modal-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: transparentize(black, 0.2);
-      visibility: visible;
-      opacity: 1;
-      transition: height 250ms;
-    }
-
-    &:checked ~ .modal-content {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      margin-top: -15%;
-      margin-left: -15%;
-      width: 400px;
-      height: auto;
-      padding: 40px;
-      background-color: white;
-      border-radius: 3px;
-      visibility: visible;
-      opacity: 1;
-      cursor: auto;
-      transform: scale(1);
-      transition: transform 500ms;
-
-      .modal-close {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 20px;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: transparentize($color-basic-dark,0.6);
-        transition: color 200ms,
-        transform 500ms,
-        background-color 500ms;
-
-
-        &:hover,
-        &:focus {
-          color: lighten($color-basic-dark, 10%);
-          background-color: $color-basic-light;
-        }
-      }
-
-      p {
-        position: relative;
-        margin: 0 0 20px 0;
-        font-weight: 200;
-        font-size: 14px;
-        line-height: 1.6;
-      }
-
-      .modal-content-button {
-        position: relative;
-        float: right;
-        margin: 0;
-        padding: 10px 20px;
-        color: white;
-        font-weight: 100;
-        border-radius: 3px;
-        background-color: $color-secondary-light;
-
-        &:hover,
-        &:focus {
-          background-color: lighten($color-secondary-light,10%);
-        }
-      }
-    }
-  }
+.display-none {
+  display: none;
 }

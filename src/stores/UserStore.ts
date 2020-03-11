@@ -2,7 +2,7 @@ import {action, computed, observable} from 'mobx';
 import {instance} from '../http/instance';
 import {URLS} from '../http/urls';
 import {
-    deleteGoodFromBasket,
+    deleteGoodFromBasket, deleteOrders,
     getBuyerById,
     getGoodsInBasket,
     getGoodsOfSeller,
@@ -10,7 +10,7 @@ import {
     getShopByUserId,
     getUserOrders,
     postGood,
-    postOrder,
+    postOrder, updateOrderState,
     updateUserRole
 } from "../http/services";
 import jwtDecode from 'jwt-decode';
@@ -28,7 +28,7 @@ class UserStore {
     @observable roles: Roles[] = [];
     @observable basket = [];
     @observable likedGoods = [];
-    @observable orders = [];
+    @observable orders: GoodInterface[] = [];
 
     @observable goodsInBasket: GoodInterface[] = [];
     @observable goodsInLikedGoods: GoodInterface[] = [];
@@ -43,7 +43,7 @@ class UserStore {
     @observable goodsOfSeller: GoodInterface[] = [];
     @observable ordersOfSeller: GoodInterface[] = [];
 
-    constructor() {
+    constructor () {
         const accessToken  = this.getAuthTokens();
 
         if (accessToken) {
@@ -58,9 +58,8 @@ class UserStore {
         this.id = authData.id;
         this.name = authData.name;
         this.roles = authData.roles;
-        console.log(authData.roles);
 
-        await this.initBasket();
+        await this.initBasket();         //
         await this.initLikedGoods();
         await this.getOrders(this.id);
 
@@ -89,10 +88,10 @@ class UserStore {
     }
 
     @action.bound
-    async login () {
+    async login (email, password) {
         const user = {
-            email: this.email,
-            password: this.password
+            email: email,
+            password: password
         };
 
         try {
@@ -106,11 +105,11 @@ class UserStore {
     }
 
     @action.bound
-    async register () {
+    async register (name, email, password) {
         const user = {
-            name: this.nameForRegistration,
-            email: this.email,
-            password: this.password
+            name: name,
+            email: email,
+            password: password
         };
         try {
             const response = await instance.post(URLS.registerBuyer, user);
@@ -118,6 +117,7 @@ class UserStore {
         } catch (error) {
             console.log(error);
         }
+        this.login(email, password);
     }
 
     @action.bound
@@ -148,11 +148,12 @@ class UserStore {
     }
 
     @action.bound
-    async logOutBuyer () {
+    async logOutUser () {
         localStorage.removeItem(TOKEN);
 
         this.basket = [];
         this.name = '';
+        this.ordersOfSeller = [];
     }
 
     @action.bound
@@ -189,7 +190,7 @@ class UserStore {
     async setSellerRole () {
         const response = await updateUserRole(this.id, Roles.seller);
         console.log(response);
-        this.login();
+        this.login(this.email, this.password);
         this.roles.push(Roles.seller);
     }
 
@@ -198,7 +199,7 @@ class UserStore {
         try {
             const responseSeller = await getShopByUserId(id);
             this.seller = responseSeller.data;
-            const responseSellerOrders = await getSellerOrders(this.seller._id);
+            const responseSellerOrders = await getSellerOrders(this.seller._id); //new function, for accept orders
             this.ordersOfSeller = responseSellerOrders.data;
             console.log(this.ordersOfSeller);
         } catch (error) {
@@ -233,23 +234,32 @@ class UserStore {
             await this.removeFromBasket(idGood);
             await this.getOrders(this.id);
 
-            console.log(response);
+            console.log(this.orders);
         } catch (error) {
             console.log(error);
         }
     }
 
-    @observable goodName;
-    @observable price;
-    @observable description;
+    @action
+    async acceptOrder(idOrder) {
+        let response = await updateOrderState(idOrder);
+        console.log(response.data);
+        await this.getOrders(this.id);
+        const responseSellerOrders = await getSellerOrders(this.seller._id);
+        this.ordersOfSeller = responseSellerOrders.data;
+    }
+
+    @observable newGoodName = "";
+    @observable newGoodPrice = 0;
+    @observable newGoodDescription = "";
 
     @action.bound
     async createGood () {
         const good = {
-            name: this.goodName,
-            price: this.price,
+            name: this.newGoodName,
+            price: this.newGoodPrice,
             idSeller: this.seller._id,
-            description: this.description,
+            description: this.newGoodDescription,
             image: "fairy-house.jpg",
             likes: 0
         }
@@ -260,6 +270,13 @@ class UserStore {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    @action
+    async deleteOrder (idOrder) {
+        let response = await deleteOrders(idOrder);
+        this.orders = this.orders.filter(order => order.idOrder !== response.data._id);
+        this.ordersOfSeller = this.ordersOfSeller.filter(order => order.idOrder !== response.data._id);
     }
 }
 

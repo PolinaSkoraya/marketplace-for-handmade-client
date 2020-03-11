@@ -43,6 +43,13 @@ class OneGoodStore {
     @observable description = "";
     @observable price = 0;
 
+    @action
+    initUpdatingGood (good) {
+        this.goodName = good.name;
+        this.description = good.description;
+        this.price = good.price;
+    }
+
     @action.bound
     handleInputChange (event) {
         const target = event.target;
