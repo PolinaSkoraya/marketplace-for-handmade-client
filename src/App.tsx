@@ -17,6 +17,8 @@ import RootStore from "./stores/RootStore";
 import BuyerPage from "./pages/BuyerPage/BuyerPage";
 import SellerProfile from "./pages/SellerProfile/SellerProfile";
 import {RawIntlProvider} from 'react-intl'
+import PrivateRouter from "./routes/PrivateRouter";
+import {Roles} from "./stores/helpers/roles";
 
 
 @observer
@@ -37,19 +39,48 @@ class App extends Component {
                         <Switch>
                             <Route exact path={ROUTES.root} component={HomePage}/>
                             <Route exact path={ROUTES.goods.goods} component={GoodsPage}/>
-                            <Route exact path={ROUTES.sellers.sellers} component={SellerProfile}/>
-                            <Route path={ROUTES.buyers.login} component={BuyerLogin}/>
-                            <Route path={ROUTES.buyers.registration} component={BuyerRegistration}/>
-                            <Route exact path={ROUTES.sellers.id} component={SellerPage}/>
 
-                            <Route exact path={ROUTES.goods.id} component={OneGoodPage}/>
+                            <PrivateRouter
+                                path={ROUTES.sellers.sellers}
+                                roles={[Roles.buyer]}
+                                component={SellerProfile}
+                                exact
+                            />
 
-                            <Route exact path={ROUTES.sellers.profile} component={SellerProfile}/>
-                            <Route exact path={ROUTES.buyers.profile} component={BuyerPage}/>
+                            <Route path={ROUTES.users.login} component={BuyerLogin}/>
+                            <Route path={ROUTES.users.registration} component={BuyerRegistration}/>
+
+                            <PrivateRouter
+                                path={ROUTES.sellers.id}
+                                roles={[Roles.buyer]}
+                                component={SellerPage}
+                                exact
+                            />
+
+                            <PrivateRouter
+                                path={ROUTES.goods.id}
+                                roles={[Roles.buyer]}
+                                component={OneGoodPage}
+                                exact
+                            />
+
+                            {/*<PrivateRouter*/}
+                            {/*    path={ROUTES.sellers.profile}*/}
+                            {/*    roles={[Roles.buyer]}*/}
+                            {/*    component={SellerProfile}*/}
+                            {/*    exact*/}
+                            {/*/>*/}
+
+                            <PrivateRouter
+                                path={ROUTES.users.profile}
+                                roles={[Roles.buyer]}
+                                component={BuyerPage}
+                                exact
+                            />
 
                         </Switch>
 
-                        {/*<Redirect to={ROUTES.buyers.login}/>*/}
+                        {/*<Redirect to={ROUTES.users.login}/>*/}
                     </BrowserRouter>
                 </div>
             </RawIntlProvider>

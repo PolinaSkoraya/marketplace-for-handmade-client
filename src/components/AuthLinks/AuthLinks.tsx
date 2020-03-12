@@ -11,11 +11,11 @@ class AuthLinks extends Component {
 
         return(
             <div className="links">
-                <NavLink to={ROUTES.buyers.login} className="auth-link">
+                <NavLink to={ROUTES.users.login} className="auth-link">
                     <FormattedMessage id="signIn"/>
                 </NavLink>
 
-                <NavLink to={ROUTES.buyers.registration} className="auth-link">
+                <NavLink to={ROUTES.users.registration} className="auth-link">
                     <FormattedMessage id="register"/>
                 </NavLink>
             </div>

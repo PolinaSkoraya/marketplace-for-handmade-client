@@ -24,7 +24,7 @@ export function postGood(good) {
 }
 
 export function getBuyerById (id) {
-    return instance.get(URLS.buyers + id);
+    return instance.get(URLS.users + id);
 }
 
 export function getSellerById (id) { //user/id/shop
@@ -52,7 +52,7 @@ export function getGoodWithSellerById (id) {
 }
 
 export function getGoodsInBasket (id) {
-    return instance.get(URLS.buyers + id + "/basket",{
+    return instance.get(URLS.users + id + "/basket",{
         headers: {
             'auth-token': localStorage.getItem(TOKEN),
         },
@@ -60,19 +60,19 @@ export function getGoodsInBasket (id) {
 }
 
 export function postGoodIntoBasket (idBuyer, idGood) {
-    return instance.post(URLS.buyers + idBuyer + "/basket",{
+    return instance.post(URLS.users + idBuyer + "/basket",{
         "idGood" : idGood
     })
 }
 
 export function deleteGoodFromBasket (idBuyer, idGood) {
-    return instance.post(URLS.buyers + idBuyer + "/basket/delete",{
+    return instance.post(URLS.users + idBuyer + "/basket/delete",{
         "idGood" : idGood
     })
 }
 
 export function getLikedGoods (id) {
-    return instance.get(URLS.buyers + id + "/liked",{
+    return instance.get(URLS.users + id + "/liked",{
         headers: {
             'auth-token': localStorage.getItem(TOKEN),
         },
@@ -80,13 +80,13 @@ export function getLikedGoods (id) {
 }
 
 export function postGoodIntoLikedGoods (idBuyer, idGood) {
-    return instance.post(URLS.buyers + idBuyer + "/liked",{
+    return instance.post(URLS.users + idBuyer + "/liked",{
         "idGood" : idGood
     })
 }
 
 export function deleteGoodFromLikedGoods (idBuyer, idGood) {
-    return instance.post(URLS.buyers + idBuyer + "/liked/delete",{
+    return instance.post(URLS.users + idBuyer + "/liked/delete",{
         "idGood" : idGood
     })
 }
@@ -98,7 +98,7 @@ export function updateLikes (idGood, likes) {
 }
 
 export function getShopByUserId(idUser) {
-    return instance.get(URLS.buyers + idUser + "/shop", {
+    return instance.get(URLS.users + idUser + "/shop", {
         headers: {
             'auth-token': localStorage.getItem(TOKEN),
         },
@@ -106,7 +106,7 @@ export function getShopByUserId(idUser) {
 }
 
 export function updateUserRole(idUser, role) {
-    return instance.post(URLS.buyers + idUser, {
+    return instance.post(URLS.users + idUser, {
         'roles' : role
     })
 }
@@ -120,14 +120,14 @@ export function updateGood(idGood, good) {
 }
 
 export function postOrder(idUser, idGood, idSeller) {
-    return instance.post(URLS.buyers + idUser + "/orders",{
+    return instance.post(URLS.users + idUser + "/orders",{
         'idGood': idGood,
         'idSeller': idSeller
     })
 }
 
 export function getUserOrders(idUser) {
-    return instance.get(URLS.buyers + idUser + "/orders")
+    return instance.get(URLS.users + idUser + "/orders")
 }
 
 export function getSellerOrders(idSeller) {
@@ -140,4 +140,14 @@ export function updateOrderState(idOrder) {
 
 export function deleteOrders(idOrder) {
     return instance.delete("/orders/" + idOrder);
+}
+
+export function postShop(seller) {
+    return instance.post("/sellers",{
+        "name": seller.name,
+        "idUser": seller.idUser,
+        "description": seller.description,
+        "logo": seller.logo,
+        "services": seller.services
+    })
 }

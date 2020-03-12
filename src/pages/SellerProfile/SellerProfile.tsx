@@ -41,7 +41,23 @@ class SellerProfile extends Component {
                             </form>
                         </div>
                         :
-                        <button onClick={user.setSellerRole}>start selling</button>
+                        <div>
+                            <p>shop info</p>
+                            <input
+                                className = ''
+                                type='text'
+                                name="newShopName"
+                                onChange={user.handleInputChange}
+                                placeholder='shop name'
+                            />
+                            <textarea
+                                className = ''
+                                name="newShopDescription"
+                                onChange={user.handleInputChange}
+                                placeholder='shop description'
+                            />
+                            <button onClick={user.setSellerRole}>start selling</button>
+                        </div>
                 }
                 <div>
                     <GoodsContainer

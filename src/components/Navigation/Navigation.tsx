@@ -49,7 +49,7 @@ class Navigation extends Component {
                                     </NavLink>
                             }
 
-                            <NavLink to={ROUTES.buyers.buyers + user.id} className="navigation__link navigation__link--user">
+                            <NavLink to={ROUTES.users.users + user.id} className="navigation__link navigation__link--user">
                                 <FormattedMessage id="profile"/>
                             </NavLink>
 
@@ -72,7 +72,7 @@ class Navigation extends Component {
                         </div>
                     ) : (
                         <div className="navigation__links navigation__links--user">
-                            <NavLink to={ROUTES.buyers.login} className="navigation__link navigation__link--user">
+                            <NavLink to={ROUTES.users.login} className="navigation__link navigation__link--user">
                                 <FormattedMessage id="signIn"/>
                             </NavLink>
                         </div>

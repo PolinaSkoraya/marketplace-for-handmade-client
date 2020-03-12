@@ -10,7 +10,7 @@ import {
     getShopByUserId,
     getUserOrders,
     postGood,
-    postOrder, updateOrderState,
+    postOrder, postShop, updateOrderState,
     updateUserRole
 } from "../http/services";
 import jwtDecode from 'jwt-decode';
@@ -188,10 +188,30 @@ class UserStore {
 
     @action.bound
     async setSellerRole () {
-        const response = await updateUserRole(this.id, Roles.seller);
-        console.log(response);
+        await updateUserRole(this.id, Roles.seller);
         this.login(this.email, this.password);
         this.roles.push(Roles.seller);
+        await this.createShop();
+    }
+    @observable newShopName = "";
+    @observable newShopDescription = "";
+
+    @action.bound
+    async createShop () {
+        const seller = {
+            name: this.newShopName,
+            idUser: this.id,
+            description: this.newShopDescription,
+            logo: "clayshop-logo.svg",
+            services: "master on all hands"
+        }
+
+        try {
+            const response = await postShop(seller);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     @action.bound
@@ -201,7 +221,6 @@ class UserStore {
             this.seller = responseSeller.data;
             const responseSellerOrders = await getSellerOrders(this.seller._id); //new function, for accept orders
             this.ordersOfSeller = responseSellerOrders.data;
-            console.log(this.ordersOfSeller);
         } catch (error) {
             console.log(error);
         }

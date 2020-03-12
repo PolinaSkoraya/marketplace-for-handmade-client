@@ -1,6 +1,65 @@
-@import "src/styles/variables";
+@import "../../styles/variables";
+@import "../../styles/shared";
 
-.header{
+#scene {
+  margin-top: 200px;
+  animation: scale;
+  animation-duration: 1.5s;
+  .item-2, .item-3 {
+    animation: scale;
+    animation-duration: 1.5s;
+  }
+}
+
+.item-1 {
+  background-color: $color-secondary-light;
+  height: 200px;
+  width: 260px;
+  border-radius: 20px;
+  @extend %center;
+  img {
+    color: white;
+    width: 80%;
+  }
+}
+//.item-1:hover{
+//   background-color: $color-basic-medium;
+//   transition-property: background-color;
+//   transition-duration: .8s;
+// }
+
+.item-2 {
+  height: 80px;
+  width: 80px;
+  margin-top: -20px;
+  margin-left: -25px;
+  @extend %center;
+
+  img {
+    width: 95%;
+  }
+}
+
+.item-3 {
+  width: 90px;
+  height: 90px;
+  margin-top: -260px;
+  margin-left: 230px;
+  @extend %center;
+
+  img {
+    width: 80%;
+  }
+}
+
+.item-4 {
+  background-color: #73c7ce;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+}
+
+.header {
   height: 100vh;
   position: relative;
   display: flex;
@@ -43,3 +102,16 @@
 .header__text{
   font-size: $font-size-sub-title;
 }
+
+@keyframes scale {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.1, 1.1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+

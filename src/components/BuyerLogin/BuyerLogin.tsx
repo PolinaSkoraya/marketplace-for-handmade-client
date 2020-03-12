@@ -37,7 +37,7 @@ class BuyerLogin extends Component {
 
                     <input type="button" onClick={() => user.login(user.email, user.password)} value="sign in"/>
                     {/*<label htmlFor="signInButton" className="signIn-label">sign in</label>*/}
-                    <NavLink to={ROUTES.buyers.registration}>
+                    <NavLink to={ROUTES.users.registration}>
                         <FormattedMessage id="register"/>
                     </NavLink>
                  </form>

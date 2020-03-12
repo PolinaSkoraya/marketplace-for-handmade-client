@@ -9,14 +9,14 @@ export const ROUTES = {
     sellers: {
         sellers: '/sellers/',
         id: '/sellers/:id',
-        profile: '/sellers/:id/profile'
+        profile: '/seller/:id/profile'
     },
 
-    buyers: {
-        buyers: '/buyers/',
-        login: '/buyers/login',
-        registration: '/buyers/registration',
-        profile: '/buyers/:id'
+    users: {
+        users: '/users/',
+        login: '/users/login',
+        registration: '/users/registration',
+        profile: '/users/:id'
     }
 
 }

@@ -14,7 +14,7 @@ export function getDefaultRouteByRole() {
     if (getRole(Roles.seller)) {
         return ROUTES.sellers.profile;
     } else if (getRole(Roles.buyer)) {
-        return ROUTES.buyers.profile;
+        return ROUTES.users.profile;
     }
 }
 

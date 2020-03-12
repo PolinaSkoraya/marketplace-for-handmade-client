@@ -20,13 +20,13 @@ class GoodsPage extends Component{
 
         return (
             <>
-                { user.authenticated ? (
+                {/*{ user.authenticated ? (*/}
                     <div className="goods-page">
                         <GoodsContainer goodsContainerTitle="All Goods" goods={this.store.goods}/>
                     </div>
-                ) : (
-                    <Redirect to={ROUTES.buyers.login}/>
-                ) }
+                {/*) : (*/}
+                {/*    <Redirect to={ROUTES.users.login}/>*/}
+                {/*) }*/}
             </>
         )
     }
