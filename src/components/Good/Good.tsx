@@ -24,18 +24,14 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
 
     constructor (props) {
         super(props);
-        this.getShopName(this.props.idSeller);
         this.store.initUpdatingGood(this.props.good);
     }
 
-    @action.bound
-    async getShopName (id) {
-        try {
-            const responseSeller = await getSellerById(id);
-            this.sellerName = responseSeller.data.name;
-        } catch (error) {
-            console.log(error);
-        }
+    componentDidMount () : void {
+        this.store.getShopName(this.props.idSeller)
+            .then( response =>
+                this.sellerName = response
+            );
     }
 
     @action.bound
@@ -81,12 +77,19 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
             <button onClick={() => this.update(this.props.good._id)}>Update good</button>
         </form>
 
+
+        //flexDirection: "row", width: "300px", height: "250px"
         return(
                 <div
                     className="good"
-                    id={this.props.good._id + this.props.good.idOrder}
-                    style={this.props.good.status === "accepted" ? {backgroundColor: "#efefef"} : {backgroundColor: "white"} }
+                    id = {this.props.good._id + this.props.good.idOrder}
+                    style = {this.props.good.status === "accepted" ?
+                        {backgroundColor: "#efefef"}
+                        :
+                        {backgroundColor: "white"}
+                    }
                 >
+
                     {
                         <div className="good__buttons">
                             {
@@ -150,8 +153,6 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
                             }
                         </div>
                     }
-
-
 
                     <div className="good__image">
                         <NavLink

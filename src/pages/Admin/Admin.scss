@@ -1,0 +1,14 @@
+.admin-page {
+  padding-top: 100px;
+}
+
+.grid-container{
+  display: grid;
+  border: 1px solid black;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: 120px 100px 350px 250px;
+  border-bottom: 1px solid gray;
+}

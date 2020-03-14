@@ -13,26 +13,52 @@ import icon3 from "../../static/icons/svg/014-button-1.svg";
 
 import Parallax from  "parallax-js";
 import logo from "../../static/icons/diy.svg";
+import {action, observable} from "mobx";
+import SmallButton from "../../components/SmallButton/SmallButton";
+import Pagination from "../../components/Pagination/Pagination";
+
 
 @observer
 class HomePage extends Component{
     store: GoodsStore = new GoodsStore();
+    @observable currentPage = 1;
+    @observable numberOfPages = 0;
 
-    async componentDidMount() {
-        await this.store.loadGoods();
-
+    async componentDidMount () {
+        const response = await this.store.loadGoods(this.currentPage);
+        this.numberOfPages = response;
         // let scene = document.getElementById('scene');
         // let parallaxInstance = new Parallax(scene, {
         //     relativeInput: true,
         //     hoverOnly: true,
         //     selector: ".item"
         // });
+    }
 
+    @action.bound
+    async previousPage () {
+        this.currentPage = this.currentPage - 1;
+        await this.store.loadGoods(this.currentPage);
+        console.log(this.currentPage);
+    }
+
+    @action.bound
+    async nextPage () {
+        this.currentPage = this.currentPage + 1;
+        await this.store.loadGoods(this.currentPage);
+        console.log(this.currentPage);
+    }
+
+    @action.bound
+    async setPage (page) {
+        this.currentPage = page;
+        await this.store.loadGoods(this.currentPage);
+        console.log(this.currentPage);
     }
 
     render () {
         const {user} = RootStore;
-
+        console.log(this.numberOfPages);
         return(
             <>
                 <div className="header">
@@ -61,13 +87,19 @@ class HomePage extends Component{
                             </div>
                     </div>
 
+
                 </div>
 
-                <div className="goodsContainer">
+                <div className="home-page__goods">
                     <GoodsContainer goodsContainerTitle="All goods" goods={this.store.goods}/>
+                    <Pagination
+                        currentPage={this.currentPage}
+                        nextPage={this.nextPage}
+                        numberOfPages={this.numberOfPages}
+                        previousPage={this.previousPage}
+                        setPage={this.setPage}
+                    />
                 </div>
-
-
             </>
         )
     }

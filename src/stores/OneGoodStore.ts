@@ -1,9 +1,12 @@
 import {action, computed, observable} from 'mobx';
 import {
-    deleteGoodFromBasket,
     deleteGoodFromLikedGoods,
     getGoodWithSellerById,
-    postGoodIntoBasket, postGoodIntoLikedGoods, updateGood, updateLikes
+    getSellerById,
+    postGoodIntoBasket,
+    postGoodIntoLikedGoods,
+    updateGood,
+    updateLikes
 } from "../http/services";
 import RootStore from "./RootStore";
 
@@ -34,6 +37,16 @@ class OneGoodStore {
             const responseGood = await getGoodWithSellerById(id);
             this.good = responseGood.data;
 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    @action
+    async getShopName (idSeller) {
+        try {
+            const responseSeller = await getSellerById(idSeller);
+            return responseSeller.data.name;
         } catch (error) {
             console.log(error);
         }

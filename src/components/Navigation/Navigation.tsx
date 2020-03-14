@@ -34,6 +34,10 @@ class Navigation extends Component {
                         <NavLink to={ROUTES.goods.goods} className="navigation__link navigation__link--app">
                             <FormattedMessage id="goods"/>
                         </NavLink>
+
+                        <NavLink to={ROUTES.admin} className="navigation__link navigation__link--app">
+                            Admin
+                        </NavLink>
                     </div>
 
                     { user.authenticated ? (

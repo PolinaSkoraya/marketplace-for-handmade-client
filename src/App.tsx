@@ -19,6 +19,7 @@ import SellerProfile from "./pages/SellerProfile/SellerProfile";
 import {RawIntlProvider} from 'react-intl'
 import PrivateRouter from "./routes/PrivateRouter";
 import {Roles} from "./stores/helpers/roles";
+import Admin from "./pages/Admin/Admin";
 
 
 @observer
@@ -37,6 +38,8 @@ class App extends Component {
                         <Navigation/>
 
                         <Switch>
+                            <Route exact path={ROUTES.admin} component={Admin}/>
+
                             <Route exact path={ROUTES.root} component={HomePage}/>
                             <Route exact path={ROUTES.goods.goods} component={GoodsPage}/>
 

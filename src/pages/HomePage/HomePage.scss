@@ -12,21 +12,17 @@
 }
 
 .item-1 {
-  background-color: $color-secondary-light;
+  background-color: $color-basic-medium;
   height: 200px;
   width: 260px;
   border-radius: 20px;
   @extend %center;
+
   img {
     color: white;
     width: 80%;
   }
 }
-//.item-1:hover{
-//   background-color: $color-basic-medium;
-//   transition-property: background-color;
-//   transition-duration: .8s;
-// }
 
 .item-2 {
   height: 80px;
@@ -113,5 +109,9 @@
   100% {
     transform: scale(1, 1);
   }
+}
+
+.home-page__goods {
+  margin-bottom: 20px;
 }
 

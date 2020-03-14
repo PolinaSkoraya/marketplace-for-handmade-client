@@ -14,7 +14,7 @@ class SellerProfile extends Component {
             <div className="seller-profile-container">
                 {
                     getRole(Roles.seller) ?
-                        <div>
+                        <div className="seller-profile-container__header">
                             <h1>{user.seller.name}</h1>
                             <form className="createGood-form">
                                 <input

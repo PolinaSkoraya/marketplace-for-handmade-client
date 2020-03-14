@@ -4,11 +4,19 @@ import {TOKEN} from "../stores/UserStore";
 import {GoodInterface} from "../stores/helpers/interfaces";
 import {Roles} from "../stores/helpers/roles";
 
+export function getPageGoods(page) {
+    return instance.get(URLS.goods + page, {
+        headers: {
+            'auth-token': localStorage.getItem(TOKEN)
+        }
+    });
+}
+
 export function getAllGoods() {
-    return instance.get(URLS.goods, {
+    return instance.get("/goods", {
         headers: {
             'auth-token': localStorage.getItem(TOKEN),
-        },
+        }
     });
 }
 

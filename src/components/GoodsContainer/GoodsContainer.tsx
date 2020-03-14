@@ -25,7 +25,7 @@ class GoodsContainer extends Component <{ goodsContainerTitle: string, goods: Go
                     {
                         this.props.goods.map ( good =>
                                 <Good
-                                    key={good._id + good.status}
+                                    key={good._id + good.idOrder}
                                     good={good}
                                     idSeller={good.idSeller}
                                     goodsContainerPosition={this.props.goodsContainerPosition}

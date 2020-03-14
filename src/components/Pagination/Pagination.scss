@@ -1,0 +1,17 @@
+@import "../../styles/variables";
+@import "../../styles/shared";
+
+.pagination{
+  display: flex;
+  @extend %center;
+}
+
+.pagination__buttons-page {
+  display: flex;
+  padding: 0 20px;
+}
+
+.buttonPage {
+  display: none;
+}
+

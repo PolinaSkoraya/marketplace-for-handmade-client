@@ -1,19 +1,19 @@
 import {action, observable} from 'mobx';
-import {getAllGoods} from "../http/services";
+import {getAllGoods, getPageGoods} from "../http/services";
 import {GoodInterface} from "./helpers/interfaces";
 
 class GoodsStore {
     @observable goods: GoodInterface[] = [];
+    //@observable numberOfPages: number = 0;
 
     @action.bound
-    async loadGoods () {
+    async loadGoods (page) {
         try {
-            const responseGoods = await getAllGoods();
-            this.goods = responseGoods.data;
+            const responseGoods = await getPageGoods(page);
+            this.goods = responseGoods.data.docs;
+            // this.numberOfPages = responseGoods.data.totalPages;
             this.sortByLikes();
-            // if (numberOfGoods) {
-            //     this.setFixedNumberOfGoods(numberOfGoods);
-            // }
+            return responseGoods.data.totalPages;
         } catch (error) {
             console.log(error);
         }
@@ -26,10 +26,18 @@ class GoodsStore {
             .sort((a, b) => a.likes > b.likes ? -1 : 1);
     }
 
-    // @action.bound
-    // setFixedNumberOfGoods (num) {
-    //     this.goods = this.goods.slice(0, num);
-    // }
+    @action.bound
+    async searchByName (name) {
+        console.log(name);
+        let allGoods: GoodInterface[];
+        try {
+            let response = await getAllGoods();
+            allGoods = response.data;
+            this.goods = allGoods.filter(good => good.name.toLowerCase() === name.toLowerCase());
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 }
 

@@ -17,6 +17,8 @@ export const ROUTES = {
         login: '/users/login',
         registration: '/users/registration',
         profile: '/users/:id'
-    }
+    },
+
+    admin: '/admin'
 
 }

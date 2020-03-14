@@ -1,5 +1,23 @@
 @import "src/styles/variables";
+@import "src/styles/shared";
 
-.goods-page{
-  padding: 0 40px;
+.goods-page {
+  padding: 80px 0;
+}
+
+#button-search {
+  display: none;
+}
+
+#button-cancel-search{
+  display: none;
+}
+
+.goods-page__search {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+  input {
+
+  }
 }
