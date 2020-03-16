@@ -4,7 +4,7 @@ $color-basic-medium: #8e8392;
 $color-secondary-medium: #83677b;
 $color-basic-light: #e6e6e6;
 $color-secondary-light: #73c1c8;
-$color-grey: #7a717c;
+$color-grey: rgba(168, 168, 168, 0.64);
 
 $color-active: #1b36ce;
 
@@ -14,6 +14,6 @@ $font-size-buttons: 18px;
 $font-size-title: 25px;
 $font-size-sub-title: 20px;
 
-$box-shadow-good: rgba(80, 57, 76, 0.3) 2px 2px 8px 1px;
+$box-shadow-good: rgba(171, 160, 173, 0.51) 2px 2px 8px 1px;
 $box-shadow-good-active: $color-secondary-light 0px 0px 15px 2px;
-$box-shadow-good-hover: $color-grey 2px 2px 8px 1px;
+$box-shadow-good-hover: rgba(171, 160, 173, 0.51) 2px 2px 8px 1px;

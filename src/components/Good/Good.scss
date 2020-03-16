@@ -1,17 +1,18 @@
 @import "../../styles/variables";
 
-.good{
+.good {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: $box-shadow-good;
+  background-color: #efefef;
+  //box-shadow: $box-shadow-good;
   padding: 8px;
   position: relative;
 }
 
-.good:hover{
-  box-shadow: $box-shadow-good-hover;
-}
+//.good:hover{
+//  //box-shadow: $box-shadow-good-hover;
+//}
 
 .good:active{
   animation-name: shadow;
@@ -80,15 +81,6 @@
   min-height: 5px;
 }
 
-.removeButton{
-  display: none;
-}
-.addOrderButton{
-  display: none;
-}
-.updateOrderState{
-  display: none;
-}
-.updateGoodButton{
+.removeButton, #button-done-order, .addOrderButton, .updateOrderState, .updateGoodButton {
   display: none;
 }

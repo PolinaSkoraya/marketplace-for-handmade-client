@@ -29,3 +29,61 @@
   text-align: left;
   margin: 0 20px;
 }
+
+.basket-container__empty {
+  margin: 100px 0 50px 0;
+  min-height: 260px;
+  //border-bottom: 1px solid rgba(43, 129, 175, 0.88);
+}
+
+.imgs{
+  position: relative;
+
+}
+
+.basket-container__empty-message{
+  width: 200px;
+  text-align: left;
+}
+
+.img-shopping-cart {
+  height: 200px;
+  width: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  //animation-name: basket-move;
+  //animation-duration: 5s;
+}
+.img-icon2{
+  height: 50px;
+  width: auto;
+  position: absolute;
+  top: 5vw;
+  left: 5vw;
+}
+.img-icon3{
+  height: 50px;
+  width: auto;
+  position: absolute;
+  top: 7vw;
+  left: 7vw;
+}
+
+@keyframes basket-move {
+  0% {
+    transform: rotate(0);
+
+  }
+  30% {
+    transform: rotate(-12deg);
+    left: 20vw;
+  }
+  100% {
+    transform: rotate(0);
+    left: 90vw;
+
+  }
+}
+

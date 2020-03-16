@@ -5,17 +5,15 @@ import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
 import AuthLinks from "../../components/AuthLinks/AuthLinks";
 import RootStore from "../../stores/RootStore";
-import {FormattedMessage} from 'react-intl';
-
+import {NavLink} from 'react-router-dom';
 import icon1 from "../../static/icons/svg/026-handmade.svg";
 import icon2 from "../../static/icons/svg/010-ball-of-wool.svg";
 import icon3 from "../../static/icons/svg/014-button-1.svg";
-
-import Parallax from  "parallax-js";
-import logo from "../../static/icons/diy.svg";
 import {action, observable} from "mobx";
-import SmallButton from "../../components/SmallButton/SmallButton";
 import Pagination from "../../components/Pagination/Pagination";
+import Good from "../../components/Good/Good";
+import {STATIC_IMAGES} from "../../http/urls";
+import {ROUTES} from "../../routes/routes";
 
 
 @observer
@@ -25,14 +23,7 @@ class HomePage extends Component{
     @observable numberOfPages = 0;
 
     async componentDidMount () {
-        const response = await this.store.loadGoods(this.currentPage);
-        this.numberOfPages = response;
-        // let scene = document.getElementById('scene');
-        // let parallaxInstance = new Parallax(scene, {
-        //     relativeInput: true,
-        //     hoverOnly: true,
-        //     selector: ".item"
-        // });
+        this.numberOfPages = await this.store.loadGoods(this.currentPage);
     }
 
     @action.bound
@@ -75,19 +66,57 @@ class HomePage extends Component{
                         <AuthLinks/>
                     ) }
 
-                    <div id="scene">
-                            <div className="item-1" data-depth="0.1">
-                                <img src={icon1} alt="logo" className=""/>
-                            </div>
-                            <div className="item-2" data-depth="0.8">
-                                <img src={icon2} alt="logo" />
-                            </div>
-                            <div className="item-3" data-depth="0.1">
-                                <img src={icon3} alt="logo" />
-                            </div>
-                    </div>
+                    {/*<div id="scene">*/}
+                    {/*    <div className="item-1" >*/}
+                    {/*        <img src={icon1} alt="logo"/>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="item-2">*/}
+                    {/*        <img src={icon2} alt="logo" />*/}
+                    {/*    </div>*/}
+                    {/*    <div className="item-3">*/}
+                    {/*        <img src={icon3} alt="logo" />*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                </div>
 
 
+                <div className="wrapper">
+                    <div className="wrapper__title">Top 3 of marketplace</div>
+                        <ul className="stage">
+                            {
+                                this.store.goods[0]?
+                                this.store.goods.slice(0, 3).map(good =>
+                                    <li className="scene">
+                                        <div className="movie" onClick={ () => { return true } }>
+                                            <div className="poster">
+                                                <div className="poster__inner">
+                                                    <Good
+                                                        key={0}
+                                                        good={good}
+                                                        idSeller={good.idSeller}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="info">
+                                                <NavLink
+                                                    className="good__link-image"
+                                                    to={ROUTES.goods.goods+ good._id}
+                                                >
+                                                    <div className="info__inner">
+                                                        <p className="info__name">{good.name}</p>
+                                                        {/*<img className="info__img" src={STATIC_IMAGES + good.image } alt="image"/>*/}
+                                                        <p>{good.description}</p>
+                                                    </div>
+                                                </NavLink>
+                                            </div>
+                                        </div>
+                                    </li>
+                                )
+                                :
+                                <></>
+                            }
+                        </ul>
                 </div>
 
                 <div className="home-page__goods">

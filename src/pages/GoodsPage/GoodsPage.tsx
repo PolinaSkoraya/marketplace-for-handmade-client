@@ -63,38 +63,32 @@ class GoodsPage extends Component{
 
         return (
             <>
-                {/*{ user.authenticated ? (*/}
-                    <div className="goods-page">
-                        <div className="goods-page__search">
-                            <button id="button-cancel-search" onClick={() => this.store.loadGoods(this.currentPage)}>cancel</button>
-                            <SmallButton labelStyle={labelStyle} style={{...iconStyle}} htmlFor="button-cancel-search" icon={<MdCancel/>}/>
+                <div className="goods-page">
+                    <div className="goods-page__search">
+                        <button id="button-cancel-search" onClick={() => this.store.loadGoods(this.currentPage)}>cancel</button>
+                        <SmallButton labelStyle={labelStyle} style={{...iconStyle}} htmlFor="button-cancel-search" icon={<MdCancel/>}/>
 
-                            <input
-                                type="text"
-                                name="searchName"
-                                placeholder="Search..."
-                                onChange={this.handleInputChange}
-                            />
-
-                            <div className="goods-page__search-button">
-                                <button  id="button-search" onClick={()=>this.store.searchByName(this.searchName)}>search</button>
-                                <SmallButton labelStyle={labelStyle} style={iconStyle} htmlFor="button-search" icon={<FiSearch/>} />
-                            </div>
-                        </div>
-
-                        <GoodsContainer goodsContainerTitle="All Goods" goods={this.store.goods}/>
-
-                        <Pagination
-                            currentPage={this.currentPage}
-                            nextPage={this.nextPage}
-                            numberOfPages={this.numberOfPages}
-                            previousPage={this.previousPage}
-                            setPage={this.setPage}
+                        <input
+                            type="text"
+                            name="searchName"
+                            placeholder="Search..."
+                            onChange={this.handleInputChange}
                         />
+
+                        <button  id="button-search" onClick={()=>this.store.searchByName(this.searchName)}>search</button>
+                        <SmallButton labelStyle={labelStyle} style={iconStyle} htmlFor="button-search" icon={<FiSearch/>}/>
                     </div>
-                {/*) : (*/}
-                {/*    <Redirect to={ROUTES.users.login}/>*/}
-                {/*) }*/}
+
+                    <GoodsContainer goodsContainerTitle="All Goods" goods={this.store.goods}/>
+
+                    <Pagination
+                        currentPage={this.currentPage}
+                        nextPage={this.nextPage}
+                        numberOfPages={this.numberOfPages}
+                        previousPage={this.previousPage}
+                        setPage={this.setPage}
+                    />
+                </div>
             </>
         )
     }
