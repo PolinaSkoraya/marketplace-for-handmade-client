@@ -137,9 +137,8 @@
 }
 
 .wrapper {
-  min-height: 90vh;
-  padding: 30px;
-  margin: 0 auto 100px auto;
+  height: 100vh;
+  //padding: 20px;
   background-color: $color-secondary-light;
   @extend %center;
   flex-direction: column;
@@ -159,7 +158,7 @@
 }
 
 .wrapper__title {
-  padding: 55px 0 75px 0;
+  padding-bottom: 60px;
   font-size: $font-size-title;
   font-weight: 500;
 }
@@ -184,7 +183,7 @@ Build the scene and rotate on hover
 
 .scene {
   width: 260px;
-  height: 400px;
+  //height: 400px;
   margin: 0 45px;
   //float: left;
   perspective: 1000px;

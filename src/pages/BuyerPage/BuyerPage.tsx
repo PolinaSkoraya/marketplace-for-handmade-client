@@ -11,13 +11,16 @@ import { withRouter } from 'react-router';
 import basket from "../../static/icons/svg/shopping-cart.svg";
 import icon2 from "../../static/icons/svg/010-ball-of-wool.svg";
 import icon3 from "../../static/icons/svg/014-button-1.svg";
+import {CSSTransition} from "react-transition-group";
 import {action, observable} from "mobx";
 import {ROUTES} from "../../routes/routes";
+import {OrdersContainer} from "../../components/OrdersContainer/OrdersContainer";
 
 @observer
 class BuyerPage extends Component {
     @observable animation = false;
     @observable isRedirect = false;
+    @observable appearHome = true;
 
     @action.bound
     animate () {
@@ -47,13 +50,13 @@ class BuyerPage extends Component {
 
         return (
             <div className="profile-container">
-                <div className="profile-container__aside displayNone">
-                    <ul className="aside-list">
-                        <li className="aside-list__item">
-                            {/*<NavLink>Liked</NavLink>*/}
-                        </li>
-                    </ul>
-                </div>
+                {/*<div className="profile-container__aside displayNone">*/}
+                {/*    <ul className="aside-list">*/}
+                {/*        <li className="aside-list__item">*/}
+                {/*            /!*<NavLink>Liked</NavLink>*!/*/}
+                {/*        </li>*/}
+                {/*    </ul>*/}
+                {/*</div>*/}
                 <div className="profile-container__main">
                     {/*<div className="profile-title">*/}
                     {/*    <FormattedMessage id="hello" values={{name: user.name}}/>*/}
@@ -67,6 +70,7 @@ class BuyerPage extends Component {
                                     goods={user.goodsInBasket}
                                     goodsContainerPosition={GoodsContainerPosition.basket}
                                 />
+
                                 <div className="basket-container__cost">
                                     <FormattedMessage id="basketCost" values={{basketCost: user.basketCost}}/>
                                 </div>
@@ -100,10 +104,8 @@ class BuyerPage extends Component {
                             </div>
                     }
 
-                    <GoodsContainer
-                        goodsContainerTitle="Orders"
+                    <OrdersContainer
                         goods={user.orders}
-                        goodsContainerPosition={GoodsContainerPosition.ordersBuyer}
                     />
                 </div>
             </div>

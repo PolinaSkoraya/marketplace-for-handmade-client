@@ -25,21 +25,31 @@
   height: 300px;
 }
 
-.buyerLogin-input {
+.input.buyerLogin-input {
   width: 80%;
   padding: 10px 5px;
-  border-radius: 17px;
-  border: none;
-  outline: none;
-
   &:focus {
-    border: 1px solid blue;
+    border: 1px solid $color-basic-dark;
   }
 }
 
-.signIn-label{
+.signIn-label {
 
-  &:hover{
+  &:hover {
     color: $color-basic-light;
   }
+}
+
+.button-basic {
+  margin-right: 10px;
+  background-color: $color-basic-medium;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
 }

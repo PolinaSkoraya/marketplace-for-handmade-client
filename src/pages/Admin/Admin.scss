@@ -1,14 +1,22 @@
 .admin-page {
-  padding-top: 100px;
+  font-size: 14px;
+  padding: 10px;
 }
 
-.grid-container{
+.grid-container {
   display: grid;
   border: 1px solid black;
+  margin: 60px 40px;
 }
 
 .grid-row {
   display: grid;
-  grid-template-columns: 120px 100px 350px 250px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   border-bottom: 1px solid gray;
+}
+
+.grid-container-order {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  width: 400px;
+  margin: 12px 12px;
 }

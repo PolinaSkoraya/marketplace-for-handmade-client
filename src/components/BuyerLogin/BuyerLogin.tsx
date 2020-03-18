@@ -18,7 +18,7 @@ class BuyerLogin extends Component {
                         <FormattedMessage id="signIn"/>
                     </h4>
                    <input
-                       className = 'buyerLogin-input'
+                       className = 'input buyerLogin-input'
                        type='text'
                        name="email"
                        onChange={user.handleInputChange}
@@ -27,7 +27,7 @@ class BuyerLogin extends Component {
                    />
 
                    <input
-                       className = 'buyerLogin-input'
+                       className = 'input buyerLogin-input'
                        type='text'
                        name="password"
                        onChange={user.handleInputChange}
@@ -35,7 +35,7 @@ class BuyerLogin extends Component {
                        value={user.password}
                     />
 
-                    <input type="button" onClick={() => user.login(user.email, user.password)} value="sign in"/>
+                    <input type="button" className="button-basic" onClick={() => user.login(user.email, user.password)} value="sign in"/>
                     {/*<label htmlFor="signInButton" className="signIn-label">sign in</label>*/}
                     <NavLink to={ROUTES.users.registration}>
                         <FormattedMessage id="register"/>

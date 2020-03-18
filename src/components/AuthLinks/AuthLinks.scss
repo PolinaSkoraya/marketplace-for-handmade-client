@@ -1,21 +1,31 @@
 @import "src/styles/variables";
 
-.links{
+.links {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   flex-basis: 40%;
 }
 
-.auth-link{
+.links-circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-secondary-medium;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.auth-link {
   opacity: 1;
   font-size: $font-size-title;
   color: $color-basic-dark;
   padding-bottom: 20px;
 }
 
-.auth-link:hover{
-  color: $color-active;
+.auth-link:hover {
+  color: $color-secondary-light;
 }

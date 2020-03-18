@@ -16,12 +16,15 @@ import SmallButton from "../SmallButton/SmallButton";
 import RootStore from "../../stores/RootStore";
 
 import {MdDone} from "react-icons/md";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 @observer
 class Good extends Component<{good: GoodInterface, idSeller: string, goodsContainerPosition?: GoodsContainerPosition, shadow?: boolean}> {
     store = new OneGoodStore();
     @observable sellerName = "";
     @observable show = false;
+
+    @observable appear = true;
 
     constructor (props) {
         super(props);
@@ -40,6 +43,13 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
         this.store.update(id);
     }
 
+    @action
+    deleteGood(user, id){
+        // this.toggleAppear();
+        console.log(this.appear);
+        user.removeFromBasket(this.props.good._id);
+    }
+
     showModal = () => {
         this.show = true;
     }
@@ -53,7 +63,7 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
 
         const form = <form className="createGood-form">
             <input
-                className = 'createGood-form__input'
+                className = 'input createGood-form__input'
                 type='text'
                 name="goodName"
                 onChange={this.store.handleInputChange}
@@ -61,14 +71,14 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
                 value={this.store.goodName}
             />
             <textarea
-                className = 'createGood-form__input'
+                className = 'input createGood-form__input'
                 name="description"
                 onChange={this.store.handleInputChange}
                 placeholder='description'
                 value={this.store.description}
             />
             <input
-                className = 'createGood-form__input'
+                className = 'input createGood-form__input'
                 type='text'
                 name="price"
                 onChange={this.store.handleInputChange}
@@ -79,14 +89,21 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
         </form>
 
         return(
+            // <TransitionGroup className="card-container">
+            <CSSTransition
+                key={this.props.good._id}
+                in={this.appear}
+                timeout={1000}
+                classNames="fade"
+            >
                 <div
                     className="good"
                     id = {this.props.good._id + this.props.good.idOrder}
                     style = {
-                        this.props.good.status === "accepted" ?
-                        {backgroundColor: "#ceefed"}
+                        this.props.shadow === false?
+                        {boxShadow: "none"}
                         :
-                        {backgroundColor: "#efefef"}
+                        {}
                     }
                 >
                     {
@@ -111,7 +128,7 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
                                     <button
                                         id={this.props.good.name + "-remove"}
                                         className="removeButton"
-                                        onClick={() => user.removeFromBasket(this.props.good._id)}
+                                        onClick={() => this.deleteGood(user, this.props.good._id)}
                                     >
                                     </button>
                                     <SmallButton htmlFor={this.props.good.name + "-remove"} icon={<FaTrash/>}/>
@@ -189,6 +206,8 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
 
                     </div>
                 </div>
+            </CSSTransition>
+            // </TransitionGroup>
         )
     }
 }

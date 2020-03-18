@@ -94,6 +94,7 @@ class HomePage extends Component{
                                                         key={0}
                                                         good={good}
                                                         idSeller={good.idSeller}
+                                                        shadow={false}
                                                     />
                                                 </div>
                                             </div>
@@ -119,16 +120,16 @@ class HomePage extends Component{
                         </ul>
                 </div>
 
-                <div className="home-page__goods">
-                    <GoodsContainer goodsContainerTitle="All goods" goods={this.store.goods}/>
-                    <Pagination
-                        currentPage={this.currentPage}
-                        nextPage={this.nextPage}
-                        numberOfPages={this.numberOfPages}
-                        previousPage={this.previousPage}
-                        setPage={this.setPage}
-                    />
-                </div>
+                {/*<div className="home-page__goods">*/}
+                {/*    <GoodsContainer goodsContainerTitle="All goods" goods={this.store.goods}/>*/}
+                {/*    <Pagination*/}
+                {/*        currentPage={this.currentPage}*/}
+                {/*        nextPage={this.nextPage}*/}
+                {/*        numberOfPages={this.numberOfPages}*/}
+                {/*        previousPage={this.previousPage}*/}
+                {/*        setPage={this.setPage}*/}
+                {/*    />*/}
+                {/*</div>*/}
             </>
         )
     }

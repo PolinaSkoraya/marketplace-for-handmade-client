@@ -43,11 +43,11 @@ class OneGoodPage extends Component<any> {
 
                             {
                                 this.store.isInBasket ?
-                                    <button className="button-addToBasket" onClick={() => user.removeFromBasket(this.store.good._id)}>
+                                    <button className="button-basic button-addToBasket" onClick={() => user.removeFromBasket(this.store.good._id)}>
                                         remove from basket
                                     </button>
                                     :
-                                    <button className="button-addToBasket" onClick={this.store.addToBasket}>
+                                    <button className="button-basic button-addToBasket" onClick={this.store.addToBasket}>
                                         add to basket
                                     </button>
                             }

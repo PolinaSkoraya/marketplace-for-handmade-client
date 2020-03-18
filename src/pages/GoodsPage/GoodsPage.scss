@@ -5,19 +5,26 @@
   padding: 80px 0;
 }
 
-#button-search {
-  display: none;
-}
-
-#button-cancel-search{
+#button-search, #button-cancel-search {
   display: none;
 }
 
 .goods-page__search {
   display: flex;
   justify-content: flex-end;
+  @extend %center;
   padding: 0 20px;
-  input {
+}
 
+.input {
+  outline: none;
+  border: 1px solid $color-basic-medium;
+  border-radius: 7px;
+  padding: 7px 5px;
+  margin: 0 3px;
+  &:focus {
+    color: $color-basic-medium;
+    border-color: $color-basic-dark;
   }
 }
+

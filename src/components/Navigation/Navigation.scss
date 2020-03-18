@@ -3,7 +3,7 @@
 .navigation__list{
   display: flex;
   background-color: $color-basic-light;
-  height: 10vh;
+  height: 9vh;
   justify-content: space-between;
   align-items: center;
   position: fixed;
@@ -11,25 +11,27 @@
   z-index: 10;
 }
 
-.navigation__links{
+.navigation__links {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.navigation__link{
+.navigation__link {
   color: $color-basic-dark;
-  font-size: $font-size-buttons;
+  font-size: $font-size-medium;
+  font-weight: 500;
   padding: 0 15px;
 }
 
-.navigation__link:hover{
+.navigation__link:hover {
   color: $color-secondary-light;
+  transition: color 250ms;
 }
 
-.navigation__image{
-  height: 9vh;
-  width: 9vh;
+.navigation__image {
+  height: 8vh;
+  width: auto;
 }
 
 #logOutButton {

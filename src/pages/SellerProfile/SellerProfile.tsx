@@ -4,6 +4,7 @@ import {getRole, Roles} from "../../stores/helpers/roles";
 import RootStore from "../../stores/RootStore";
 import {GoodsContainer, GoodsContainerPosition} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
+import {OrdersContainer} from "../../components/OrdersContainer/OrdersContainer";
 
 @observer
 class SellerProfile extends Component {
@@ -18,26 +19,26 @@ class SellerProfile extends Component {
                             <h1>{user.seller.name}</h1>
                             <form className="createGood-form">
                                 <input
-                                    className = 'createGood-form__input'
+                                    className = 'input createGood-form__input'
                                     type='text'
                                     name="newGoodName"
                                     onChange={user.handleInputChange}
                                     placeholder='name'
                                 />
                                 <textarea
-                                    className = 'createGood-form__input'
+                                    className = 'input createGood-form__input'
                                     name="newGoodDescription"
                                     onChange={user.handleInputChange}
                                     placeholder='description'
                                 />
                                 <input
-                                    className = 'createGood-form__input'
+                                    className = 'input createGood-form__input'
                                     type='text'
                                     name="newGoodPrice"
                                     onChange={user.handleInputChange}
                                     placeholder='price'
                                 />
-                                <button onClick={user.createGood}>create new good</button>
+                                <button className="button-basic" onClick={user.createGood}>create new good</button>
                             </form>
                         </div>
                         :
@@ -60,10 +61,9 @@ class SellerProfile extends Component {
                         </div>
                 }
                 <div>
-                    <GoodsContainer
-                        goodsContainerTitle="Your orders"
+                    <OrdersContainer
                         goods={user.ordersOfSeller}
-                        goodsContainerPosition={GoodsContainerPosition.ordersSeller}
+                        position={GoodsContainerPosition.ordersSeller}
                     />
                 </div>
             </div>

@@ -28,12 +28,12 @@ class GoodsStore {
 
     @action.bound
     async searchByName (name) {
-        console.log(name);
         let allGoods: GoodInterface[];
+        let regexp = new RegExp(`${name}`);
         try {
             let response = await getAllGoods();
             allGoods = response.data;
-            this.goods = allGoods.filter(good => good.name.toLowerCase() === name.toLowerCase());
+            this.goods = allGoods.filter(good => good.name.toLowerCase().search(regexp)>=0);
         } catch (error) {
             console.log(error);
         }

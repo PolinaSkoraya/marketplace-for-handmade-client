@@ -1,5 +1,7 @@
 @import "styles/variables";
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Noto+Sans+KR:400,500,700&display=swap');
+
+//font-family: 'Bree Serif', serif;
 
 *, *:before, *:after {
   box-sizing: border-box;
@@ -7,7 +9,7 @@
 
 .App {
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   color: $color-basic-dark;
 }
 

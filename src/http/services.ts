@@ -4,6 +4,15 @@ import {TOKEN} from "../stores/UserStore";
 import {GoodInterface} from "../stores/helpers/interfaces";
 import {Roles} from "../stores/helpers/roles";
 
+export function getUsers() {
+    return instance.get(URLS.users);
+}
+
+export function getSellers() {
+    return instance.get(URLS.sellers);
+}
+
+
 export function getPageGoods(page) {
     return instance.get(URLS.goods + page, {
         headers: {

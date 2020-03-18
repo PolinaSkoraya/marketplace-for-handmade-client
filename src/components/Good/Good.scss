@@ -4,17 +4,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #efefef;
-  //box-shadow: $box-shadow-good;
+  box-shadow: $box-shadow-good;
   padding: 8px;
   position: relative;
 }
 
-//.good:hover{
-//  //box-shadow: $box-shadow-good-hover;
-//}
+.good:hover{
+  box-shadow: $box-shadow-good-hover;
+  //transform: scale(1.1, 1.1);
+  //transition: transform 300ms;
+}
 
-.good:active{
+.good:active {
   animation-name: shadow;
   animation-duration: .4s;
 }
@@ -56,6 +57,7 @@
 
 .good__title{
   font-size: $font-size-sub-title;
+  font-weight: 500;
 }
 
 .good__link{
@@ -63,11 +65,11 @@
 }
 
 .good__link:hover{
-  color: $color-grey;
+  color: $color-secondary-medium;
 }
 
 .good__link:active{
-  color: $color-secondary-dark;
+  color: $color-secondary-medium;
 }
 
 .good__likes{

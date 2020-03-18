@@ -12,6 +12,7 @@ import SmallButton from "../../components/SmallButton/SmallButton";
 
 import {FiSearch} from "react-icons/fi";
 import {MdCancel} from "react-icons/md";
+import {CSSTransition} from "react-transition-group";
 
 @observer
 class GoodsPage extends Component{
@@ -53,33 +54,56 @@ class GoodsPage extends Component{
         const name = target.name;
 
         this[name] = value;
+        this.store.searchByName(this.searchName);
+    }
+
+    @action
+    resetGoods (page) {
+        this.searchName = "";
+        this.store.loadGoods(page);
     }
 
     render(){
         const {user} = RootStore;
 
-        const iconStyle = {fontSize: "16px"};
-        const labelStyle = {height: "25px", width: "25px"};
+        const iconStyle = {fontSize: "20px"};
+        const labelStyle = {height: "30px", width: "30px"};
 
         return (
             <>
                 <div className="goods-page">
                     <div className="goods-page__search">
-                        <button id="button-cancel-search" onClick={() => this.store.loadGoods(this.currentPage)}>cancel</button>
-                        <SmallButton labelStyle={labelStyle} style={{...iconStyle}} htmlFor="button-cancel-search" icon={<MdCancel/>}/>
+                        {
+                            this.searchName && (
+                                <>
+                                    <button id="button-cancel-search" onClick={() => this.resetGoods(this.currentPage)}>cancel</button>
+                                    <SmallButton labelStyle={labelStyle} style={{...iconStyle}} htmlFor="button-cancel-search" icon={<MdCancel/>}/>
+                                </>
 
+                            )
+                        }
                         <input
                             type="text"
                             name="searchName"
                             placeholder="Search..."
                             onChange={this.handleInputChange}
+                            className="input input-search"
+                            value={this.searchName}
                         />
 
                         <button  id="button-search" onClick={()=>this.store.searchByName(this.searchName)}>search</button>
                         <SmallButton labelStyle={labelStyle} style={iconStyle} htmlFor="button-search" icon={<FiSearch/>}/>
                     </div>
 
-                    <GoodsContainer goodsContainerTitle="All Goods" goods={this.store.goods}/>
+                    {/*<CSSTransition*/}
+                    {/*    in={true}*/}
+                    {/*    appear={true}*/}
+                    {/*    exit={true}*/}
+                    {/*    timeout={3000}*/}
+                    {/*    classNames="fade"*/}
+                    {/*>*/}
+                        <GoodsContainer goodsContainerTitle="All Goods" goods={this.store.goods}/>
+                    {/*</CSSTransition>*/}
 
                     <Pagination
                         currentPage={this.currentPage}
