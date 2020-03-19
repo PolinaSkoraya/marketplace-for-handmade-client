@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 import {observer} from 'mobx-react';
 import {action, observable} from "mobx";
 import {ROUTES} from "../../routes/routes";
-import {GoodInterface} from "../../stores/helpers/interfaces";
+import {GoodInterface, goodsCategories} from "../../stores/helpers/interfaces";
 import {STATIC_IMAGES} from "../../http/urls";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {GoodsContainerPosition} from "../GoodsContainer/GoodsContainer";
@@ -44,26 +44,25 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
     }
 
     @action
-    deleteGood(user, id){
-        // this.toggleAppear();
+    deleteGood (user, id) {
         console.log(this.appear);
         user.removeFromBasket(this.props.good._id);
     }
 
     showModal = () => {
         this.show = true;
-    }
+    };
 
     hideModal = () => {
         this.show = false;
-    }
+    };
 
     render () {
         const {user} = RootStore;
 
-        const form = <form className="createGood-form">
+        const form = <form className="updateGood-form">
             <input
-                className = 'input createGood-form__input'
+                className = 'input updateGood-form__input'
                 type='text'
                 name="goodName"
                 onChange={this.store.handleInputChange}
@@ -71,21 +70,33 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
                 value={this.store.goodName}
             />
             <textarea
-                className = 'input createGood-form__input'
+                className = 'input updateGood-form__input updateGood-form__textarea'
                 name="description"
                 onChange={this.store.handleInputChange}
                 placeholder='description'
                 value={this.store.description}
             />
             <input
-                className = 'input createGood-form__input'
+                className = 'input updateGood-form__input'
                 type='text'
                 name="price"
                 onChange={this.store.handleInputChange}
                 placeholder='price'
                 value={this.store.price}
             />
-            <button onClick={() => this.update(this.props.good._id)}>Update good</button>
+
+            <select
+                className = 'input updateGood-form__input'
+                name="goodCategory"
+                onChange={this.store.handleInputChange}
+            >
+                <option value={goodsCategories.art}>art</option>
+                <option value={goodsCategories.accessories}>accessories</option>
+                <option value={goodsCategories.homeware}>homeware</option>
+                <option value={goodsCategories.toys}>toys</option>
+            </select>
+
+            <button onClick={() => this.update(this.props.good._id)} className="button-basic">Update good</button>
         </form>
 
         return(

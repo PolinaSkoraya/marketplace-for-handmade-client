@@ -13,12 +13,12 @@ class BuyerRegistration extends Component {
 
          return (
              <div className="buyerRegistration">
-                <form className="buyerRegistration-form">
+                <form className="form-log buyerRegistration-form">
                     <h4>
                         <FormattedMessage id="register"/>
                     </h4>
                     <input
-                        className="buyerRegistration-input"
+                        className="input buyerRegistration-input"
                         type="text"
                         name="nameForRegistration"
                         value={user.nameForRegistration}
@@ -27,7 +27,7 @@ class BuyerRegistration extends Component {
                     />
 
                     <input
-                        className="buyerRegistration-input"
+                        className="input buyerRegistration-input"
                         type="text"
                         name="email"
                         value={user.email}
@@ -36,7 +36,7 @@ class BuyerRegistration extends Component {
                     />
 
                     <input
-                        className="buyerRegistration-input"
+                        className="input buyerRegistration-input"
                         type="text"
                         name="password"
                         value={user.password}
@@ -46,6 +46,7 @@ class BuyerRegistration extends Component {
 
                     <input
                         type="button"
+                        className="button-basic"
                         value="sign up"
                         onClick={() => user.register(user.nameForRegistration, user.email, user.password)}
                     />

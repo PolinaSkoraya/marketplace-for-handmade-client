@@ -72,10 +72,12 @@ class Order extends Component<{good: GoodInterface, idSeller: string, position?:
                                 <p>status: {this.props.good.status}</p>
                                 {
                                     this.props.good.status === "accepted" &&
-                                    <>
+                                    this.props.position === GoodsContainerPosition.ordersBuyer &&
+                                    <div className="order__buttons-done">
                                         <button id="button-done-order" onClick={ () => {user.deleteOrder(this.props.good.idOrder)}}/>
+                                        <p>done order</p>
                                         <SmallButton style={{color: "black"}} htmlFor="button-done-order" icon={<MdDone/>}/>
-                                    </>
+                                    </div>
                                 }
                                 {
                                     this.props.good.status === "processing" &&

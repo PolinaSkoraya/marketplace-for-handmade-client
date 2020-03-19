@@ -1,8 +1,10 @@
 @import "../../styles/variables";
+@import "../../styles/shared";
 
 .order {
   display: flex;
   box-shadow: $box-shadow-good;
+  padding: 8px;
 }
 
 .order__image {
@@ -12,12 +14,19 @@
 .order__image img {
   object-fit: cover;
   width: 100%;
-  height: 180px;
+  height: 200px;
+}
+
+.order__about {
+  text-align: left;
+  line-height: 1.5;
+  padding-left: 8px;
 }
 
 .order__info {
   display: flex;
   flex-direction: column;
+
 }
 
 .order__title {
@@ -58,4 +67,11 @@
 
 #button-done-order, .updateOrderState {
   display: none;
+}
+
+.order__buttons-done {
+  line-height: 1;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
 }

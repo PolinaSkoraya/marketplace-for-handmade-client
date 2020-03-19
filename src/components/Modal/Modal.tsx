@@ -10,6 +10,7 @@ class Modal extends Component<{goodName?: string, show, handleClose}> {
                 <section className='modal-main'>
                     {this.props.children}
                     <button
+                        className="button-basic"
                         onClick={this.props.handleClose}
                     >
                         Close

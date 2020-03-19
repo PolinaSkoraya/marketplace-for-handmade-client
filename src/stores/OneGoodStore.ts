@@ -17,7 +17,7 @@ class OneGoodStore {
         _id: "",
         name: "",
         price: 0,
-        idCategory: "",
+        category: "",
         idSeller: "",
         description: "",
         likes: 0,
@@ -55,12 +55,14 @@ class OneGoodStore {
     @observable goodName = "";
     @observable description = "";
     @observable price = 0;
+    @observable goodCategory = "";
 
     @action
     initUpdatingGood (good) {
         this.goodName = good.name;
         this.description = good.description;
         this.price = good.price;
+        this.good.category = good.category;
     }
 
     @action.bound
@@ -78,7 +80,8 @@ class OneGoodStore {
             const newGood = {
                 name: this.goodName,
                 description: this.description,
-                price: this.price
+                price: this.price,
+                category: this.goodCategory
             }
             const responseGood = await updateGood(id, newGood);
             this.good = responseGood.data;

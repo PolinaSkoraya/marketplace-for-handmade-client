@@ -16,7 +16,8 @@ class Pagination extends Component<{currentPage: number, numberOfPages: number, 
 
     @action.bound
     createArray () {
-        // let array = Array.from(Array(this.props.numberOfPages).keys());
+        console.log(this.props.numberOfPages);
+        let array = Array.from(Array(this.props.numberOfPages).keys());
         this.array = [0, 1];
         console.log(this.array);
     }

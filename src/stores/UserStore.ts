@@ -271,17 +271,21 @@ class UserStore {
     @observable newGoodName = "";
     @observable newGoodPrice = 0;
     @observable newGoodDescription = "";
+    @observable newGoodCategory = "";
 
     @action.bound
     async createGood () {
+        console.log(this.newGoodCategory);
         const good = {
             name: this.newGoodName,
             price: this.newGoodPrice,
             idSeller: this.seller._id,
             description: this.newGoodDescription,
             image: "fairy-house.jpg",
-            likes: 0
-        }
+            likes: 0,
+            category: this.newGoodCategory,
+            tags: ["tag1", "tag2"]
+        };
 
         try {
             const response = await postGood(good);

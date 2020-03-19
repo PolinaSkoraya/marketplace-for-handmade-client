@@ -39,6 +39,19 @@ class GoodsStore {
         }
     }
 
+    @action.bound
+    async searchByCategory (category) {
+        let allGoods: GoodInterface[];
+        try {
+            let response = await getAllGoods();
+            allGoods = response.data;
+            // @ts-ignore
+            this.goods = allGoods.filter(good => (good.category) && (good.category.toUpperCase() === category));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
 
 export default GoodsStore;

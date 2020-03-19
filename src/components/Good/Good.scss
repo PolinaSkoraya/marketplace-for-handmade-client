@@ -86,3 +86,21 @@
 .removeButton, #button-done-order, .addOrderButton, .updateOrderState, .updateGoodButton {
   display: none;
 }
+
+.updateGood-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+}
+
+.input.updateGood-form__input {
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+.updateGood-form__textarea {
+  height: 120px;
+  resize: none;
+}

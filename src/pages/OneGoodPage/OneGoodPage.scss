@@ -102,28 +102,31 @@
   color: white;
 }
 
-.good-page__description-title{
+.good-page__description-title {
   font-size: $font-size-medium;
 }
 
-.good-page__description-text{
+.good-page__description-text {
   width: 50%;
-  padding: 30px 0;
+  padding: 15px 0;
 }
 
-.likeSVG{
-  height: 40px;
+.good-page__description-category {
+  padding: 15px 0;
 }
 
-.good-page__shop-info{
+//.likeSVG {
+//  height: 40px;
+//}
+
+.good-page__shop-info {
   display: flex;
   padding: 15px 10px;
   background-color: $color-basic-light;
   border-radius: 10px;
-  //align-items: center;
 }
 
-.shop-info__image{
+.shop-info__image {
   height: 20%;
   width: 20%;
   margin-right: 20px;
@@ -137,7 +140,7 @@
   color: $color-secondary-light;
 }
 
-.shop-info__description{
+.shop-info__description {
   padding: 5px 0;
 }
 
@@ -148,18 +151,3 @@
   }
 }
 
-//.card{
-//  cursor: pointer;
-//  position: absolute;
-//  transform: translate(-50%, -50%);
-//  top: 20%;
-//  left: 30%;
-//}
-//
-//.card-front,
-//.card-back{
-//  width: 100%;
-//  height: 100%;
-//  //overflow: hidden;
-//  position: absolute;
-//}

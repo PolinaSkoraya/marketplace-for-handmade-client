@@ -1,15 +1,22 @@
+enum goodsCategories {
+    art = "ART",
+    accessories = "ACCESSORIES",
+    homeware = "HOMEWARE",
+    toys = "TOYS"
+}
 
 interface GoodInterface {
     _id: string,
     name: string,
     price: number,
-    idCategory?: string,
-    idSeller: string
+    idSeller: string,
     description?: string,
     likes: number,
     image: string,
     status?: string,
-    idOrder?: string
+    idOrder?: string,
+    category?: string,
+    tags?: string[]
 }
 
 interface SellerInterface {
@@ -21,4 +28,4 @@ interface SellerInterface {
 }
 
 // @ts-ignore
-export {GoodInterface, SellerInterface};
+export {GoodInterface, SellerInterface, goodsCategories};

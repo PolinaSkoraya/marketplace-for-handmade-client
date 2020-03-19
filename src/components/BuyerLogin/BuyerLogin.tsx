@@ -13,7 +13,7 @@ class BuyerLogin extends Component {
 
         return (
             <div className="buyerLogin">
-                <form className="buyerLogin-form">
+                <form className="form-log buyerLogin-form">
                     <h4 className="buyerLogin-form__name">
                         <FormattedMessage id="signIn"/>
                     </h4>

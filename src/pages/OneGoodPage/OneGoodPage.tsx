@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
 import './OneGoodPage.scss';
 import OneGoodStore from "../../stores/OneGoodStore";
 import {observer} from "mobx-react";
@@ -84,10 +84,13 @@ class OneGoodPage extends Component<any> {
                 </div>
 
                 <div className="good-page__description">
+                    <div className="good-page__description-category">
+                        <FormattedMessage id="category"/>
+                        {this.store.good.category}
+                    </div>
                     <div className="good-page__description-title">
                         <FormattedMessage id="description"/>
                     </div>
-
                     <div className="good-page__description-text">
                         {this.store.good.description}
                     </div>

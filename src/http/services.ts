@@ -36,7 +36,9 @@ export function postGood(good) {
         "idSeller": good.idSeller,
         "likes": good.likes,
         "description": good.description,
-        "image": good.image
+        "image": good.image,
+        "tags": good.tags,
+        "category": good.category
     })
 }
 
@@ -132,7 +134,8 @@ export function updateGood(idGood, good) {
     return instance.post(URLS.goods + idGood, {
         'name' : good.name,
         'description' : good.description,
-        'price' : good.price
+        'price' : good.price,
+        'category': good.category
     })
 }
 

@@ -1,20 +1,16 @@
 import './BuyerPage.scss'
 import React, {Component} from "react";
-import {GoodsContainer, GoodsContainerPosition} from "../../components/GoodsContainer/GoodsContainer";
+import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
-import PropTypes from "prop-types";
 import RootStore from "../../stores/RootStore";
 import {FormattedMessage} from "react-intl";
-import {Redirect, NavLink} from "react-router-dom"
-import { withRouter } from 'react-router';
+import {withRouter} from 'react-router';
+import {NavLink} from 'react-router-dom';
 
 import basket from "../../static/icons/svg/shopping-cart.svg";
-import icon2 from "../../static/icons/svg/010-ball-of-wool.svg";
-import icon3 from "../../static/icons/svg/014-button-1.svg";
-import {CSSTransition} from "react-transition-group";
 import {action, observable} from "mobx";
 import {ROUTES} from "../../routes/routes";
-import {OrdersContainer} from "../../components/OrdersContainer/OrdersContainer";
+import {GoodsContainerPosition, OrdersContainer} from "../../components/OrdersContainer/OrdersContainer";
 
 @observer
 class BuyerPage extends Component {
@@ -33,20 +29,20 @@ class BuyerPage extends Component {
 
     render () {
         const {user} = RootStore;
-        // @ts-ignore
-        const { history } = this.props;
-        // history.push(ROUTES.goods.goods);
-
-        const animate = this.animation ? {
-            top: "0",
-            left: "0",
-            animationName: "basket-move",
-            animationDuration: "2s"
-        } : {};
-
-        if (this.isRedirect) {
-            return <Redirect to={ROUTES.goods.goods}/>
-        }
+        // // @ts-ignore
+        // const { history } = this.props;
+        // // history.push(ROUTES.goods.goods);
+        //
+        // const animate = this.animation ? {
+        //     top: "0",
+        //     left: "0",
+        //     animationName: "basket-move",
+        //     animationDuration: "2s"
+        // } : {};
+        //
+        // if (this.isRedirect) {
+        //     return <Redirect to={ROUTES.goods.goods}/>
+        // }
 
         return (
             <div className="profile-container">
@@ -80,11 +76,10 @@ class BuyerPage extends Component {
                                 <div className="basket-container__empty-message">
                                     Your basket is empty! Click to go to the goods catalog
                                 </div>
-                                <div  className="imgs" onClick={this.animate}>
-                                    <img style={animate} className="img-shopping-cart" src={basket} alt="shopping-cart"/>
-                                    {/*<img className="img-icon2" src={icon2} alt="logo" />*/}
-                                    {/*<img className="img-icon3" src={icon3} alt="logo" />*/}
-                                </div>
+
+                                <NavLink to={ROUTES.goods.goods} className="">
+                                    <img onClick={this.animate} className="img-shopping-cart" src={basket} alt="shopping-cart"/>
+                                </NavLink>
                             </div>
                         }
                     </div>
@@ -106,6 +101,7 @@ class BuyerPage extends Component {
 
                     <OrdersContainer
                         goods={user.orders}
+                        position={GoodsContainerPosition.ordersBuyer}
                     />
                 </div>
             </div>

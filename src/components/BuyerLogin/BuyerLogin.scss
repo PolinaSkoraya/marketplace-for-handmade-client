@@ -8,11 +8,7 @@
   align-items: center;
 }
 
-.buyerLogin-form__name{
-
-}
-
-.buyerLogin-form {
+.form-log {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -33,10 +29,15 @@
   }
 }
 
-.signIn-label {
-
-  &:hover {
-    color: $color-basic-light;
+.input {
+  outline: none;
+  border: 1px solid $color-basic-medium;
+  border-radius: 7px;
+  padding: 7px 5px;
+  margin: 0 3px;
+  &:focus {
+    color: $color-basic-medium;
+    border-color: $color-basic-dark;
   }
 }
 

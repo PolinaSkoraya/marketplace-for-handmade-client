@@ -1,16 +1,17 @@
+@import "src/styles/variables";
+
 .buyerRegistration {
   padding-top: 10vh;
   display: flex;
   flex-direction: column;
-  max-width: 50%;
+  justify-content: center;
+  align-items: center;
 }
 
-.buyerRegistration-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.buyerRegistration-input {
-  padding: 10px;
-  margin: 10px;
+.input.buyerRegistration-input {
+  width: 80%;
+  padding: 10px 5px;
+  &:focus {
+    border: 1px solid $color-basic-dark;
+  }
 }
