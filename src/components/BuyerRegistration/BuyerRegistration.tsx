@@ -47,9 +47,10 @@ class BuyerRegistration extends Component {
                     <input
                         type="button"
                         className="button-basic"
-                        value="sign up"
+                        value="Join"
                         onClick={() => user.register(user.nameForRegistration, user.email, user.password)}
                     />
+
                     <NavLink to={ROUTES.users.login}>
                         <FormattedMessage id="signIn"/>
                     </NavLink>

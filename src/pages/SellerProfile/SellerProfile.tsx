@@ -54,8 +54,9 @@ class SellerProfile extends Component {
                                     className = 'input createGood-form__input'
                                     name="newGoodCategory"
                                     onChange={user.handleInputChange}
+                                    defaultValue="choose"
                                 >
-                                    <option disabled selected value="choose">Choose category</option>
+                                    <option disabled value="choose">Choose category</option>
                                     <option value={goodsCategories.art}>art</option>
                                     <option value={goodsCategories.accessories}>accessories</option>
                                     <option value={goodsCategories.homeware}>homeware</option>

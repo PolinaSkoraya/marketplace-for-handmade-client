@@ -1,70 +1,17 @@
 @import "../../styles/variables";
 @import "../../styles/shared";
 
-#scene {
-  margin-top: 200px;
-  animation: scale;
-  animation-duration: 1.5s;
-  .item-2, .item-3 {
-    animation: scale;
-    animation-duration: 1.5s;
-  }
-}
-
-.item-1 {
-  background-color: $color-secondary-medium;
-  height: 200px;
-  width: 260px;
-  border-radius: 20px;
-  @extend %center;
-
-  img {
-    color: white;
-    width: 80%;
-  }
-}
-
-.item-2 {
-  height: 80px;
-  width: 80px;
-  margin-top: -20px;
-  margin-left: -25px;
-  @extend %center;
-
-  img {
-    width: 95%;
-  }
-}
-
-.item-3 {
-  width: 90px;
-  height: 90px;
-  margin-top: -260px;
-  margin-left: 230px;
-  @extend %center;
-
-  img {
-    width: 80%;
-  }
-}
-
-.item-4 {
-  background-color: #73c7ce;
-  height: 300px;
-  width: 300px;
-  border-radius: 50%;
-}
-
 .header {
   height: 100vh;
   position: relative;
   display: flex;
+  background-color: slategray;
 }
 
 .header::after{
   content: "";
   background-attachment: fixed;
-  background-image: url("../../static/images/header-home-1.jpg");
+  background-image: url("../../static/images/header-home.jpg");
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
@@ -75,9 +22,9 @@
   bottom: 0;
   right: 0;
   position: absolute;
-  z-index: -1;
+  z-index: 1;
 
-  animation: backgroundImage 20s infinite;
+  animation: backgroundImage 40s infinite;
 }
 
 @keyframes backgroundImage {
@@ -85,16 +32,13 @@
     background-image: url("../../static/images/header-home.jpg");
   }
   25%{
-    background-image: url("../../static/images/header-home-1.jpg");
-  }
-  50%{
     background-image: url("../../static/images/header-home-2.jpg");
   }
-  75%{
+  50%{
     background-image: url("../../static/images/header-home-3.jpg");
   }
-  100%{
-    background-image: url("../../static/images/header-home.jpg");
+  750%{
+    background-image: url("../../static/images/header-home-1.jpg");
   }
 }
 

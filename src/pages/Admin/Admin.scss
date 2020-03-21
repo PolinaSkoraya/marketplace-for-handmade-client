@@ -1,3 +1,6 @@
+@import "src/styles/shared";
+@import "src/styles/variables";
+
 .admin-page {
   font-size: 14px;
   padding: 10px;
@@ -19,4 +22,10 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   width: 400px;
   margin: 12px 12px;
+}
+
+.order-list {
+  border-right: 1px solid $color-basic-dark;
+  border-left: 1px solid $color-basic-dark;
+  margin: 5px 0;
 }

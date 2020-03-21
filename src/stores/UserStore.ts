@@ -33,6 +33,8 @@ class UserStore {
     @observable goodsInBasket: GoodInterface[] = [];
     @observable goodsInLikedGoods: GoodInterface[] = [];
 
+    @observable showMessageError = false;
+
     @observable seller = {
         _id: "",
         description: "",
@@ -95,11 +97,13 @@ class UserStore {
         };
 
         try {
+            this.showMessageError = false;
             const response = await instance.post(URLS.loginBuyer, user);
             localStorage.setItem(TOKEN, response.data);
 
             this.init(response.data);
         } catch (error) {
+            this.showMessageError = true;
             console.log(error);
         }
     }

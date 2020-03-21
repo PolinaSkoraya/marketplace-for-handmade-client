@@ -11,6 +11,7 @@ import {getRole, Roles} from "../../stores/helpers/roles";
 import {FormattedMessage} from "react-intl";
 import {FaRegSquare, FaSignOutAlt} from "react-icons/fa";
 import SmallButton from "../SmallButton/SmallButton";
+import {FiShoppingCart} from "react-icons/fi";
 
 @observer
 class Navigation extends Component {
@@ -54,15 +55,17 @@ class Navigation extends Component {
                             }
 
                             <NavLink to={ROUTES.users.users + user.id} className="navigation__link navigation__link--user">
-                                <FormattedMessage id="profile"/>
+                                <button
+                                    id="basketButton"
+                                >
+                                    <FormattedMessage id="profile"/>
+                                </button>
+                                <div className="basket-buttons">
+                                    <SmallButton htmlFor="basketButton" icon={user.goodsInBasket.length} style={{fontSize: "15px", backgroundColor: "rgba(75,177,218,0.22)"}}/>
+                                    <SmallButton htmlFor="basketButton" icon={<FiShoppingCart/>} style={{fontSize: "20px"}}/>
+                                </div>
                             </NavLink>
 
-                            {/*<NavLink*/}
-                            {/*    to={ROUTES.root}*/}
-                            {/*    className="navigation__link navigation__link--user"*/}
-                            {/*>*/}
-                            {/*    link to home*/}
-                            {/*</NavLink>*/}
                             <div className="navigation__link navigation__link--user">
                                 <button
                                     id="logOutButton"

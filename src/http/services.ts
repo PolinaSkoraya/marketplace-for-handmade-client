@@ -1,8 +1,6 @@
 import {instance} from "./instance";
 import {URLS} from "./urls";
 import {TOKEN} from "../stores/UserStore";
-import {GoodInterface} from "../stores/helpers/interfaces";
-import {Roles} from "../stores/helpers/roles";
 
 export function getUsers() {
     return instance.get(URLS.users);

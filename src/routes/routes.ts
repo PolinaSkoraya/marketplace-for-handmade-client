@@ -14,8 +14,8 @@ export const ROUTES = {
 
     users: {
         users: '/users/',
-        login: '/users/login',
-        registration: '/users/registration',
+        login: '/user/login',
+        registration: '/user/registration',
         profile: '/users/:id'
     },
 

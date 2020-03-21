@@ -24,8 +24,6 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
     @observable sellerName = "";
     @observable show = false;
 
-    @observable appear = true;
-
     constructor (props) {
         super(props);
         this.store.initUpdatingGood(this.props.good);
@@ -45,7 +43,6 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
 
     @action
     deleteGood (user, id) {
-        console.log(this.appear);
         user.removeFromBasket(this.props.good._id);
     }
 
@@ -101,12 +98,12 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
 
         return(
             // <TransitionGroup className="card-container">
-            <CSSTransition
-                key={this.props.good._id}
-                in={this.appear}
-                timeout={1000}
-                classNames="fade"
-            >
+            // <CSSTransition
+            //     key={this.props.good._id}
+            //     in={this.appear}
+            //     timeout={1000}
+            //     classNames="fade"
+            // >
                 <div
                     className="good"
                     id = {this.props.good._id + this.props.good.idOrder}
@@ -217,7 +214,7 @@ class Good extends Component<{good: GoodInterface, idSeller: string, goodsContai
 
                     </div>
                 </div>
-            </CSSTransition>
+            // </CSSTransition>
             // </TransitionGroup>
         )
     }

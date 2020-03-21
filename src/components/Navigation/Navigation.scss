@@ -34,6 +34,14 @@
   width: auto;
 }
 
-#logOutButton {
+#logOutButton, #basketButton {
   display: none;
+}
+
+.basket-buttons {
+  display: flex;
+}
+
+.basket-buttons {
+
 }

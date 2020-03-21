@@ -4,15 +4,12 @@ import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
 import GoodsStore from "../../stores/GoodsStore";
 import RootStore from "../../stores/RootStore";
-import {ROUTES} from "../../routes/routes";
-import {Redirect} from 'react-router-dom'
 import {action, observable} from "mobx";
 import Pagination from "../../components/Pagination/Pagination";
 import SmallButton from "../../components/SmallButton/SmallButton";
 
 import {FiSearch} from "react-icons/fi";
 import {MdCancel} from "react-icons/md";
-import {CSSTransition} from "react-transition-group";
 import {goodsCategories} from "../../stores/helpers/interfaces";
 
 @observer
@@ -21,32 +18,29 @@ class GoodsPage extends Component{
     @observable currentPage = 1;
     @observable numberOfPages = 0;
     @observable searchName = "";
-    @observable searchCategory ="";
+    @observable searchCategory = "choose";
+    @observable defaultSelect = "choose";
 
     async componentDidMount () {
-        const response = await this.store.loadGoods(this.currentPage);
-        this.numberOfPages = response.data;
+        this.numberOfPages = await this.store.loadGoods(this.currentPage);
     }
 
     @action.bound
     async previousPage () {
         this.currentPage = this.currentPage - 1;
         await this.store.loadGoods(this.currentPage);
-        console.log(this.currentPage);
     }
 
     @action.bound
     async nextPage () {
         this.currentPage = this.currentPage + 1;
         await this.store.loadGoods(this.currentPage);
-        console.log(this.currentPage);
     }
 
     @action.bound
     async setPage (page) {
         this.currentPage = page;
         await this.store.loadGoods(this.currentPage);
-        console.log(this.currentPage);
     }
 
     @action.bound
@@ -58,10 +52,9 @@ class GoodsPage extends Component{
         this[name] = value;
         if (name === "searchName") {
             this.store.searchByName(this.searchName);
-            this.searchCategory = "";
+            this.searchCategory = this.defaultSelect;
         }
         if (name === "searchCategory") {
-            console.log(this.searchCategory);
             this.store.searchByCategory(this.searchCategory);
             this.searchName = "";
         }
@@ -70,7 +63,7 @@ class GoodsPage extends Component{
     @action
     resetGoods (page) {
         this.searchName = "";
-        this.searchCategory = "";
+        this.searchCategory = this.defaultSelect;
         this.store.loadGoods(page);
     }
 
@@ -85,7 +78,7 @@ class GoodsPage extends Component{
                 <div className="goods-page">
                     <div className="goods-page__search">
                         {
-                            (this.searchName || this.searchCategory) && (
+                            (this.searchName || this.searchCategory !== this.defaultSelect) && (
                                 <>
                                     <button id="button-cancel-search" onClick={() => this.resetGoods(this.currentPage)}>cancel</button>
                                     <SmallButton labelStyle={labelStyle} style={{...iconStyle}} htmlFor="button-cancel-search" icon={<MdCancel/>}/>
@@ -97,8 +90,9 @@ class GoodsPage extends Component{
                             className = 'input select-category'
                             name="searchCategory"
                             onChange={this.handleInputChange}
+                            value = {this.searchCategory}
                         >
-                            <option disabled selected value="choose">Choose category</option>
+                            <option value={this.defaultSelect} disabled>Choose category</option>
                             <option value={goodsCategories.art}>art</option>
                             <option value={goodsCategories.accessories}>accessories</option>
                             <option value={goodsCategories.homeware}>homeware</option>

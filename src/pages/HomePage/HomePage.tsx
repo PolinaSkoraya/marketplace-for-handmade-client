@@ -65,18 +65,6 @@ class HomePage extends Component{
                     ) : (
                         <AuthLinks/>
                     ) }
-
-                    {/*<div id="scene">*/}
-                    {/*    <div className="item-1" >*/}
-                    {/*        <img src={icon1} alt="logo"/>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="item-2">*/}
-                    {/*        <img src={icon2} alt="logo" />*/}
-                    {/*    </div>*/}
-                    {/*    <div className="item-3">*/}
-                    {/*        <img src={icon3} alt="logo" />*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                 </div>
 
 

@@ -24,29 +24,27 @@
 }
 .fade-appear-active {
   opacity: 1;
-  transition: opacity 1500ms linear;
+  transition: opacity 150ms linear;
 }
 
-/* enter */
 .fade-enter {
   opacity: 0;
   z-index: 1;
 }
 .fade-enter-active {
   opacity: 1;
-  transition: opacity 1500ms linear;
+  transition: opacity 150ms linear;
 }
 
-/* exit */
 .fade-exit {
   opacity: 1;
   z-index: 1;
 }
 .fade-exit-active {
   opacity: 0;
-  transition: opacity 1500ms linear;
+  transition: opacity 150ms linear;
 }
 
-//.fade-exit-done {
-//  opacity: 0;
-//}
+.fade-exit-done {
+  opacity: 0;
+}

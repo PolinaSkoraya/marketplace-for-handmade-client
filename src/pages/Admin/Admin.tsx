@@ -2,14 +2,10 @@ import './Admin.scss'
 import {observer} from "mobx-react";
 import React, {Component} from "react";
 import RootStore from "../../stores/RootStore";
-import Good from "../../components/Good/Good";
-import GoodsStore from "../../stores/GoodsStore";
-import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {GoodInterface} from "../../stores/helpers/interfaces";
 import {observable} from "mobx";
-import ReactDataGrid from "react-data-grid";
-import {getAllGoods, getSellerOrders, getSellers, getUserOrders, getUsers} from "../../http/services";
+import {getAllGoods, getSellers, getUserOrders, getUsers} from "../../http/services";
 
 @observer
 class Admin extends Component {
@@ -123,29 +119,39 @@ class GridRowOrder  extends Component<{order: GoodInterface}> {
 @observer
 class GridRowUser  extends Component<{user: any}> {
     render () {
-        console.log(this.props.user.orders);
-
         return (
             <div className="grid-row grid-row-user">
                 <div className="grid-column grid-column-1">{this.props.user.name}</div>
                 <div className="grid-column grid-column-2">{this.props.user.email}</div>
                 <div className="grid-column grid-column-3">{this.props.user.roles.sort().join(', ')}</div>
                 <div className="grid-column grid-column-4">
-                    <div className="grid-container grid-container-order">
-                        <div className="grid-row grid-row-order">
-                            <div className="grid-column ">name</div>
-                            <div className="grid-column ">price</div>
-                            <div className="grid-column ">status</div>
-                        </div>
+                    <div>
                         {
                             this.props.user.orders &&
                             this.props.user.orders.map ( order =>
-                                {
-                                    return <GridRowOrder order={order} key={order._id + "o"}/>
-                                }
+                            <ul className="order-list">
+                                <li>name: {order.name}</li>
+                                <li>price: {order.price}</li>
+                                <li>status: {order.status}</li>
+                            </ul>
                             )
                         }
                     </div>
+                    {/*<div className="grid-container grid-container-order">*/}
+                    {/*    <div className="grid-row grid-row-order">*/}
+                    {/*        <div className="grid-column ">name</div>*/}
+                    {/*        <div className="grid-column ">price</div>*/}
+                    {/*        <div className="grid-column ">status</div>*/}
+                    {/*    </div>*/}
+                    {/*    {*/}
+                    {/*        this.props.user.orders &&*/}
+                    {/*        this.props.user.orders.map ( order =>*/}
+                    {/*            {*/}
+                    {/*                return <GridRowOrder order={order} key={order._id + "o"}/>*/}
+                    {/*            }*/}
+                    {/*        )*/}
+                    {/*    }*/}
+                    {/*</div>*/}
                 </div>
             </div>
         );

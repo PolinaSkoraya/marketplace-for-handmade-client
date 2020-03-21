@@ -8,27 +8,18 @@ import {FaArrowLeft, FaArrowRight} from "react-icons/fa";
 
 @observer
 class Pagination extends Component<{currentPage: number, numberOfPages: number, previousPage, nextPage, setPage }> {
-    @observable.shallow array: number[] = [];
+    @observable array: number[] = [];
 
-    componentDidMount(): void {
-        this.createArray();
+    componentDidUpdate(prevProps: Readonly<{ currentPage: number; numberOfPages: number; previousPage; nextPage; setPage }>): void {
+        if (this.props.numberOfPages !== prevProps.numberOfPages ) {
+            this.createArray();
+        }
     }
 
     @action.bound
     createArray () {
-        console.log(this.props.numberOfPages);
-        let array = Array.from(Array(this.props.numberOfPages).keys());
-        this.array = [0, 1];
-        console.log(this.array);
+        this.array = Array.from(Array(this.props.numberOfPages).keys());
     }
-
-    // @action.bound
-    // createArray () {
-    //     for (let i = 0; i < this.props.numberOfPages; i++) {
-    //         this.array.push(i);
-    //     }
-    //     console.log(this.array);
-    // }
 
     render () {
         const buttonStyle = {
