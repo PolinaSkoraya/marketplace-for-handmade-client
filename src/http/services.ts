@@ -169,3 +169,7 @@ export function postShop(seller) {
         "services": seller.services
     })
 }
+
+export function deleteUserById (idUser) {
+    return instance.post(URLS.users + idUser + "/delete");
+}

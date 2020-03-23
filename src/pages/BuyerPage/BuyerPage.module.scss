@@ -1,0 +1,72 @@
+@import "src/styles/variables";
+
+.profileContainer {
+  display: flex;
+  padding-top: 9vh;
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+}
+
+.profileContainer__aside {
+  display: flex;
+  justify-content: flex-end;
+  flex-basis: 15%;
+  background-color: #efefef;
+}
+
+.profileContainer__main {
+  flex-basis: 100%;
+}
+
+.basketContainer {
+
+}
+
+.basketContainer__cost {
+  font-size: $font-size-title;
+  text-align: left;
+  margin: 0 20px;
+}
+
+.basketContainer__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0 50px 0;
+  min-height: 260px;
+}
+
+.basketContainer__emptyMessage {
+  width: 200px;
+  text-align: left;
+  font-size: $font-size-medium;
+}
+
+.imgShoppingCart {
+  height: 200px;
+  width: auto;
+}
+
+.sticky {
+  background-color: $color-secondary-medium;
+  position: sticky;
+  top: calc(9vh + 20px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  height: 100px;
+  width: 100px;
+
+  margin: 20px 20px 0 0;
+  padding: 10px 0;
+
+  border-radius: 20px;
+  box-shadow: $box-shadow-good;
+}
+
+.profileContainer__link {
+
+}
+

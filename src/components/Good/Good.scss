@@ -8,10 +8,16 @@
   padding: 8px;
   position: relative;
   background-color: white;
+
+  border-radius: 11px;
+  //background: #efefef;
+  //box-shadow:  5px 5px 6px #dcdcdc,
+  //-5px -5px 6px #ffffff;
 }
 
 .good:hover{
   box-shadow: $box-shadow-good-hover;
+
   //transform: scale(1.1, 1.1);
   //transition: transform 300ms;
 }
@@ -30,23 +36,24 @@
   }
 }
 
-.good__about{
-  margin: 0 10px;
+.good__about {
+  margin:0 10px;
 }
 
-.good__image{
-
-}
-
-.good__link-image{
+.good__link-image {
   display: inline-block;
 }
 
-.good__image img{
+.good__image img {
   object-fit: cover;
   height: 200px;
   width: 100%;
   margin-bottom: 8px;
+
+  border-radius: 11px;
+  background: #efefef;
+  box-shadow: inset 5px 5px 6px #dcdcdc,
+  inset -5px -5px 6px #ffffff;
 }
 
 .good__info{

@@ -1,8 +1,14 @@
 $color-basic-dark: #0D3849;
 $color-basic-medium: #2F6F89;
 $color-secondary-medium: #58A7C6;
-$color-secondary-light: #A4CFE0;
+$color-secondary-light: #a4cfe0;
 $color-basic-light: #ebebeb;
+
+//$color-basic-dark: #2B277F;
+//$color-basic-medium: #584289;
+//$color-secondary-medium: #6D80BF;
+//$color-secondary-light: #CE8EB4;
+//$color-basic-light: #D2E1FA;
 
 //$color-grey: rgba(168, 168, 168, 0.64);
 
@@ -16,6 +22,6 @@ $font-size-sub-title: 20px;
 $font-size-medium: 18px;
 $font-size-small: 15px;
 
-$box-shadow-good: rgba(106, 106, 106, 0.39) 2px 2px 8px 1px;
-$box-shadow-good-active: $color-secondary-light 0px 0px 15px 2px;
-$box-shadow-good-hover: rgba(106, 106, 106, 0.55)  2px 2px 8px 1px;
+$box-shadow-good: 0 1px 6px 0 rgba(32, 33, 36, .28);
+$box-shadow-good-active: 0 1px 6px 0 rgba(32, 33, 36, 0.32);
+$box-shadow-good-hover: 0 1px 6px 0 rgba(32, 33, 36, 0.44);

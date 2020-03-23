@@ -11,11 +11,28 @@
 
 .goods-page__search {
   display: flex;
-  justify-content: flex-end;
-  @extend %center;
   padding: 0 20px;
+  justify-content: center;
 }
 
-.select-category option {
+.goods-page__search select{
 
 }
+
+.search-div {
+  display: flex;
+}
+
+////
+.search-div  i {
+  margin-top: 3px;
+  margin-left: calc(30vw - 35px);
+  position: absolute;
+}
+
+.input-search {
+  width: 30vw;
+  padding: 10px;
+  text-align: left;
+}
+

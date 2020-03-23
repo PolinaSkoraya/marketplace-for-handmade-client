@@ -4,8 +4,8 @@ import React, {Component} from "react";
 import RootStore from "../../stores/RootStore";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {GoodInterface} from "../../stores/helpers/interfaces";
-import {observable} from "mobx";
-import {getAllGoods, getSellers, getUserOrders, getUsers} from "../../http/services";
+import {action, observable} from "mobx";
+import {deleteUserById, getAllGoods, getSellers, getUserOrders, getUsers} from "../../http/services";
 
 @observer
 class Admin extends Component {
@@ -31,11 +31,8 @@ class Admin extends Component {
     }
 
     render () {
-        const {user} = RootStore;
-
         return (
             <>
-
                 <div className="admin-page">
                     <div className="grid-container">
                         goods
@@ -57,6 +54,7 @@ class Admin extends Component {
                     <div className="grid-container grid-container-users">
                         users
                         <div className="grid-row grid-row-user grid-row-user__title" key="0">
+                            <div className="grid-column grid-column-0">button</div>
                             <div className="grid-column grid-column-1">name</div>
                             <div className="grid-column grid-column-2">email</div>
                             <div className="grid-column grid-column-3">roles</div>
@@ -118,9 +116,18 @@ class GridRowOrder  extends Component<{order: GoodInterface}> {
 
 @observer
 class GridRowUser  extends Component<{user: any}> {
+    @action
+    async deleteUser(idUser) {
+        console.log("deleted");
+        await deleteUserById(idUser);
+    }
+
     render () {
+        console.log(this.props.user);
+
         return (
             <div className="grid-row grid-row-user">
+                <div className="grid-column grid-column-0"><button onClick={() => this.deleteUser(this.props.user._id)}>delete user by id</button></div>
                 <div className="grid-column grid-column-1">{this.props.user.name}</div>
                 <div className="grid-column grid-column-2">{this.props.user.email}</div>
                 <div className="grid-column grid-column-3">{this.props.user.roles.sort().join(', ')}</div>
@@ -129,11 +136,11 @@ class GridRowUser  extends Component<{user: any}> {
                         {
                             this.props.user.orders &&
                             this.props.user.orders.map ( order =>
-                            <ul className="order-list">
-                                <li>name: {order.name}</li>
-                                <li>price: {order.price}</li>
-                                <li>status: {order.status}</li>
-                            </ul>
+                                <ul className="order-list" key={order._id + this.props.user._id}>
+                                    <li>name: {order.name}</li>
+                                    <li>price: {order.price}</li>
+                                    <li>status: {order.status}</li>
+                                </ul>
                             )
                         }
                     </div>

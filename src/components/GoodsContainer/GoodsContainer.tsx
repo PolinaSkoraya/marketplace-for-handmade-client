@@ -33,7 +33,7 @@ class GoodsContainer extends Component <{ goodsContainerTitle: string, goods: Go
                                     in={this.animate}
                                     appear={true}
                                     key={good._id + "anim"}
-                                    timeout={150}
+                                    timeout={200}
                                     classNames="fade"
                                 >
                                     <Good

@@ -29,8 +29,7 @@ class OneGoodPage extends Component<any> {
                 </div>
 
                 <div className="good-page__info">
-
-                    <div className="good-page__info-left card-front">
+                    <div className="good-page__info-left">
                         <img className="good-page__image" src={STATIC_IMAGES + this.store.good.image} alt="image"/>
                     </div>
 

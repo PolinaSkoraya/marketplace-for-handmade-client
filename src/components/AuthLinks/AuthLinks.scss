@@ -13,10 +13,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: $color-secondary-medium;
+  background-color: rgba(88, 167, 198, 0.85);
   height: 200px;
   width: 200px;
   border-radius: 50%;
+
+  z-index: 5;
 }
 
 .auth-link {

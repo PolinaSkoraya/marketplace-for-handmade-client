@@ -86,6 +86,24 @@ class GoodsPage extends Component{
 
                             )
                         }
+
+                        <div className="search-div">
+                            <i className="icon-search">
+                                <SmallButton labelStyle={labelStyle} style={iconStyle} htmlFor="button-search" icon={<FiSearch/>}/>
+                            </i>
+                            <input
+                                type="text"
+                                name="searchName"
+                                placeholder="Search..."
+                                onChange={this.handleInputChange}
+                                className="input input-search"
+                                value={this.searchName}
+                            >
+                            </input>
+
+                            <button  id="button-search" onClick={()=>this.store.searchByName(this.searchName)}/>
+                        </div>
+
                         <select
                             className = 'input select-category'
                             name="searchCategory"
@@ -98,18 +116,6 @@ class GoodsPage extends Component{
                             <option value={goodsCategories.homeware}>homeware</option>
                             <option value={goodsCategories.toys}>toys</option>
                         </select>
-
-                        <input
-                            type="text"
-                            name="searchName"
-                            placeholder="Search..."
-                            onChange={this.handleInputChange}
-                            className="input input-search"
-                            value={this.searchName}
-                        />
-
-                        <button  id="button-search" onClick={()=>this.store.searchByName(this.searchName)}>search</button>
-                        <SmallButton labelStyle={labelStyle} style={iconStyle} htmlFor="button-search" icon={<FiSearch/>}/>
                     </div>
 
                     {/*<CSSTransition*/}

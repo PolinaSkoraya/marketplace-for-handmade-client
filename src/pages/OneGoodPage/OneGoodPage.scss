@@ -1,34 +1,42 @@
 @import "src/styles/variables";
 
-.good-page{
-  padding: 10vh 40px 0 40px;
+.good-page {
+  display: flex;
+  flex-direction: column;
+  padding: 8vh 40px 0 40px;
   text-align: left;
+
 }
 
-.good-page__title{
+.good-page__title {
   font-size: $font-size-title;
   font-weight: 500;
-  padding: 10px 0;
+  padding: 25px 10px;
 }
 
-.good-page__info-left{
-  flex-basis: 40%;
+.good-page__info {
+  display: flex;
+}
+
+.good-page__info-left {
+  border-radius: 20px;
+  box-shadow: $box-shadow-good;
+  flex-basis: 30%;
+  margin-right: 40px;
+}
+
+.good-page__image {
+  border-radius: 20px;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .good-page__info-right{
   flex-basis: 30%;
 }
 
-.good-page__image {
-  max-width: 70vh;
-}
-
-.good-page{
-  display: flex;
-  flex-direction: column;
-}
-
-.good-page__info{
+.good-page__info {
   display: flex;
   padding: 5px;
 }

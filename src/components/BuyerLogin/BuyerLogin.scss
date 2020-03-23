@@ -1,11 +1,17 @@
 @import "src/styles/variables";
+@import "src/styles/shared";
 
 .buyerLogin {
-  padding-top: 10vh;
+  //padding-top: 8vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @extend %center;
+  height: 100vh;
+  //background-color: $color-secondary-light;
+
+  //background-image: radial-gradient(rgba(186, 235, 255, 0.2) 15%, transparent 16%),
+  //radial-gradient(rgba(184, 238, 255, 0.21) 15%, transparent 16%);
+  //background-size: 60px 60px;
+  //background-position: 0 0, 30px 30px;
 }
 
 .form-log {
@@ -14,11 +20,17 @@
   justify-content: space-around;
   align-items: center;
   padding: 10px;
-  margin-top: 40px;
   border-radius: 20px;
   background-color: $color-secondary-light;
   width: 350px;
   height: 300px;
+
+  box-shadow: $box-shadow-good;
+
+  //border-radius: 11px;
+  //background: #efefef;
+  //box-shadow:  5px 5px 6px #dcdcdc,
+  //-5px -5px 6px #ffffff;
 }
 
 .input.buyerLogin-input {
@@ -32,12 +44,20 @@
 .input {
   outline: none;
   border: 1px solid $color-basic-medium;
-  border-radius: 7px;
+  border-radius: 18px;
   padding: 7px 5px;
   margin: 0 3px;
+
+  box-shadow: $box-shadow-good;
+
+  //border-radius: 11px;
+  //background: #efefef;
+  //box-shadow: inset 5px 5px 6px #dcdcdc,
+  //inset -5px -5px 6px #ffffff;
+
   &:focus {
     color: $color-basic-medium;
-    border-color: $color-basic-dark;
+    //border-color: $color-basic-dark;
   }
 }
 
@@ -45,12 +65,17 @@
   margin-right: 10px;
   background-color: $color-basic-medium;
   border: none;
-  color: white;
+  color: $color-basic-light;
   padding: 10px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  border-radius: 12px;
+  border-radius: 18px;
   cursor: pointer;
+
+  //border-radius: 11px;
+  //background: #efefef;
+  //box-shadow:  5px 5px 6px #dcdcdc,
+  //-5px -5px 6px #ffffff;
 }
