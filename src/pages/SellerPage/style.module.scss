@@ -1,21 +1,21 @@
 @import "src/styles/variables";
 
-.seller-page {
-  padding: calc(9vh + 20px) 20px;
+.sellerPage {
+  padding: calc(8vh + 20px) 20px;
 }
 
-.seller-profile__info{
+.sellerPage__info {
   display: flex;
 }
 
-.seller-profile__back-image {
+.sellerPage__backImage {
   background-image: url("../../static/images/background-for-shop.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   height: 200px;
 }
 
-.seller-profile__logo{
+.sellerPage__logo {
   margin: -45px 30px 0 30px;
   background-color: $color-basic-light;
   border-radius: 50%;
@@ -26,30 +26,26 @@
   align-items: center;
 }
 
-.seller-profile__logo-img {
+.sellerPage__logoImg {
   height: 80%;
   width: 80%;
 }
 
-.seller-profile__text {
+.sellerPage__text {
   text-align: left;
   max-width: 70%;
 }
 
-.seller-profile__text-field {
+.sellerPage__textField {
   padding: 8px 0;
 }
 
-.seller-profile__text-field--name{
+.sellerPage__textField_name {
   font-size: 25px;
 }
 
-.seller-profile__description{
+.sellerPage__description{
   margin: 8px 0;
   padding: 4px 8px;
   border-left: 1px solid $color-basic-light;
-}
-
-.seller-profile__footer{
-  margin: 100px 0 10px 0;
 }

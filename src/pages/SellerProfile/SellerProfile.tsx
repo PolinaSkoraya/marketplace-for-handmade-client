@@ -1,14 +1,15 @@
-import './SellerProfile.scss'
+import style from './style.module.scss';
 import React, {Component} from 'react';
 import {getRole, Roles} from "../../stores/helpers/roles";
 import RootStore from "../../stores/RootStore";
-import {GoodsContainer, GoodsContainerPosition} from "../../components/GoodsContainer/GoodsContainer";
+import {GoodsContainerPosition} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
 import {OrdersContainer} from "../../components/OrdersContainer/OrdersContainer";
 import {goodsCategories} from "../../stores/helpers/interfaces";
 import {ROUTES} from "../../routes/routes";
 import {NavLink} from 'react-router-dom';
-
+import Button from "../../components/Button/Button";
+import classNames from "classnames";
 
 @observer
 class SellerProfile extends Component {
@@ -16,10 +17,10 @@ class SellerProfile extends Component {
         const {user} = RootStore;
 
         return (
-            <div className="profile-container">
+            <div className={style.profileContainer}>
                 {
                     getRole(Roles.seller) ?
-                        <div className="profile-container__header">
+                        <div className={style.profileContainer__header}>
                             <div className="profile-container__info">
                                 <NavLink
                                     to={ROUTES.sellers.sellers + user.seller._id}
@@ -29,29 +30,29 @@ class SellerProfile extends Component {
                                 </NavLink>
                             </div>
 
-                            <form className="createGood-form">
+                            <form className={style.createGoodForm}>
                                 <input
-                                    className = 'input createGood-form__input'
+                                    className = {classNames("input", style.createGoodForm__input)}
                                     type='text'
                                     name="newGoodName"
                                     onChange={user.handleInputChange}
                                     placeholder='name'
                                 />
                                 <textarea
-                                    className = 'input createGood-form__input createGood-form__textarea'
+                                    className = {classNames("input", style.createGoodForm__input, style.createGoodForm__textarea)}
                                     name="newGoodDescription"
                                     onChange={user.handleInputChange}
                                     placeholder='description'
                                 />
                                 <input
-                                    className = 'input createGood-form__input'
+                                    className = {classNames("input", style.createGoodForm__input)}
                                     type='text'
                                     name="newGoodPrice"
                                     onChange={user.handleInputChange}
                                     placeholder='price'
                                 />
                                 <select
-                                    className = 'input createGood-form__input'
+                                    className = {classNames("input", style.createGoodForm__input)}
                                     name="newGoodCategory"
                                     onChange={user.handleInputChange}
                                     defaultValue="choose"
@@ -62,7 +63,13 @@ class SellerProfile extends Component {
                                     <option value={goodsCategories.homeware}>homeware</option>
                                     <option value={goodsCategories.toys}>toys</option>
                                 </select>
-                                <button className="button-basic" onClick={user.createGood}>create new good</button>
+
+                                <Button
+                                    styleType="primary"
+                                    onClick={user.createGood}
+                                >
+                                    create new good
+                                </Button>
                             </form>
                         </div>
                         :
@@ -81,7 +88,7 @@ class SellerProfile extends Component {
                                 onChange={user.handleInputChange}
                                 placeholder='shop description'
                             />
-                            <button onClick={user.setSellerRole}>start selling</button>
+                            <Button onClick={user.setSellerRole}>start selling</Button>
                         </div>
                 }
                 {

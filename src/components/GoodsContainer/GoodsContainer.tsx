@@ -1,4 +1,5 @@
-import "./GoodsContainer.scss"
+import style from "./style.module.scss";
+import "./GoodsContainerAnimation.scss"
 import React, {Component} from "react";
 import Good from "../Good/Good";
 import {observer} from "mobx-react";
@@ -14,21 +15,29 @@ export enum GoodsContainerPosition {
     ordersSeller = "ORDERS_SELLER",
 }
 
+interface Props {
+    goodsContainerTitle: string,
+    goods: GoodInterface[],
+    goodsContainerPosition?: GoodsContainerPosition
+}
+
 @observer
-class GoodsContainer extends Component <{ goodsContainerTitle: string, goods: GoodInterface[], goodsContainerPosition?: GoodsContainerPosition }> {
+class GoodsContainer extends Component <Props> {
     @observable animate = true;
 
     render () {
+        const {goods, goodsContainerPosition, goodsContainerTitle} = this.props;
+
         return (
-            <div className="goodsContainer">
-                <div className="goodsContainer__title">
-                    {this.props.goodsContainerTitle}
+            <div className={style.goodsContainer}>
+                <div className={style.goodsContainer__title}>
+                    {goodsContainerTitle}
                 </div>
 
-                <div className="goodsContainer__grid">
+                <div className={style.goodsContainer__grid}>
                     <TransitionGroup component={null}>
                     {
-                        this.props.goods.map ( good =>
+                        goods.map ( good =>
                                 <CSSTransition
                                     in={this.animate}
                                     appear={true}
@@ -40,7 +49,7 @@ class GoodsContainer extends Component <{ goodsContainerTitle: string, goods: Go
                                         key={good._id + good.idOrder}
                                         good={good}
                                         idSeller={good.idSeller}
-                                        goodsContainerPosition={this.props.goodsContainerPosition}
+                                        goodsContainerPosition={goodsContainerPosition}
                                     />
                                 </CSSTransition>
                         )

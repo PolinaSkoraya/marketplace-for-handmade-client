@@ -1,11 +1,17 @@
-import './Admin.scss'
+import style from './style.module.scss';
 import {observer} from "mobx-react";
 import React, {Component} from "react";
-import RootStore from "../../stores/RootStore";
-import OneGoodStore from "../../stores/OneGoodStore";
 import {GoodInterface} from "../../stores/helpers/interfaces";
-import {action, observable} from "mobx";
-import {deleteUserById, getAllGoods, getSellers, getUserOrders, getUsers} from "../../http/services";
+import {observable} from "mobx";
+import {
+    getAllGoods,
+    getSellers,
+    getUserOrders,
+    getUsers
+} from "../../http/services";
+import GridRowShop from "./GridRowShop";
+import GridRowUser from "./GridRowUser";
+import GridRowGood from "./GridRowGood";
 
 @observer
 class Admin extends Component {
@@ -20,11 +26,11 @@ class Admin extends Component {
         this.goods = responseGoods.data;
         this.users = responseUsers.data;
         this.sellers = responseSellers.data;
+        console.log(this.sellers);
         await Promise.all (
             this.users.map(async user => {
                 const orders = await getUserOrders(user._id);
                 user.orders = orders.data;
-                console.log(user);
             })
         )
 
@@ -33,15 +39,15 @@ class Admin extends Component {
     render () {
         return (
             <>
-                <div className="admin-page">
-                    <div className="grid-container">
+                <div className={style.adminPage}>
+                    <div className={style.gridContainer}>
                         goods
-                        <div className="grid-row grid-row-good grid-row-good__title" key="0">
+                        <div className={style.gridRow} key="0">
                             <div className="grid-column grid-column-1">name</div>
                             <div className="grid-column grid-column-2">price</div>
-                            <div className="grid-column grid-column-3">description</div>
-                            <div className="grid-column grid-column-4">seller</div>
-                            {/*<div className="grid-column grid-column-5"></div>*/}
+                            <div className="grid-column grid-column-3">category</div>
+                            <div className="grid-column grid-column-4">description</div>
+                            <div className="grid-column grid-column-5">seller</div>
                         </div>
                         {
                             this.goods.map ( good =>
@@ -51,9 +57,10 @@ class Admin extends Component {
                             )
                         }
                     </div>
-                    <div className="grid-container grid-container-users">
+
+                    <div className={style.gridContainer}>
                         users
-                        <div className="grid-row grid-row-user grid-row-user__title" key="0">
+                        <div className={style.gridRow} key="0">
                             <div className="grid-column grid-column-0">button</div>
                             <div className="grid-column grid-column-1">name</div>
                             <div className="grid-column grid-column-2">email</div>
@@ -68,100 +75,26 @@ class Admin extends Component {
                             )
                         }
                     </div>
-                </div>
-            </>
-        )
-    }
-}
 
-@observer
-class GridRowGood  extends Component<{good: GoodInterface, idSeller: string}> {
-    oneGoodStore: OneGoodStore = new OneGoodStore();
-    @observable sellerName = "";
-
-    componentDidMount(): void {
-        this.oneGoodStore.getShopName(this.props.idSeller).then( response =>
-            this.sellerName = response
-        )
-    }
-
-    render () {
-        const {good} = this.props;
-
-        return (
-            <div className="grid-row grid-row-good">
-                <div className="grid-column grid-column-1">{good.name}</div>
-                <div className="grid-column grid-column-2">{good.price}</div>
-                <div className="grid-column grid-column-3">{good.description}</div>
-                <div className="grid-column grid-column-4">{this.sellerName}</div>
-            </div>
-        );
-    }
-}
-
-@observer
-class GridRowOrder  extends Component<{order: GoodInterface}> {
-    render () {
-        const {order} = this.props;
-
-        return (
-            <div className="grid-row grid-row-order">
-                <div className="grid-column ">{order.name}</div>
-                <div className="grid-column ">{order.price}</div>
-                <div className="grid-column ">{order.status}</div>
-            </div>
-        );
-    }
-}
-
-@observer
-class GridRowUser  extends Component<{user: any}> {
-    @action
-    async deleteUser(idUser) {
-        console.log("deleted");
-        await deleteUserById(idUser);
-    }
-
-    render () {
-        console.log(this.props.user);
-
-        return (
-            <div className="grid-row grid-row-user">
-                <div className="grid-column grid-column-0"><button onClick={() => this.deleteUser(this.props.user._id)}>delete user by id</button></div>
-                <div className="grid-column grid-column-1">{this.props.user.name}</div>
-                <div className="grid-column grid-column-2">{this.props.user.email}</div>
-                <div className="grid-column grid-column-3">{this.props.user.roles.sort().join(', ')}</div>
-                <div className="grid-column grid-column-4">
-                    <div>
+                    <div className={style.gridContainer}>
+                        shops
+                        <div className={style.gridRow} key="0">
+                            <div className="grid-column grid-column-0">owner</div>
+                            <div className="grid-column grid-column-1">shop name</div>
+                            <div className="grid-column grid-column-2">description</div>
+                            <div className="grid-column grid-column-3">orders</div>
+                        </div>
                         {
-                            this.props.user.orders &&
-                            this.props.user.orders.map ( order =>
-                                <ul className="order-list" key={order._id + this.props.user._id}>
-                                    <li>name: {order.name}</li>
-                                    <li>price: {order.price}</li>
-                                    <li>status: {order.status}</li>
-                                </ul>
+                            this.sellers.map ( seller =>
+                                {
+                                    return <GridRowShop seller={seller} key={seller._id}/>
+                                }
                             )
                         }
                     </div>
-                    {/*<div className="grid-container grid-container-order">*/}
-                    {/*    <div className="grid-row grid-row-order">*/}
-                    {/*        <div className="grid-column ">name</div>*/}
-                    {/*        <div className="grid-column ">price</div>*/}
-                    {/*        <div className="grid-column ">status</div>*/}
-                    {/*    </div>*/}
-                    {/*    {*/}
-                    {/*        this.props.user.orders &&*/}
-                    {/*        this.props.user.orders.map ( order =>*/}
-                    {/*            {*/}
-                    {/*                return <GridRowOrder order={order} key={order._id + "o"}/>*/}
-                    {/*            }*/}
-                    {/*        )*/}
-                    {/*    }*/}
-                    {/*</div>*/}
                 </div>
-            </div>
-        );
+            </>
+        )
     }
 }
 

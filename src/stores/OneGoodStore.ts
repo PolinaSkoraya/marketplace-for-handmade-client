@@ -52,40 +52,18 @@ class OneGoodStore {
         }
     }
 
-    @observable goodName = "";
-    @observable description = "";
-    @observable price = 0;
-    @observable goodCategory = "";
-
-    @action
-    initUpdatingGood (good) {
-        this.goodName = good.name;
-        this.description = good.description;
-        this.price = good.price;
-        this.good.category = good.category;
-    }
-
     @action.bound
-    handleInputChange (event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-        this[name] = value;
-    }
-
-    @action.bound
-    async update(id) {
+    async update (id, goodName, description, price, category) {
         try {
             const newGood = {
-                name: this.goodName,
-                description: this.description,
-                price: this.price,
-                category: this.goodCategory
-            }
+                name: goodName,
+                description: description,
+                price: price,
+                category: category
+            };
             const responseGood = await updateGood(id, newGood);
             this.good = responseGood.data;
-
+            console.log("store update");
         } catch (error) {
             console.log(error);
         }
@@ -100,8 +78,6 @@ class OneGoodStore {
             console.log(error);
         }
     }
-
-
 
     @action.bound
     async addToLikedGoods() {

@@ -8,7 +8,7 @@
   flex-basis: 40%;
 }
 
-.links-circle {
+.linksCircle {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,17 +17,16 @@
   height: 200px;
   width: 200px;
   border-radius: 50%;
-
   z-index: 5;
 }
 
-.auth-link {
+.authLink {
   opacity: 1;
   font-size: $font-size-title;
   color: $color-basic-dark;
   padding-bottom: 20px;
 }
 
-.auth-link:hover {
+.authLink:hover {
   color: $color-secondary-light;
 }

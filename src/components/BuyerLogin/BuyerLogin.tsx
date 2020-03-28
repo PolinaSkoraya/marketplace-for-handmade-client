@@ -6,6 +6,9 @@ import {ROUTES} from "../../routes/routes";
 import {NavLink} from 'react-router-dom';
 import {FormattedMessage} from "react-intl";
 import MessageError from "../MessageError/MessageError";
+import Button from "../Button/Button";
+
+import {FaRegLemon, FaTrash, FaRegSquare, FaPen} from "react-icons/fa";
 
 @observer
 class BuyerLogin extends Component {
@@ -39,7 +42,7 @@ class BuyerLogin extends Component {
                             value={user.password}
                         />
 
-                        <input type="button" className="button-basic" onClick={() => user.login(user.email, user.password)} value="sign in"/>
+                        <Button onClick={() => user.login(user.email, user.password)}>sign in</Button>
 
                         <NavLink to={ROUTES.users.registration}>
                             <FormattedMessage id="register"/>

@@ -1,36 +1,36 @@
 @import "src/styles/variables";
 @import "src/styles/shared";
 
-.profile-container {
+.profileContainer {
   display: flex;
   flex-direction: column;
-  padding-top: 10vh;
+  padding: 10vh 5% 0 5%;
 }
 
-.profile-container__header {
+.profileContainer__header {
   display: flex;
   flex-direction: column;
   margin: 20px 20px;
 }
 
-.createGood-form {
+.createGoodForm {
   display: flex;
   flex-direction: column;
   @extend %center;
   width: 250px;
 }
 
-.input.createGood-form__input {
+.createGoodForm__input {
   margin-bottom: 10px;
   width: 100%;
 }
 
-.createGood-form__textarea {
+.createGoodForm__textarea {
   height: 80px;
   resize: none;
 }
 
-.success{
+.success {
   color: rgba(0, 0, 254, 0.66);
 }
 

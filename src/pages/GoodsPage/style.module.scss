@@ -1,0 +1,45 @@
+@import "src/styles/variables";
+@import "src/styles/shared";
+
+.goodsPage {
+  padding: 11vh 3% 0 3%;
+}
+
+.goodsPage__search {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.search {
+  position: relative;
+  margin: 0 30px;
+  width: 30vw;
+}
+
+.inputSearch {
+  width: 30vw;
+  text-align: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 11px;
+  left: 93%;
+  z-index: 10;
+  color: $color-secondary-medium;
+}
+
+.buttonCancel, .buttonSearch {
+  font-size: 22px;
+}
+
+.buttonCancel {
+  position: absolute;
+  top: 10px;
+  left: -25px;
+  box-shadow: $box-shadow-good;
+}

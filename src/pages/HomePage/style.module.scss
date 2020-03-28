@@ -5,6 +5,7 @@
   height: 100vh;
   position: relative;
   display: flex;
+  background-color: #fff;
 }
 
 .header::after{
@@ -30,18 +31,18 @@
   0%{
     background-image: url("../../static/images/header-home.jpg");
   }
-  25%{
+  33%{
     background-image: url("../../static/images/header-home-2.jpg");
   }
-  50%{
+  66%{
     background-image: url("../../static/images/header-home-3.jpg");
   }
-  750%{
+  100%{
     background-image: url("../../static/images/header-home-1.jpg");
   }
 }
 
-.main-photo:hover {
+.mainPhoto:hover {
   transition-property: opacity;
   transition-duration: .8s;
   opacity: 0.4;
@@ -50,13 +51,6 @@
 .goodsContainer{
   height: 500px;
   margin: 0 20px;
-}
-
-.header__info{
-  display: flex;
-  flex-basis: 40%;
-  justify-content: center;
-  align-items: center;
 }
 
 .header__text{
@@ -75,13 +69,12 @@
   }
 }
 
-.home-page__goods {
+.homePage__goods {
   margin-bottom: 20px;
 }
 
 .wrapper {
   height: 100vh;
-  //padding: 20px;
   background-color: $color-secondary-light;
   @extend %center;
   flex-direction: column;
@@ -89,8 +82,6 @@
 
 .poster {
   @extend %center;
-  //padding: 0 15px;
-  //padding: 0.6em 0.7em;
 }
 
 .info .info__img  {
@@ -126,15 +117,13 @@ Build the scene and rotate on hover
 
 .scene {
   width: 260px;
-  //height: 400px;
   margin: 0 45px;
-  //float: left;
   perspective: 1000px;
 }
 
 .movie {
   width: 260px;
-  height: 294px;
+  height: 296px;
   transform-style: preserve-3d;
   transform: translateZ(-130px);
   transition: transform 350ms;
@@ -151,7 +140,7 @@ Transform and style the two planes
 .movie .info {
   position: absolute;
   width: 260px;
-  height: 294px;
+  height: 296px;
   background-color: #fff;
   backface-visibility: hidden;
 }
@@ -160,7 +149,6 @@ Transform and style the two planes
   transform: translateZ(130px);
   background-size: cover;
   background-repeat: no-repeat;
-
 }
 
 .movie .info {
@@ -192,30 +180,10 @@ Shadow beneath the 3D object
 Movie information
 **************************************/
 
-.info header {
-  color: #FFF;
-  padding: 7px 10px;
-  font-weight: bold;
-  height: 195px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  text-shadow: 0 1px 1px rgba(0,0,0,1);
-}
-
-.info header h1 {
-  margin: 0 0 2px;
-  font-size: 1.4em;
-}
-
-.info header .rating {
-  border: 1px solid #FFF;
-  padding: 0 3px;
-}
-
 .info .info__inner {
   padding: 1.2em 1.4em;
   font-weight: 500;
-  color: #666;
+  color: #081924;
   line-height: 1.4em;
 }
 

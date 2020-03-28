@@ -2,7 +2,7 @@
 
 .profileContainer {
   display: flex;
-  padding-top: 9vh;
+  padding-top: 100px;
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
 }
@@ -16,10 +16,6 @@
 
 .profileContainer__main {
   flex-basis: 100%;
-}
-
-.basketContainer {
-
 }
 
 .basketContainer__cost {
@@ -50,7 +46,7 @@
 .sticky {
   background-color: $color-secondary-medium;
   position: sticky;
-  top: calc(9vh + 20px);
+  top: 80px;
 
   display: flex;
   flex-direction: column;
@@ -59,14 +55,12 @@
   height: 100px;
   width: 100px;
 
-  margin: 20px 20px 0 0;
   padding: 10px 0;
 
   border-radius: 20px;
   box-shadow: $box-shadow-good;
+
+  margin-left: -120px;
 }
 
-.profileContainer__link {
-
-}
 

@@ -1,9 +1,7 @@
-import './OrdersContainer.scss'
+import style from './style.module.scss';
 import React, {Component} from "react";
-import Good from "../Good/Good";
 import {observer} from "mobx-react";
 import {GoodInterface} from "../../stores/helpers/interfaces";
-import {CSSTransition, TransitionGroup} from "react-transition-group";
 import Order from "../Order/Order";
 
 export enum GoodsContainerPosition {
@@ -14,28 +12,35 @@ export enum GoodsContainerPosition {
     ordersSeller = "ORDERS_SELLER",
 }
 
-@observer
-class OrdersContainer extends Component <{ goods: GoodInterface[], position?: GoodsContainerPosition}> {
-    render () {
-        return (
-                <div className="ordersContainer">
-                    <div className="ordersContainer__title">
-                        ORDERS
-                    </div>
+interface Props {
+    goods: GoodInterface[],
+    position?: GoodsContainerPosition
+}
 
-                    <div className="ordersContainer__grid">
-                        {
-                            this.props.goods.map ( good =>
-                                <Order
-                                    key={good._id + good.idOrder}
-                                    good={good}
-                                    idSeller={good.idSeller}
-                                    position={this.props.position}
-                                />
-                            )
-                        }
-                    </div>
+@observer
+class OrdersContainer extends Component <Props> {
+    render () {
+        const {goods, position} = this.props;
+
+        return (
+            <div className={style.ordersContainer}>
+                <div className={style.ordersContainer__title}>
+                    ORDERS
                 </div>
+
+                <div className={style.ordersContainer__grid}>
+                    {
+                        goods.map ( good =>
+                            <Order
+                                key={good._id + good.idOrder}
+                                good={good}
+                                idSeller={good.idSeller}
+                                position={position}
+                            />
+                        )
+                    }
+                </div>
+            </div>
         )
     }
 }

@@ -3,7 +3,7 @@ import {instance} from '../http/instance';
 import {URLS} from '../http/urls';
 import {
     deleteGoodFromBasket, deleteOrders,
-    getBuyerById,
+    getUserById,
     getGoodsInBasket,
     getGoodsOfSeller,
     getLikedGoods, getSellerOrders,
@@ -126,7 +126,7 @@ class UserStore {
 
     @action.bound
     async initBasket () {
-        let responseBuyer = await getBuyerById(this.id);
+        let responseBuyer = await getUserById(this.id);
         this.basket = responseBuyer.data.basket;
 
         this.getGoods(); //get goods after getting the basket
@@ -146,7 +146,7 @@ class UserStore {
 
     @action.bound
     async initLikedGoods () {
-        let responseBuyer = await getBuyerById(this.id);
+        let responseBuyer = await getUserById(this.id);
         this.likedGoods = responseBuyer.data.likedGoods;
         this.setLikedGoods();
     }

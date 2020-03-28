@@ -1,90 +1,80 @@
-import './Navigation.scss'
+import style from './style.module.scss';
 import React, {Component} from "react";
-import {NavLink, Redirect} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {ROUTES} from "../../routes/routes";
 import { withRouter } from "react-router";
-
-import logo from "../../static/icons/diy.svg"
+import logo from "../../static/icons/diy.svg";
 import RootStore from "../../stores/RootStore";
 import {observer} from "mobx-react";
 import {getRole, Roles} from "../../stores/helpers/roles";
 import {FormattedMessage} from "react-intl";
-import {FaRegSquare, FaSignOutAlt} from "react-icons/fa";
-import SmallButton from "../SmallButton/SmallButton";
+import {FaSignOutAlt} from "react-icons/fa";
 import {FiShoppingCart} from "react-icons/fi";
+import Button from "../Button/Button";
 
 @observer
 class Navigation extends Component {
-
-    logOut (user) {
-        // this.props.history.push("/");
-        user.logOutUser();
+    async logOut (user) {
+        await user.logOutUser();
     }
 
     render () {
         const {user} = RootStore;
 
         return (
-            <div className='navigation'>
-                <div className='navigation__list'>
-                    <div className="navigation__links navigation__links--app">
-                        <NavLink to={ROUTES.root} className="navigation__link navigation__link--app">
-                            <img src={logo} alt="logo" className="navigation__image"/>
+            <div className={style.navigation}>
+                <div className={style.navigation__list}>
+                    <div className={style.navigation__links}>
+                        <NavLink to={ROUTES.root} className={style.navigation__link} >
+                            <img src={logo} alt="logo" className={style.navigation__image}/>
                         </NavLink>
 
-                        <NavLink to={ROUTES.goods.goods} className="navigation__link navigation__link--app">
+                        <NavLink to={ROUTES.goods.goods} className={style.navigation__link}>
                             <FormattedMessage id="goods"/>
                         </NavLink>
 
-                        <NavLink to={ROUTES.admin} className="navigation__link navigation__link--app">
+                        <NavLink to={ROUTES.admin} className={style.navigation__link}>
                             Admin
                         </NavLink>
                     </div>
 
                     { user.authenticated ? (
-                        <div className="navigation__links navigation__links--user">
+                        <div className={style.navigation__links}>
+                            <div className={style.navigation__userName}>{user.name}</div>
                             {
                                 getRole(Roles.seller) ?
-                                    <NavLink to={ROUTES.sellers.sellers} className="navigation__link navigation__link--user">
+                                    <NavLink to={ROUTES.sellers.sellers} className={style.navigation__link}>
                                         <FormattedMessage id="myShop"/>
                                     </NavLink>
                                     :
-                                    <NavLink to={ROUTES.sellers.sellers} className="navigation__link navigation__link--user">
+                                    <NavLink to={ROUTES.sellers.sellers} className={style.navigation__link}>
                                         <FormattedMessage id="startSelling"/>
                                     </NavLink>
                             }
-
-                            <NavLink to={ROUTES.users.users + user.id} className="navigation__link navigation__link--user">
-                                <button
-                                    id="basketButton"
-                                >
-                                    <FormattedMessage id="profile"/>
-                                </button>
-                                <div className="basket-buttons">
-                                    <SmallButton htmlFor="basketButton" icon={user.goodsInBasket.length} style={{fontSize: "15px", backgroundColor: "rgba(75,177,218,0.22)"}}/>
-                                    <SmallButton htmlFor="basketButton" icon={<FiShoppingCart/>} style={{fontSize: "20px"}}/>
+                            <NavLink to={ROUTES.users.users + user.id} className={style.navigation__link}>
+                                <div className={style.basketButtons}>
+                                    {user.goodsInBasket.length}
+                                    <FiShoppingCart/>
                                 </div>
                             </NavLink>
 
-                            <div className="navigation__link navigation__link--user">
-                                <button
+                            <div className={style.navigation__link}>
+                                <Button
+                                    styleType="medium"
                                     id="logOutButton"
                                     onClick={() => this.logOut(user)}
                                 >
-                                    log out
-                                </button>
-                                <SmallButton htmlFor="logOutButton" icon={<FaSignOutAlt/>} style={{fontSize: "20px"}}/>
+                                    <FaSignOutAlt/>
+                                </Button>
                             </div>
-
                         </div>
                     ) : (
-                        <div className="navigation__links navigation__links--user">
-                            <NavLink to={ROUTES.users.login} className="navigation__link navigation__link--user">
+                        <div className={style.navigation__link}>
+                            <NavLink to={ROUTES.users.login} className={style.navigation__link}>
                                 <FormattedMessage id="signIn"/>
                             </NavLink>
                         </div>
                     ) }
-
                 </div>
             </div>
         );

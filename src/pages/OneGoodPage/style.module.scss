@@ -1,0 +1,197 @@
+@import "src/styles/variables";
+@import "src/styles/shared";
+
+.goodPage {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8vh;
+  text-align: left;
+}
+
+.goodPage__title {
+  font-size: $font-size-title;
+  font-weight: 700;
+  padding-bottom: 25px;
+}
+
+.goodPage__info {
+  display: flex;
+  height: 92vh;
+
+}
+
+.goodPage__infoLeft {
+  flex-basis: 55%;
+  background-color: rgba(46, 107, 134, 0.8);
+  @extend %center;
+
+}
+
+.image__div {
+  box-shadow: $box-shadow-good;
+  border-radius: 20px;
+  width: 30vw;
+  height: 30vw;
+
+  position: relative;
+}
+
+.buttonLike__div {
+  position: absolute;
+  top: -8px;
+  left: 95%;
+}
+
+.goodPage__infoRight {
+  display: flex;
+  @extend  %center;
+  flex-basis: 45%;
+
+  background-color: rgba(47, 111, 137, 0.21);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.goodPage__image {
+  border-radius: 20px;
+  object-fit: cover;
+  width: 30vw;
+  height: 30vw;
+}
+
+.goodPage__price {
+  font-size: $font-size-small;
+  font-weight: 500;
+}
+
+.priceNumber {
+  font-size: $font-size-title;
+  padding-top: 10px;
+  padding-bottom: 25px;
+}
+
+.goodPage__buttons {
+  display: flex;
+  padding-bottom: 25px;
+  align-items: center;
+}
+
+.buttonAddToBasket {
+  width: 150px;
+  height: 60px;
+  border-radius: 20px;
+}
+
+.buttonLike {
+  border: none;
+  color: white;
+  width: 30px;
+  height:  30px;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+.buttonLike:hover {
+  transition-property: background-color;
+  transition-duration: .2s;
+  color: white;
+}
+
+.buttonLike:active {
+  animation-name: box-shadow-animation;
+  animation-duration: .5s;
+}
+
+.buttonLike_liked {
+  background-color: $color-button-liked;
+}
+
+.buttonLike_liked:hover {
+  background-color: $color-secondary-medium;
+}
+
+.buttonLike_unliked {
+  background-color: $color-secondary-medium;
+}
+
+.buttonLike_unliked:hover {
+  transition-property: background-color;
+  transition-duration: .2s;
+  background-color: $color-button-liked;
+  color: white;
+}
+
+.goodPage__description {
+  display: flex;
+  flex-direction: column;
+  @extend %center;
+
+  padding: 60px 40px;
+}
+
+.goodPage__descriptionTitle {
+  font-size: $font-size-title;
+}
+
+.goodPage__descriptionText {
+  width: 50%;
+  padding: 15px 0;
+}
+
+.goodPage__descriptionCategory {
+  padding: 15px 0;
+}
+
+.goodPage__shopInfo {
+  display: flex;
+  background-color: $color-basic-light;
+  border-radius: 10px;
+  padding: 15px 10px;
+  width: 250px;
+}
+
+.shopInfo__image {
+  height: 20%;
+  width: 20%;
+  margin-right: 20px;
+}
+
+.good__shopName {
+  color: $color-basic-dark;
+}
+
+.good__shopName:hover {
+  color: $color-secondary-light;
+}
+
+.shopInfo__description {
+  padding: 5px 0;
+}
+
+@keyframes box-shadow-animation {
+  from {box-shadow: rgba(80, 57, 76, 0.4) 0 0 0 3px;}
+  to {
+    box-shadow: rgba(80, 57, 76, 0.1) 0 0 10px 5px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .goodPage__info {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .goodPage__infoLeft {
+    margin: 0;
+    padding: 50px 0;
+  }
+
+  .goodPage__infoRight {
+    padding: 40px;
+  }
+}
+

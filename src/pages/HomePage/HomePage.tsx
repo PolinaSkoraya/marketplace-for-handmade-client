@@ -1,20 +1,13 @@
 import React, {Component} from 'react';
-import './HomePage.scss';
+import style from './style.module.scss';
 import GoodsStore from "../../stores/GoodsStore";
-import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
 import AuthLinks from "../../components/AuthLinks/AuthLinks";
 import RootStore from "../../stores/RootStore";
 import {NavLink} from 'react-router-dom';
-import icon1 from "../../static/icons/svg/026-handmade.svg";
-import icon2 from "../../static/icons/svg/010-ball-of-wool.svg";
-import icon3 from "../../static/icons/svg/014-button-1.svg";
 import {action, observable} from "mobx";
-import Pagination from "../../components/Pagination/Pagination";
 import Good from "../../components/Good/Good";
-import {STATIC_IMAGES} from "../../http/urls";
 import {ROUTES} from "../../routes/routes";
-
 
 @observer
 class HomePage extends Component{
@@ -49,35 +42,23 @@ class HomePage extends Component{
 
     render () {
         const {user} = RootStore;
-        console.log(this.numberOfPages);
-        return(
-            <>
-                <div className="header">
-                    { user.authenticated ? (
-                        <>
-                            <div className="header__info">
-                                {/*<div className="header__text">*/}
-                                {/*    <FormattedMessage id="hello" values={{name: user.name}}/>*/}
-                                {/*</div>*/}
-                            </div>
 
-                        </>
-                    ) : (
-                        <AuthLinks/>
-                    ) }
+        return (
+            <>
+                <div className={style.header}>
+                    { !user.authenticated && <AuthLinks/> }
                 </div>
 
-
-                <div className="wrapper">
-                    <div className="wrapper__title">Top 3 of marketplace</div>
-                        <ul className="stage">
+                <div className={style.wrapper}>
+                    <div className={style.wrapper__title}>Top 3 of marketplace</div>
+                        <ul className={style.stage}>
                             {
-                                this.store.goods[0]?
-                                this.store.goods.slice(0, 3).map(good =>
-                                    <li className="scene">
-                                        <div className="movie" onClick={ () => { return true } }>
-                                            <div className="poster">
-                                                <div className="poster__inner">
+                                this.store.goods[0] &&
+                                this.store.goods.slice(0, 3).map( good =>
+                                    <li className={style.scene} key={good._id}>
+                                        <div className={style.movie} onClick={ () => { return true } }>
+                                            <div className={style.poster}>
+                                                <div className={style.poster__inner}>
                                                     <Good
                                                         key={0}
                                                         good={good}
@@ -87,14 +68,12 @@ class HomePage extends Component{
                                                 </div>
                                             </div>
 
-                                            <div className="info">
+                                            <div className={style.info}>
                                                 <NavLink
-                                                    className="good__link-image"
                                                     to={ROUTES.goods.goods+ good._id}
                                                 >
-                                                    <div className="info__inner">
-                                                        <p className="info__name">{good.name}</p>
-                                                        {/*<img className="info__img" src={STATIC_IMAGES + good.image } alt="image"/>*/}
+                                                    <div className={style.info__inner}>
+                                                        <p className={style.info__name}>{good.name}</p>
                                                         <p>{good.description}</p>
                                                     </div>
                                                 </NavLink>
@@ -102,22 +81,9 @@ class HomePage extends Component{
                                         </div>
                                     </li>
                                 )
-                                :
-                                <></>
                             }
                         </ul>
                 </div>
-
-                {/*<div className="home-page__goods">*/}
-                {/*    <GoodsContainer goodsContainerTitle="All goods" goods={this.store.goods}/>*/}
-                {/*    <Pagination*/}
-                {/*        currentPage={this.currentPage}*/}
-                {/*        nextPage={this.nextPage}*/}
-                {/*        numberOfPages={this.numberOfPages}*/}
-                {/*        previousPage={this.previousPage}*/}
-                {/*        setPage={this.setPage}*/}
-                {/*    />*/}
-                {/*</div>*/}
             </>
         )
     }

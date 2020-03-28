@@ -40,7 +40,7 @@ export function postGood(good) {
     })
 }
 
-export function getBuyerById (id) {
+export function getUserById(id) {
     return instance.get(URLS.users + id);
 }
 
@@ -157,7 +157,7 @@ export function updateOrderState(idOrder) {
 }
 
 export function deleteOrders(idOrder) {
-    return instance.delete("/orders/" + idOrder);
+    return instance.post("/orders/" + idOrder);
 }
 
 export function postShop(seller) {

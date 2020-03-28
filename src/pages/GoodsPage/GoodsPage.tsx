@@ -1,4 +1,4 @@
-import "./GoodsPage.scss"
+import style from "./style.module.scss"
 import React, {Component} from "react";
 import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
@@ -6,14 +6,15 @@ import GoodsStore from "../../stores/GoodsStore";
 import RootStore from "../../stores/RootStore";
 import {action, observable} from "mobx";
 import Pagination from "../../components/Pagination/Pagination";
-import SmallButton from "../../components/SmallButton/SmallButton";
-
+import { IconContext } from "react-icons";
 import {FiSearch} from "react-icons/fi";
 import {MdCancel} from "react-icons/md";
 import {goodsCategories} from "../../stores/helpers/interfaces";
+import Button from "../../components/Button/Button";
+import classNames from "classnames";
 
 @observer
-class GoodsPage extends Component{
+class GoodsPage extends Component {
     store: GoodsStore = new GoodsStore();
     @observable currentPage = 1;
     @observable numberOfPages = 0;
@@ -44,68 +45,68 @@ class GoodsPage extends Component{
     }
 
     @action.bound
-    handleInputChange (event) {
+    async handleInputChange (event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
 
         this[name] = value;
         if (name === "searchName") {
-            this.store.searchByName(this.searchName);
+            await this.store.searchByName(this.searchName);
             this.searchCategory = this.defaultSelect;
         }
         if (name === "searchCategory") {
-            this.store.searchByCategory(this.searchCategory);
+            await this.store.searchByCategory(this.searchCategory);
             this.searchName = "";
         }
     }
 
     @action
-    resetGoods (page) {
+    async resetGoods (page) {
         this.searchName = "";
         this.searchCategory = this.defaultSelect;
-        this.store.loadGoods(page);
+        await this.store.loadGoods(page);
     }
 
     render(){
         const {user} = RootStore;
 
-        const iconStyle = {fontSize: "20px"};
-        const labelStyle = {height: "30px", width: "30px"};
-
         return (
             <>
-                <div className="goods-page">
-                    <div className="goods-page__search">
-                        {
-                            (this.searchName || this.searchCategory !== this.defaultSelect) && (
-                                <>
-                                    <button id="button-cancel-search" onClick={() => this.resetGoods(this.currentPage)}>cancel</button>
-                                    <SmallButton labelStyle={labelStyle} style={{...iconStyle}} htmlFor="button-cancel-search" icon={<MdCancel/>}/>
-                                </>
+                <div className={style.goodsPage}>
+                    <div className={style.goodsPage__search}>
+                        <div className={style.search}>
+                            {
+                                (this.searchName || this.searchCategory !== this.defaultSelect) && (
+                                    <>
+                                        <Button
+                                            styleType="small"
+                                            className={style.buttonCancel}
+                                            onClick={() => this.resetGoods(this.currentPage)}
+                                        >
+                                            <MdCancel/>
+                                        </Button>
+                                    </>
 
-                            )
-                        }
+                                )
+                            }
+                            <IconContext.Provider value={{className: style.searchIcon }}>
+                                    <FiSearch/>
+                            </IconContext.Provider>
 
-                        <div className="search-div">
-                            <i className="icon-search">
-                                <SmallButton labelStyle={labelStyle} style={iconStyle} htmlFor="button-search" icon={<FiSearch/>}/>
-                            </i>
                             <input
                                 type="text"
                                 name="searchName"
                                 placeholder="Search..."
                                 onChange={this.handleInputChange}
-                                className="input input-search"
+                                className={classNames("input", style.inputSearch)}
                                 value={this.searchName}
                             >
                             </input>
-
-                            <button  id="button-search" onClick={()=>this.store.searchByName(this.searchName)}/>
                         </div>
 
                         <select
-                            className = 'input select-category'
+                            className="input"
                             name="searchCategory"
                             onChange={this.handleInputChange}
                             value = {this.searchCategory}
@@ -118,15 +119,7 @@ class GoodsPage extends Component{
                         </select>
                     </div>
 
-                    {/*<CSSTransition*/}
-                    {/*    in={true}*/}
-                    {/*    appear={true}*/}
-                    {/*    exit={true}*/}
-                    {/*    timeout={3000}*/}
-                    {/*    classNames="fade"*/}
-                    {/*>*/}
-                        <GoodsContainer goodsContainerTitle="All Goods" goods={this.store.goods}/>
-                    {/*</CSSTransition>*/}
+                    <GoodsContainer goodsContainerTitle="All Goods" goods={this.store.goods}/>
 
                     <Pagination
                         currentPage={this.currentPage}
@@ -141,4 +134,4 @@ class GoodsPage extends Component{
     }
 }
 
-export {GoodsPage};
+export default GoodsPage;

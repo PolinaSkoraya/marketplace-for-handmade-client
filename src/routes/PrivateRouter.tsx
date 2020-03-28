@@ -32,7 +32,7 @@ class PrivateRouter extends React.Component<PrivateRouterProps> {
             <>
                 <Route
                     {...rest}
-                    render={props =>
+                    render = { props =>
                         access ? (
                             <Component   {...props} /> //key={key}
                         ) : (

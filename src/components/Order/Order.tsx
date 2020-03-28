@@ -1,4 +1,4 @@
-import './Order.scss'
+import style from './style.module.scss';
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import {observer} from 'mobx-react';
@@ -6,23 +6,24 @@ import RootStore from "../../stores/RootStore";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {action, observable} from "mobx";
 import {GoodsContainerPosition} from "../GoodsContainer/GoodsContainer";
-import SmallButton from "../SmallButton/SmallButton";
 import {FaRegSquare} from "react-icons/fa";
 import {MdDone} from "react-icons/md";
 import {ROUTES} from "../../routes/routes";
 import {STATIC_IMAGES} from "../../http/urls";
-import {FormattedMessage} from "react-intl";
 import {GoodInterface} from "../../stores/helpers/interfaces";
+import Button from "../Button/Button";
+import classNames from 'classnames';
+
+interface Props {
+    good: GoodInterface,
+    idSeller: string,
+    position?: GoodsContainerPosition
+}
 
 @observer
-class Order extends Component<{good: GoodInterface, idSeller: string, position?: GoodsContainerPosition}> {
+class Order extends Component<Props> {
     store = new OneGoodStore();
     @observable sellerName = "";
-
-    constructor (props) {
-        super(props);
-        this.store.initUpdatingGood(this.props.good);
-    }
 
     componentDidMount () : void {
         this.store.getShopName(this.props.idSeller)
@@ -31,70 +32,72 @@ class Order extends Component<{good: GoodInterface, idSeller: string, position?:
             );
     }
 
-    @action.bound
-    update (id) {
-        this.store.update(id);
-    }
-
     @action
-    deleteGood(user, id){
-        user.removeFromBasket(this.props.good._id);
+    async doneOrder(user, good) {
+        await user.deleteOrder(good.idOrder);
     }
 
     render () {
         const {user} = RootStore;
+        const {idSeller, good, position} =this.props;
 
         return(
-                <div className="order"  id = {this.props.good._id + this.props.good.idOrder}>
-                    <div className="order__image">
-                        <img src={STATIC_IMAGES + this.props.good.image } alt="knitting"/>
+                <div className={style.order}  id = {good._id + good.idOrder}>
+                    <div className={style.order__image}>
+                        <img src={STATIC_IMAGES + good.image } alt="knitting"/>
                     </div>
 
-                    <div className="order__about">
+                    <div className={style.order__about}>
                         <NavLink
-                            to={ROUTES.goods.goods + this.props.good._id}
-                            className="order__title order__link"
+                            to={ROUTES.goods.goods + good._id}
+                            className={classNames(style.order__title, style.order__link)}
                         >
-                            {this.props.good.name}
+                            {good.name}
                         </NavLink>
 
-                        <div className="order__info">
+                        <div className={style.order__info}>
                             <NavLink
-                                to={ROUTES.sellers.sellers + this.props.idSeller}
-                                className="order__shop-name order__link"
+                                to={ROUTES.sellers.sellers + idSeller}
+                                className={style.order__link}
                             >
                                 {this.sellerName}
                             </NavLink>
 
-                            <div className="order__price">{this.props.good.price}$</div>
+                            <div className={style.orderPrice}>{good.price}$</div>
 
                             <div className="order__buttons">
-                                <p>status: {this.props.good.status}</p>
+                                <p>status: {good.status}</p>
                                 {
-                                    this.props.good.status === "accepted" &&
-                                    this.props.position === GoodsContainerPosition.ordersBuyer &&
-                                    <div className="order__buttons-done">
-                                        <button id="button-done-order" onClick={ () => {user.deleteOrder(this.props.good.idOrder)}}/>
+                                    good.status === "accepted" &&
+                                    position === GoodsContainerPosition.ordersBuyer &&
+                                    <div className={style.order__buttonsDone}>
                                         <p>done order</p>
-                                        <SmallButton style={{color: "black"}} htmlFor="button-done-order" icon={<MdDone/>}/>
+                                        <Button
+                                            styleType="small"
+                                            id="button-done-order"
+                                            className="addOrderButton"
+                                            onClick={ () => user.deleteOrder(good.idOrder)}
+                                        >
+                                            <MdDone/>
+                                        </Button>
                                     </div>
                                 }
                                 {
-                                    this.props.good.status === "processing" &&
-                                    this.props.position === GoodsContainerPosition.ordersSeller &&
+                                    good.status === "processing" &&
+                                    position === GoodsContainerPosition.ordersSeller &&
                                     <>
-                                        <button
-                                            id={this.props.good.idOrder}
+                                        <Button
+                                            styleType="small"
+                                            id={good.idOrder}
                                             className="updateOrderState"
-                                            onClick={() => user.acceptOrder(this.props.good.idOrder)}
+                                            onClick={() => user.acceptOrder(good.idOrder)}
                                         >
-                                        </button>
-                                        <SmallButton htmlFor={this.props.good.idOrder as string} icon={<FaRegSquare/>}/>
+                                            <FaRegSquare/>
+                                        </Button>
                                     </>
                                 }
                             </div>
                         </div>
-
                     </div>
                 </div>
         )

@@ -1,12 +1,13 @@
 @import 'src/styles/variables';
 
-.navigation__list{
+.navigation__list {
   display: flex;
   background-color: $color-basic-light;
-  height: 9vh;
+  height: 8%;
   justify-content: space-between;
   align-items: center;
   position: fixed;
+  left: 0;
   width: 100%;
   z-index: 10;
   box-shadow: $box-shadow-good;
@@ -35,14 +36,12 @@
   width: auto;
 }
 
-#logOutButton, #basketButton {
-  display: none;
-}
-
-.basket-buttons {
+.basketButtons {
   display: flex;
 }
 
-.basket-buttons {
-
+.navigation__userName {
+  font-size: $font-size-medium;
+  font-weight: 500;
+  margin-right: 40px;
 }

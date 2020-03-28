@@ -10,16 +10,10 @@
   background-color: white;
 
   border-radius: 11px;
-  //background: #efefef;
-  //box-shadow:  5px 5px 6px #dcdcdc,
-  //-5px -5px 6px #ffffff;
 }
 
 .good:hover{
   box-shadow: $box-shadow-good-hover;
-
-  //transform: scale(1.1, 1.1);
-  //transition: transform 300ms;
 }
 
 .good:active {
@@ -40,7 +34,7 @@
   margin:0 10px;
 }
 
-.good__link-image {
+.good__linkImage {
   display: inline-block;
 }
 
@@ -84,31 +78,27 @@
   text-align: left;
 }
 
-.good__buttons{
+.good__buttons {
   display: flex;
   margin-top: -5px;
   padding-bottom: 3px;
   min-height: 5px;
 }
 
-.removeButton, #button-done-order, .addOrderButton, .updateOrderState, .updateGoodButton {
-  display: none;
-}
-
-.updateGood-form {
+.updateGoodForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  width: 320px;
 }
 
-.input.updateGood-form__input {
+.updateGoodForm__input {
   margin-bottom: 10px;
   width: 80%;
 }
 
-.updateGood-form__textarea {
+.updateGoodForm__textarea {
   height: 120px;
   resize: none;
 }
