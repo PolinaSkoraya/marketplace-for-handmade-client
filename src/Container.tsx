@@ -37,28 +37,40 @@ function Container({ location }) {
                 <CSSTransition
                     key={location.key}
                     timeout={{ enter: 300, exit: 300 }}
-                    classNames={'fade'}
+                    classNames={'page'}
                 >
                     <section className="route-section">
-                        <Switch>
+                        <Switch location={location}>
                             {
                                 routes.map(({ path, Component }) => (
                                     <Route key={path} exact path={path}>
-                                        {({ match }) => (
                                             <Component />
-                                        )}
                                     </Route>
                                 ))
+
                             }
                             {
                                 privateRoutes.map(({ path, roles, Component }) => (
                                     <PrivateRouter key={path} exact path={path} component={Component} roles={roles}/>
                                 ))
                             }
+                            <Route path="*">
+                                <NoMatch location={location}/>
+                            </Route>
                         </Switch>
                     </section>
                 </CSSTransition>
             </TransitionGroup>
+        </div>
+    );
+}
+
+function NoMatch ({location}) {
+    return (
+        <div style={{height: "550px", backgroundColor: "white", paddingTop: "100px"}}>
+            <h3>
+                No match for <code>{location.pathname}</code>
+            </h3>
         </div>
     );
 }

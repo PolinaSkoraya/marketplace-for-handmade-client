@@ -11,8 +11,13 @@
   "register": "Зарегистрироваться",
   "likes": "Лайки: {likes}",
   "myShop": "Мой магазин",
-  "startSelling": "Начать продавать",
+  "startSelling": "Стать продавцом",
   "goods": "Товары",
   "profile": "Профиль",
-  "category": "Категория: "
+  "category": "Категория: ",
+  "orders": "Заказы",
+  "acceptedOrders": "Подтвержденные заказы",
+  "processingOrders": "Заказы для подтверждения",
+  "deleteUser": "удалить пользователя",
+  "shopInfo": "О магазине"
 }

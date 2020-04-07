@@ -32,7 +32,7 @@ class BuyerPage extends Component {
         return (
             <div className={styles.profileContainer}>
                 <div className={styles.profileContainer__aside}>
-                    <div className={styles.sticky}>
+                    <div className={styles.menu}>
                         <a className={styles.profileContainer__link} href="#basket">
                             basket
                         </a>

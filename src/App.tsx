@@ -1,6 +1,5 @@
 import React, {Component, Suspense, lazy} from 'react';
 import './App.scss';
-import './styles/reset.scss'
 
 import {BrowserRouter} from 'react-router-dom'
 import Navigation from "./components/Navigation/Navigation";
@@ -13,7 +12,7 @@ import Container from "./Container";
 
 @observer
 class App extends Component {
-    async componentDidMount() {
+    async componentDidMount () {
         await RootStore.init();
     }
 

@@ -5,6 +5,7 @@ import React, {Component} from "react";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {action, observable} from "mobx";
 import classNames from 'classnames';
+import Button from "../Button/Button";
 
 interface Props {
     good: GoodInterface
@@ -71,7 +72,7 @@ class UpdateGoodForm extends Component<Props> {
                     <option value={goodsCategories.toys}>toys</option>
                 </select>
 
-                <button onClick={() => this.update(this.props.good._id, this.goodName, this.description, this.price, this.goodCategory)} className="button-basic">Update good</button>
+                <Button type="submit" onClick={() => this.update(this.props.good._id, this.goodName, this.description, this.price, this.goodCategory)} className="button-basic">Update good</Button>
             </form>
         )
     }

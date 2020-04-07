@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import {action} from "mobx";
 import {deleteUserById} from "../../http/services";
 import style from "./style.module.scss";
+import {FormattedMessage} from "react-intl";
 
 @observer
 class GridRowUser  extends Component<{user: any}> {
@@ -14,10 +15,14 @@ class GridRowUser  extends Component<{user: any}> {
     render () {
         return (
             <div className={style.gridRow}>
-                <div className="grid-column grid-column-0"><button onClick={() => this.deleteUser(this.props.user._id)}>delete user by id</button></div>
+                <div className="grid-column grid-column-0">
+                    <button onClick={() => this.deleteUser(this.props.user._id)}>
+                        <FormattedMessage id={"deleteUser"}/>
+                    </button>
+                </div>
                 <div className="grid-column grid-column-1">{this.props.user.name}</div>
                 <div className="grid-column grid-column-2">{this.props.user.email}</div>
-                <div className="grid-column grid-column-3">{this.props.user.roles.sort().join(', ')}</div>
+                <div className="grid-column grid-column-3">{this.props.user.roles.join(', ')}</div>
                 <div className="grid-column grid-column-4">
                     <div>
                         {

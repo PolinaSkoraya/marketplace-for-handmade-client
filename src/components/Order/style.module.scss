@@ -27,12 +27,14 @@
 .order__info {
   display: flex;
   flex-direction: column;
-
+  font-size: $font-size-medium;
+  line-height: 1.5;
 }
 
 .order__title {
   font-size: $font-size-medium;
   font-weight: 500;
+  line-height: 2;
 }
 
 .order__link {

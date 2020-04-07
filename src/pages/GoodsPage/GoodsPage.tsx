@@ -87,10 +87,9 @@ class GoodsPage extends Component {
                                             <MdCancel/>
                                         </Button>
                                     </>
-
                                 )
                             }
-                            <IconContext.Provider value={{className: style.searchIcon }}>
+                            <IconContext.Provider value={{className: style.searchIcon}}>
                                     <FiSearch/>
                             </IconContext.Provider>
 

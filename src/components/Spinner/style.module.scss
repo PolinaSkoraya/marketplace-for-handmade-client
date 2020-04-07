@@ -30,8 +30,8 @@
 }
 
 .circle, .line {
-  width: 200px;
-  height: 200px;
+  width: 170px;
+  height: 170px;
   border: 3px solid $color-basic-medium;
   border-radius: 50%;
 }
@@ -39,7 +39,7 @@
 .circle {
   position: relative;
   transform-style: preserve-3d;
-  animation: spinn 6s infinite linear;
+  animation: spinn 5s infinite linear;
 }
 
 .line {

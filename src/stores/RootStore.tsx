@@ -11,7 +11,7 @@ class RootStore {
     @action
     init () {
         this.isLoading = false;
-        // setTimeout(() => this.isLoading = false, 100);
+        // setTimeout(() => this.isLoading = false, 3000);
     }
 }
 

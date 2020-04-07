@@ -26,7 +26,6 @@ class Admin extends Component {
         this.goods = responseGoods.data;
         this.users = responseUsers.data;
         this.sellers = responseSellers.data;
-        console.log(this.sellers);
         await Promise.all (
             this.users.map(async user => {
                 const orders = await getUserOrders(user._id);

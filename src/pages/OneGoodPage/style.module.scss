@@ -11,7 +11,7 @@
 .goodPage__title {
   font-size: $font-size-title;
   font-weight: 700;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 
 .goodPage__info {
@@ -34,6 +34,7 @@
   height: 30vw;
 
   position: relative;
+  margin-right: 40px;
 }
 
 .buttonLike__div {
@@ -64,14 +65,17 @@
 }
 
 .goodPage__price {
+  display: flex;
   font-size: $font-size-small;
   font-weight: 500;
+  padding-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .priceNumber {
+  padding-left: 10px;
   font-size: $font-size-title;
-  padding-top: 10px;
-  padding-bottom: 25px;
 }
 
 .goodPage__buttons {
@@ -82,8 +86,9 @@
 
 .buttonAddToBasket {
   width: 150px;
-  height: 60px;
-  border-radius: 20px;
+  height: 55px;
+  border-radius: 50px;
+  background-color: lighten($color-basic-medium, 10%);
 }
 
 .buttonLike {
@@ -138,8 +143,10 @@
 }
 
 .goodPage__descriptionText {
+  line-height: 1.5;
   width: 50%;
   padding: 15px 0;
+  font-size: $font-size-medium;
 }
 
 .goodPage__descriptionCategory {

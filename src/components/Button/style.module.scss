@@ -25,6 +25,7 @@
     &:hover:enabled {
       background: $color-basic-dark;
       box-shadow: $box-shadow-good-hover;
+      transition: background-color 200ms;
     }
 
     &:active:enabled {
@@ -53,6 +54,7 @@
     &:hover:enabled {
       color: $color-secondary-light;
       background-color: $color-basic-light;
+      transition: background-color 250ms;
     }
 
     &:active:enabled {

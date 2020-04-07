@@ -14,7 +14,6 @@ interface Props {
     setPage
 }
 
-
 @observer
 class Pagination extends Component<Props> {
     @observable array: number[] = [];
@@ -38,9 +37,6 @@ class Pagination extends Component<Props> {
             nextPage,
             setPage
         } = this.props;
-
-        console.log(numberOfPages);
-        console.log(currentPage);
 
         return (
             <div className={style.pagination}>

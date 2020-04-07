@@ -18,9 +18,8 @@ interface PrivateRouterProps {
 
 @observer
 class PrivateRouter extends React.Component<PrivateRouterProps> {
-    render() {
-        console.log(this.props);
 
+    render() {
         const { component: Component, roles, ...rest } = this.props;
         // const key =
         //     computedMatch && computedMatch.params && computedMatch.params.id;

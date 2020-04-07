@@ -24,13 +24,13 @@
 
 .page-enter {
   opacity: 0;
-  transform: scale(1.1); //
+  transform: scale(1); //
 }
 
 .page-enter-active {
   opacity: 1;
   transform: scale(1);
-  transition: opacity 2000ms, transform 2000ms;
+  transition: opacity 300ms, transform 300ms;
 }
 
 .page-exit {
@@ -40,24 +40,24 @@
 
 .page-exit-active {
   opacity: 0;
-  transform: scale(0.9); //
-  transition: opacity 2000ms, transform 2000ms;
+  transform: scale(.9); //
+  transition: opacity 300ms, transform 300ms;
 }
 
 //****************************************************
 
-.fade-enter {
+.fadePage-enter {
   opacity: 0;
 }
-.fade-enter.fade-enter-active {
+.fadePage-enter.fadePage-enter-active {
   opacity: 1;
   transition: opacity 300ms ease-in;
 }
-.fade-exit {
+.fadePage-exit {
   opacity: 1;
 }
 
-.fade-exit.fade-exit-active {
+.fadePage-exit.fadePage-exit-active {
   opacity: 0;
   transition: opacity 300ms ease-in;
 }

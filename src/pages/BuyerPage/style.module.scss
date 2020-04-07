@@ -2,7 +2,7 @@
 
 .profileContainer {
   display: flex;
-  padding-top: 100px;
+  padding-top: 7vh;
   background-size: 60px 60px;
   background-position: 0 0, 30px 30px;
 }
@@ -43,10 +43,10 @@
   width: auto;
 }
 
-.sticky {
+.menu {
   background-color: $color-secondary-medium;
   position: sticky;
-  top: 80px;
+  top: 50px;
 
   display: flex;
   flex-direction: column;
@@ -55,12 +55,17 @@
   height: 100px;
   width: 100px;
 
+  margin-top: 20%;
+  margin-right: 15%;
   padding: 10px 0;
 
   border-radius: 20px;
   box-shadow: $box-shadow-good;
+}
 
-  margin-left: -120px;
+.profileContainer__link:hover {
+  color: $color-secondary-light;
+  transition: color 250ms;
 }
 
 

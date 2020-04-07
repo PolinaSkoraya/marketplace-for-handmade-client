@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: column;
   padding: 10vh 5% 0 5%;
+
+  position: relative;
 }
 
 .profileContainer__header {
@@ -13,12 +15,43 @@
   margin: 20px 20px;
 }
 
+.profileContainer__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .createGoodForm {
   display: flex;
   flex-direction: column;
   @extend %center;
-  width: 250px;
+  width: 300px;
+  background-color: $color-secondary-light;
+  box-shadow: $box-shadow-good;
+  border-radius: 20px;
+  padding: 30px;
+
+  transform: translateX(-100%);
+  position: absolute;
+  top: 12vh;
+  left: 0;
+  opacity: 0.5;
+
+  transition: left 500ms, opacity 200ms;
 }
+
+.buttonShowModal {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.createGoodForm__show {
+  left: 340px;
+  opacity: 1;
+  transition: left 500ms, opacity 200ms;
+}
+
 
 .createGoodForm__input {
   margin-bottom: 10px;
@@ -30,7 +63,21 @@
   resize: none;
 }
 
+.createGoodForm__buttonClose {
+  position: absolute;
+  top: 12px;
+  left: 265px;
+  font-size: 22px;
+}
+
 .success {
   color: rgba(0, 0, 254, 0.66);
+}
+
+.profileContainer__title {
+  font-size: $font-size-title;
+  font-weight: 500;
+  padding-left: 80px;
+  margin: 0 auto;
 }
 

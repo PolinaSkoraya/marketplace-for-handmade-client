@@ -53,7 +53,7 @@ class HomePage extends Component{
                     <div className={style.wrapper__title}>Top 3 of marketplace</div>
                         <ul className={style.stage}>
                             {
-                                this.store.goods[0] &&
+                                this.store.goods &&
                                 this.store.goods.slice(0, 3).map( good =>
                                     <li className={style.scene} key={good._id}>
                                         <div className={style.movie} onClick={ () => { return true } }>

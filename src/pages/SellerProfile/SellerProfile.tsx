@@ -10,9 +10,26 @@ import {ROUTES} from "../../routes/routes";
 import {NavLink} from 'react-router-dom';
 import Button from "../../components/Button/Button";
 import classNames from "classnames";
+import {action, observable} from "mobx";
+import {MdCancel} from "react-icons/md";
+import {FormattedMessage} from "react-intl";
 
 @observer
 class SellerProfile extends Component {
+    @observable isShowModal = false;
+
+    @action.bound
+    toggleForm () {
+        console.log(this.isShowModal, "showModal");
+        this.isShowModal = !this.isShowModal;
+    }
+
+    @action.bound
+    async onCreateGood (user) {
+        this.isShowModal = !this.isShowModal;
+        await user.createGood();
+    }
+
     render() {
         const {user} = RootStore;
 
@@ -21,16 +38,23 @@ class SellerProfile extends Component {
                 {
                     getRole(Roles.seller) ?
                         <div className={style.profileContainer__header}>
-                            <div className="profile-container__info">
+                            <div className={style.profileContainer__info}>
                                 <NavLink
                                     to={ROUTES.sellers.sellers + user.seller._id}
-                                    className="good__shop-name good__link"
+                                    className={style.profileContainer__title}
                                 >
-                                    <h1>{user.seller.name}</h1>
+                                    {user.seller.name}
                                 </NavLink>
+
+                                <Button type="button" onClick={this.toggleForm} className={style.buttonShowModal}>create good</Button>
                             </div>
 
-                            <form className={style.createGoodForm}>
+                            <form
+                                className={classNames(style.createGoodForm, {[style.createGoodForm__show]: this.isShowModal})}
+                            >
+                                <Button type="button" styleType="small" onClick={this.toggleForm} className={style.createGoodForm__buttonClose}>
+                                    <MdCancel/>
+                                </Button>
                                 <input
                                     className = {classNames("input", style.createGoodForm__input)}
                                     type='text'
@@ -66,15 +90,17 @@ class SellerProfile extends Component {
 
                                 <Button
                                     styleType="primary"
-                                    onClick={user.createGood}
+                                    onClick={()=>this.onCreateGood(user)}
                                 >
                                     create new good
                                 </Button>
                             </form>
                         </div>
                         :
-                        <div>
-                            <p>shop info</p>
+                        <div >
+                            <div>
+                                <FormattedMessage id="shopInfo"/>
+                            </div>
                             <input
                                 className = "input"
                                 type='text'
@@ -94,7 +120,16 @@ class SellerProfile extends Component {
                 {
                     user.ordersOfSeller[0] &&
                     <OrdersContainer
-                        goods={user.ordersOfSeller}
+                        title="processingOrders"
+                        goods={user.ordersOfSeller.filter(good => good.status === "processing")}
+                        position={GoodsContainerPosition.ordersSeller}
+                    />
+                }
+                {
+                    user.ordersOfSeller[0] &&
+                    <OrdersContainer
+                        title="acceptedOrders"
+                        goods={user.ordersOfSeller.filter(good => good.status === "accepted")}
                         position={GoodsContainerPosition.ordersSeller}
                     />
                 }

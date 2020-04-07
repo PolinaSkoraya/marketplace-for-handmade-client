@@ -59,6 +59,10 @@ html {
   font-size: 100%;
 }
 
+a {
+  color: inherit;
+}
+
 a:active,
 a:hover {
   outline: 0;
@@ -115,4 +119,12 @@ fieldset {
 
 textarea {
   resize: vertical;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
 }
