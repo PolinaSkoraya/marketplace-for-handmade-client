@@ -8,10 +8,11 @@
 .message-error {
   display: flex;
   @extend %center;
-  height: 50px;
+  height: 35px;
   width: 100%;
-  border-top: 3px solid $color-button-liked;
-  border-bottom: 3px solid $color-button-liked;
+  border-top: 2px solid $color-button-liked;
+  padding: 7px;
+  border-bottom: 2px solid $color-button-liked;
 }
 
 .message-error__icon {
@@ -19,11 +20,11 @@
 }
 
 .warning-icon {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
 }
 
 .message-error__message {
-  font-size: $font-size-medium;
+  font-size: $font-size-small;
 }
 

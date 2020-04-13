@@ -97,19 +97,19 @@ class SellerProfile extends Component {
                             </form>
                         </div>
                         :
-                        <div >
-                            <div>
+                        <div  className={style.profileContainer__form}>
+                            <div className={style.profileContainer__formTitle}>
                                 <FormattedMessage id="shopInfo"/>
                             </div>
                             <input
-                                className = "input"
+                                className = {classNames("input", style.profileContainer__input)}
                                 type='text'
                                 name="newShopName"
                                 onChange={user.handleInputChange}
                                 placeholder='shop name'
                             />
                             <textarea
-                                className = "input"
+                                className = {classNames("input", style.profileContainer__textarea, style.profileContainer__input)}
                                 name="newShopDescription"
                                 onChange={user.handleInputChange}
                                 placeholder='shop description'

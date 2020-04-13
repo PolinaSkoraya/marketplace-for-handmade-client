@@ -3,6 +3,7 @@
 
 .buyerLogin {
   display: flex;
+  flex-direction: column;
   @extend %center;
   height: 100vh;
 }
@@ -13,6 +14,7 @@
   justify-content: space-around;
   align-items: center;
   padding: 10px;
+  margin: 10px;
   border-radius: 20px;
   background-color: $color-secondary-light;
   width: 350px;
@@ -23,7 +25,8 @@
 
 .input.buyerLogin-input {
   width: 80%;
-  padding: 10px 5px;
+  //padding: 10px 5px;
+  margin: 0;
   &:focus {
     border: 1px solid $color-basic-dark;
   }
@@ -53,4 +56,10 @@
   font-size: 16px;
   border-radius: 20px;
   cursor: pointer;
+}
+
+.messageError {
+  margin-top: -7px;
+  color: $color-button-liked;
+  font-size: 12px;
 }

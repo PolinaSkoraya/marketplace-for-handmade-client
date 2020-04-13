@@ -186,7 +186,7 @@ class UserStore {
         let cost = 0;
         this.goodsInBasket.forEach(good => {
             cost += good.price;
-        })
+        });
         return cost;
     }
 
@@ -207,8 +207,8 @@ class UserStore {
             idUser: this.id,
             description: this.newShopDescription,
             logo: "clayshop-logo.svg",
-            services: "master on all hands"
-        }
+            services: "master"
+        };
 
         try {
             const response = await postShop(seller);

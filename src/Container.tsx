@@ -6,6 +6,7 @@ import {ROUTES} from "./routes/routes";
 import BuyerLogin from "./components/BuyerLogin/BuyerLogin";
 import BuyerRegistration from "./components/BuyerRegistration/BuyerRegistration";
 import {Roles} from "./stores/helpers/roles";
+import Modals from "./components/Modals";
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const Admin = lazy(() => import('./pages/Admin/Admin'));
@@ -20,7 +21,7 @@ const routes = [
     { path: ROUTES.root, Component: HomePage },
     { path: ROUTES.goods.goods, Component: GoodsPage },
     { path: ROUTES.users.login, Component: BuyerLogin },
-    { path: ROUTES.users.registration, Component: BuyerRegistration },
+    { path: ROUTES.users.registration, Component: BuyerRegistration }
 ];
 
 const privateRoutes = [

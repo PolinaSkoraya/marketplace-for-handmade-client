@@ -22,7 +22,7 @@ class Navigation extends Component {
         const {user} = RootStore;
 
         return (
-            <div className={style.navigation}>
+            <>
                 <div className={style.navigation__list}>
                     <div className={style.navigation__links}>
                         <NavLink to={ROUTES.root} className={style.navigation__link} >
@@ -76,7 +76,7 @@ class Navigation extends Component {
                         </div>
                     ) }
                 </div>
-            </div>
+            </>
         );
     }
 }

@@ -3,13 +3,12 @@ import React, {Component} from "react";
 import {TiWarningOutline} from "react-icons/ti";
 import {IconContext} from "react-icons";
 import {observer} from "mobx-react";
+import {FormattedMessage} from "react-intl";
 
 @observer
 class MessageError extends Component<{message: string, show: boolean}> {
 
     render () {
-        console.log("masfhrofhrofjerij");
-
         return (
             <div className={this.props.show ? "message-error" : "message-error-none"}>
                 <div className="message-error__icon">
@@ -19,7 +18,7 @@ class MessageError extends Component<{message: string, show: boolean}> {
                 </div>
 
                 <div className="message-error__message">
-                    Error: Incorrect email or password.
+                    <FormattedMessage id="incorrectEmOrPass"/>
                 </div>
             </div>
         )

@@ -43,7 +43,6 @@ class SellerPage extends Component {
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div className={style.sellerPage__body}>

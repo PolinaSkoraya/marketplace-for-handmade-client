@@ -91,6 +91,10 @@
   align-items: center;
   justify-content: center;
   width: 320px;
+  background-color: $color-secondary-light;
+  padding: 20px 10px;
+  box-shadow: $box-shadow-good;
+  border-radius: 20px;
 }
 
 .updateGoodForm__input {
@@ -102,3 +106,5 @@
   height: 120px;
   resize: none;
 }
+
+

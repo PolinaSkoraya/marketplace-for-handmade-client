@@ -19,5 +19,7 @@
   "acceptedOrders": "Подтвержденные заказы",
   "processingOrders": "Заказы для подтверждения",
   "deleteUser": "удалить пользователя",
-  "shopInfo": "О магазине"
+  "shopInfo": "О магазине",
+  "validMessage": "минимум 5 символов",
+  "incorrectEmOrPass": "Неверный email или password"
 }

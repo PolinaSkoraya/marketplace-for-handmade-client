@@ -53,17 +53,16 @@ class OneGoodStore {
     }
 
     @action.bound
-    async update (id, goodName, description, price, category) {
+    async update (payload) {
         try {
             const newGood = {
-                name: goodName,
-                description: description,
-                price: price,
-                category: category
+                name: payload.goodName,
+                description: payload.description,
+                price: payload.price,
+                category: payload.goodCategory
             };
-            const responseGood = await updateGood(id, newGood);
+            const responseGood = await updateGood(payload.id, newGood);
             this.good = responseGood.data;
-            console.log("store update");
         } catch (error) {
             console.log(error);
         }

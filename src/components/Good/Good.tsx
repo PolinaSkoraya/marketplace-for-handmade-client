@@ -9,12 +9,12 @@ import {STATIC_IMAGES} from "../../http/urls";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {GoodsContainerPosition} from "../GoodsContainer/GoodsContainer";
 import {FormattedMessage} from 'react-intl';
-import Modal from "../Modal/Modal";
 import {FaRegLemon, FaTrash, FaPen} from "react-icons/fa";
 import RootStore from "../../stores/RootStore";
 import Button from "../Button/Button";
-import UpdateGoodForm from "./UpdateGoodForm";
 import classNames from 'classnames';
+import ModalStore from "../../stores/ModalStore";
+import UpdateGoodModal from "./UpdateGoodModal";
 
 interface Props {
     good: GoodInterface,
@@ -27,7 +27,6 @@ interface Props {
 class Good extends Component<Props> {
     store = new OneGoodStore();
     @observable sellerName = "";
-    @observable isShow = false;
 
     componentDidMount () : void {
         this.store.getShopName(this.props.idSeller)
@@ -41,12 +40,11 @@ class Good extends Component<Props> {
         await user.removeFromBasket(id);
     }
 
-    showModal = () => {
-        this.isShow = true;
-    };
-
-    hideModal = () => {
-        this.isShow = false;
+    openModal = (good?) => async () => {
+        console.log("open", good);
+        const { payload } = await ModalStore.showModal(UpdateGoodModal, {good});
+        console.log("payload", payload);
+        await  this.store.update(payload);
     };
 
     render () {
@@ -64,15 +62,15 @@ class Good extends Component<Props> {
                         good.idSeller === user.seller._id &&
                         goodsContainerPosition === GoodsContainerPosition.sellerPage &&
                         <>
-                            <Button styleType="small" id={good.name} className={style.updateGoodButton} onClick={this.showModal}>
+
+                            <Button
+                                    styleType="small"
+                                    id={good._id}
+                                    className={style.updateGoodButton}
+                                    onClick={this.openModal(good)}
+                            >
                                 <FaPen/>
                             </Button>
-                            <Modal
-                                children = {<UpdateGoodForm good={good}/>}
-                                goodName={good.name}
-                                handleClose={this.hideModal}
-                                isShow={this.isShow}
-                            />
                         </>
                     }
                     {

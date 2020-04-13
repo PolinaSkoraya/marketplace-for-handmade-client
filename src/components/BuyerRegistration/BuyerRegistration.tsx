@@ -5,6 +5,9 @@ import RootStore from "../../stores/RootStore";
 import {FormattedMessage} from "react-intl";
 import {ROUTES} from "../../routes/routes";
 import {NavLink} from 'react-router-dom';
+import { Form, Text } from 'informed';
+import {validateLength} from "../BuyerLogin/BuyerLogin";
+import Button from "../Button/Button";
 
 @observer
 class BuyerRegistration extends Component {
@@ -13,48 +16,63 @@ class BuyerRegistration extends Component {
 
          return (
              <div className="buyerRegistration">
-                <form className="form-log buyerRegistration-form">
-                    <h4>
-                        <FormattedMessage id="register"/>
-                    </h4>
-                    <input
-                        className="input buyerRegistration-input"
-                        type="text"
-                        name="nameForRegistration"
-                        value={user.nameForRegistration}
-                        onChange={user.handleInputChange}
-                        placeholder='name'
-                    />
+                <Form className="form-log buyerRegistration-form">
+                    {({ formState }) => (
+                        <>
+                            <h4>
+                                <FormattedMessage id="register"/>
+                            </h4>
+                            <Text
+                                className="input buyerRegistration-input"
+                                value={user.nameForRegistration}
+                                onChange={user.handleInputChange}
+                                placeholder='name'
+                                id="nameForRegistration"
+                                field="nameForRegistration"
+                                validate={validateLength}
+                                validateOnChange
+                            />
+                            <label htmlFor="nameForRegistration" className="messageError">{formState.errors.nameForRegistration}</label>
 
-                    <input
-                        className="input buyerRegistration-input"
-                        type="text"
-                        name="email"
-                        value={user.email}
-                        onChange={user.handleInputChange}
-                        placeholder='email'
-                    />
+                            <Text
+                                className="input buyerRegistration-input"
+                                value={user.email}
+                                onChange={user.handleInputChange}
+                                placeholder='email'
+                                id="email"
+                                field="email"
+                                validate={validateLength}
+                                validateOnChange
+                            />
+                            <label htmlFor="email" className="messageError">{formState.errors.email}</label>
 
-                    <input
-                        className="input buyerRegistration-input"
-                        type="text"
-                        name="password"
-                        value={user.password}
-                        onChange={user.handleInputChange}
-                        placeholder='password'
-                    />
+                            <Text
+                                className="input buyerRegistration-input"
+                                type="password"
+                                value={user.password}
+                                onChange={user.handleInputChange}
+                                placeholder='password'
+                                id="password"
+                                field="password"
+                                validate={validateLength}
+                                validateOnChange
+                            />
+                            <label htmlFor="password" className="messageError">{formState.errors.password}</label>
 
-                    <input
-                        type="button"
-                        className="button-basic"
-                        value="Join"
-                        onClick={() => user.register(user.nameForRegistration, user.email, user.password)}
-                    />
+                            <Button
+                                type="submit"
+                                onClick={() => user.register(user.nameForRegistration, user.email, user.password)}
+                                disabled={formState.invalid}
+                            >
+                                <FormattedMessage id="register"/>
+                            </Button>
 
-                    <NavLink to={ROUTES.users.login}>
-                        <FormattedMessage id="signIn"/>
-                    </NavLink>
-                </form>
+                            <NavLink to={ROUTES.users.login}>
+                                <FormattedMessage id="signIn"/>
+                            </NavLink>
+                        </>
+                    )}
+                </Form>
              </div>
          );
     }
