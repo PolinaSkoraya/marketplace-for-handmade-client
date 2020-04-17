@@ -12,6 +12,10 @@ import {
 import GridRowShop from "./GridRowShop";
 import GridRowUser from "./GridRowUser";
 import GridRowGood from "./GridRowGood";
+import {FormattedMessage} from "react-intl";
+import ModalStore from "../../stores/ModalStore";
+import WarningModal from "../../components/WarningModal/WarningModal";
+import Button from "../../components/Button/Button";
 
 @observer
 class Admin extends Component {
@@ -32,15 +36,23 @@ class Admin extends Component {
                 user.orders = orders.data;
             })
         )
-
     }
+
+    openModal = () => async () => {
+        const { payload } = await ModalStore.showModal(WarningModal);
+
+        console.log(payload);
+    };
 
     render () {
         return (
             <>
                 <div className={style.adminPage}>
+                    <div className={style.tableTitle}>
+                        <FormattedMessage id="goods"/>
+                    </div>
+
                     <div className={style.gridContainer}>
-                        goods
                         <div className={style.gridRow} key="0">
                             <div className="grid-column grid-column-1">name</div>
                             <div className="grid-column grid-column-2">price</div>
@@ -57,8 +69,10 @@ class Admin extends Component {
                         }
                     </div>
 
+                    <div className={style.tableTitle}>
+                        <FormattedMessage id="users"/>
+                    </div>
                     <div className={style.gridContainer}>
-                        users
                         <div className={style.gridRow} key="0">
                             <div className="grid-column grid-column-0">button</div>
                             <div className="grid-column grid-column-1">name</div>
@@ -75,8 +89,10 @@ class Admin extends Component {
                         }
                     </div>
 
+                    <div className={style.tableTitle}>
+                        <FormattedMessage id="shops"/>
+                    </div>
                     <div className={style.gridContainer}>
-                        shops
                         <div className={style.gridRow} key="0">
                             <div className="grid-column grid-column-0">owner</div>
                             <div className="grid-column grid-column-1">shop name</div>

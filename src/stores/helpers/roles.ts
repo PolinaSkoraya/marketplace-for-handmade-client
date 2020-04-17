@@ -1,5 +1,4 @@
 import RootStore from "../RootStore";
-import {ROUTES} from "../../routes/routes";
 
 export enum Roles {
     seller = 'SELLER',
@@ -10,11 +9,11 @@ export function getRole(role: Roles) {
     return RootStore.user.roles.includes(role);
 }
 
-export function getDefaultRouteByRole() {
-    if (getRole(Roles.seller)) {
-        return ROUTES.sellers.profile;
-    } else if (getRole(Roles.buyer)) {
-        return ROUTES.users.profile;
-    }
-}
+// export function getDefaultRouteByRole() {
+//     if (getRole(Roles.seller)) {
+//         return ROUTES.sellers.profile;
+//     } else if (getRole(Roles.buyer)) {
+//         return ROUTES.users.profile;
+//     }
+// }
 

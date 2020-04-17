@@ -7,9 +7,9 @@ export const ROUTES = {
     },
 
     sellers: {
-        sellers: '/sellers/',
-        id: '/sellers/:id',
-        profile: '/seller/:id/profile'
+        sellers: '/shops/',
+        id: '/shops/:id',
+        orders: 'user/shop/orders'
     },
 
     users: {

@@ -6,8 +6,9 @@ import {FormattedMessage} from "react-intl";
 import {ROUTES} from "../../routes/routes";
 import {NavLink} from 'react-router-dom';
 import { Form, Text } from 'informed';
-import {validateLength} from "../BuyerLogin/BuyerLogin";
 import Button from "../Button/Button";
+import {validateLength} from "../../stores/helpers/validation";
+import { withRouter } from "react-router";
 
 @observer
 class BuyerRegistration extends Component {
@@ -31,6 +32,7 @@ class BuyerRegistration extends Component {
                                 field="nameForRegistration"
                                 validate={validateLength}
                                 validateOnChange
+                                autoFocus
                             />
                             <label htmlFor="nameForRegistration" className="messageError">{formState.errors.nameForRegistration}</label>
 
@@ -61,13 +63,18 @@ class BuyerRegistration extends Component {
 
                             <Button
                                 type="submit"
-                                onClick={() => user.register(user.nameForRegistration, user.email, user.password)}
+                                onClick={async () => {
+                                    await user.register(user.nameForRegistration, user.email, user.password);
+                                    // let props: any = this.props;
+                                    // props.history.push("/");
+                                }}
                                 disabled={formState.invalid}
+                                className="buttonSign"
                             >
                                 <FormattedMessage id="register"/>
                             </Button>
 
-                            <NavLink to={ROUTES.users.login}>
+                            <NavLink to={ROUTES.users.login} className="linkToLog">
                                 <FormattedMessage id="signIn"/>
                             </NavLink>
                         </>
@@ -78,4 +85,4 @@ class BuyerRegistration extends Component {
     }
 }
 
-export default BuyerRegistration;
+export default withRouter(BuyerRegistration);

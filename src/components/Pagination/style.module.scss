@@ -4,6 +4,7 @@
 .pagination{
   display: flex;
   @extend %center;
+  padding-top: 20px;
 }
 
 .pagination__buttonsPage {

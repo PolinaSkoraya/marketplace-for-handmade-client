@@ -13,6 +13,9 @@ import {STATIC_IMAGES} from "../../http/urls";
 import {GoodInterface} from "../../stores/helpers/interfaces";
 import Button from "../Button/Button";
 import classNames from 'classnames';
+import {FormattedMessage} from "react-intl";
+import {TiWarningOutline} from "react-icons/ti";
+import {IconContext} from "react-icons";
 
 interface Props {
     good: GoodInterface,
@@ -44,7 +47,7 @@ class Order extends Component<Props> {
         return(
                 <div className={style.order}  id = {good._id + good.idOrder}>
                     <div className={style.order__image}>
-                        <img src={STATIC_IMAGES + good.image } alt="knitting"/>
+                        <img src={good.image } alt="knitting"/>
                     </div>
 
                     <div className={style.order__about}>
@@ -66,35 +69,44 @@ class Order extends Component<Props> {
                             <div className={style.orderPrice}>{good.price}$</div>
 
                             <div className="order__buttons">
-                                <p>status: {good.status}</p>
+                                <div><FormattedMessage id="status"/>: {good.status}</div>
                                 {
                                     good.status === "accepted" &&
                                     position === GoodsContainerPosition.ordersBuyer &&
-                                    <div className={style.order__buttonsDone}>
-                                        <p>done order</p>
+                                    <div className={style.order__buttonDone}>
+                                        <div>
+                                            <FormattedMessage id="doneOrder"/>:
+                                        </div>
                                         <Button
                                             styleType="small"
                                             id="button-done-order"
-                                            className="addOrderButton"
+                                            className={style.order__statusButton}
                                             onClick={ () => user.deleteOrder(good.idOrder)}
                                         >
-                                            <MdDone/>
+                                            <IconContext.Provider value={{ className: style.doneIcon }}>
+                                                <MdDone/>
+                                            </IconContext.Provider>
                                         </Button>
                                     </div>
                                 }
                                 {
                                     good.status === "processing" &&
                                     position === GoodsContainerPosition.ordersSeller &&
-                                    <>
+                                    <div className={style.order__status}>
+                                        <div>
+                                            <FormattedMessage id="acceptOrder"/>:
+                                        </div>
                                         <Button
                                             styleType="small"
                                             id={good.idOrder}
-                                            className="updateOrderState"
+                                            className={style.order__statusButton}
                                             onClick={() => user.acceptOrder(good.idOrder)}
                                         >
-                                            <FaRegSquare/>
+                                            <IconContext.Provider value={{ className: style.acceptIcon }}>
+                                                <FaRegSquare/>
+                                            </IconContext.Provider>
                                         </Button>
-                                    </>
+                                    </div>
                                 }
                             </div>
                         </div>

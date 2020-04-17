@@ -10,14 +10,27 @@ import RootStore from "../../stores/RootStore";
 import Button from "../../components/Button/Button";
 import classNames from "classnames";
 import "./parallax.scss";
+import "./gallery.scss"
+import {observable} from "mobx";
+import {getGoodsOfSeller} from "../../http/services";
+import {GoodInterface} from "../../stores/helpers/interfaces";
+import {ROUTES} from "../../routes/routes";
 
 @observer
 class OneGoodPage extends Component<any> {
     store = new OneGoodStore();
+    @observable sellerGoods: GoodInterface[] = [];
 
     async componentDidMount() {
         const {match}  = this.props;
         await this.store.initGood(match.params.id);
+
+        try {
+            const response = await getGoodsOfSeller(this.store.good.seller._id);
+            this.sellerGoods = response.data;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render () {
@@ -28,56 +41,54 @@ class OneGoodPage extends Component<any> {
 
                 <div className="parallax">
                     <div className="parallax__group parallax__group1">
-                        <div className="parallax__layer parallax__layer--base">
-                            <div className="title">
-                                <div className={style.image__div}>
-                                    <img className={style.goodPage__image} src={STATIC_IMAGES + this.store.good.image} alt="image"/>
+                        <div className="title">
+                            <div className={style.image__div}>
+                                <img className={style.goodPage__image} src={this.store.good.image} alt="image"/>
 
-                                    <div className={style.buttonLike__div}>
+                                <div className={style.buttonLike__div}>
+                                    {
+                                        this.store.isLiked ?
+                                            <Button styleType="small" className={classNames(style.buttonLike, style.buttonLike_liked)} onClick={this.store.removeFromLikedGoods}>
+                                                <FaHeart />
+                                            </Button>
+                                            :
+                                            <Button styleType="small" className={classNames(style.buttonLike, style.buttonLike_unliked)} onClick={this.store.addToLikedGoods}>
+                                                <FaHeart />
+                                            </Button>
+                                    }
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className={style.info}>
+                                    <div className={style.goodPage__title}>
+                                        {this.store.good.name}
+                                    </div>
+
+                                    <div className={style.goodPage__price}>
+                                        <div>
+                                            <FormattedMessage id="price" values={{price: this.store.good.price}}/>
+                                        </div>
+                                        <div className={style.priceNumber}>{this.store.good.price}$</div>
+                                    </div>
+
+                                    <div className={style.goodPage__buttons}>
                                         {
-                                            this.store.isLiked ?
-                                                <Button styleType="small" className={classNames(style.buttonLike, style.buttonLike_liked)} onClick={this.store.removeFromLikedGoods}>
-                                                    <FaHeart />
+                                            this.store.isInBasket ?
+                                                <Button
+                                                    className={style.buttonAddToBasket}
+                                                    onClick={() => user.removeFromBasket(this.store.good._id)}
+                                                >
+                                                    remove from basket
                                                 </Button>
                                                 :
-                                                <Button styleType="small" className={classNames(style.buttonLike, style.buttonLike_unliked)} onClick={this.store.addToLikedGoods}>
-                                                    <FaHeart />
+                                                <Button
+                                                    className={style.buttonAddToBasket}
+                                                    onClick={this.store.addToBasket}
+                                                >
+                                                    add to basket
                                                 </Button>
                                         }
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <div className={style.info}>
-                                        <div className={style.goodPage__title}>
-                                            {this.store.good.name}
-                                        </div>
-
-                                        <div className={style.goodPage__price}>
-                                            <div>
-                                                <FormattedMessage id="price" values={{price: this.store.good.price}}/>
-                                            </div>
-                                            <div className={style.priceNumber}>{this.store.good.price}$</div>
-                                        </div>
-
-                                        <div className={style.goodPage__buttons}>
-                                            {
-                                                this.store.isInBasket ?
-                                                    <Button
-                                                        className={style.buttonAddToBasket}
-                                                        onClick={() => user.removeFromBasket(this.store.good._id)}
-                                                    >
-                                                        remove from basket
-                                                    </Button>
-                                                    :
-                                                    <Button
-                                                        className={style.buttonAddToBasket}
-                                                        onClick={this.store.addToBasket}
-                                                    >
-                                                        add to basket
-                                                    </Button>
-                                            }
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -85,52 +96,64 @@ class OneGoodPage extends Component<any> {
                     </div>
 
                     <div className="parallax__group parallax__group2">
-                        <div className="parallax__layer parallax__layer--base">
-                            <div className="title description">
-                                    <div className={style.goodPage__descriptionCategory}>
-                                        <FormattedMessage id="category"/>
-                                        {this.store.good.category}
-                                    </div>
-
-                                    <div className={style.goodPage__descriptionTitle}>
-                                        <FormattedMessage id="description"/>
-                                    </div>
-
-                                    <div className={style.goodPage__descriptionText}>
-                                        {this.store.good.description}
-                                    </div>
+                        <div className="title description">
+                            <div className={style.goodPage__descriptionTitle}>
+                                <FormattedMessage id="description"/>
                             </div>
-                        </div>
 
-                        <div className="parallax__layer parallax__layer--back">
-                            <div className="title">
+                            <div className={style.goodPage__descriptionText}>
+                                {this.store.good.description}
                             </div>
+
+                            {
+                                this.store.good.photos.length !== 0 &&
+                                <div className="items-row">
+                                    <div className="item img1">
+                                        <img src={this.store.good.photos[0]} alt="descPhoto"/>
+                                    </div>
+                                    <div className="item img2">
+                                        <img src={this.store.good.photos[1]} alt="descPhoto"/>
+                                    </div>
+                                    <div className="item img3">
+                                        <img src={this.store.good.photos[2]} alt="descPhoto"/>
+                                    </div>
+                                    <div className="item img4">
+                                        <img src={this.store.good.photos[3]} alt="descPhoto"/>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
 
                     <div className="parallax__group parallax__group3">
-                        <div className="parallax__layer parallax__layer--base">
-                            <div className="parallax__aboutShop--base">
-                                <div className="shop-logo">
-                                    {/*<img src={STATIC_IMAGES + this.store.good.seller.logo} alt="logo" />*/}
-                                </div>
-                            </div>
+                        <div className={style.shopName}>
+                            <NavLink
+                                to={ROUTES.sellers.sellers + this.store.good.idSeller}
+                                className="shopLink"
+                            >
+                                <FormattedMessage id="shop" values={{shopName: this.store.good.seller.name}}/>
+                            </NavLink>
                         </div>
 
-                        <div className="parallax__layer parallax__layer--fore">
-                            <div className="parallax__aboutShop--fore">
-                                <div className="shopName">
-                                    <NavLink
-                                        to={"/sellers/" + this.store.good.idSeller}
-                                        className="shopLink"
-                                    >
-                                        <FormattedMessage id="shop" values={{shopName: this.store.good.seller.name}}/>
+                        <div className="shop-description">
+                            {this.store.good.seller.description}
+                        </div>
+
+                        <div className={style.sellerGoods}>
+                        {
+                            this.sellerGoods.length !== 0 &&
+                            this.sellerGoods.slice(0, 4).map ( good =>
+                                <div key={good._id + "gallery"} className={style.sellerGoods__good}>
+                                    <NavLink to={ROUTES.goods.goods + good._id}>
+                                        <img
+                                            className={style.sellerGoods__image}
+                                            src={good.image}
+                                            alt={good.image}
+                                        />
                                     </NavLink>
                                 </div>
-                                <div className="shop-description">
-                                    {this.store.good.seller.description}
-                                </div>
-                            </div>
+                            )
+                        }
                         </div>
                     </div>
 

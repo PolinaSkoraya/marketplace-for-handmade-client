@@ -140,6 +140,7 @@
 
 .goodPage__descriptionTitle {
   font-size: $font-size-title;
+  margin-bottom: 5px;
 }
 
 .goodPage__descriptionText {
@@ -178,6 +179,37 @@
 .shopInfo__description {
   padding: 5px 0;
 }
+
+.sellerGoods {
+  padding: 40px 0;
+  width: 80vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  grid-gap: 2%;
+}
+
+.sellerGoods__good {
+  height: 220px;
+  box-shadow:  $box-shadow-good;
+
+}
+
+.sellerGoods__good:hover {
+  transform: scale(1.07);
+  transition: transform 200ms;
+}
+
+.sellerGoods__image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.shopName {
+  font-size: $font-size-title;
+  margin-bottom: 10px;
+}
+
 
 @keyframes box-shadow-animation {
   from {box-shadow: rgba(80, 57, 76, 0.4) 0 0 0 3px;}

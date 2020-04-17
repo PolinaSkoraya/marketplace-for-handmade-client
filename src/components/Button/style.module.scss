@@ -74,7 +74,12 @@
     color: $color-secondary-medium;
     font-size: 20px;
 
+    display: flex;
+    @extend %center;
+
     &:hover:enabled {
+      color: $color-secondary-light;
+      transition: color 250ms;
     }
 
     &:active:enabled {

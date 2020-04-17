@@ -9,8 +9,16 @@
 
 .input.buyerRegistration-input {
   width: 80%;
-  padding: 10px 5px;
   &:focus {
     border: 1px solid $color-basic-dark;
   }
+}
+
+.buyerRegistration-form {
+  height: 360px;
+}
+
+.linkToLog {
+  margin-top: -10px;
+  margin-bottom: 10px;
 }

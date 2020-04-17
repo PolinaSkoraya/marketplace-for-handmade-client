@@ -68,9 +68,26 @@
   }
 }
 
-.order__buttonsDone {
+.order__buttonDone {
   line-height: 1;
   padding-top: 15px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.doneIcon {
+  font-size: 18px;
+}
+.acceptIcon {
+  font-size: 13px;
+}
+
+.order__status {
+  display: flex;
+  height: 30px;
+  align-items: center;
+}
+
+.order__statusButton {
+  margin: 5px;
 }

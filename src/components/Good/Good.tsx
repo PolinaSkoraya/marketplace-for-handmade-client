@@ -9,12 +9,16 @@ import {STATIC_IMAGES} from "../../http/urls";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {GoodsContainerPosition} from "../GoodsContainer/GoodsContainer";
 import {FormattedMessage} from 'react-intl';
-import {FaRegLemon, FaTrash, FaPen} from "react-icons/fa";
+import {FaTrash, FaPen} from "react-icons/fa";
+import {MdAttachMoney} from "react-icons/md";
 import RootStore from "../../stores/RootStore";
 import Button from "../Button/Button";
 import classNames from 'classnames';
 import ModalStore from "../../stores/ModalStore";
 import UpdateGoodModal from "./UpdateGoodModal";
+import {TiWarningOutline} from "react-icons/ti";
+import {IconContext} from "react-icons";
+import WarningModal from "../WarningModal/WarningModal";
 
 interface Props {
     good: GoodInterface,
@@ -26,6 +30,7 @@ interface Props {
 @observer
 class Good extends Component<Props> {
     store = new OneGoodStore();
+
     @observable sellerName = "";
 
     componentDidMount () : void {
@@ -41,10 +46,10 @@ class Good extends Component<Props> {
     }
 
     openModal = (good?) => async () => {
-        console.log("open", good);
         const { payload } = await ModalStore.showModal(UpdateGoodModal, {good});
-        console.log("payload", payload);
+
         await  this.store.update(payload);
+        // await this.shopStore.initGoodsOfSeller(good.idSeller);
     };
 
     render () {
@@ -91,7 +96,9 @@ class Good extends Component<Props> {
                                 className="addOrderButton"
                                 onClick={() => user.addOrder(user.id, good._id, idSeller)}
                             >
-                                <FaRegLemon/>
+                                <IconContext.Provider value={{ className: style.moneyIcon }}>
+                                    <MdAttachMoney/>
+                                </IconContext.Provider>
                             </Button>
                         </>
                     }
@@ -102,7 +109,7 @@ class Good extends Component<Props> {
                         className={style.good__linkImage}
                         to={ROUTES.goods.goods+ good._id}
                     >
-                        <img src={STATIC_IMAGES + good.image } alt="knitting"/>
+                        <img src={good.image } alt="knitting"/>
                     </NavLink>
                 </div>
 

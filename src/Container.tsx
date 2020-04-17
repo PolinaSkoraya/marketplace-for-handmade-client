@@ -7,6 +7,7 @@ import BuyerLogin from "./components/BuyerLogin/BuyerLogin";
 import BuyerRegistration from "./components/BuyerRegistration/BuyerRegistration";
 import {Roles} from "./stores/helpers/roles";
 import Modals from "./components/Modals";
+import NoMatch from "./pages/NoMatch/NoMatch";
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const Admin = lazy(() => import('./pages/Admin/Admin'));
@@ -38,7 +39,7 @@ function Container({ location }) {
                 <CSSTransition
                     key={location.key}
                     timeout={{ enter: 300, exit: 300 }}
-                    classNames={'page'}
+                    classNames={'fadePage'}
                 >
                     <section className="route-section">
                         <Switch location={location}>
@@ -62,16 +63,6 @@ function Container({ location }) {
                     </section>
                 </CSSTransition>
             </TransitionGroup>
-        </div>
-    );
-}
-
-function NoMatch ({location}) {
-    return (
-        <div style={{height: "550px", backgroundColor: "white", paddingTop: "100px"}}>
-            <h3>
-                No match for <code>{location.pathname}</code>
-            </h3>
         </div>
     );
 }

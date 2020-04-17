@@ -1,11 +1,4 @@
-import {GoodInterface} from "../../stores/helpers/interfaces";
-import {observer} from "mobx-react";
-import React, {Component} from "react";
 import {action, observable} from "mobx";
-
-interface props {
-    good: GoodInterface
-}
 
 class UpdateGoodForm {
     @observable newInfoGood = {
@@ -36,8 +29,9 @@ class UpdateGoodForm {
     }
 
     @action.bound
-    async onSubmit(func?) {
-        func(this.newInfoGood);
+    async onSubmit(values, func?) {
+        values.values.id = this.newInfoGood.id;
+        func(values.values);
     }
 }
 

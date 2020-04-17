@@ -35,6 +35,7 @@ export function postGood(good) {
         "likes": good.likes,
         "description": good.description,
         "image": good.image,
+        "photos": good.photos,
         "tags": good.tags,
         "category": good.category
     })

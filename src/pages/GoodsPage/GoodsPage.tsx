@@ -68,9 +68,7 @@ class GoodsPage extends Component {
         await this.store.loadGoods(page);
     }
 
-    render(){
-        const {user} = RootStore;
-
+    render () {
         return (
             <>
                 <div className={style.goodsPage}>
@@ -118,7 +116,7 @@ class GoodsPage extends Component {
                         </select>
                     </div>
 
-                    <GoodsContainer goodsContainerTitle="All Goods" goods={this.store.goods}/>
+                    <GoodsContainer goods={this.store.goods}/>
 
                     <Pagination
                         currentPage={this.currentPage}

@@ -4,14 +4,12 @@ import {GoodInterface} from "./helpers/interfaces";
 
 class GoodsStore {
     @observable goods: GoodInterface[] = [];
-    //@observable numberOfPages: number = 0;
 
     @action.bound
     async loadGoods (page) {
         try {
             const responseGoods = await getPageGoods(page);
             this.goods = responseGoods.data.docs;
-            // this.numberOfPages = responseGoods.data.totalPages;
             this.sortByLikes();
             return responseGoods.data.totalPages;
         } catch (error) {
@@ -33,7 +31,7 @@ class GoodsStore {
         try {
             let response = await getAllGoods();
             allGoods = response.data;
-            this.goods = allGoods.filter(good => good.name.toLowerCase().search(regexp)>=0);
+            this.goods = allGoods.filter( good => good.name.toLowerCase().search(regexp) >= 0);
         } catch (error) {
             console.log(error);
         }

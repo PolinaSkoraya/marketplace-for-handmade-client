@@ -1,7 +1,11 @@
 @import "src/styles/variables";
+@import "../../styles/shared";
 
 .sellerPage {
   padding: calc(8vh + 20px) 20px;
+
+  position: relative;
+  overflow: hidden;
 }
 
 .sellerPage__info {
@@ -24,6 +28,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  overflow: hidden;
 }
 
 .sellerPage__logoImg {
@@ -38,6 +44,7 @@
 
 .sellerPage__textField {
   padding: 8px 0;
+  font-size: $font-size-medium;
 }
 
 .sellerPage__textField_name {
@@ -47,5 +54,171 @@
 .sellerPage__description{
   margin: 8px 0;
   padding: 4px 8px;
-  border-left: 1px solid $color-basic-light;
+  line-height: 1.2;
+  max-width: 700px;
+}
+
+.buttonShowModal {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.createGoodForm {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  @extend %center;
+  width: 600px;
+  background-color: $color-secondary-light;
+  box-shadow: $box-shadow-good;
+  border-radius: 20px;
+  padding: 30px;
+
+  position: absolute;
+  top: 400px;
+  right: -600px;
+  opacity: 0;
+
+  transition: right 500ms, opacity 200ms;
+}
+
+.createGoodForm__show {
+  right: 20px;
+  top: 15px;
+  opacity: 1;
+  transition: right 500ms, opacity 200ms;
+}
+
+
+.createGoodForm__input {
+  margin-bottom: 20px;
+  width: 100%;
+
+}
+
+.createGoodForm__textarea {
+  height: 180px;
+  resize: none;
+
+  font-size: $font-size-small;
+}
+
+.createGoodForm__buttonClose {
+  position: absolute;
+  top: 12px;
+  left: 565px;
+  font-size: 22px;
+}
+
+.createGoodContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -100px;
+}
+
+.messageError {
+  margin-top: -15px;
+  margin-bottom: 15px;
+  color: $color-button-liked;
+  font-size: 12px;
+  height: 7px;
+}
+
+.formContent {
+  display: flex;
+}
+
+.formTextInfo {
+  flex-basis: 55%;
+  padding-right: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fileInputs {
+  flex-basis: 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageWrap {
+  height: 100px;
+  width: 100px;
+
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.formImage {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.inputPhotos, .inputImage {
+  display: contents;
+  z-index: -1;
+}
+
+.inputImage {
+  padding-bottom: 80px;
+}
+
+.labelPhotos, .labelImage {
+  cursor: pointer;
+  outline: none;
+  border: none;
+
+  width: 150px;
+
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 20px;
+
+  background-color: $color-basic-medium;
+  color: $color-basic-light;
+  box-shadow: $box-shadow-good;
+
+  &:hover {
+    background: $color-basic-dark;
+    box-shadow: $box-shadow-good-hover;
+    transition: background-color 200ms;
+  }
+
+  &:active {
+    background: #0b2430;
+    box-shadow: $box-shadow-good-active;
+  }
+}
+
+.image {
+  min-height: 110px;
+}
+
+.photos {
+  display: flex;
+  flex-wrap: wrap;
+
+  min-height: 220px;
+}
+
+.fileInputs__text {
+  text-align: left;
+  font-size: $font-size-medium;
+  margin-bottom: 10px;
+}
+
+.formTitle {
+  font-size: $font-size-medium;
+  font-weight: 500;
+  margin-top: -30px;
+  padding-bottom: 10px;
 }

@@ -1,4 +1,5 @@
 @import "src/styles/variables";
+@import "../../styles/shared";
 
 .profileContainer {
   display: flex;
@@ -12,6 +13,7 @@
   justify-content: flex-end;
   flex-basis: 15%;
   background-color: #efefef;
+  min-height: 100vh;
 }
 
 .profileContainer__main {
@@ -21,21 +23,21 @@
 .basketContainer__cost {
   font-size: $font-size-title;
   text-align: left;
-  margin: 0 20px;
+  margin: 20px 20px 10px 20px;
 }
 
-.basketContainer__empty {
+.emptyContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px 0 50px 0;
-  min-height: 260px;
+  padding: 40px 0;
 }
 
-.basketContainer__emptyMessage {
+.emptyMessage {
   width: 200px;
   text-align: left;
   font-size: $font-size-medium;
+  margin-bottom: 10px;
 }
 
 .imgShoppingCart {
@@ -44,7 +46,7 @@
 }
 
 .menu {
-  background-color: $color-secondary-medium;
+  background-color: rgba(88, 167, 198, 0.71);
   position: sticky;
   top: 50px;
 
@@ -52,14 +54,14 @@
   flex-direction: column;
   justify-content: space-around;
 
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 120px;
 
   margin-top: 20%;
   margin-right: 15%;
-  padding: 10px 0;
+  padding: 13px;
 
-  border-radius: 20px;
+  border-radius: 50%;
   box-shadow: $box-shadow-good;
 }
 
@@ -68,4 +70,20 @@
   transition: color 250ms;
 }
 
+.ordersContainer__emptyMessage {
+  display: flex;
+  flex-direction: column;
+  @extend %center;
+  margin: 40px 0;
+}
+
+.ordersContainer__emptyMessageTitle {
+  font-size: $font-size-title;
+}
+
+.ordersContainer__emptyMessageText {
+  font-size: 18px;
+  padding: 20px 0;
+  width: 200px;
+}
 

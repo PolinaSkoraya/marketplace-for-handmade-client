@@ -22,6 +22,7 @@ class OneGoodStore {
         description: "",
         likes: 0,
         image: "",
+        photos: [],
         seller: {
             _id: "",
             services: "",
@@ -53,7 +54,7 @@ class OneGoodStore {
     }
 
     @action.bound
-    async update (payload) {
+    async   update (payload) {
         try {
             const newGood = {
                 name: payload.goodName,

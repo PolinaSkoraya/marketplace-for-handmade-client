@@ -9,17 +9,35 @@
 .gridContainer {
   display: grid;
   border: 1px solid black;
-  margin: 40px 40px;
+  margin: 0 40px 15px 40px;
 }
 
 .gridRow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   border-bottom: 1px solid gray;
+  padding: 10px 5px;
 }
 
 .orderList {
   border-right: 1px solid $color-basic-dark;
   border-left: 1px solid $color-basic-dark;
   margin: 5px 0;
+}
+
+.buttonDeleteUser {
+  box-shadow: none;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: darken($color-secondary-light, 20%);
+}
+
+.button.buttonDeleteUser:hover {
+  box-shadow: none;
+  background-color: $color-button-liked;
+}
+
+.tableTitle {
+  font-size: $font-size-sub-title;
+  padding: 15px 0;
 }

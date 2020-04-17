@@ -34,6 +34,11 @@ class UserStore {
     @observable goodsInLikedGoods: GoodInterface[] = [];
 
     @observable showMessageError = false;
+    @observable isError = false;
+
+    errors = {
+      notCreated: []
+    };
 
     @observable seller = {
         _id: "",
@@ -272,29 +277,26 @@ class UserStore {
         this.ordersOfSeller = responseSellerOrders.data;
     }
 
-    @observable newGoodName = "";
-    @observable newGoodPrice = 0;
-    @observable newGoodDescription = "";
-    @observable newGoodCategory = "";
-
     @action.bound
-    async createGood () {
-        console.log(this.newGoodCategory);
+    async createGood (values) {
         const good = {
-            name: this.newGoodName,
-            price: this.newGoodPrice,
+            name: values.newGoodName,
+            price: values.newGoodPrice,
             idSeller: this.seller._id,
-            description: this.newGoodDescription,
-            image: "fairy-house.jpg",
+            description: values.newGoodDescription,
+            image: values.image,
+            photos: values.photos,
             likes: 0,
-            category: this.newGoodCategory,
+            category: values.newGoodCategory,
             tags: ["tag1", "tag2"]
         };
 
         try {
-            const response = await postGood(good);
-            console.log(response);
+            await postGood(good);
+
         } catch (error) {
+            // @ts-ignore
+            this.errors.notCreated.push(error);
             console.log(error);
         }
     }

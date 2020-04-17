@@ -65,6 +65,8 @@
 .rc-dialog-root {
   position: absolute;
   top: 20vh;
-  left: 30vw;
+  left: 35vw;
+  display: flex;
+  z-index: 999;
 }
 

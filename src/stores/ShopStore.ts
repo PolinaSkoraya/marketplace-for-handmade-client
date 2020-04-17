@@ -37,4 +37,4 @@ class ShopStore {
     }
 }
 
-export {ShopStore};
+export default ShopStore;

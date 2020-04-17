@@ -6,6 +6,7 @@ import {observer} from "mobx-react";
 import {GoodInterface} from "../../stores/helpers/interfaces";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {observable} from "mobx";
+import classNames from "classnames";
 
 export enum GoodsContainerPosition {
     basket = 'BASKET',
@@ -16,7 +17,7 @@ export enum GoodsContainerPosition {
 }
 
 interface Props {
-    goodsContainerTitle: string,
+    goodsContainerTitle?: string,
     goods: GoodInterface[],
     goodsContainerPosition?: GoodsContainerPosition
 }
@@ -29,10 +30,13 @@ class GoodsContainer extends Component <Props> {
         const {goods, goodsContainerPosition, goodsContainerTitle} = this.props;
 
         return (
-            <div className={style.goodsContainer}>
-                <div className={style.goodsContainer__title}>
-                    {goodsContainerTitle}
-                </div>
+                <div className={classNames(style.goodsContainer, {[style.goodsContainer__padding]: !goodsContainerTitle} )}>
+                {
+                    goodsContainerTitle &&
+                    <div className={style.goodsContainer__title}>
+                        {goodsContainerTitle}
+                    </div>
+                }
 
                 <div className={style.goodsContainer__grid}>
                     <TransitionGroup component={null}>

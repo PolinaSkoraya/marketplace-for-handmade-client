@@ -25,7 +25,6 @@
 
 .input.buyerLogin-input {
   width: 80%;
-  //padding: 10px 5px;
   margin: 0;
   &:focus {
     border: 1px solid $color-basic-dark;
@@ -62,4 +61,14 @@
   margin-top: -7px;
   color: $color-button-liked;
   font-size: 12px;
+  height: 7px;
+}
+
+.linkToRegistr {
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.buttonSign {
+  width: 95px;
 }

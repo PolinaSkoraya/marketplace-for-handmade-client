@@ -16,6 +16,7 @@ interface GoodInterface {
     status?: string,
     idOrder?: string,
     category?: string,
+    photos?: string[]
     tags?: string[]
 }
 

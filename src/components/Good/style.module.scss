@@ -90,11 +90,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 320px;
+  width: 340px;
   background-color: $color-secondary-light;
-  padding: 20px 10px;
   box-shadow: $box-shadow-good;
   border-radius: 20px;
+  padding: 30px 10px;
 }
 
 .updateGoodForm__input {
@@ -107,4 +107,26 @@
   resize: none;
 }
 
+.buttonClose {
+  position: absolute;
+  top: 12px;
+  left: 305px;
+  font-size: 22px;
+}
+
+.moneyIcon {
+  font-size: 14px;
+}
+
+.messageError {
+  margin-top: -5px;
+  margin-bottom: 15px;
+  color: $color-button-liked;
+  font-size: 12px;
+  height: 7px;
+}
+
+.buttonUpdate {
+  margin-top: 15px;
+}
 

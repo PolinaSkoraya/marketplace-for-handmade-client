@@ -4,7 +4,7 @@ const URLS = {
     users: '/users/',
     registerBuyer: '/users/register',
     sellers: "/sellers/"
-}
+};
 
 const STATIC_IMAGES = "http://localhost:9000/static/images/";
 

@@ -7,25 +7,11 @@ import {FormattedMessage} from "react-intl";
 import {withRouter} from 'react-router';
 import {NavLink} from 'react-router-dom';
 import basket from "../../static/icons/svg/shopping-cart.svg";
-import {action, observable} from "mobx";
 import {ROUTES} from "../../routes/routes";
 import {GoodsContainerPosition, OrdersContainer} from "../../components/OrdersContainer/OrdersContainer";
 
 @observer
 class BuyerPage extends Component {
-    @observable animation = false;
-    @observable isRedirect = false;
-    @observable appearHome = true;
-
-    @action.bound
-    animate () {
-        this.animation = true;
-        setTimeout(() => {
-            this.animation = false;
-            this.isRedirect = true;
-        }, 2000);
-    }
-
     render () {
         const {user} = RootStore;
 
@@ -49,7 +35,7 @@ class BuyerPage extends Component {
                     <div>
                         <div className={styles.basketContainer} id="basket">
                             {
-                                user.goodsInBasket[0]?
+                                user.goodsInBasket.length !== 0 ?
                                 <>
                                     <GoodsContainer
                                         goodsContainerTitle="Basket"
@@ -62,13 +48,13 @@ class BuyerPage extends Component {
                                     </div>
                                 </>
                                 :
-                                <div className={styles.basketContainer__empty}>
-                                    <div className={styles.basketContainer__emptyMessage}>
+                                <div className={styles.emptyContainer}>
+                                    <div className={styles.emptyMessage}>
                                         Your basket is empty! Click to go to the goods catalog
                                     </div>
 
                                     <NavLink to={ROUTES.goods.goods} className="">
-                                        <img onClick={this.animate} className={styles.imgShoppingCart} src={basket} alt="shopping-cart"/>
+                                        <img className={styles.imgShoppingCart} src={basket} alt="shopping-cart"/>
                                     </NavLink>
                                 </div>
                             }
@@ -78,26 +64,25 @@ class BuyerPage extends Component {
                     <div>
                         <div id="liked">
                             {
-                                user.goodsInLikedGoods[0] ?
+                                user.goodsInLikedGoods.length !== 0 &&
                                     <GoodsContainer
                                         goodsContainerTitle="Liked"
                                         goods={user.goodsInLikedGoods}
                                         goodsContainerPosition={GoodsContainerPosition.likedGoods}
                                     />
-                                    :
-                                    <div>
-                                        Like?
-                                    </div>
                             }
                         </div>
                     </div>
 
                     <div>
                         <div id="orders">
-                            <OrdersContainer
-                                goods={user.orders}
-                                position={GoodsContainerPosition.ordersBuyer}
-                            />
+                            {
+                                user.orders.length !== 0 &&
+                                <OrdersContainer
+                                    goods={user.orders}
+                                    position={GoodsContainerPosition.ordersBuyer}
+                                />
+                            }
                         </div>
                     </div>
 

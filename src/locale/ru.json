@@ -3,6 +3,7 @@
   "basketCost": "Сумма: {basketCost}$",
   "price": "Цена: {price}$",
   "shop": "Магазин: {shopName}",
+  "shopJ": "Магазин",
   "description": "Описание: ",
   "services": "Услуги: {sellerServices}",
   "aboutShop": "О магазине:",
@@ -21,5 +22,14 @@
   "deleteUser": "удалить пользователя",
   "shopInfo": "О магазине",
   "validMessage": "минимум 5 символов",
-  "incorrectEmOrPass": "Неверный email или password"
+  "incorrectEmOrPass": "Неверный email или password",
+  "acceptOrder": "принять заказ",
+  "doneOrder": "завершить заказ",
+  "status": "состояние",
+  "users": "Пользователи",
+  "shops": "Магазины",
+  "chooseFile": "выбрать файлы...",
+  "adPhotos": "Дополнительные фото, выберите 4:",
+  "mainPhoto": "Главное фото:",
+  "addNewGood": "Новый товар"
 }

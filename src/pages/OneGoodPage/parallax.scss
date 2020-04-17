@@ -4,110 +4,45 @@
 @import "src/styles/shared";
 @import "src/styles/variables";
 
-.parallax {
-  perspective: 300px;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-
-}
-
 .parallax__group {
-  position: relative;
-  height: 100vh;
+  height: 92vh;
   transform-style: preserve-3d;
 
-}
-
-.parallax__layer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  position: sticky;
+  top: 8vh;
   left: 0;
 
-  padding-top: 20vh;
-}
-
-.parallax__layer--fore {
-  z-index: 1;
-  transform: translateZ(90px) scale(.7);
-}
-
-.parallax__layer--base {
-  transform: translateZ(0);
-  z-index: 4;
-}
-
-.parallax__layer--back {
-  transform: translateZ(-300px) scale(2.02);
-  background-color: lighten( $color-secondary-medium, 37%);
-  background-image: radial-gradient(white 15%, transparent 16%),
-  radial-gradient(white 15%, transparent 16%);
-  background-size: 60px 60px;
-  background-position: 0 0, 30px 30px;
-  z-index: 3;
-}
-
-.parallax__layer--deep {
-  transform: translateZ(-600px) scale(3);
-  background-color: #0000b6;
-  z-index: 2;
+  padding: 40px;
 }
 
 .parallax__group1 {
-  z-index: 5;
-  .parallax__layer--base {
-    background-color: lighten( $color-secondary-medium, 40%);
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding-top: 8vh;
+  margin-bottom: 8vh;
+  background-color: lighten($color-secondary-light, 20%);
+
+  background-image: radial-gradient(white 15%, transparent 16%),
+  radial-gradient(white 15%, transparent 16%);
+  background-size: 60px 60px;
 }
 
 .parallax__group2 {
-  z-index: 3;
-  .parallax__layer--base {
-  }
-  .parallax__layer--back {
-  }
+  background-color: lighten($color-secondary-light, 17%);
+
+
+  display: flex;
+  align-items: center;
 }
 
 .parallax__group3 {
-  z-index: 4;
-  .parallax__layer--base {
-    background-color: lighten( $color-secondary-medium, 30%);
+  background-color: lighten($color-secondary-light, 10%);
 
-  }
-  .parallax__layer--fore {
-  }
-}
-
-.parallax__group4 {
-  z-index: 2;
-
-  .parallax__layer--base {
-    z-index: -4;
-  }
-}
-
-.parallax__group5 {
-  z-index: 3;
-
-  .parallax__layer--base {
-    background-color: #69E781;
-  }
-}
-
-.parallax__group6 {
-  z-index: 2;
-  .parallax__layer--back {
-    opacity: 1;
-  }
-}
-
-.parallax__group7 {
-  z-index: 3;
-  .parallax__layer--base {
-    background-color: #69E781;
-  }
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .title {
@@ -124,33 +59,16 @@
   @extend %center;
 }
 
-.parallax__aboutShop--fore {
-  display: flex;
-  flex-direction: column;
-  @extend %center;
-
-  padding-top: 5vh;
-}
-
-.shop-logo {
-  margin-left: -30%;
-  margin-top: -15%;
-  img {
-    height: 100vh;
-    opacity: 0.1;
-  }
-}
-
 .shopName {
   font-size: $font-size-title;
   margin-bottom: 10px;
-
 }
 
 .shopLink {
+  display: block;
   color: $color-basic-dark;
   font-weight: 500;
-  padding: 0 15px;
+  margin-bottom: 15px;
 }
 
 .shop-description {

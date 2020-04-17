@@ -24,9 +24,7 @@ class App extends Component {
             ) : (
             <RawIntlProvider value={localization.intl}>
                 <div className="App">
-                    <div className=".modalsWrapper">
-                        <Modals/>
-                    </div>
+                    <Modals/>
                     <BrowserRouter>
                         <Navigation/>
                         <Suspense fallback={<Spinner/>}>

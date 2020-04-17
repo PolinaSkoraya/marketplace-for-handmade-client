@@ -8,26 +8,18 @@ import {FormattedMessage} from "react-intl";
 import MessageError from "../MessageError/MessageError";
 import Button from "../Button/Button";
 import { Form, Text } from 'informed';
-import {FaRegLemon, FaTrash, FaRegSquare, FaPen} from "react-icons/fa";
-import * as Yup from 'yup';
-
-export const validateLength = value => {
-    return !value || value.length < 6
-        ? "must be longer than 5 characters"
-        : undefined;
-};
-
-export const SignupSchema = Yup.object().shape({
-    email: Yup.string()
-        .email('Invalid email')
-        .required('Required'),
-    password: Yup.string()
-        .min(6, 'Too Short!')
-        .required('Required')
-});
+import {validateLength} from "../../stores/helpers/validation";
+import {action} from "mobx";
+import { withRouter } from "react-router";
 
 @observer
 class BuyerLogin extends Component {
+    @action
+    async login(user, email, password) {
+        await user.login(email, password);
+        let props: any = this.props;
+        props.history.push("/");
+    }
 
     render () {
         const {user} = RootStore;
@@ -55,6 +47,7 @@ class BuyerLogin extends Component {
                                     id="email"
                                     validate={validateLength}
                                     validateOnChange
+                                    autoFocus
                                 />
                                 <label htmlFor="email" className="messageError">{formState.errors.email}</label>
 
@@ -71,11 +64,16 @@ class BuyerLogin extends Component {
                                 />
                                 <label htmlFor="password" className="messageError">{formState.errors.password}</label>
 
-                                <Button type="submit" onClick={() => user.login(user.email, user.password)} disabled={formState.invalid}>
+                                <Button
+                                    type="submit"
+                                    className="buttonSign"
+                                    onClick={() => this.login(user, formState.values.email, formState.values.password)}
+                                    disabled={formState.invalid}
+                                >
                                     <FormattedMessage id="signIn"/>
                                 </Button>
 
-                                <NavLink to={ROUTES.users.registration}>
+                                <NavLink to={ROUTES.users.registration} className="linkToRegistr">
                                     <FormattedMessage id="register"/>
                                 </NavLink>
                             </>
@@ -95,4 +93,4 @@ class BuyerLogin extends Component {
     }
 }
 
-export default BuyerLogin;
+export default withRouter(BuyerLogin);

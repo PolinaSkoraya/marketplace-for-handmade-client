@@ -21,55 +21,6 @@
   justify-content: space-between;
 }
 
-.createGoodForm {
-  display: flex;
-  flex-direction: column;
-  @extend %center;
-  width: 300px;
-  background-color: $color-secondary-light;
-  box-shadow: $box-shadow-good;
-  border-radius: 20px;
-  padding: 30px;
-
-  transform: translateX(-100%);
-  position: absolute;
-  top: 12vh;
-  left: 0;
-  opacity: 0.5;
-
-  transition: left 500ms, opacity 200ms;
-}
-
-.buttonShowModal {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-}
-
-.createGoodForm__show {
-  left: 340px;
-  opacity: 1;
-  transition: left 500ms, opacity 200ms;
-}
-
-
-.createGoodForm__input {
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-.createGoodForm__textarea {
-  height: 80px;
-  resize: none;
-}
-
-.createGoodForm__buttonClose {
-  position: absolute;
-  top: 12px;
-  left: 265px;
-  font-size: 22px;
-}
-
 .success {
   color: rgba(0, 0, 254, 0.66);
 }
@@ -105,5 +56,22 @@
   resize: none;
   margin-bottom: 20px;
   font-size: $font-size-small;
+}
+
+.shopName {
+  font-size: $font-size-title;
+  text-align: left;
+  padding: 20px 0  0 20px;
+}
+
+.profileContainer__message {
+  display: flex;
+  flex-direction: column;
+  @extend %center;
+  padding-top: 60px;
+}
+
+.profileContainer__messageText {
+  font-size: $font-size-sub-title;
 }
 
