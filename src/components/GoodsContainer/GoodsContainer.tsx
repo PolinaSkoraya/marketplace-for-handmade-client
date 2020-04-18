@@ -17,7 +17,7 @@ export enum GoodsContainerPosition {
 }
 
 interface Props {
-    goodsContainerTitle?: string,
+    goodsContainerTitle?: any,
     goods: GoodInterface[],
     goodsContainerPosition?: GoodsContainerPosition
 }

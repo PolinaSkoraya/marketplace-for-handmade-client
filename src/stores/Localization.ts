@@ -6,17 +6,23 @@ import {
     defineMessages,
 } from 'react-intl';
 
-import text from '../locale/en.json'
+import EN from '../locale/en.json';
+import RU from "../locale/ru.json";
 
 class Localization {
-    @observable.shallow messages: Record<string, string> = text;
-    @observable locale = "en";
+    @observable messages: Record<string, string> = EN;
+    @observable locale;
     @observable intl: IntlShape;
-
+    private defaultLocale = 'en';
     // @observable private _locale: string;
-    // private defaultLocale = 'en';
 
-    constructor() {
+    constructor () {
+        this.locale = localStorage.getItem('locale') || this.defaultLocale;
+
+        if (this.locale === "ru") {
+            this.messages = RU;
+        }
+
         const cache = createIntlCache();
 
         this.intl = createIntl({
@@ -27,15 +33,24 @@ class Localization {
         );
     }
 
-    // constructor() {
-    //     this._locale = localStorage.getItem('locale') || this.defaultLocale;
-    //
-    //     this.initIntl().then(() => {
-    //         reaction(() => this.locale, () => this.initIntl());
-    //         reaction(() => this.messages, () => this.initIntl());
-    //     });
-    // }
-    //
+    @action
+    updateLocale (lang) {
+        const cache = createIntlCache();
+
+        if (lang === "en") {
+            this.messages = EN;
+        } else {
+            this.messages = RU;
+        }
+
+        this.intl = createIntl({
+                locale: this.locale,
+                messages: this.messages,
+            },
+            cache,
+        );
+    }
+
     // @computed
     // get locale() {
     //     return this._locale;
@@ -46,24 +61,6 @@ class Localization {
     //         localStorage.setItem('locale', locale);
     //
     //         this._locale = locale;
-    //         this.fetchTranslation(this._locale);
-    //     }
-    // }
-
-    // @action.bound
-    // async restoreDefaults() {
-    //     this._locale = this.defaultLocale;
-    //     await this.fetchTranslation(this._locale);
-    // }
-
-    // @action.bound
-    // async fetchTranslation(locale: string) {
-    //     try {
-    //         const response = await httpFacade.localization.fetchLocalization(locale);
-    //
-    //         this.messages = response.data;
-    //     } catch (error) {
-    //         Log.error(error);
     //     }
     // }
 

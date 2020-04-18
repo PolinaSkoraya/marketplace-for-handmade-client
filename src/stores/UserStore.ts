@@ -105,8 +105,8 @@ class UserStore {
             this.showMessageError = false;
             const response = await instance.post(URLS.loginBuyer, user);
             localStorage.setItem(TOKEN, response.data);
-
             this.init(response.data);
+            return response.data;
         } catch (error) {
             this.showMessageError = true;
             console.log(error);
@@ -198,7 +198,7 @@ class UserStore {
     @action.bound
     async setSellerRole () {
         await updateUserRole(this.id, Roles.seller);
-        this.login(this.email, this.password);
+        await this.login(this.email, this.password);  //await
         this.roles.push(Roles.seller);
         await this.createShop();
     }

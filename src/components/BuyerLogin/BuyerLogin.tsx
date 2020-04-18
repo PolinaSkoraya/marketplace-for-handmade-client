@@ -16,9 +16,11 @@ import { withRouter } from "react-router";
 class BuyerLogin extends Component {
     @action
     async login(user, email, password) {
-        await user.login(email, password);
+        const response = await user.login(email, password);
         let props: any = this.props;
-        props.history.push("/");
+        if (response) {
+            props.history.push("/");
+        }
     }
 
     render () {
@@ -34,9 +36,9 @@ class BuyerLogin extends Component {
                     <Form className="form-log buyerLogin-form">
                         {({ formState }) => (
                             <>
-                                <h4 className="buyerLogin-form__name">
+                                <p className="buyerLoginForm__title">
                                     <FormattedMessage id="signIn"/>
-                                </h4>
+                                </p>
 
                                 <Text
                                     field="email"

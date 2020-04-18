@@ -12,6 +12,7 @@ import {FaSignOutAlt} from "react-icons/fa";
 import {FiShoppingCart} from "react-icons/fi";
 import Button from "../Button/Button";
 import classNames from "classnames";
+import {MdLanguage} from "react-icons/md";
 
 @observer
 class Navigation extends Component {
@@ -22,8 +23,17 @@ class Navigation extends Component {
         props.history.push("/");
     }
 
+    setLocale (localization, lang) {
+        localStorage.setItem('locale', lang);
+        localization.locale = lang;
+
+        localization.updateLocale(lang);
+        console.log(lang);
+    }
+
     render () {
         const {user} = RootStore;
+        const {localization} = RootStore;
 
         let props: any = this.props;
 
@@ -31,6 +41,20 @@ class Navigation extends Component {
             <>
                 <div className={style.navigation__list}>
                     <div className={style.navigation__links}>
+                        <div className={style.localeBtn}>
+                            {
+                                localization.locale === "en" ?
+                                    <Button styleType="medium" onClick={()=>this.setLocale(localization, "ru")}>
+                                        <MdLanguage/>
+                                        <p>ru</p>
+                                    </Button> :
+                                    <Button styleType="medium" onClick={()=>this.setLocale(localization, "en")}>
+                                        <MdLanguage/>
+                                        <p>en</p>
+                                    </Button>
+                            }
+                        </div>
+
                         <NavLink
                             to={ROUTES.root}
                             className={style.navigation__link}

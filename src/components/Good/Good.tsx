@@ -5,7 +5,6 @@ import {observer} from 'mobx-react';
 import {action, observable} from "mobx";
 import {ROUTES} from "../../routes/routes";
 import {GoodInterface} from "../../stores/helpers/interfaces";
-import {STATIC_IMAGES} from "../../http/urls";
 import OneGoodStore from "../../stores/OneGoodStore";
 import {GoodsContainerPosition} from "../GoodsContainer/GoodsContainer";
 import {FormattedMessage} from 'react-intl';
@@ -16,9 +15,7 @@ import Button from "../Button/Button";
 import classNames from 'classnames';
 import ModalStore from "../../stores/ModalStore";
 import UpdateGoodModal from "./UpdateGoodModal";
-import {TiWarningOutline} from "react-icons/ti";
 import {IconContext} from "react-icons";
-import WarningModal from "../WarningModal/WarningModal";
 
 interface Props {
     good: GoodInterface,

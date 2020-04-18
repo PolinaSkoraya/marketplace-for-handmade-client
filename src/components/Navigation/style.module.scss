@@ -98,3 +98,14 @@
 .activeLink {
   color: $color-secondary-medium;
 }
+
+.localeBtn {
+  margin-left: 10px;
+}
+
+@media (max-width: 400px) {
+  .navigation__list {
+    flex-direction: column;
+    height: auto;
+  }
+}

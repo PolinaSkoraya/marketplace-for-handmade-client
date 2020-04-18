@@ -87,3 +87,13 @@
   width: 200px;
 }
 
+@media (max-width: 400px) {
+  .profileContainer {
+    padding-top: 13vh;
+  }
+
+  .profileContainer__aside {
+    display: none;
+  }
+}
+

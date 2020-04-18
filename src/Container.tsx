@@ -46,7 +46,7 @@ function Container({ location }) {
                             {
                                 routes.map(({ path, Component }) => (
                                     <Route key={path} exact path={path}>
-                                            <Component />
+                                            <Component key={path}/>
                                     </Route>
                                 ))
 

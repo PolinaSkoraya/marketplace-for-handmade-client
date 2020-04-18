@@ -8,6 +8,7 @@ import {NavLink} from 'react-router-dom';
 import {action, observable} from "mobx";
 import Good from "../../components/Good/Good";
 import {ROUTES} from "../../routes/routes";
+import {FormattedMessage} from "react-intl";
 
 @observer
 class HomePage extends Component{
@@ -50,7 +51,9 @@ class HomePage extends Component{
                 </div>
 
                 <div className={style.wrapper}>
-                    <div className={style.wrapper__title}>Top 3 of marketplace</div>
+                    <div className={style.wrapper__title}>
+                        <FormattedMessage id="top3"/>
+                    </div>
                         <ul className={style.stage}>
                             {
                                 this.store.goods &&

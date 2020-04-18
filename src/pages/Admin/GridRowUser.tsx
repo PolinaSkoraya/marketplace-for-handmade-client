@@ -6,26 +6,14 @@ import style from "./style.module.scss";
 import {FormattedMessage} from "react-intl";
 import Button from "../../components/Button/Button";
 import classNames from "classnames";
-import ModalStore, {DialogActionType} from "../../stores/ModalStore";
-import WarningModal from "../../components/WarningModal/WarningModal";
 
 @observer
-class GridRowUser  extends Component<{user: any}> {
-    @action
-    async deleteUser(idUser) {
-        const {operation} = await ModalStore.showModal(WarningModal, {title: "Delete user?"});
-
-        if (operation === 1) {
-            await deleteUserById(idUser);
-        }
-
-    }
-
+class GridRowUser  extends Component<{user: any, deleteUser: (userId) => void}> {
     render () {
         return (
             <div className={style.gridRow}>
                 <div className="grid-column grid-column-0">
-                    <Button className={classNames(style.buttonDeleteUser, style.button)} onClick={() => this.deleteUser(this.props.user._id)}>
+                    <Button className={classNames(style.buttonDeleteUser, style.button)} onClick={() => this.props.deleteUser(this.props.user._id)}>
                         <FormattedMessage id={"deleteUser"}/>
                     </Button>
                 </div>

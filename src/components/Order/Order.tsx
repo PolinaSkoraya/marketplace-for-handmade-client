@@ -96,6 +96,7 @@ class Order extends Component<Props> {
                                         <div>
                                             <FormattedMessage id="acceptOrder"/>:
                                         </div>
+
                                         <Button
                                             styleType="small"
                                             id={good.idOrder}

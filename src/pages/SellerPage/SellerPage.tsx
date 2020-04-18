@@ -2,7 +2,6 @@ import style from "./style.module.scss"
 import React, {Component} from "react";
 import {observer} from "mobx-react";
 import {GoodsContainer, GoodsContainerPosition} from "../../components/GoodsContainer/GoodsContainer";
-import {STATIC_IMAGES} from "../../http/urls";
 import {FormattedMessage} from "react-intl";
 import classNames from "classnames";
 import ShopStore from "../../stores/ShopStore";
@@ -13,7 +12,7 @@ import {goodsCategories} from "../../stores/helpers/interfaces";
 import RootStore from "../../stores/RootStore";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { Form, Text, TextArea, Select, Option } from 'informed';
+import {Form, Option, Select, Text, TextArea} from 'informed';
 import {validateLength, validateNumber} from "../../stores/helpers/validation";
 import axios from "axios";
 
@@ -34,12 +33,11 @@ class SellerPage extends Component {
         this.isShowModal = !this.isShowModal;
     }
 
-
     @action.bound
     async onCreateGood (user, values) {
         this.isShowModal = !this.isShowModal;
 
-        await this.handleDrop (this.files, this.file);
+        // await this.handleDrop (this.files, this.file);
 
         values.photos = this.photos;
         values.image = this.image;
@@ -82,12 +80,10 @@ class SellerPage extends Component {
         this[name] = files;
         console.log(this[name]);
 
-        if(name == "files") {
-            let imgURLS: string[] = [];
-            Array.from(this.files).map ( file =>
-                imgURLS.push(window.URL.createObjectURL(file))
+        if (name == "files") {
+            this.photosURLS = Array.from(this.files).map ( file =>
+                window.URL.createObjectURL(file)
             );
-            this.photosURLS = imgURLS;
         } else {
             this.imageURL = window.URL.createObjectURL(files[0]);
         }
@@ -120,8 +116,7 @@ class SellerPage extends Component {
             headers: { "X-Requested-With": "XMLHttpRequest" },
         }).then(response => {
             const data = response.data;
-            const fileURL = data.secure_url; // You should store this URL for future references in your app
-            this.image = fileURL;
+            this.image = data.secure_url;
         });
 
         await axios.all(uploaders).then(() => {
@@ -134,8 +129,8 @@ class SellerPage extends Component {
         let props: any = this.props;
         const idSeller = props.match.params.id;
 
-        console.log(this.photosURLS);
-        console.log(this.imageURL);
+        // console.log(this.photosURLS);
+        // console.log(this.imageURL);
 
         return (
             <div className={style.sellerPage}>
@@ -148,7 +143,7 @@ class SellerPage extends Component {
                     rtl={false}
                     pauseOnHover
                 />
-                <div className="sellerrPage__header">
+                <div className="sellerPage__header">
 
                     <div className={style.sellerPage__backImage}> </div>
 
@@ -265,15 +260,17 @@ class SellerPage extends Component {
                                         <label htmlFor="photos" className={style.labelPhotos}>
                                             <FormattedMessage id="chooseFile"/>
                                         </label>
-                                        <div className={style.photos}>
+                                        {
+                                            Boolean(this.photosURLS.length) && <div className={style.photos}>
                                             {
-                                                this.photosURLS.length !== 0 && this.photosURLS.map ( url =>
-                                                    <div className={style.imageWrap}>
-                                                        <img src={url} alt="image" key={url} className={style.formImage}/>
+                                                 this.photosURLS.map ( url =>
+                                                    <div className={style.imageWrap} key={url}>
+                                                        <img src={url} alt="image" className={style.formImage}/>
                                                     </div>
                                                 )
                                             }
                                         </div>
+                                        }
                                     </div>
                                 </div>
                             )}

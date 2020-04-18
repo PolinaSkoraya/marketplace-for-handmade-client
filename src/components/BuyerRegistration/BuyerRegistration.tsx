@@ -20,9 +20,9 @@ class BuyerRegistration extends Component {
                 <Form className="form-log buyerRegistration-form">
                     {({ formState }) => (
                         <>
-                            <h4>
+                            <p className="formTitle">
                                 <FormattedMessage id="register"/>
-                            </h4>
+                            </p>
                             <Text
                                 className="input buyerRegistration-input"
                                 value={user.nameForRegistration}

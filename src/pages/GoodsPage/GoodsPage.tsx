@@ -3,7 +3,6 @@ import React, {Component} from "react";
 import {GoodsContainer} from "../../components/GoodsContainer/GoodsContainer";
 import {observer} from "mobx-react";
 import GoodsStore from "../../stores/GoodsStore";
-import RootStore from "../../stores/RootStore";
 import {action, observable} from "mobx";
 import Pagination from "../../components/Pagination/Pagination";
 import { IconContext } from "react-icons";
@@ -12,6 +11,7 @@ import {MdCancel} from "react-icons/md";
 import {goodsCategories} from "../../stores/helpers/interfaces";
 import Button from "../../components/Button/Button";
 import classNames from "classnames";
+import {FormattedMessage} from "react-intl";
 
 @observer
 class GoodsPage extends Component {
@@ -69,6 +69,8 @@ class GoodsPage extends Component {
     }
 
     render () {
+        const searchMessage = <FormattedMessage id="searched"/>;
+
         return (
             <>
                 <div className={style.goodsPage}>
@@ -108,11 +110,21 @@ class GoodsPage extends Component {
                             onChange={this.handleInputChange}
                             value = {this.searchCategory}
                         >
-                            <option value={this.defaultSelect} disabled>Choose category</option>
-                            <option value={goodsCategories.art}>art</option>
-                            <option value={goodsCategories.accessories}>accessories</option>
-                            <option value={goodsCategories.homeware}>homeware</option>
-                            <option value={goodsCategories.toys}>toys</option>
+                            <option value={this.defaultSelect} disabled>
+                                Choose category
+                            </option>
+                            <option value={goodsCategories.art}>
+                                art
+                            </option>
+                            <option value={goodsCategories.accessories}>
+                                accessories
+                            </option>
+                            <option value={goodsCategories.homeware}>
+                                homeware
+                            </option>
+                            <option value={goodsCategories.toys}>
+                                toys
+                            </option>
                         </select>
                     </div>
 

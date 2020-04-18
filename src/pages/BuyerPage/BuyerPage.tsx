@@ -14,19 +14,22 @@ import {GoodsContainerPosition, OrdersContainer} from "../../components/OrdersCo
 class BuyerPage extends Component {
     render () {
         const {user} = RootStore;
+        const basketMessage = <FormattedMessage id="basket"/>;
+        const likedMessage = <FormattedMessage id="liked"/>;
+        const ordersMessage = <FormattedMessage id="orders"/>;
 
         return (
             <div className={styles.profileContainer}>
                 <div className={styles.profileContainer__aside}>
                     <div className={styles.menu}>
                         <a className={styles.profileContainer__link} href="#basket">
-                            basket
+                            <FormattedMessage id="basket"/>
                         </a>
                         <a className={styles.profileContainer__link} href="#liked">
-                            liked
+                            <FormattedMessage id="liked"/>
                         </a>
                         <a className={styles.profileContainer__link} href="#orders">
-                            orders
+                            <FormattedMessage id="orders"/>
                         </a>
                     </div>
                 </div>
@@ -38,7 +41,7 @@ class BuyerPage extends Component {
                                 user.goodsInBasket.length !== 0 ?
                                 <>
                                     <GoodsContainer
-                                        goodsContainerTitle="Basket"
+                                        goodsContainerTitle={basketMessage}
                                         goods={user.goodsInBasket}
                                         goodsContainerPosition={GoodsContainerPosition.basket}
                                     />
@@ -66,7 +69,7 @@ class BuyerPage extends Component {
                             {
                                 user.goodsInLikedGoods.length !== 0 &&
                                     <GoodsContainer
-                                        goodsContainerTitle="Liked"
+                                        goodsContainerTitle={likedMessage}
                                         goods={user.goodsInLikedGoods}
                                         goodsContainerPosition={GoodsContainerPosition.likedGoods}
                                     />
