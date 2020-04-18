@@ -6,7 +6,6 @@ import {FormattedMessage} from "react-intl";
 import classNames from "classnames";
 import ShopStore from "../../stores/ShopStore";
 import Button from "../../components/Button/Button";
-import {action, observable} from "mobx";
 import {MdCancel} from "react-icons/md";
 import {goodsCategories} from "../../stores/helpers/interfaces";
 import RootStore from "../../stores/RootStore";
@@ -14,55 +13,10 @@ import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {Form, Option, Select, Text, TextArea} from 'informed';
 import {validateLength, validateNumber} from "../../stores/helpers/validation";
-import axios from "axios";
 
 @observer
 class SellerPage extends Component {
     store: ShopStore = new ShopStore();
-    @observable isShowModal = false;
-    @observable file = [];
-    @observable files = [];
-    @observable photosURLS: string[] = [];
-    @observable imageURL = "";
-
-    image = "";
-    photos: string[] = [];
-
-    @action.bound
-    toggleForm () {
-        this.isShowModal = !this.isShowModal;
-    }
-
-    @action.bound
-    async onCreateGood (user, values) {
-        this.isShowModal = !this.isShowModal;
-
-        // await this.handleDrop (this.files, this.file);
-
-        values.photos = this.photos;
-        values.image = this.image;
-
-        try {
-            await user.createGood(values);
-            if(user.errors.notCreated.length === 0) {
-                toast.success("Good was created!", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    autoClose: 3000
-                });
-            }
-            while(user.errors.notCreated.length !== 0) {
-                user.errors.notCreated.pop();
-                throw Error("good wasn't created");
-            }
-        } catch (error) {
-            toast.error(error.message, {
-                position: toast.POSITION.TOP_RIGHT
-            });
-        }
-
-        let props: any = this.props;
-        await this.store.initGoodsOfSeller(props.match.params.id);
-    }
 
     async componentDidMount() {
         let props: any = this.props;
@@ -70,67 +24,13 @@ class SellerPage extends Component {
         await this.store.initGoodsOfSeller(props.match.params.id);
     }
 
-    @action.bound
-    handleInputChange (event) {
-        const target = event.target;
-
-        const files = target.files;
-        const name = target.name;
-
-        this[name] = files;
-        console.log(this[name]);
-
-        if (name == "files") {
-            this.photosURLS = Array.from(this.files).map ( file =>
-                window.URL.createObjectURL(file)
-            );
-        } else {
-            this.imageURL = window.URL.createObjectURL(files[0]);
-        }
-
-    }
-
-    @action.bound
-    handleDrop = async (files, file) => {
-        const filesArray: string[] = Array.from(files);
-        const uploaders = filesArray.map( file => {
-
-            const data = new FormData();
-            data.append('file', file);
-            data.append('upload_preset', 'zefqx6js');
-
-            return axios.post("https://api.cloudinary.com/v1_1/cloudqawsed/image/upload", data, {
-                headers: { "X-Requested-With": "XMLHttpRequest" },
-            }).then(response => {
-                const data = response.data;
-                const fileURL = data.secure_url; // You should store this URL for future references in your app
-                this.photos.push(fileURL);
-            })
-        });
-
-        const data = new FormData();
-        data.append('file', file[0]);
-        data.append('upload_preset', 'zefqx6js');
-
-        await axios.post("https://api.cloudinary.com/v1_1/cloudqawsed/image/upload", data, {
-            headers: { "X-Requested-With": "XMLHttpRequest" },
-        }).then(response => {
-            const data = response.data;
-            this.image = data.secure_url;
-        });
-
-        await axios.all(uploaders).then(() => {
-            console.log("all files uploaded", this.photos);
-        });
-    };
-
     render () {
         const {user} = RootStore;
         let props: any = this.props;
         const idSeller = props.match.params.id;
 
-        // console.log(this.photosURLS);
-        // console.log(this.imageURL);
+        console.log(this.store.photosURLS);
+        console.log(this.store.imageURL);
 
         return (
             <div className={style.sellerPage}>
@@ -172,15 +72,15 @@ class SellerPage extends Component {
                 {
                     idSeller === user.seller._id &&
                     <div className={style.createGoodContainer}>
-                        <Button type="button" onClick={this.toggleForm} className={style.buttonShowModal}>create good</Button>
+                        <Button type="button" onClick={this.store.toggleForm} className={style.buttonShowModal}>create good</Button>
 
                         <Form
-                            className={classNames(style.createGoodForm, {[style.createGoodForm__show]: this.isShowModal})}
+                            className={classNames(style.createGoodForm, {[style.createGoodForm__show]: this.store.isShowModal})}
                         >
                             {({ formState }) => (
                                 <div className={style.formContent}>
                                     <div className={style.formTextInfo}>
-                                        <Button type="button" styleType="small" onClick={this.toggleForm} className={style.createGoodForm__buttonClose}>
+                                        <Button type="button" styleType="small" onClick={this.store.toggleForm} className={style.createGoodForm__buttonClose}>
                                             <MdCancel/>
                                         </Button>
 
@@ -229,7 +129,7 @@ class SellerPage extends Component {
                                         <Button
                                             styleType="primary"
                                             type="submit"
-                                            onClick={ () => this.onCreateGood(user, formState.values)}
+                                            onClick={ () => this.store.onCreateGood(user, formState.values)}
                                             disabled={formState.invalid}
                                         >
                                             create new good
@@ -240,15 +140,15 @@ class SellerPage extends Component {
                                         <p className={style.fileInputs__text}>
                                             <FormattedMessage id="mainPhoto"/>
                                         </p>
-                                        <input id="image" type="file" name="file" onChange={this.handleInputChange} className={style.inputImage}/>
+                                        <input id="image" type="file" name="file" onChange={this.store.handleInputChange} className={style.inputImage}/>
                                         <label htmlFor="image" className={style.labelPhotos}>
                                             <FormattedMessage id="chooseFile"/>
                                         </label>
                                         <div className={style.image}>
                                             {
-                                                this.imageURL &&
+                                                this.store.imageURL &&
                                                 <div className={style.imageWrap}>
-                                                    <img src={this.imageURL} alt="image" className={style.formImage}/>
+                                                    <img src={this.store.imageURL} alt="image" className={style.formImage}/>
                                                 </div>
                                             }
                                         </div>
@@ -256,14 +156,14 @@ class SellerPage extends Component {
                                         <p className={style.fileInputs__text}>
                                             <FormattedMessage id="adPhotos"/>
                                         </p>
-                                        <input id="photos" type="file" name="files" onChange={this.handleInputChange}  multiple className={style.inputPhotos}/>
+                                        <input id="photos" type="file" name="files" onChange={this.store.handleInputChange}  multiple className={style.inputPhotos}/>
                                         <label htmlFor="photos" className={style.labelPhotos}>
                                             <FormattedMessage id="chooseFile"/>
                                         </label>
                                         {
-                                            Boolean(this.photosURLS.length) && <div className={style.photos}>
+                                            Boolean(this.store.photosURLS.length) && <div className={style.photos}>
                                             {
-                                                 this.photosURLS.map ( url =>
+                                                 this.store.photosURLS.map ( url =>
                                                     <div className={style.imageWrap} key={url}>
                                                         <img src={url} alt="image" className={style.formImage}/>
                                                     </div>
