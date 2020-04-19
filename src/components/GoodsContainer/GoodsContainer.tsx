@@ -2,7 +2,7 @@ import style from "./style.module.scss";
 import "./GoodsContainerAnimation.scss"
 import React, {Component} from "react";
 import Good from "../Good/Good";
-import {observer} from "mobx-react";
+import {inject, observer} from "mobx-react";
 import {GoodInterface} from "../../stores/helpers/interfaces";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {observable} from "mobx";
@@ -20,6 +20,7 @@ interface Props {
     goodsContainerTitle?: any,
     goods: GoodInterface[],
     goodsContainerPosition?: GoodsContainerPosition
+    func?: (id: string) => void
 }
 
 @observer
@@ -27,7 +28,7 @@ class GoodsContainer extends Component <Props> {
     @observable animate = true;
 
     render () {
-        const {goods, goodsContainerPosition, goodsContainerTitle} = this.props;
+        const {goods, goodsContainerPosition, goodsContainerTitle, ...rest} = this.props;
 
         return (
                 <div className={classNames(style.goodsContainer, {[style.goodsContainer__padding]: !goodsContainerTitle} )}>
@@ -54,6 +55,7 @@ class GoodsContainer extends Component <Props> {
                                         good={good}
                                         idSeller={good.idSeller}
                                         goodsContainerPosition={goodsContainerPosition}
+                                        {...rest}
                                     />
                                 </CSSTransition>
                         )

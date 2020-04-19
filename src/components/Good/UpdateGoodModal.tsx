@@ -22,7 +22,7 @@ class UpdateGoodModal extends Component<Props> {
     form = new UpdateGoodForm(this.good);
 
     onSubmit = async (values) => {
-        const {operation} = await ModalStore.showModal(WarningModal, {title: "Update good?"});
+        const {operation} = await ModalStore.showModal(WarningModal, {title: "updateGood"});
 
         if (operation === 1) {
             await this.form.onSubmit(values, payload =>

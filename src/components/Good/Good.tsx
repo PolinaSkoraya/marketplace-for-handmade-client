@@ -21,7 +21,8 @@ interface Props {
     good: GoodInterface,
     idSeller: string,
     goodsContainerPosition?: GoodsContainerPosition,
-    shadow?: boolean
+    shadow?: boolean,
+    func?: (id: string) => void
 }
 
 @observer
@@ -42,16 +43,17 @@ class Good extends Component<Props> {
         await user.removeFromBasket(id);
     }
 
-    openModal = (good?) => async () => {
+    openModal = (good?, func?) => async () => {
         const { payload } = await ModalStore.showModal(UpdateGoodModal, {good});
 
-        await  this.store.update(payload);
-        // await this.shopStore.initGoodsOfSeller(good.idSeller);
+        await this.store.update(payload);
+        await func(good.idSeller);
+        // console.log(func);
     };
 
     render () {
         const {user} = RootStore;
-        const {good, shadow, goodsContainerPosition, idSeller} = this.props;
+        const {good, shadow, goodsContainerPosition, idSeller, func} = this.props;
 
         return (
             <div
@@ -69,7 +71,7 @@ class Good extends Component<Props> {
                                     styleType="small"
                                     id={good._id}
                                     className={style.updateGoodButton}
-                                    onClick={this.openModal(good)}
+                                    onClick={this.openModal(good, func)}
                             >
                                 <FaPen/>
                             </Button>

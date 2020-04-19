@@ -183,6 +183,7 @@ class SellerPage extends Component {
                         goodsContainerTitle = {"Goods of " + this.store.seller.name}
                         goods={this.store.goodsOfSeller}
                         goodsContainerPosition={GoodsContainerPosition.sellerPage}
+                        func={this.store.initGoodsOfSeller}
                     />
                 </div>
             </div>
