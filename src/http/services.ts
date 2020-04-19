@@ -12,7 +12,8 @@ export function getSellers() {
 
 
 export function getPageGoods(page) {
-    return instance.get(URLS.goods + page, {
+    console.log("good page");
+    return instance.get(URLS.goods + "page/" + page, {
         headers: {
             'auth-token': localStorage.getItem(TOKEN)
         }
@@ -174,3 +175,10 @@ export function postShop(seller) {
 export function deleteUserById (idUser) {
     return instance.post(URLS.users + idUser + "/delete");
 }
+
+export function getGoodsByName (name, page) {
+    console.log("get");
+    return instance.get(URLS.goods + name + "/" +page)
+}
+
+

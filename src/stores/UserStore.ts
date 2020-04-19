@@ -284,7 +284,7 @@ class UserStore {
             price: values.newGoodPrice,
             idSeller: this.seller._id,
             description: values.newGoodDescription,
-            image: values.image,
+            image: values.photos[0],
             photos: values.photos,
             likes: 0,
             category: values.newGoodCategory,
@@ -293,8 +293,8 @@ class UserStore {
 
         try {
             await postGood(good);
-
         } catch (error) {
+            console.log("create", error);
             // @ts-ignore
             this.errors.notCreated.push(error);
             console.log(error);

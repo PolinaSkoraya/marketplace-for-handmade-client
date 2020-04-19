@@ -8,14 +8,21 @@ import BuyerRegistration from "./components/BuyerRegistration/BuyerRegistration"
 import {Roles} from "./stores/helpers/roles";
 import Modals from "./components/Modals";
 import NoMatch from "./pages/NoMatch/NoMatch";
+import GoodsPage from "./pages/GoodsPage/GoodsPage";
+import SellerProfile from "./pages/SellerProfile/SellerProfile";
+import SellerPage from "./pages/SellerPage/SellerPage";
+import OneGoodPage from "./pages/OneGoodPage/OneGoodPage";
+import BuyerPage from "./pages/BuyerPage/BuyerPage";
+import HomePage from "./pages/HomePage/HomePage";
+import Admin from "./pages/Admin/Admin";
 
-const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
-const Admin = lazy(() => import('./pages/Admin/Admin'));
-const GoodsPage = lazy(() => import("./pages/GoodsPage/GoodsPage"));
-const SellerProfile = lazy(() => import("./pages/SellerProfile/SellerProfile"));
-const SellerPage = lazy(() => import("./pages/SellerPage/SellerPage"));
-const OneGoodPage = lazy(() => import("./pages/OneGoodPage/OneGoodPage"));
-const BuyerPage = lazy(() => import("./pages/BuyerPage/BuyerPage"));
+// const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+// const Admin = lazy(() => import('./pages/Admin/Admin'));
+// const GoodsPage = lazy(() => import("./pages/GoodsPage/GoodsPage"));
+// const SellerProfile = lazy(() => import("./pages/SellerProfile/SellerProfile"));
+// const SellerPage = lazy(() => import("./pages/SellerPage/SellerPage"));
+//const OneGoodPage = lazy(() => import("./pages/OneGoodPage/OneGoodPage"));
+// const BuyerPage = lazy(() => import("./pages/BuyerPage/BuyerPage"));
 
 const routes = [
     { path: ROUTES.admin, Component: Admin },

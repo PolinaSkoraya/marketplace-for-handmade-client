@@ -13,6 +13,9 @@ import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {Form, Option, Select, Text, TextArea} from 'informed';
 import {validateLength, validateNumber} from "../../stores/helpers/validation";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import dropdownStyle from "../../styles/dropdownStyle.module.scss";
 
 @observer
 class SellerPage extends Component {
@@ -32,6 +35,10 @@ class SellerPage extends Component {
         console.log(this.store.photosURLS);
         console.log(this.store.imageURL);
 
+        const options = [
+            goodsCategories.art, goodsCategories.toys, goodsCategories.homeware, goodsCategories.accessories
+        ];
+
         return (
             <div className={style.sellerPage}>
                 <ToastContainer
@@ -44,8 +51,8 @@ class SellerPage extends Component {
                     pauseOnHover
                 />
                 <div className="sellerPage__header">
-
-                    <div className={style.sellerPage__backImage}> </div>
+                    <div className={style.sellerPage__backImage}>
+                    </div>
 
                     <div className={style.sellerPage__info}>
                         <div className={style.sellerPage__logo}>
@@ -115,16 +122,25 @@ class SellerPage extends Component {
                                         />
                                         <label htmlFor="newGoodPrice" className={style.messageError}>{formState.errors.newGoodPrice}</label>
 
-                                        <Select
-                                            className = {classNames("input", style.createGoodForm__input)}
-                                            field="newGoodCategory"
-                                        >
-                                            <Option disabled value="">Choose category</Option>
-                                            <Option value={goodsCategories.art}>art</Option>
-                                            <Option value={goodsCategories.accessories}>accessories</Option>
-                                            <Option value={goodsCategories.homeware}>homeware</Option>
-                                            <Option value={goodsCategories.toys}>toys</Option>
-                                        </Select>
+                                        {/*<Select*/}
+                                        {/*    className = {classNames("input", style.createGoodForm__input)}*/}
+                                        {/*    field="newGoodCategory"*/}
+                                        {/*>*/}
+                                        {/*    <Option disabled value="">Choose category</Option>*/}
+                                        {/*    <Option value={goodsCategories.art}>art</Option>*/}
+                                        {/*    <Option value={goodsCategories.accessories}>accessories</Option>*/}
+                                        {/*    <Option value={goodsCategories.homeware}>homeware</Option>*/}
+                                        {/*    <Option value={goodsCategories.toys}>toys</Option>*/}
+                                        {/*</Select>*/}
+                                        <Dropdown
+                                            onChange={(event)=> formState.values.newGoodCategory = event.value }
+                                            options={options}
+                                            placeholder="Choose category"
+                                            arrowClassName={dropdownStyle.dropArrow}
+                                            controlClassName={dropdownStyle.dropControl}
+                                            menuClassName={dropdownStyle.dropMenu}
+                                            className={dropdownStyle.drop}
+                                        />
 
                                         <Button
                                             styleType="primary"
@@ -137,22 +153,6 @@ class SellerPage extends Component {
                                     </div>
 
                                     <div className={style.fileInputs}>
-                                        <p className={style.fileInputs__text}>
-                                            <FormattedMessage id="mainPhoto"/>
-                                        </p>
-                                        <input id="image" type="file" name="file" onChange={this.store.handleInputChange} className={style.inputImage}/>
-                                        <label htmlFor="image" className={style.labelPhotos}>
-                                            <FormattedMessage id="chooseFile"/>
-                                        </label>
-                                        <div className={style.image}>
-                                            {
-                                                this.store.imageURL &&
-                                                <div className={style.imageWrap}>
-                                                    <img src={this.store.imageURL} alt="image" className={style.formImage}/>
-                                                </div>
-                                            }
-                                        </div>
-
                                         <p className={style.fileInputs__text}>
                                             <FormattedMessage id="adPhotos"/>
                                         </p>
