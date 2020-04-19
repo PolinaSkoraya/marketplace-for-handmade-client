@@ -9,7 +9,7 @@ import Button from "../../components/Button/Button";
 import classNames from "classnames";
 import {FormattedMessage} from "react-intl";
 import styles from "../BuyerPage/style.module.scss";
-import fileIcon from "../../static/icons/svg/emptyFile.svg";
+import fileIcon from "../../static/icons/empty.svg";
 
 @observer
 class SellerProfile extends Component {

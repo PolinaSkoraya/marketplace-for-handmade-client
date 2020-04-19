@@ -6,7 +6,7 @@ import RootStore from "../../stores/RootStore";
 import {FormattedMessage} from "react-intl";
 import {withRouter} from 'react-router';
 import {NavLink} from 'react-router-dom';
-import basket from "../../static/icons/svg/shopping-cart.svg";
+import basket from "../../static/icons/shopping-cart.svg";
 import {ROUTES} from "../../routes/routes";
 import {GoodsContainerPosition, OrdersContainer} from "../../components/OrdersContainer/OrdersContainer";
 

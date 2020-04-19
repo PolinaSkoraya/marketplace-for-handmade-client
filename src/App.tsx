@@ -1,6 +1,5 @@
 import React, {Component, Suspense, lazy} from 'react';
 import './App.scss';
-
 import {BrowserRouter} from 'react-router-dom'
 import Navigation from "./components/Navigation/Navigation";
 import {observer} from "mobx-react";
@@ -9,7 +8,6 @@ import {RawIntlProvider} from 'react-intl';
 import Spinner from "./components/Spinner/Spinner";
 import Container from "./Container";
 import Modals from "./components/Modals";
-
 
 @observer
 class App extends Component {
