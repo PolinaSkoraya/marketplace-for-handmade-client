@@ -9,7 +9,7 @@
   position: relative;
   background-color: white;
 
-  border-radius: 11px;
+  border-radius: 10px;
 }
 
 .good:hover{
@@ -128,5 +128,11 @@
 
 .buttonUpdate {
   margin-top: 15px;
+}
+
+@media (max-width: 400px) {
+  .good {
+    margin-bottom: 20px;
+  }
 }
 

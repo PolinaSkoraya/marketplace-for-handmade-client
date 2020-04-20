@@ -6,7 +6,7 @@
     "shopJ": "Shop",
     "description": "Description",
     "services": "Services: {sellerServices}",
-    "aboutShop": "About shop:",
+    "aboutShop": "About shop",
     "message.goodAdded": "All right! Good was added.",
     "signIn": "Sign in",
     "register": "Join",
@@ -43,5 +43,6 @@
     "accessories": "accessories",
     "homeware": "homeware",
     "toys": "toys",
-    "updateGood": "Update good?"
+    "updateGood": "Update good?",
+    "emptyBasket": "Your basket is empty! Click to go to the goods catalog"
 }

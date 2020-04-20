@@ -22,14 +22,12 @@ class GoodsPage extends Component {
     store: GoodsStore = new GoodsStore();
 
     async componentDidMount () {
-        console.log("mount");
-        console.log(this.store.currentPage);
-        this.store.numberOfPages = await this.store.loadGoods(this.store.currentPage);
-
-        console.log(this.store.numberOfPages);
+        await this.store.search();
     }
 
     render () {
+        console.log(this.store.showReset);
+
         const searchMessage = <FormattedMessage id="searched"/>;
         const options = [
             goodsCategories.art, goodsCategories.toys, goodsCategories.homeware, goodsCategories.accessories
@@ -47,7 +45,7 @@ class GoodsPage extends Component {
                                         <Button
                                             styleType="small"
                                             className={style.buttonCancel}
-                                            onClick={() => this.store.resetGoods(this.store.currentPage)}
+                                            onClick={() => this.store.resetGoods()}
                                         >
                                             <MdCancel/>
                                         </Button>
@@ -75,7 +73,8 @@ class GoodsPage extends Component {
                             arrowClassName={dropdownStyle.dropArrow}
                             controlClassName={dropdownStyle.dropControl}
                             menuClassName={dropdownStyle.dropMenu}
-                            className={dropdownStyle.drop}
+                            className={classNames(dropdownStyle.drop, style.dropMargin)}
+                            value={this.store.searchCategory}
                         />
                     </div>
 

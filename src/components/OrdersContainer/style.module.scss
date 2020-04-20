@@ -18,3 +18,10 @@
   padding: 45px 0 45px 0;
   text-align: left;
 }
+
+@media (max-width: 400px) {
+  .ordersContainer__grid {
+    display: flex;
+    flex-direction: column;
+  }
+}

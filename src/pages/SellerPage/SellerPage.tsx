@@ -52,25 +52,24 @@ class SellerPage extends Component {
                 />
                 <div className="sellerPage__header">
                     <div className={style.sellerPage__backImage}>
-                    </div>
-
-                    <div className={style.sellerPage__info}>
                         <div className={style.sellerPage__logo}>
                             <img src={this.store.seller.logo} alt="shop logo" className={style.sellerPage__logoImg}/>
                         </div>
+                    </div>
 
-                        <div className={style.sellerPage__text}>
-                            <div className={classNames(style.sellerPage__textField, style.sellerPage__textField_name)}>
-                                {this.store.seller.name}
-                            </div>
-                            <div className={style.sellerPage__textField}>
-                                <FormattedMessage id="services" values={{sellerServices: this.store.seller.services}}/>
-                            </div>
-                            <div className={style.sellerPage__textField}>
-                                <FormattedMessage id="aboutShop"/>
-                                <div className={style.sellerPage__description}>
-                                    {this.store.seller.description}
-                                </div>
+                    <div className={style.sellerPage__info}>
+                        <div className={classNames(style.sellerPage__textField, style.sellerPage__textField_name)}>
+                            {this.store.seller.name}
+                        </div>
+
+                        {/*<div className={style.sellerPage__textField}>*/}
+                        {/*    <FormattedMessage id="services" values={{sellerServices: this.store.seller.services}}/>*/}
+                        {/*</div>*/}
+
+                        <div className={style.sellerPage__textField}>
+                            {/*<p><FormattedMessage id="aboutShop"/></p>*/}
+                            <div className={style.sellerPage__description}>
+                                {this.store.seller.description}
                             </div>
                         </div>
                     </div>
@@ -85,6 +84,7 @@ class SellerPage extends Component {
                             className={classNames(style.createGoodForm, {[style.createGoodForm__show]: this.store.isShowModal})}
                         >
                             {({ formState }) => (
+                                <>
                                 <div className={style.formContent}>
                                     <div className={style.formTextInfo}>
                                         <Button type="button" styleType="small" onClick={this.store.toggleForm} className={style.createGoodForm__buttonClose}>
@@ -122,16 +122,6 @@ class SellerPage extends Component {
                                         />
                                         <label htmlFor="newGoodPrice" className={style.messageError}>{formState.errors.newGoodPrice}</label>
 
-                                        {/*<Select*/}
-                                        {/*    className = {classNames("input", style.createGoodForm__input)}*/}
-                                        {/*    field="newGoodCategory"*/}
-                                        {/*>*/}
-                                        {/*    <Option disabled value="">Choose category</Option>*/}
-                                        {/*    <Option value={goodsCategories.art}>art</Option>*/}
-                                        {/*    <Option value={goodsCategories.accessories}>accessories</Option>*/}
-                                        {/*    <Option value={goodsCategories.homeware}>homeware</Option>*/}
-                                        {/*    <Option value={goodsCategories.toys}>toys</Option>*/}
-                                        {/*</Select>*/}
                                         <Dropdown
                                             onChange={(event)=> formState.values.newGoodCategory = event.value }
                                             options={options}
@@ -141,15 +131,6 @@ class SellerPage extends Component {
                                             menuClassName={dropdownStyle.dropMenu}
                                             className={dropdownStyle.drop}
                                         />
-
-                                        <Button
-                                            styleType="primary"
-                                            type="submit"
-                                            onClick={ () => this.store.onCreateGood(user, formState.values)}
-                                            disabled={formState.invalid}
-                                        >
-                                            create new good
-                                        </Button>
                                     </div>
 
                                     <div className={style.fileInputs}>
@@ -173,6 +154,15 @@ class SellerPage extends Component {
                                         }
                                     </div>
                                 </div>
+                                <Button
+                                styleType="primary"
+                                type="submit"
+                                onClick={ () => this.store.onCreateGood(user, formState.values)}
+                                disabled={formState.invalid}
+                                >
+                                create new good
+                                </Button>
+                                </>
                             )}
                         </Form>
                     </div>

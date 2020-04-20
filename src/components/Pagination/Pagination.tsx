@@ -52,18 +52,19 @@ class Pagination extends Component<Props> {
 
                 <div className={style.pagination__buttonsPage}>
                     {
-                        this.array.map (num => {
-                                return <div key={num}>
-                                    <Button
-                                        styleType="small"
-                                        id={"buttonPage" + num}
-                                        className = {classNames(style.buttonPage, {[style.currentButtonPage]: currentPage === num + 1})}
-                                        onClick={() => setPage(num + 1)}
-                                    >
-                                        {num + 1}
-                                    </Button>
-                                </div>
-                            }
+                        this.array.map (num =>
+                            <div key={num}>
+                                <Button
+                                    styleType="small"
+                                    id={"buttonPage" + num}
+                                    className = {classNames(style.buttonPage,
+                                    {[style.currentButtonPage]: currentPage === num + 1})}
+                                    onClick={() => setPage(num + 1)}
+                                    disabled={currentPage === num + 1}
+                                >
+                                {num + 1}
+                                </Button>
+                            </div>
                         )
                     }
                 </div>

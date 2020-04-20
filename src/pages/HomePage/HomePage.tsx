@@ -11,34 +11,11 @@ import {ROUTES} from "../../routes/routes";
 import {FormattedMessage} from "react-intl";
 
 @observer
-class HomePage extends Component{
+class HomePage extends Component {
     store: GoodsStore = new GoodsStore();
-    @observable currentPage = 1;
-    @observable numberOfPages = 0;
 
     async componentDidMount () {
-        this.numberOfPages = await this.store.loadGoods(this.currentPage);
-    }
-
-    @action.bound
-    async previousPage () {
-        this.currentPage = this.currentPage - 1;
-        await this.store.loadGoods(this.currentPage);
-        console.log(this.currentPage);
-    }
-
-    @action.bound
-    async nextPage () {
-        this.currentPage = this.currentPage + 1;
-        await this.store.loadGoods(this.currentPage);
-        console.log(this.currentPage);
-    }
-
-    @action.bound
-    async setPage (page) {
-        this.currentPage = page;
-        await this.store.loadGoods(this.currentPage);
-        console.log(this.currentPage);
+        await this.store.loadGoods(1);
     }
 
     render () {

@@ -8,28 +8,32 @@
 .goodsPage__search {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 15px 20px 0 20px;
 }
 
 .search {
   position: relative;
-  margin: 0 30px;
-  width: 30vw;
+  margin-bottom: 20px;
+  //margin: 0 30px;
+  //width: 30vw;
 }
 
 .inputSearch {
+  //padding-right: 15px;
   width: 30vw;
-  text-align: left;
-  position: absolute;
-  top: 0;
-  left: 0;
+  //text-align: left;
+  //position: absolute;
+  //top: 0;
+  //left: 0;
+  //position: relative;
 }
 
 .searchIcon {
   position: absolute;
   top: 11px;
   right: 15px;
-  z-index: 10;
+  z-index: 1;
   color: $color-secondary-medium;
 }
 
@@ -44,6 +48,28 @@
   box-shadow: $box-shadow-good;
 }
 
+.dropMargin {
+  margin-left: 15px;
+}
 
+@media (max-width: 400px) {
+  .goodsPage {
+    padding: 19vh 3% 60px 3%;
+  }
+
+  .goodsPage__search {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inputSearch {
+    width: 240px;
+  }
+
+  .dropMargin {
+    margin-left: 0;
+  }
+}
 
 

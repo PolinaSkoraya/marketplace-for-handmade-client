@@ -53,7 +53,7 @@ class BuyerPage extends Component {
                                 :
                                 <div className={styles.emptyContainer}>
                                     <div className={styles.emptyMessage}>
-                                        Your basket is empty! Click to go to the goods catalog
+                                        <FormattedMessage id="emptyBasket"/>
                                     </div>
 
                                     <NavLink to={ROUTES.goods.goods} className="">

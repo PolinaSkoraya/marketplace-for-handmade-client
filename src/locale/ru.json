@@ -6,7 +6,7 @@
   "shopJ": "Магазин",
   "description": "Описание: ",
   "services": "Услуги: {sellerServices}",
-  "aboutShop": "О магазине:",
+  "aboutShop": "О магазине",
   "message.goodAdded": "Товар успешно добавлен!",
   "signIn": "Войти",
   "register": "Регистрация",
@@ -43,5 +43,6 @@
   "toys": "игрушки",
   "NO": "НЕТ",
   "YES": "ДА",
-  "updateGood": "Обновить товар?"
+  "updateGood": "Обновить товар?",
+  "emptyBasket": "Ваша корзина пуста! Кликни, что бы перейти в каталог товаров"
 }

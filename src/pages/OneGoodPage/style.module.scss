@@ -268,8 +268,8 @@
 
 @media (max-width: 400px) {
   .itemsRow {
-    //height: 50vw;
-    padding: 20px 100px;
+    height: 200px;
+    padding: 20px;
   }
 
   .image__div {
@@ -308,11 +308,15 @@
   .goodPage__descriptionText {
     font-size: 16px;
     line-height: 1.2;
+    width: auto;
+    padding: 0 20px;
   }
 
   .shopDescription {
     line-height: 1.2;
     font-size: 16px;
+    width: auto;
+    padding: 0 20px;
   }
 
   .buttonLike {
@@ -320,6 +324,27 @@
   }
 
   .goodPage__section {
+    top: 15vh;
+    height: 85vh;
     padding: 10px;
+  }
+
+  .goodPage__sectionGood {
+    padding-top: 15vh;
+    margin-bottom: 15vh;
+  }
+
+  .sellerGoods {
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sellerGoods__good {
+    height: 120px;
+    width: 120px;
+    margin: 10px;
+    box-shadow:  $box-shadow-good;
   }
 }

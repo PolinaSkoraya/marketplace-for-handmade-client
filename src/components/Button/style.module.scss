@@ -14,7 +14,7 @@
   border-radius: 20px;
 
   &:disabled {
-    cursor: unset;
+    cursor: not-allowed;
   }
 
   &__primary {

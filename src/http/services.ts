@@ -28,6 +28,20 @@ export function getAllGoods() {
     });
 }
 
+export function getGoodsWithQuery (config) {
+    console.log(config);
+    return instance.get("/goods/query", {
+        params: {
+            page: config.page,
+            category: config.category,
+            name: config.name
+        },
+        headers: {
+            'auth-token': localStorage.getItem(TOKEN),
+        }
+    });
+}
+
 export function postGood(good) {
     return instance.post("/goods",{
         "name": good.name,

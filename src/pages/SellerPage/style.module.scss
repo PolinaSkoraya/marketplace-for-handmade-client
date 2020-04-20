@@ -10,6 +10,8 @@
 
 .sellerPage__info {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sellerPage__backImage {
@@ -17,46 +19,51 @@
   background-repeat: no-repeat;
   background-position: center center;
   height: 200px;
+
+  //display: flex;
+  //padding: 20px;
+  //align-items: center;
+
+  position: relative;
 }
 
 .sellerPage__logo {
-  margin: -45px 30px 0 30px;
   background-color: $color-basic-light;
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 10vw;
+  height: 10vw;
   display: flex;
   justify-content: center;
   align-items: center;
 
   overflow: hidden;
+  position: absolute;
+  top: 140px;
+  left: 40px;
 }
 
 .sellerPage__logoImg {
   height: 80%;
   width: 80%;
-
 }
 
 .sellerPage__text {
-  text-align: left;
-  max-width: 70%;
 }
 
 .sellerPage__textField {
-  padding: 8px 0;
   font-size: $font-size-medium;
 }
 
 .sellerPage__textField_name {
-  font-size: 25px;
+  font-size: $font-size-title;
+  margin: 15px;
+  font-weight: 500;
 }
 
 .sellerPage__description{
-  margin: 8px 0;
-  padding: 4px 8px;
-  line-height: 1.2;
-  max-width: 700px;
+  line-height: 1.4;
+  max-width: 550px;
+  font-size: $font-size-medium;
 }
 
 .buttonShowModal {
@@ -81,21 +88,19 @@
   right: -600px;
   opacity: 0;
 
-  transition: right 500ms, opacity 200ms;
+  transition: top 500ms ease-in-out, right 500ms ease-in-out, opacity 200ms ease-in-out;
 }
 
 .createGoodForm__show {
   right: 20px;
-  top: 15px;
+  top: 10px;
   opacity: 1;
-  transition: right 500ms, opacity 200ms;
+  transition: top 500ms ease-in-out, right 500ms ease-in-out, opacity 200ms ease-in-out;
 }
 
-
 .createGoodForm__input {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   width: 100%;
-
 }
 
 .createGoodForm__textarea {
@@ -132,12 +137,12 @@
 }
 
 .formTextInfo {
-  flex-basis: 55%;
+  min-width: 300px;
   padding-right: 30px;
 }
 
 .fileInputs {
-  flex-basis: 45%;
+  min-width: 240px;
   display: flex;
   flex-direction: column;
 }
@@ -203,8 +208,6 @@
 .photos {
   display: flex;
   flex-wrap: wrap;
-
-  min-height: 220px;
 }
 
 .fileInputs__text {
@@ -217,4 +220,80 @@
   font-size: $font-size-medium;
   font-weight: 500;
   padding-bottom: 10px;
+}
+
+@media (max-width: 400px) {
+  .sellerPage__logo {
+    position: absolute;
+  }
+  .sellerPage__info {
+    text-align: center;
+  }
+
+  .sellerPage__description {
+    width: auto;
+  }
+
+  .sellerPage__backImage {
+    height: 150px;
+
+    position: relative;
+  }
+
+  .sellerPage__logo {
+    top: 140px;
+    left: 20px;
+  }
+
+  .createGoodForm {
+    width: unset;
+    padding: 10px 20px;
+  }
+
+  .formContent {
+    flex-direction: column;
+  }
+
+  .createGoodForm__buttonClose {
+    position: absolute;
+    top: 12px;
+    font-size: 22px;
+  }
+
+  .formTextInfo {
+    min-width: unset;
+    padding-right: 0;
+  }
+
+  .fileInputs {
+    min-height: 237px;
+    align-items: center;
+  }
+
+  .photos {
+    width: 155px;
+    height: 155px;
+    margin-bottom: 10px;
+  }
+
+  .imageWrap {
+    height: 70px;
+    width: 70px;
+    margin: 3px;
+  }
+
+  .formImage {
+    height: 70px;
+  }
+
+  .createGoodForm__textarea {
+    height: 120px;
+  }
+
+  .createGoodForm__buttonClose {
+    position: absolute;
+    top: 10px;
+    left: 250px;
+    font-size: 22px;
+  }
 }

@@ -1,7 +1,9 @@
 @import "./variables";
 
 .drop {
+  box-shadow: $box-shadow-good;
   margin-bottom: 20px;
+  border-radius: 20px;
 
   .dropControl {
     border: 1px solid $color-basic-medium;
@@ -24,3 +26,4 @@
     margin-right: 5px;
   }
 }
+

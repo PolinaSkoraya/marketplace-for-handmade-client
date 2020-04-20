@@ -1,6 +1,7 @@
 import {action, observable} from 'mobx';
-import {getAllGoods, getGoodsByName, getPageGoods} from "../http/services";
+import {getAllGoods, getGoodsByName, getGoodsWithQuery, getPageGoods} from "../http/services";
 import {GoodInterface} from "./helpers/interfaces";
+import {createObservableArray} from "mobx/lib/types/observablearray";
 
 class GoodsStore {
     @observable goods: GoodInterface[] = [];
@@ -8,16 +9,15 @@ class GoodsStore {
     @observable numberOfPages = 0;
     @observable searchName = "";
     @observable showReset = false;
+    @observable searchCategory = "";
 
     @action.bound
     async loadGoods (page) {
         try {
-            console.log("loadGoods", page);
             const responseGoods = await getPageGoods(page);
             this.goods = responseGoods.data.docs;
+            this.numberOfPages = responseGoods.data.totalPages;
             this.sortByLikes();
-
-            return responseGoods.data.totalPages;
         } catch (error) {
             console.log(error);
         }
@@ -31,87 +31,63 @@ class GoodsStore {
     }
 
     @action.bound
-    async searchByName (name) {
+    async search () {
         this.showReset = true;
-        let allGoods: GoodInterface[];
-        let regexp = new RegExp(`${name.value}`);
+        const config = {
+            page: this.currentPage,
+            category: this.searchCategory,
+            name: this.searchName
+        };
         try {
-            // let response = await getAllGoods();
-            // allGoods = response.data;
-            // this.goods = allGoods.filter( good => good.name.toLowerCase().search(regexp) >= 0);
-
-            this.searchName = name.value;
-            const responseGoods = await getGoodsByName(name.value, this.currentPage);
-            this.goods = responseGoods.data.docs;
-            this.numberOfPages = responseGoods.data.totalPages;
-
-            console.log(responseGoods);
+            const response = await getGoodsWithQuery(config);
+            this.goods = response.data.docs;
+            this.numberOfPages = response.data.totalPages;
+            this.sortByLikes();
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
     }
 
     @action.bound
+    async searchByName (name) {
+        this.currentPage = 1;
+        this.searchName = name.value;
+        this.search();
+    }
+
+    @action.bound
     async searchByCategory (category) {
-        this.showReset = true;
-        let allGoods: GoodInterface[];
-        try {
-            let response = await getAllGoods();
-            allGoods = response.data;
-            // @ts-ignore
-            this.goods = allGoods.filter(good => (good.category) && (good.category.toUpperCase() === category));
-        } catch (error) {
-            console.log(error);
-        }
+        this.currentPage = 1;
+        this.searchCategory = category;
+        this.search();
     }
 
     @action.bound
     async previousPage () {
         this.currentPage = this.currentPage - 1;
-        if (this.searchName) {
-
-            const responseGoods = await getGoodsByName(this.searchName, this.currentPage);
-            this.goods = responseGoods.data.docs;
-            this.numberOfPages = responseGoods.data.totalPages;
-
-        } else {
-            await this.loadGoods(this.currentPage);
-        }
+        this.search();
     }
 
     @action.bound
     async nextPage () {
         this.currentPage = this.currentPage + 1;
-        if (this.searchName) {
-
-            const responseGoods = await getGoodsByName(this.searchName, this.currentPage);
-            this.goods = responseGoods.data.docs;
-            this.numberOfPages = responseGoods.data.totalPages;
-
-        } else {
-            await this.loadGoods(this.currentPage);
-        }
+        this.search();
     }
 
     @action.bound
     async setPage (page) {
         this.currentPage = page;
-        if (this.searchName) {
-
-            const responseGoods = await getGoodsByName(this.searchName, this.currentPage);
-            this.goods = responseGoods.data.docs;
-            this.numberOfPages = responseGoods.data.totalPages;
-
-        } else {
-            await this.loadGoods(this.currentPage);
-        }
+        this.search();
     }
 
     @action
-    async resetGoods (page) {
-        this.showReset = false;
+    async resetGoods () {
         this.searchName = "";
-        this.numberOfPages = await this.loadGoods(page);
+        this.searchCategory = "";
+        this.currentPage = 1;
+        this.search();
+        this.showReset = false;
     }
 }
 
