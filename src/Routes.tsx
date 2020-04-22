@@ -6,23 +6,15 @@ import { ROUTES } from "./routes/routes";
 import BuyerLogin from "./pages/Login/Login";
 import BuyerRegistration from "./pages/Registration/Registration";
 import { Roles } from "./stores/helpers/roles";
-import Modals from "./components/Modals";
 import NoMatch from "./pages/NoMatch/NoMatch";
-import GoodsPage from "./pages/GoodsPage/GoodsPage";
-import SellerProfile from "./pages/SellerProfile/SellerProfile";
-import SellerPage from "./pages/SellerPage/SellerPage";
-import GoodPage from "./pages/GoodPage/GoodPage";
-import BuyerPage from "./pages/BuyerPage/BuyerPage";
-import HomePage from "./pages/HomePage/HomePage";
-import Admin from "./pages/Admin/Admin";
 
-// const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
-// const Admin = lazy(() => import('./pages/Admin/Admin'));
-// const GoodsPage = lazy(() => import("./pages/GoodsPage/GoodsPage"));
-// const SellerProfile = lazy(() => import("./pages/SellerProfile/SellerProfile"));
-// const SellerPage = lazy(() => import("./pages/SellerPage/SellerPage"));
-//const GoodPage = lazy(() => import("./pages/GoodPage/GoodPage"));
-// const BuyerPage = lazy(() => import("./pages/BuyerPage/BuyerPage"));
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const Admin = lazy(() => import('./pages/Admin/Admin'));
+const GoodsPage = lazy(() => import("./pages/GoodsPage/GoodsPage"));
+const SellerProfile = lazy(() => import("./pages/SellerProfile/SellerProfile"));
+const SellerPage = lazy(() => import("./pages/SellerPage/SellerPage"));
+const GoodPage = lazy(() => import("./pages/GoodPage/GoodPage"));
+const BuyerPage = lazy(() => import("./pages/BuyerPage/BuyerPage"));
 
 const routes = [
   { path: ROUTES.admin, Component: Admin },
@@ -43,7 +35,7 @@ const privateRoutes = [
   { path: ROUTES.users.profile, roles: [Roles.buyer], Component: BuyerPage },
 ];
 
-function Container({ location }) {
+function Routes({ location }) {
   return (
     <div>
       <TransitionGroup className="transition-group">
@@ -69,7 +61,7 @@ function Container({ location }) {
                 />
               ))}
               <Route path="*">
-                <NoMatch location={location} />
+                <NoMatch />
               </Route>
             </Switch>
           </section>
@@ -79,4 +71,4 @@ function Container({ location }) {
   );
 }
 
-export default withRouter(Container);
+export default withRouter(Routes);

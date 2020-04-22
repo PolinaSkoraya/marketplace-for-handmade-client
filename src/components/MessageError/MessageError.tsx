@@ -17,7 +17,7 @@ class MessageError extends Component<{ message: string; show: boolean }> {
         </div>
 
         <div className={style.messageError__message}>
-          <FormattedMessage id="incorrectEmOrPass" />
+          <FormattedMessage id={this.props.message} />
         </div>
       </div>
     );

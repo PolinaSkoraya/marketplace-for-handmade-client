@@ -17,29 +17,38 @@ class AdminStore {
 
   @action.bound
   async init() {
-    let responseGoods = await getAllGoods();
-    let responseUsers = await getUsers();
-    let responseSellers = await getSellers();
-    this.goods = responseGoods.data;
-    this.users = responseUsers.data;
-    this.sellers = responseSellers.data;
+    try {
+      let responseGoods = await getAllGoods();
+      let responseUsers = await getUsers();
+      let responseSellers = await getSellers();
+      this.goods = responseGoods.data;
+      this.users = responseUsers.data;
+      this.sellers = responseSellers.data;
 
-    await Promise.all(
-      this.users.map(async (user) => {
-        const orders = await getUserOrders(user.id);
-        user.orders = orders.data;
-      })
-    );
+      await Promise.all(
+          this.users.map(async (user) => {
+            const orders = await getUserOrders(user._id);
+            user.orders = orders.data;
+          })
+      );
+    } catch (e) {
+
+    }
   }
 
   @action.bound
   async deleteUser(userId) {
-    await ModalStore.showModal(WarningModal, {
-      title: "delUser",
-    });
+    try {
+      await ModalStore.showModal(WarningModal, {
+        title: "delUser",
+      });
 
-    await deleteUserById(userId);
-    await this.init();
+      await deleteUserById(userId);
+      await this.init();
+    } catch (e) {
+
+    }
+
   }
 }
 

@@ -66,7 +66,7 @@ class SellerProfile extends Component {
               <FormattedMessage id="shopInfo" />
             </div>
             <input
-              className={classNames("input", style.profileContainer__input)}
+              className={classNames(style.input, style.profileContainer__input)}
               type="text"
               name="newShopName"
               onChange={user.handleInputChange}
@@ -76,7 +76,7 @@ class SellerProfile extends Component {
 
             <textarea
               className={classNames(
-                "input",
+                style.input,
                 style.profileContainer__textarea,
                 style.profileContainer__input
               )}
@@ -84,6 +84,33 @@ class SellerProfile extends Component {
               onChange={user.handleInputChange}
               placeholder="shop description"
             />
+
+            <div className={style.fileInputs}>
+              <p className={style.fileInputs__text}>
+                <FormattedMessage id="addLogo"/>
+              </p>
+              <input
+                  id="photos"
+                  type="file"
+                  name="files"
+                  onChange={user.onInputFileChange}
+                  className={style.inputLogo}
+              />
+              <label htmlFor="photos" className={style.labelLogo}>
+                <FormattedMessage id="chooseFile" />
+              </label>
+              <div className={style.logoContainer}>
+                {Boolean(user.logoURL) && (
+                    <div className={style.logo}>
+                      <img
+                          src={user.logoURL}
+                          alt="image"
+                          className={style.formLogo}
+                      />
+                    </div>
+                )}
+              </div>
+            </div>
 
             <Button onClick={user.setSellerRole}>
               <FormattedMessage id="startSelling"/>

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../routes/routes";
 import { withRouter } from "react-router";
-import logo from "../../static/icons/diy.svg";
+import logo from "../../static/icons/handmade.svg";
 import RootStore from "../../stores/RootStore";
 import { observer } from "mobx-react";
 import { getRole, Roles } from "../../stores/helpers/roles";
@@ -13,9 +13,18 @@ import { FiShoppingCart } from "react-icons/fi";
 import Button from "../Button/Button";
 import classNames from "classnames";
 import { MdLanguage } from "react-icons/md";
+import {action, observable} from "mobx";
+import {FiMenu} from "react-icons/fi"
 
 @observer
 class Navigation extends Component {
+  @observable hideMenu = true;
+
+  @action.bound
+  toggleMenu() {
+    this.hideMenu = !this.hideMenu;
+  }
+
   async logOut(user) {
     await user.logOutUser();
 
@@ -26,15 +35,13 @@ class Navigation extends Component {
   setLocale = (localization, lang) => () => {
     localStorage.setItem("locale", lang);
     localization.locale = lang;
-
-    localization.updateLocale(lang);
   };
 
   render() {
     const { user } = RootStore;
     const { localization } = RootStore;
 
-    let props: any = this.props;
+    const props: any = this.props;
 
     return (
       <>
@@ -52,7 +59,7 @@ class Navigation extends Component {
               ) : (
                 <Button
                   styleType="medium"
-                  onClick={() => this.setLocale(localization, "en")}
+                  onClick={this.setLocale(localization, "en")}
                 >
                   <MdLanguage />
                   <p>en</p>
@@ -87,10 +94,13 @@ class Navigation extends Component {
                 </NavLink>
             }
 
+            <button onClick={this.toggleMenu} className={style.btnToggleMenu}>
+              <FiMenu/>
+            </button>
           </div>
 
           {user.authenticated ? (
-            <div className={style.navigation__links}>
+            <div className={classNames(style.navigation__links, style.navigation__links_hide, {[style.hideMenu]: this.hideMenu})}>
               <div className={style.dropdown}>
                 <div
                   className={classNames(style.dropbtn, {
@@ -154,7 +164,6 @@ class Navigation extends Component {
               <div className={style.navigation__link}>
                 <Button
                   styleType="medium"
-                  id="logOutButton"
                   onClick={() => this.logOut(user)}
                 >
                   <FaSignOutAlt />

@@ -11,7 +11,7 @@ class UpdateGoodForm {
 
   constructor(payload) {
 
-    this.newInfoGood.id = payload.good.id;
+    this.newInfoGood.id = payload.good._id;
     this.newInfoGood.goodName = payload.good.name;
     this.newInfoGood.description = payload.good.description as string;
     this.newInfoGood.price = payload.good.price;
@@ -21,7 +21,7 @@ class UpdateGoodForm {
   @action.bound
   handleInputChange(event) {
     const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.value;
     const name = target.name;
 
     this.newInfoGood[name] = value;

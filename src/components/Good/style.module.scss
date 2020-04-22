@@ -215,6 +215,18 @@
   transition: opacity 500ms;
 }
 
+.input {
+  outline: none;
+  border: 1px solid $color-basic-medium;
+  border-radius: 20px;
+  padding: 10px 15px;
+  box-shadow: $box-shadow-good;
+
+  &:focus {
+    color: $color-basic-medium;
+  }
+}
+
 @media (max-width: 400px) {
   .good {
     margin-bottom: 20px;

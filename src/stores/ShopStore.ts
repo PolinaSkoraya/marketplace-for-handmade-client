@@ -1,8 +1,7 @@
 import { action, observable } from "mobx";
-import { getGoodsOfSeller, getSellerById } from "../http/services";
+import {getGoodsOfSeller, getSellerById, uploadImages} from "../http/services";
 import { IGood } from "./helpers/interfaces";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 class ShopStore {
   @observable seller = {
@@ -27,18 +26,15 @@ class ShopStore {
       const responseSeller = await getSellerById(id);
       this.seller = responseSeller.data;
     } catch (error) {
-      console.log(error);
     }
   }
 
   @action.bound
   async initGoodsOfSeller(id) {
     try {
-
       const responseGoodsOfSeller = await getGoodsOfSeller(id);
       this.goodsOfSeller = responseGoodsOfSeller.data;
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -51,11 +47,10 @@ class ShopStore {
   async onCreateGood(user, values) {
     this.isShowModal = !this.isShowModal;
 
-    await this.handleDrop(this.files);
-
-    values.photos = this.photos;
-
     try {
+      await this.handleDrop(this.files);
+      values.photos = this.photos;
+
       await user.createGood(values);
       if (user.errors.notCreated.length === 0) {
         toast.success("Good was created!", {
@@ -63,11 +58,10 @@ class ShopStore {
           autoClose: 3000,
         });
       }
-      console.log(this.seller);
       await this.initGoodsOfSeller(user.seller.id);
 
 
-      while (user.errors.notCreated.length !== 0) {
+      if (user.errors.notCreated.length !== 0) {
         user.errors.notCreated.pop();
         throw Error("good wasn't created");
       }
@@ -94,28 +88,13 @@ class ShopStore {
 
   @action.bound
   handleDrop = async (files) => {
-    const filesArray: string[] = Array.from(files);
-    const uploaders = filesArray.map((file) => {
-      const data = new FormData();
-      data.append("file", file);
-      data.append("upload_preset", "zefqx6js");
+    try {
+      const response = uploadImages(files);
+      this.photos = await response;
+    } catch (e) {
 
-      return axios
-        .post(
-          "https://api.cloudinary.com/v1_1/cloudqawsed/image/upload",
-          data,
-          {
-            headers: { "X-Requested-With": "XMLHttpRequest" },
-          }
-        )
-        .then((response) => {
-          const data = response.data;
-          const fileURL = data.secure_url;
-          this.photos.push(fileURL);
-        });
-    });
+    }
 
-    await axios.all(uploaders)
   };
 }
 

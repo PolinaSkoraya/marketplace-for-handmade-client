@@ -3,7 +3,6 @@ import { observer } from "mobx-react";
 import Modal from "rc-dialog";
 import { FormattedMessage } from "react-intl";
 import classNames from "classnames";
-
 import style from "./style.module.scss";
 import { DialogActionType, ModalProps } from "../../stores/ModalStore";
 import Button from "../Button/Button";

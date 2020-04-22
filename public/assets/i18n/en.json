@@ -58,5 +58,8 @@
   "removeFromBasket": "Remove from basket",
   "notFound": "Not found...",
   "seeMore": "Click to see more!",
-  "pay": "Pay"
+  "pay": "Pay",
+  "alreadyExist": "Such name or email already exist",
+  "info": "On our pages you will find thousands of pieces created by artists, designers and makers, knitting, stitching, painting, printing, soldering, sketching, whittling, carving and crocheting in studios and at kitchen tables. So if you’re looking for that perfect original gift or you want to shop small, shop independent and give handmade, we suggest sitting down with a cuppa and having a look through the amazing creations on Makers - all made by clever hands crafting away.",
+  "addLogo": "Add logo"
 }

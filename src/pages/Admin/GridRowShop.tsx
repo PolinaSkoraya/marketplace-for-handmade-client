@@ -30,8 +30,8 @@ class GridRowShop extends Component<{ seller: any }> {
         </div>
         <div>
           <div>
-            {this.orders &&
-              this.orders.map((order) => (
+            {
+              this.orders?.map((order) => (
                 <ul
                     className={style.orderList}
                     key={order.id}

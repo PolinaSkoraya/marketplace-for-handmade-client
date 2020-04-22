@@ -1,7 +1,6 @@
 import { action, observable } from "mobx";
 import {
   getGoodsWithQuery,
-  getPageGoods,
 } from "../http/services";
 import { IGood } from "./helpers/interfaces";
 
@@ -35,7 +34,6 @@ class GoodsStore {
       this.sortByLikes();
 
     } catch (error) {
-      console.log(error);
     }
   }
 

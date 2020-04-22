@@ -1,6 +1,7 @@
 @import "styles/variables";
 @import url("https://fonts.googleapis.com/css2?family=Muli:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Amaranth&display=swap');
 
 *,
 *:before,
@@ -13,7 +14,6 @@
   color: #05161d;
 }
 
-//**********************************
 .transition-group {
   position: relative;
 }
@@ -26,7 +26,7 @@
 
 .page-enter {
   opacity: 0;
-  transform: scale(1); //
+  transform: scale(1);
 }
 
 .page-enter-active {
@@ -42,11 +42,9 @@
 
 .page-exit-active {
   opacity: 0;
-  transform: scale(0.9); //
+  transform: scale(0.9);
   transition: opacity 300ms, transform 300ms;
 }
-
-//****************************************************
 
 .fadePage-enter {
   opacity: 0;

@@ -16,89 +16,99 @@ class Admin extends Component {
   }
 
   render() {
+    console.log(this.store.sellers);
+
     return (
       <>
         <div className={style.adminPage}>
           <div className={style.tableTitle}>
-            <FormattedMessage id="goods" />
+            <FormattedMessage id="users" />
           </div>
 
-          <div className={style.gridContainer}>
-            <div className={style.gridRow}>
-              <div>
-                <FormattedMessage id="name"/>
+          <div className={style.tableWrap}>
+            <div className={style.gridContainer}>
+              <div className={style.gridRow}>
+                <div/>
+                <div>
+                  <FormattedMessage id="name"/>
+                </div>
+                <div>
+                  <FormattedMessage id="email"/>
+                </div>
+                <div>
+                  <FormattedMessage id="roles"/>
+                </div>
+                <div>
+                  <FormattedMessage id="orders"/>
+                </div>
               </div>
-              <div>
-                <FormattedMessage id="price"/>
-              </div>
-              <div>
-                <FormattedMessage id="category"/>
-              </div>
-              <div>
-                <FormattedMessage id="description"/>
-              </div>
-              <div>
-                <FormattedMessage id="seller"/>
-              </div>
+              {this.store.users.map((user) =>
+                  <GridRowUser
+                      user={user}
+                      key={user._id}
+                      deleteUser={this.store.deleteUser}
+                  />)}
             </div>
-            {this.store.goods.map((good) =>
-                <GridRowGood
-                  good={good}
-                  idSeller={good.idSeller}
-                  key={good._id}
-                />
-            )}
           </div>
 
           <div className={style.tableTitle}>
-            <FormattedMessage id="users" />
+            <FormattedMessage id="goods" />
           </div>
-          <div className={style.gridContainer}>
-            <div className={style.gridRow}>
-              <div/>
-              <div>
-                <FormattedMessage id="name"/>
+          <div className={style.tableWrap}>
+            <div className={style.gridContainer}>
+              <div className={style.gridRow}>
+                <div>
+                  <FormattedMessage id="name"/>
+                </div>
+                <div>
+                  <FormattedMessage id="price"/>
+                </div>
+                <div>
+                  <FormattedMessage id="category"/>
+                </div>
+                <div>
+                  <FormattedMessage id="description"/>
+                </div>
+                <div>
+                  <FormattedMessage id="seller"/>
+                </div>
               </div>
-              <div>
-                <FormattedMessage id="email"/>
-              </div>
-              <div>
-                <FormattedMessage id="roles"/>
-              </div>
-              <div>
-                <FormattedMessage id="orders"/>
-              </div>
+              {this.store.goods.map((good) =>
+                  <GridRowGood
+                      good={good}
+                      idSeller={good.idSeller}
+                      key={good._id}
+                  />
+              )}
             </div>
-            {this.store.users.map((user) =>
-                <GridRowUser
-                  user={user}
-                  key={user.id}
-                  deleteUser={this.store.deleteUser}
-                />)}
           </div>
+
 
           <div className={style.tableTitle}>
             <FormattedMessage id="shops" />
           </div>
-          <div className={style.gridContainer}>
-            <div className={style.gridRow}>
-              <div>
-                <FormattedMessage id="owner"/>
+          <div className={style.tableWrap}>
+            <div className={style.gridContainer}>
+              <div className={style.gridRow}>
+                <div>
+                  <FormattedMessage id="owner"/>
+                </div>
+                <div>
+                  <FormattedMessage id="shopName"/>
+                </div>
+                <div>
+                  <FormattedMessage id="description"/>
+                </div>
+                <div>
+                  <FormattedMessage id="orders"/>
+                </div>
               </div>
-              <div>
-                <FormattedMessage id="shopName"/>
-              </div>
-              <div>
-                <FormattedMessage id="description"/>
-              </div>
-              <div>
-                <FormattedMessage id="orders"/>
-              </div>
+              {this.store.sellers.map((seller) =>
+                  <GridRowShop seller={seller} key={seller._id} />
+              )}
             </div>
-            {this.store.sellers.map((seller) =>
-              <GridRowShop seller={seller} key={seller.id} />
-            )}
           </div>
+
         </div>
       </>
     );

@@ -15,18 +15,10 @@
 .search {
   position: relative;
   margin-bottom: 20px;
-  //margin: 0 30px;
-  //width: 30vw;
 }
 
 .inputSearch {
-  //padding-right: 15px;
   width: 30vw;
-  //text-align: left;
-  //position: absolute;
-  //top: 0;
-  //left: 0;
-  //position: relative;
 }
 
 .searchIcon {
@@ -59,9 +51,21 @@
   margin-left: 15px;
 }
 
+.input {
+  outline: none;
+  border: 1px solid $color-basic-medium;
+  border-radius: 20px;
+  padding: 10px 15px;
+  box-shadow: $box-shadow-good;
+
+  &:focus {
+    color: $color-basic-medium;
+  }
+}
+
 @media (max-width: 400px) {
   .goodsPage {
-    padding: 19vh 3% 60px 3%;
+    padding: 10vh 3% 60px 3%;
   }
 
   .goodsPage__search {

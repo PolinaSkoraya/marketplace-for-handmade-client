@@ -6,24 +6,35 @@
   position: relative;
   display: flex;
   background-color: #fff;
+
+  @extend %center;
 }
 
-.header::after {
-  content: "";
-  background-attachment: fixed;
+.pageDescription {
+  margin-top: 40px;
+  height: 80vh;
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.58);
+  line-height: 1.7;
+  color: white;
+  font-size: $font-size-title;
+
+  display: flex;
+  @extend %center;
+
+  padding: 60px;
+}
+
+.header {
   background-image: url("../../static/images/header-home.jpg");
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
 
-  opacity: 0.4;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  position: absolute;
-  z-index: 1;
-
   animation: backgroundImage 40s infinite;
 }
 
@@ -66,6 +77,11 @@
   background-color: $color-secondary-light;
   @extend %center;
   flex-direction: column;
+
+  background-image: radial-gradient(lighten($color-secondary-light, 3%) 15%, transparent 16%),
+  radial-gradient(lighten($color-secondary-light, 3%) 15%, transparent 16%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
 }
 
 .poster {
@@ -81,8 +97,9 @@
 
 .wrapper__title {
   padding-bottom: 60px;
-  font-size: $font-size-title;
   font-weight: 500;
+  font-family: 'Amaranth', sans-serif;
+  font-size: 2.5em;
 }
 
 .stage {
@@ -189,7 +206,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-basis: 40%;
+  margin-left: 20px;
+
+  position: fixed;
+  top: 12vh;
+  right: 20px;
 }
 
 .linksCircle {
@@ -197,11 +218,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(88, 167, 198, 0.85);
+  background-color: rgb(88, 167, 198);
   height: 200px;
   width: 200px;
   border-radius: 50%;
-  z-index: 5;
+  z-index: 999;
+
+  float: right;
 }
 
 .authLink {
@@ -256,5 +279,26 @@
 
   .poster {
     border-radius: 10px;
+  }
+
+  .links {
+    display: none;
+  }
+
+  .pageDescription {
+    margin-top: 15vh;
+    height: 83vh;
+    width: 95%;
+    background-color: rgba(0, 0, 0, 0.52);
+    line-height: 1.5;
+    font-size: $font-size-medium;
+    padding: 15px;
+  }
+
+  .wrapper__title {
+    padding-bottom: 20px;
+    font-weight: 500;
+    font-family: 'Amaranth', sans-serif;
+    font-size: 2em;
   }
 }

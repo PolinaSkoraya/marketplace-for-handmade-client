@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 
-import "./Good/style.module.scss";
-import ModalStore, { DialogActionType } from "../stores/ModalStore";
+import "../Good/style.module.scss";
+import ModalStore, {DialogActionType} from "../../stores/ModalStore";
 
 @observer
 class Modals extends Component {

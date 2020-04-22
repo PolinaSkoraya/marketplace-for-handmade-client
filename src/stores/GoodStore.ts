@@ -38,7 +38,6 @@ class GoodStore {
       const responseGood = await getGoodWithSellerById(id);
       this.good = responseGood.data;
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -48,7 +47,6 @@ class GoodStore {
       const responseSeller = await getSellerById(idSeller);
       return responseSeller.data.name;
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -64,7 +62,6 @@ class GoodStore {
       const responseGood = await updateGood(payload.id, newGood);
       this.good = responseGood.data;
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -74,7 +71,6 @@ class GoodStore {
       await postGoodIntoBasket(user.id, this.good._id);
       await user.initBasket();
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -88,9 +84,8 @@ class GoodStore {
         await postGoodIntoLikedGoods(user.id, this.good._id);
         await user.initLikedGoods();
 
-        await user.getGoods(); //for updating likes in basket
+        await user.getGoods();
       } catch (error) {
-        console.log(error);
       }
     } else {
       try {
@@ -103,23 +98,22 @@ class GoodStore {
         this.good.likes = this.good.likes - 1;
         await updateLikes(this.good._id, this.good.likes);
 
-        await user.getGoods(); //for updating likes in basket
+        await user.getGoods();
       } catch (error) {
-        console.log(error);
       }
     }
   }
 
   @computed
   get isInBasket() {
-    return user.basket.filter((idGood) => idGood === this.good._id).length > 0;
+    // @ts-ignore
+    return user.basket.includes(this.good._id);
   }
 
   @computed
   get isLiked() {
-    return (
-      user.likes.filter((idGood) => idGood === this.good._id).length > 0
-    );
+    // @ts-ignore
+    return user.likes.includes(this.good._id);
   }
 }
 

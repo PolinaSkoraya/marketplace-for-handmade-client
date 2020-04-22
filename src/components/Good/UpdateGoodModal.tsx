@@ -15,7 +15,7 @@ import style from "./style.module.scss";
 import classNames from "classnames";
 import { MdCancel } from "react-icons/md";
 import WarningModal from "../WarningModal/WarningModal";
-import { Form, Text, TextArea, Select, Option } from "informed";
+import { Form, Text, TextArea, Select } from "informed";
 import {
   validateLength,
   validateNumber,
@@ -31,15 +31,12 @@ class UpdateGoodModal extends Component<Props> {
   form = new UpdateGoodForm(this.good);
 
   onSubmit = async (values) => {
-    const { operation } = await ModalStore.showModal(WarningModal, {
+    await ModalStore.showModal(WarningModal, {
       title: "updateGood",
     });
-
-    if (operation === 1) {
       await this.form.onSubmit(values, (payload) =>
-        this.props.onClose(DialogActionType.submit, payload)
-      );
-    }
+      this.props.onClose(DialogActionType.submit, payload)
+    );
   };
 
   onClose = () => {
@@ -78,7 +75,7 @@ class UpdateGoodModal extends Component<Props> {
           {({ formState }) => (
             <>
               <Text
-                className={classNames("input", style.updateGoodForm__input)}
+                className={classNames(style.input, style.updateGoodForm__input)}
                 field="goodName"
                 placeholder="name"
                 validate={validateLength}
@@ -90,7 +87,7 @@ class UpdateGoodModal extends Component<Props> {
 
               <TextArea
                 className={classNames(
-                  "input",
+                  style.input,
                   style.updateGoodForm__input,
                   style.updateGoodForm__textarea
                 )}
@@ -105,7 +102,7 @@ class UpdateGoodModal extends Component<Props> {
 
               <Text
                 type="number"
-                className={classNames("input", style.updateGoodForm__input)}
+                className={classNames(style.input, style.updateGoodForm__input)}
                 field="price"
                 placeholder="price"
                 validate={validateNumber}
@@ -116,7 +113,7 @@ class UpdateGoodModal extends Component<Props> {
               </label>
 
               <Select
-                className={classNames("input", style.updateGoodForm__input)}
+                className={classNames(style.input, style.updateGoodForm__input)}
                 field="goodCategory"
               >
                 <option value={goodsCategories.art}>art</option>

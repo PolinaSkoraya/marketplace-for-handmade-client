@@ -1,6 +1,7 @@
 import { instance } from "./instance";
 import { URLS } from "./urls";
 import { TOKEN } from "../stores/UserStore";
+import axios from "axios";
 
 export function getUsers() {
   return instance.get(URLS.users);
@@ -58,7 +59,6 @@ export function getUserById(id) {
 }
 
 export function getSellerById(id) {
-  //user/id/shop
   return instance.get(URLS.sellers + id);
 }
 
@@ -190,4 +190,30 @@ export function deleteUserById(idUser) {
 
 export function getGoodsByName(name, page) {
   return instance.get(URLS.goods + name + "/" + page);
+}
+
+export async function uploadImages(files) {
+  const filesArray: string[] = Array.from(files);
+  const fileURLS: string[] = [];
+  const uploaders = filesArray.map((file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "zefqx6js");
+
+    return axios
+        .post(
+            "https://api.cloudinary.com/v1_1/cloudqawsed/image/upload",
+            data,
+            {
+              headers: { "X-Requested-With": "XMLHttpRequest" },
+            }
+        )
+        .then((response) => {
+          const data = response.data;
+          fileURLS.push(data.secure_url);
+        });
+  });
+
+  await axios.all(uploaders);
+  return fileURLS;
 }

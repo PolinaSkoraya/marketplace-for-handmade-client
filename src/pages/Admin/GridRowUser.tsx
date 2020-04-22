@@ -1,11 +1,10 @@
 import { observer } from "mobx-react";
 import React, { Component } from "react";
-import { action } from "mobx";
-import { deleteUserById } from "../../http/services";
 import style from "./style.module.scss";
 import { FormattedMessage } from "react-intl";
 import Button from "../../components/Button/Button";
 import classNames from "classnames";
+import {Roles} from "../../stores/helpers/roles";
 
 @observer
 class GridRowUser extends Component<{
@@ -13,7 +12,7 @@ class GridRowUser extends Component<{
   deleteUser: (userId) => void;
 }> {
   render() {
-      console.log(this.props);
+      console.log(this.props.user);
 
       return (
       <div className={style.gridRow}>
@@ -21,6 +20,7 @@ class GridRowUser extends Component<{
           <Button
             className={classNames(style.buttonDeleteUser, style.button)}
             onClick={() => this.props.deleteUser(this.props.user._id)}
+            disabled={this.props.user.roles.includes(Roles.admin)}
           >
             <FormattedMessage id={"deleteUser"} />
           </Button>
@@ -32,11 +32,11 @@ class GridRowUser extends Component<{
         </div>
         <div>
           <div>
-            {this.props.user.orders &&
-              this.props.user.orders.map((order) => (
+            {
+              this.props.user.orders?.map((order, index) => (
                 <ul
                   className={style.orderList}
-                  key={order.id + this.props.user.id}
+                  key={index}
                 >
                   <li><FormattedMessage id="name"/> {order.name}</li>
                   <li><FormattedMessage id="price"/> {order.price}</li>

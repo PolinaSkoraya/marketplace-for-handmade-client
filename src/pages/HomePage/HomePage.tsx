@@ -22,6 +22,9 @@ class HomePage extends Component {
     return (
       <>
         <div className={style.header}>
+            <div className={style.pageDescription}>
+                <FormattedMessage id="info"/>
+            </div>
           {!user.authenticated && <div className={style.links}>
               <div className={style.linksCircle}>
                   <NavLink to={ROUTES.users.login} className={style.authLink}>

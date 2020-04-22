@@ -20,10 +20,6 @@
   background-position: center center;
   height: 200px;
 
-  //display: flex;
-  //padding: 20px;
-  //align-items: center;
-
   position: relative;
 }
 
@@ -55,7 +51,8 @@
 }
 
 .sellerPage__textField_name {
-  font-size: $font-size-title;
+  font-family: 'Amaranth', sans-serif;
+  font-size: 2.5em;
   margin: 15px;
   font-weight: 500;
 }
@@ -64,6 +61,7 @@
   line-height: 1.4;
   max-width: 550px;
   font-size: $font-size-medium;
+  font-weight: 500;
 }
 
 .buttonShowModal {
@@ -224,6 +222,18 @@
   font-size: $font-size-medium;
   font-weight: 500;
   padding-bottom: 10px;
+}
+
+.input {
+  outline: none;
+  border: 1px solid $color-basic-medium;
+  border-radius: 20px;
+  padding: 10px 15px;
+  box-shadow: $box-shadow-good;
+
+  &:focus {
+    color: $color-basic-medium;
+  }
 }
 
 @media (max-width: 400px) {

@@ -26,7 +26,6 @@ class GoodPage extends Component<{match}> {
       const response = await getGoodsOfSeller(this.store.good.seller._id);
       this.sellerGoods = response.data;
     } catch (error) {
-      console.log(error);
     }
 
     const page = document.querySelector("#page");
@@ -55,7 +54,7 @@ class GoodPage extends Component<{match}> {
                 <img
                   className={style.goodPage__image}
                   src={this.store.good.image}
-                  alt="image"
+                  alt="good-photo"
                 />
 
                 <div className={style.buttonLike__div}>
@@ -183,7 +182,7 @@ class GoodPage extends Component<{match}> {
                       <img
                         className={style.sellerGoods__image}
                         src={good.image}
-                        alt={good.image}
+                        alt="good-image"
                       />
                     </NavLink>
                   </div>

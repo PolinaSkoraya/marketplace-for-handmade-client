@@ -43,7 +43,7 @@ class Pagination extends Component<Props> {
         <Button
           styleType="small"
           id="buttonPagePrevious"
-          className={classNames(style.buttonPage)} //, "buttonPagePrevious"
+          className={classNames(style.buttonPage)}
           onClick={previousPage}
           disabled={currentPage === 1}
         >

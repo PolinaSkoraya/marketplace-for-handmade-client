@@ -15,7 +15,7 @@ import {
   postOrder,
   postShop,
   updateOrderState,
-  updateUserRole,
+  updateUserRole, uploadImages,
 } from "../http/services";
 import jwtDecode from "jwt-decode";
 import {IGood, ISeller} from "./helpers/interfaces";
@@ -44,7 +44,6 @@ class Seller {
 class UserStore {
   @observable id;
   @observable name = "";
-  @observable nameForRegistration = "";
   @observable email = "";
   @observable password = "";
   @observable roles: Roles[] = [];
@@ -56,23 +55,22 @@ class UserStore {
   @observable goodsInLikedGoods: IGood[] = [];
 
   @observable showMessageError = false;
+  @observable isRegistrError = false;
   @observable isError = false;
 
   errors = {
     notCreated: [],
   };
 
-  // @observable seller = {
-  //   id: "",
-  //   description: "",
-  //   name: "",
-  //   services: [],
-  //   logo: "",
-  // };
   @observable seller: Seller | null | undefined;
-  //@observable seller: Seller = new Seller( {_id: "12", description: "aw", name: "dw", services: ["aw"], logo: "dw", idUser: ""});
   @observable goodsOfSeller: IGood[] = [];
   @observable ordersOfSeller: IGood[] = [];
+
+  @observable newShopName = "";
+  @observable newShopDescription = "";
+
+  @observable logoURL = "";
+  @observable files = [];
 
   constructor() {
     const accessToken = this.getAuthTokens();
@@ -90,16 +88,19 @@ class UserStore {
     this.name = authData.name;
     this.roles = authData.roles;
 
-    await Promise.all([
-      this.initBasket(),
-      this.initLikedGoods(),
-      this.getOrders(this.id)
-    ]);
+    try {
+      await Promise.all([
+        this.initBasket(),
+        this.initLikedGoods(),
+        this.getOrders(this.id)
+      ]);
 
-    if (this.roles.includes(Roles.seller)) {
-      await this.initSeller(this.id);
-      // @ts-ignore
-      await this.initGoodsOfSeller(this.seller.id);
+      if (this.roles.includes(Roles.seller)) {
+        await this.initSeller(this.id);
+        await this.initGoodsOfSeller(this.seller?.id);
+      }
+    } catch (e) {
+
     }
   }
 
@@ -119,7 +120,18 @@ class UserStore {
     const name = target.name;
 
     this[name] = value;
-    console.log(this[name]);
+  }
+
+  @action.bound
+  onInputFileChange(event) {
+      const target = event.target;
+
+      const files = target.files;
+      const name = target.name;
+
+      this[name] = files;
+
+      this.logoURL = window.URL.createObjectURL(this.files[0]);
   }
 
   @action.bound
@@ -137,10 +149,8 @@ class UserStore {
 
       this.init(response.data);
 
-      return response.data;
     } catch (error) {
       this.showMessageError = true;
-      console.log(error);
     }
   }
 
@@ -153,20 +163,26 @@ class UserStore {
     };
 
     try {
+      this.isRegistrError = false;
       await instance.post(URLS.registerBuyer, user);
 
       this.login(email, password);
     } catch (error) {
-      console.log(error);
+      this.isRegistrError = true;
     }
   }
 
   @action.bound
   async initBasket() {
-    let responseBuyer = await getUserById(this.id);
-    this.basket = responseBuyer.data.basket;
+    try {
+      let responseBuyer = await getUserById(this.id);
+      this.basket = responseBuyer.data.basket;
 
-    this.getGoods(); //get goods after getting the basket
+      this.getGoods();
+    } catch (e) {
+
+    }
+
   }
 
   @action.bound
@@ -179,15 +195,19 @@ class UserStore {
         (good) => good._id !== idGood
       );
     } catch (error) {
-      console.log(error);
     }
   }
 
   @action.bound
   async initLikedGoods() {
-    let responseBuyer = await getUserById(this.id);
-    this.likes = responseBuyer.data.likedGoods;
-    this.setLikedGoods();
+    try {
+      let responseBuyer = await getUserById(this.id);
+      this.likes = responseBuyer.data.likedGoods;
+      this.setLikedGoods();
+    } catch (e) {
+
+    }
+
   }
 
   @action.bound
@@ -206,7 +226,6 @@ class UserStore {
       const responseGoods = await getGoodsInBasket(this.id);
       this.goodsInBasket = responseGoods.data;
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -216,7 +235,6 @@ class UserStore {
       const responseGoods = await getLikedGoods(this.id);
       this.goodsInLikedGoods = responseGoods.data;
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -231,30 +249,35 @@ class UserStore {
 
   @action.bound
   async setSellerRole() {
-    console.log(this.email);
-    console.log(this.password);
-    await updateUserRole(this.id, Roles.seller);
-    await this.login(this.email, this.password); //await
-    this.roles.push(Roles.seller);
-    await this.createShop();
+    try {
+      await updateUserRole(this.id, Roles.seller);
+      await this.createShop();
+      await this.login(this.email, this.password);
+      this.roles.push(Roles.seller);
+
+      this.files = [];
+      this.logoURL = "";
+    } catch (e) {
+
+    }
   }
-  @observable newShopName = "";
-  @observable newShopDescription = "";
 
   @action.bound
   async createShop() {
+    const response = uploadImages(this.files);
+    const logo = await response;
+
     const seller = {
       name: this.newShopName,
       idUser: this.id,
       description: this.newShopDescription,
-      logo: "clayshop-logo.svg",
-      services: ["master"],
+      logo: logo[0],
+      services: [],
     };
 
     try {
       await postShop(seller);
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -262,14 +285,12 @@ class UserStore {
   async initSeller(id) {
     try {
       const response = await getShopByUserId(id);
-      // this.seller = responseSeller.data;
       this.seller = new Seller (response.data);
 
-      const responseSellerOrders = await getSellerOrders(this.seller.id); //new function, for accept orders
+      const responseSellerOrders = await getSellerOrders(this.seller.id);
       this.ordersOfSeller = responseSellerOrders.data;
 
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -279,7 +300,6 @@ class UserStore {
       const responseGoodsOfSeller = await getGoodsOfSeller(id);
       this.goodsOfSeller = responseGoodsOfSeller.data;
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -289,7 +309,6 @@ class UserStore {
       let response = await getUserOrders(id);
       this.orders = response.data;
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -301,7 +320,6 @@ class UserStore {
       await this.getOrders(this.id);
 
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -324,7 +342,7 @@ class UserStore {
       photos: values.photos,
       likes: 0,
       category: values.newGoodCategory,
-      tags: ["tag1", "tag2"],
+      tags: []
     };
 
     try {
@@ -332,19 +350,23 @@ class UserStore {
     } catch (error) {
       // @ts-ignore
       this.errors.notCreated.push(error);
-      console.log(error);
     }
   }
 
   @action
   async deleteOrder(idOrder) {
-    let response = await deleteOrders(idOrder);
-    this.orders = this.orders.filter(
-      (order) => order.idOrder !== response.data._id
-    );
-    this.ordersOfSeller = this.ordersOfSeller.filter(
-      (order) => order.idOrder !== response.data._id
-    );
+    try {
+      const response = await deleteOrders(idOrder);
+      this.orders = this.orders.filter(
+          (order) => order.idOrder !== response.data._id
+      );
+      this.ordersOfSeller = this.ordersOfSeller.filter(
+          (order) => order.idOrder !== response.data._id
+      );
+    } catch (e) {
+
+    }
+
   }
 }
 

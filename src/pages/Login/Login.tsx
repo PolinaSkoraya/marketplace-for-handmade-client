@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Login.scss";
+import style from "./style.module.scss";
 import { observer } from "mobx-react";
 import RootStore from "../../stores/RootStore";
 import { ROUTES } from "../../routes/routes";
@@ -11,38 +11,39 @@ import { action } from "mobx";
 import { withRouter } from "react-router";
 import MessageError from "../../components/MessageError/MessageError";
 import Button from "../../components/Button/Button";
+import classNames from "classnames";
 
 @observer
-class Login extends Component {
+class Login extends Component<{history}> {
   @action
-  async login(user, email, password) {
-    const response = await user.login(email, password);
-    let props: any = this.props;
-    if (response) {
-      props.history.push("/");
+  login = (user, email, password) => async () =>{
+    await user.login(email, password);
+    const {history} = this.props;
+    if (!user.showMessageError) {
+      history.push("/");
     }
-  }
+  };
 
   render() {
     const { user } = RootStore;
 
     return (
       <>
-        <div className="buyerLogin">
-          <div className="message">
-            <MessageError message="hello" show={user.showMessageError} />
+        <div className={style.login}>
+          <div>
+            <MessageError message="incorrectEmOrPass" show={user.showMessageError} />
           </div>
 
-          <Form className="form-log buyerLogin-form">
+          <Form className={style.formLog}>
             {({ formState }) => (
               <>
-                <p className="buyerLoginForm__title">
+                <p className={style.loginForm__title}>
                   <FormattedMessage id="signIn" />
                 </p>
 
                 <Text
                   field="email"
-                  className="input buyerLogin-input"
+                  className={classNames(style.input, style.loginInput)}
                   onChange={user.handleInputChange}
                   placeholder="email"
                   value={user.email}
@@ -51,14 +52,14 @@ class Login extends Component {
                   validateOnChange
                   autoFocus
                 />
-                <label htmlFor="email" className="messageError">
+                <label htmlFor="email" className={style.messageError}>
                   {formState.errors.email}
                 </label>
 
                 <Text
                   type="password"
                   field="password"
-                  className="input buyerLogin-input"
+                  className={classNames(style.input, style.loginInput)}
                   onChange={user.handleInputChange}
                   placeholder="password"
                   value={user.password}
@@ -66,14 +67,14 @@ class Login extends Component {
                   validate={validateLength}
                   validateOnChange
                 />
-                <label htmlFor="password" className="messageError">
+                <label htmlFor="password" className={style.messageError}>
                   {formState.errors.password}
                 </label>
 
                 <Button
                   type="submit"
-                  className="buttonSign"
-                  onClick={() =>
+                  className={style.buttonSign}
+                  onClick={
                     this.login(
                       user,
                       formState.values.email,
@@ -87,18 +88,13 @@ class Login extends Component {
 
                 <NavLink
                   to={ROUTES.users.registration}
-                  className="linkToRegistr"
+                  className={style.linkToRegistr}
                 >
                   <FormattedMessage id="register" />
                 </NavLink>
               </>
             )}
           </Form>
-
-          <NavLink
-            to={ROUTES.root}
-            className="navigation__link navigation__link--user"
-          />
         </div>
       </>
     );

@@ -4,6 +4,7 @@
 .adminPage {
   font-size: 14px;
   padding: 9vh 3% 0 3%;
+  min-width: 1200px;
 }
 
 .gridContainer {
@@ -32,7 +33,7 @@
   background-color: darken($color-secondary-light, 20%);
 }
 
-.button.buttonDeleteUser:hover {
+.button.buttonDeleteUser:hover:enabled {
   box-shadow: none;
   background-color: $color-button-liked;
 }
@@ -41,3 +42,13 @@
   font-size: $font-size-sub-title;
   padding: 15px 0;
 }
+
+@media (max-width: 400px) {
+  .tableWrap {
+    width: 500px;
+    height: 500px;
+    overflow: scroll;
+  }
+
+}
+

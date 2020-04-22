@@ -12,9 +12,7 @@ export enum GoodsContainerType {
   goods = "GOODS",
   basket = "BASKET",
   sellerPage = "SELLER_PAGE",
-  likedGoods = "LIKED_GOODS",
-  ordersBuyer = "ORDERS_BUYER",
-  ordersSeller = "ORDERS_SELLER",
+  likedGoods = "LIKED_GOODS"
 }
 
 interface Props {

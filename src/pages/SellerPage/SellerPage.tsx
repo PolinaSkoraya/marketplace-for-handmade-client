@@ -11,16 +11,15 @@ import Button from "../../components/Button/Button";
 import { MdCancel } from "react-icons/md";
 import { goodsCategories } from "../../stores/helpers/interfaces";
 import RootStore from "../../stores/RootStore";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Form, Option, Select, Text, TextArea } from "informed";
+import { Form, Text, TextArea } from "informed";
 import {
   validateLength,
   validateNumber,
 } from "../../stores/helpers/validation";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-import dropdownStyle from "../../styles/dropdownStyle.module.scss";
+import dropdownStyle from "../GoodsPage/dropdownStyle.module.scss";
 
 @observer
 class SellerPage extends Component<{match}> {
@@ -45,19 +44,8 @@ class SellerPage extends Component<{match}> {
 
     const options = Array.from(Object.values(goodsCategories));
 
-    console.log(user.seller);
-
     return (
       <div className={style.sellerPage}>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnHover
-        />
         <div>
           <div className={style.sellerPage__backImage}>
             <div className={style.sellerPage__logo}>
@@ -118,7 +106,7 @@ class SellerPage extends Component<{match}> {
                       </p>
                       <Text
                         className={classNames(
-                          "input",
+                          style.input,
                           style.createGoodForm__input
                         )}
                         field="newGoodName"
@@ -135,7 +123,7 @@ class SellerPage extends Component<{match}> {
 
                       <TextArea
                         className={classNames(
-                          "input",
+                          style.input,
                           style.createGoodForm__input,
                           style.createGoodForm__textarea
                         )}
@@ -154,7 +142,7 @@ class SellerPage extends Component<{match}> {
                       <Text
                         type="number"
                         className={classNames(
-                          "input",
+                          style.input,
                           style.createGoodForm__input
                         )}
                         field="newGoodPrice"
@@ -179,6 +167,7 @@ class SellerPage extends Component<{match}> {
                         controlClassName={dropdownStyle.dropControl}
                         menuClassName={dropdownStyle.dropMenu}
                         className={dropdownStyle.drop}
+                        value={options[0]}
                       />
                     </div>
 
@@ -215,10 +204,8 @@ class SellerPage extends Component<{match}> {
                   <Button
                     styleType="primary"
                     type="submit"
-                    onClick={() =>
-                      this.store.onCreateGood(user, formState.values)
-                    }
-                    disabled={formState.invalid}
+                    onClick={() => this.store.onCreateGood(user, formState.values)}
+                    disabled={formState.invalid || this.store.photosURLS.length < 3}
                   >
                     <FormattedMessage id="createGood"/>
                   </Button>

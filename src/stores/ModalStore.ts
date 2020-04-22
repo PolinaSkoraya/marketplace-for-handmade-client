@@ -33,10 +33,6 @@ export class ModalStoreModel {
     reject: (value) => void;
   }> = [];
 
-  // constructor() {
-  //     AppRouter.browserHistory.listen(() => this.closeAllModal());
-  // }
-
   @action
   showModal<T extends ModalProps, S = any>(
     Component: React.ComponentType<T>,
@@ -66,7 +62,6 @@ export class ModalStoreModel {
         promise.resolve(result);
       }
     } else {
-      console.log("There are no promises in the list of modals");
     }
     this.modalList.pop();
   }

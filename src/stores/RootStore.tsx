@@ -5,14 +5,21 @@ import Localization from "./Localization";
 class RootStore {
   @observable isLoading = true;
   @observable isServerError = false;
-  @observable user = new UserStore();
 
   @observable localization = new Localization();
+  @observable user = new UserStore();
 
-  @action
-  init() {
-    this.isLoading = false;
-    // setTimeout(() => this.isLoading = false, 3000);
+  @action.bound
+  async init() {
+    try {
+      const { locale, fetchTranslation } = this.localization;
+
+      await fetchTranslation(locale);
+    } catch (error) {
+
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
 

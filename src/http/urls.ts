@@ -6,6 +6,4 @@ const URLS = {
   sellers: "/sellers/",
 };
 
-const STATIC_IMAGES = "http://localhost:9000/static/images/";
-
-export { URLS, STATIC_IMAGES };
+export { URLS };

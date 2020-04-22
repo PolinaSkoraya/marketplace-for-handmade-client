@@ -14,7 +14,7 @@ import { FormattedMessage } from "react-intl";
 import { DebounceInput } from "react-debounce-input";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-import dropdownStyle from "../../styles/dropdownStyle.module.scss";
+import dropdownStyle from "./dropdownStyle.module.scss";
 
 @observer
 class GoodsPage extends Component {
@@ -53,7 +53,7 @@ class GoodsPage extends Component {
                 onChange={(event) =>
                   this.store.searchByName({ value: event.target.value })
                 }
-                className={classNames("input", style.inputSearch)}
+                className={classNames(style.input, style.inputSearch)}
                 value={this.store.searchName}
                 placeholder="Search..."
               />

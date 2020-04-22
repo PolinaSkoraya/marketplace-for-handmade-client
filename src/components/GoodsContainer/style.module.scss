@@ -13,14 +13,16 @@
 .goodsContainer__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
-  grid-gap: 2%;
+  grid-gap: 20px;
 }
 
 .goodsContainer__title {
-  font-size: $font-size-title;
+  font-size: 2em;
   font-weight: 500;
   padding: 45px 0;
   text-align: left;
+
+  font-family: 'Amaranth', sans-serif;
 }
 
 @media (max-width: 400px) {

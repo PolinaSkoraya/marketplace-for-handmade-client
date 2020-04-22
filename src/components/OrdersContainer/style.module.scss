@@ -13,10 +13,11 @@
 }
 
 .ordersContainer__title {
-  font-size: $font-size-title;
+  font-size: 2em;
   font-weight: 500;
   padding: 45px 0 45px 0;
   text-align: left;
+  font-family: 'Amaranth', sans-serif;
 }
 
 @media (max-width: 400px) {

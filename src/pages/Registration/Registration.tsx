@@ -1,4 +1,4 @@
-import "./Registration.scss";
+import style from "./style.module.scss";
 import React, { Component } from "react";
 import { observer } from "mobx-react";
 import RootStore from "../../stores/RootStore";
@@ -9,24 +9,38 @@ import { Form, Text } from "informed";
 import {validateEmail, validateLength} from "../../stores/helpers/validation";
 import { withRouter } from "react-router";
 import Button from "../../components/Button/Button";
+import classNames from "classnames";
+import MessageError from "../../components/MessageError/MessageError";
 
 @observer
-class Registration extends Component {
+class Registration extends Component<{history}> {
+  register = (values) => async () => {
+    const { user } = RootStore;
+
+    await user.register (values.nameForRegistration, values.email, values.password);
+    const {history} = this.props;
+    if (!user.isRegistrError) {
+      history.push("/");
+    }
+  };
+
   render() {
     const { user } = RootStore;
 
     return (
-      <div className="buyerRegistration">
-        <Form className="form-log buyerRegistration-form">
+      <div className={style.registration}>
+          <div>
+              <MessageError message="alreadyExist" show={user.isRegistrError} />
+          </div>
+
+        <Form className={classNames(style.formLog, style.registrationForm)}>
           {({ formState }) => (
             <>
-              <p className="formTitle">
+              <p className={style.formTitle}>
                 <FormattedMessage id="register" />
               </p>
               <Text
-                className="input buyerRegistration-input"
-                value={user.nameForRegistration}
-                onChange={user.handleInputChange}
+                className={classNames(style.input, style.registrationInput)}
                 placeholder="name"
                 id="nameForRegistration"
                 field="nameForRegistration"
@@ -34,13 +48,12 @@ class Registration extends Component {
                 validateOnChange
                 autoFocus
               />
-              <label htmlFor="nameForRegistration" className="messageError">
+              <label htmlFor="nameForRegistration" className={style.messageError}>
                 {formState.errors.nameForRegistration}
               </label>
 
               <Text
-                className="input buyerRegistration-input"
-                value={user.email}
+                className={classNames(style.input, style.registrationInput)}
                 onChange={user.handleInputChange}
                 placeholder="email"
                 id="email"
@@ -48,12 +61,12 @@ class Registration extends Component {
                 validate={validateEmail}
                 validateOnChange
               />
-              <label htmlFor="email" className="messageError">
+              <label htmlFor="email"  className={style.messageError}>
                 {formState.errors.email}
               </label>
 
               <Text
-                className="input buyerRegistration-input"
+                className={classNames(style.input, style.registrationInput)}
                 type="password"
                 value={user.password}
                 onChange={user.handleInputChange}
@@ -63,28 +76,19 @@ class Registration extends Component {
                 validate={validateLength}
                 validateOnChange
               />
-              <label htmlFor="password" className="messageError">
+              <label htmlFor="password" className={style.messageError}>
                 {formState.errors.password}
               </label>
 
               <Button
-                // type="submit"
-                onClick={async () => {
-                  await user.register(
-                    user.nameForRegistration,
-                    user.email,
-                    user.password
-                  );
-                  // let props: any = this.props;
-                  // props.history.push("/");
-                }}
-                disabled={formState.invalid}
-                className="buttonSign"
+                onClick={this.register(formState.values)}
+                disabled={formState.invalid && formState.values.length === 3}
+                className={style.buttonSign}
               >
                 <FormattedMessage id="register" />
               </Button>
 
-              <NavLink to={ROUTES.users.login} className="linkToLog">
+              <NavLink to={ROUTES.users.login} className={style.linkToLog}>
                 <FormattedMessage id="signIn" />
               </NavLink>
             </>
