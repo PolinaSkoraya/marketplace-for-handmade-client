@@ -1,32 +1,33 @@
 enum goodsCategories {
-    art = "ART",
-    accessories = "ACCESSORIES",
-    homeware = "HOMEWARE",
-    toys = "TOYS"
+  art = "ART",
+  accessories = "ACCESSORIES",
+  homeware = "HOMEWARE",
+  toys = "TOYS",
 }
 
-interface GoodInterface {
-    _id: string,
-    name: string,
-    price: number,
-    idSeller: string,
-    description?: string,
-    likes: number,
-    image: string,
-    status?: string,
-    idOrder?: string,
-    category?: string,
-    photos?: string[]
-    tags?: string[]
+interface IGood {
+  _id: string;
+  name: string;
+  price: number;
+  idSeller: string;
+  description?: string;
+  likes: number;
+  image: string;
+  status?: string;
+  idOrder?: string;
+  category?: string;
+  photos?: string[];
+  tags?: string[];
 }
 
-interface SellerInterface {
-    _id: string,
-    services: object,
-    name: string,
-    description: string,
-    logo: string
+interface ISeller {
+  _id: string;
+  services: string[];
+  name: string;
+  description: string;
+  logo: string;
+  idUser: string
 }
 
 // @ts-ignore
-export {GoodInterface, SellerInterface, goodsCategories};
+export { IGood, ISeller, goodsCategories };

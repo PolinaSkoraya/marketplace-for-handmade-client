@@ -8,6 +8,10 @@
   background-color: white;
 }
 
+.order_dark {
+  background-color: rgb(237, 237, 237);
+}
+
 .order__image {
   width: 50%;
 }
@@ -56,7 +60,7 @@
 
 .order:active {
   animation-name: shadow;
-  animation-duration: .4s;
+  animation-duration: 0.4s;
 }
 
 @keyframes shadow {

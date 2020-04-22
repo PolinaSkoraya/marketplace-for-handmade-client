@@ -1,4 +1,4 @@
-@import 'src/styles/variables';
+@import "src/styles/variables";
 @import "src/styles/shared";
 
 .btn {
@@ -69,8 +69,7 @@
 
   &__medium {
     padding: 0;
-    border-radius: 50%;
-    background-color: $color-basic-light;
+    background-color: inherit;
     color: $color-secondary-medium;
     font-size: 20px;
 

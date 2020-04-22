@@ -60,7 +60,7 @@
   font-weight: 500;
 }
 
-.sellerPage__description{
+.sellerPage__description {
   line-height: 1.4;
   max-width: 550px;
   font-size: $font-size-medium;
@@ -88,14 +88,16 @@
   right: -600px;
   opacity: 0;
 
-  transition: top 500ms ease-in-out, right 500ms ease-in-out, opacity 200ms ease-in-out;
+  transition: top 500ms ease-in-out, right 500ms ease-in-out,
+    opacity 200ms ease-in-out;
 }
 
 .createGoodForm__show {
   right: 20px;
   top: 10px;
   opacity: 1;
-  transition: top 500ms ease-in-out, right 500ms ease-in-out, opacity 200ms ease-in-out;
+  transition: top 500ms ease-in-out, right 500ms ease-in-out,
+    opacity 200ms ease-in-out;
 }
 
 .createGoodForm__input {
@@ -161,7 +163,8 @@
   object-fit: cover;
 }
 
-.inputPhotos, .inputImage {
+.inputPhotos,
+.inputImage {
   display: contents;
   z-index: -1;
 }
@@ -170,7 +173,8 @@
   padding-bottom: 80px;
 }
 
-.labelPhotos, .labelImage {
+.labelPhotos,
+.labelImage {
   cursor: pointer;
   outline: none;
   border: none;

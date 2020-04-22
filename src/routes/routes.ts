@@ -1,24 +1,23 @@
 export const ROUTES = {
-    root: '/',
+  root: "/",
 
-    goods: {
-        goods:'/goods/',
-        id: '/goods/:id'
-    },
+  goods: {
+    goods: "/goods/",
+    id: "/goods/:id",
+  },
 
-    sellers: {
-        sellers: '/shops/',
-        id: '/shops/:id',
-        orders: 'user/shop/orders'
-    },
+  sellers: {
+    sellers: "/shops/",
+    id: "/shops/:id",
+    orders: "user/shop/orders",
+  },
 
-    users: {
-        users: '/users/',
-        login: '/user/login',
-        registration: '/user/registration',
-        profile: '/users/:id'
-    },
+  users: {
+    users: "/users/",
+    login: "/user/login",
+    registration: "/user/registration",
+    profile: "/users/:id",
+  },
 
-    admin: '/admin'
-
+  admin: "/admin",
 };

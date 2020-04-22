@@ -8,7 +8,7 @@
   background-color: #fff;
 }
 
-.header::after{
+.header::after {
   content: "";
   background-attachment: fixed;
   background-image: url("../../static/images/header-home.jpg");
@@ -28,32 +28,32 @@
 }
 
 @keyframes backgroundImage {
-  0%{
+  0% {
     background-image: url("../../static/images/header-home.jpg");
   }
-  33%{
+  33% {
     background-image: url("../../static/images/header-home-2.jpg");
   }
-  66%{
+  66% {
     background-image: url("../../static/images/header-home-3.jpg");
   }
-  100%{
+  100% {
     background-image: url("../../static/images/header-home-1.jpg");
   }
 }
 
 .mainPhoto:hover {
   transition-property: opacity;
-  transition-duration: .8s;
+  transition-duration: 0.8s;
   opacity: 0.4;
 }
 
-.goodsContainer{
+.goodsContainer {
   height: 500px;
   margin: 0 20px;
 }
 
-.header__text{
+.header__text {
   font-size: $font-size-sub-title;
 }
 
@@ -72,7 +72,7 @@
   @extend %center;
 }
 
-.info .info__img  {
+.info .info__img {
   width: 90%;
   height: auto;
 
@@ -89,7 +89,7 @@
   display: flex;
 }
 
-.info__name{
+.info__name {
   font-size: $font-size-sub-title;
   font-weight: 700;
   padding-bottom: 10px;
@@ -126,7 +126,7 @@
   backface-visibility: hidden;
 }
 
-.movie .poster  {
+.movie .poster {
   transform: translateZ(130px);
   background-size: cover;
   background-repeat: no-repeat;
@@ -138,19 +138,19 @@
 }
 
 .movie::after {
-  content: '';
+  content: "";
   width: 260px;
   height: 260px;
   position: absolute;
   bottom: 0;
-  box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
   transform-origin: 100% 100%;
   transform: rotateX(90deg) translateX(-130px) translateY(130px);
   transition: box-shadow 350ms;
 }
 
 .movie:hover::after {
-  box-shadow: 20px -5px 50px rgba(0,0,0,0.3);
+  box-shadow: 20px -5px 50px rgba(0, 0, 0, 0.3);
 }
 
 .info .info__inner {
@@ -167,11 +167,11 @@
 }
 
 .movie .poster {
-  box-shadow: inset 0 0 40px rgba(255,255,255,0);
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0);
 }
 
 .movie:hover .poster {
-  box-shadow: inset 300px 0 40px rgba(255,255,255,0.8);
+  box-shadow: inset 300px 0 40px rgba(255, 255, 255, 0.8);
 }
 
 .movie .info,
@@ -182,6 +182,37 @@
 .movie:hover .info,
 .movie:hover .info header {
   box-shadow: inset 0 0 40px rgba(0, 0, 0, 0);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 40%;
+}
+
+.linksCircle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(88, 167, 198, 0.85);
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  z-index: 5;
+}
+
+.authLink {
+  opacity: 1;
+  font-size: $font-size-title;
+  color: $color-basic-dark;
+  padding-bottom: 20px;
+}
+
+.authLink:hover {
+  color: $color-secondary-light;
 }
 
 @media (max-width: 400px) {
@@ -219,7 +250,7 @@
     box-shadow: none;
   }
 
-  .movie .poster  {
+  .movie .poster {
     transform: none;
   }
 

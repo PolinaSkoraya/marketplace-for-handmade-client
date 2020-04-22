@@ -1,11 +1,11 @@
 @import "../../styles/shared";
 @import "../../styles/variables";
 
-.message-error-none {
+.messageErrorNone {
   visibility: hidden;
 }
 
-.message-error {
+.messageError {
   display: flex;
   @extend %center;
   height: 35px;
@@ -15,16 +15,15 @@
   border-bottom: 2px solid $color-button-liked;
 }
 
-.message-error__icon {
+.messageError__icon {
   padding-right: 10px;
 }
 
-.warning-icon {
+.warningIcon {
   height: 30px;
   width: 30px;
 }
 
-.message-error__message {
+.messageError__message {
   font-size: $font-size-small;
 }
-

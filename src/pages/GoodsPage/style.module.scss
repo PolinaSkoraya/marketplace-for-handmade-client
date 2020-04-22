@@ -37,7 +37,8 @@
   color: $color-secondary-medium;
 }
 
-.buttonCancel, .buttonSearch {
+.buttonCancel,
+.buttonSearch {
   font-size: 22px;
 }
 
@@ -46,6 +47,12 @@
   top: 10px;
   left: -25px;
   box-shadow: $box-shadow-good;
+}
+
+.messageNotFound {
+  color: $color-basic-medium;
+  font-size: 2.5em;
+  margin-top: 60px;
 }
 
 .dropMargin {
@@ -71,5 +78,3 @@
     margin-left: 0;
   }
 }
-
-

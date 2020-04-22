@@ -1,34 +1,34 @@
-import {observer} from "mobx-react";
-import React, {Component} from "react";
-import {GoodInterface} from "../../stores/helpers/interfaces";
-import OneGoodStore from "../../stores/OneGoodStore";
-import {observable} from "mobx";
+import { observer } from "mobx-react";
+import React, { Component } from "react";
+import { IGood } from "../../stores/helpers/interfaces";
+import GoodStore from "../../stores/GoodStore";
+import { observable } from "mobx";
 import style from "./style.module.scss";
 
 @observer
-class GridRowGood  extends Component<{good: GoodInterface, idSeller: string}> {
-    oneGoodStore: OneGoodStore = new OneGoodStore();
-    @observable sellerName = "";
+class GridRowGood extends Component<{ good: IGood; idSeller: string }> {
+  goodStore: GoodStore = new GoodStore();
+  @observable sellerName = "";
 
-    componentDidMount(): void {
-        this.oneGoodStore.getShopName(this.props.idSeller).then( response =>
-            this.sellerName = response
-        )
-    }
+  componentDidMount(): void {
+    this.goodStore
+      .getShopName(this.props.idSeller)
+      .then((response) => (this.sellerName = response));
+  }
 
-    render () {
-        const {good} = this.props;
+  render() {
+    const { good } = this.props;
 
-        return (
-            <div className={style.gridRow}>
-                <div className="grid-column grid-column-1">{good.name}</div>
-                <div className="grid-column grid-column-2">{good.price}</div>
-                <div className="grid-column grid-column-3">{good.category}</div>
-                <div className="grid-column grid-column-4">{good.description}</div>
-                <div className="grid-column grid-column-5">{this.sellerName}</div>
-            </div>
-        );
-    }
+    return (
+      <div className={style.gridRow}>
+        <div>{good.name}</div>
+        <div>{good.price}</div>
+        <div>{good.category}</div>
+        <div>{good.description}</div>
+        <div>{this.sellerName}</div>
+      </div>
+    );
+  }
 }
 
 export default GridRowGood;

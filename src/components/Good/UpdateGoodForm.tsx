@@ -1,38 +1,37 @@
-import {action, observable} from "mobx";
+import { action, observable } from "mobx";
 
 class UpdateGoodForm {
-    @observable newInfoGood = {
-        id: "",
-        goodName: "",
-        description: "",
-        price: 0,
-        goodCategory: ""
-    };
+  @observable newInfoGood = {
+    id: "",
+    goodName: "",
+    description: "",
+    price: 0,
+    goodCategory: "",
+  };
 
-    constructor(payload) {
-        console.log(payload.good);
+  constructor(payload) {
 
-        this.newInfoGood.id = payload.good._id;
-        this.newInfoGood.goodName = payload.good.name;
-        this.newInfoGood.description = payload.good.description as string;
-        this.newInfoGood.price = payload.good.price;
-        this.newInfoGood.goodCategory = payload.good.category as string;
-    }
+    this.newInfoGood.id = payload.good.id;
+    this.newInfoGood.goodName = payload.good.name;
+    this.newInfoGood.description = payload.good.description as string;
+    this.newInfoGood.price = payload.good.price;
+    this.newInfoGood.goodCategory = payload.good.category as string;
+  }
 
-    @action.bound
-    handleInputChange (event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+  @action.bound
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
 
-        this.newInfoGood[name] = value;
-    }
+    this.newInfoGood[name] = value;
+  }
 
-    @action.bound
-    async onSubmit(values, func?) {
-        values.values.id = this.newInfoGood.id;
-        func(values.values);
-    }
+  @action.bound
+  async onSubmit(values, func?) {
+    values.values.id = this.newInfoGood.id;
+    func(values.values);
+  }
 }
 
 export default UpdateGoodForm;

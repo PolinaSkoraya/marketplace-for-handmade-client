@@ -47,22 +47,25 @@
 
 .menu {
   background-color: rgba(88, 167, 198, 0.71);
-  position: sticky;
-  top: 50px;
+  position: fixed;
+  top: 10vh;
+  left: 20px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 
+  padding: 15px;
   height: 120px;
   width: 120px;
 
-  margin-top: 20%;
-  margin-right: 15%;
-  padding: 13px;
+  border-radius: 20px;
+  box-shadow: $box-shadow-good;
+}
 
-  border-radius: 50%;
-  box-shadow: inset $box-shadow-good;
+.menu:hover {
+  background-color: darken(rgba(88, 167, 198, 0.71), 10%);
+  transition: background-color 600ms ease-in-out;
 }
 
 .profileContainer__link:hover {
@@ -96,4 +99,3 @@
     display: none;
   }
 }
-
