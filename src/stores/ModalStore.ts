@@ -19,7 +19,6 @@ function getRandomInt(min, max) {
 
 export class Modal<T> {
   id = getRandomInt(1000000, 9000000);
-  // @ts-ignore
   Component: React.ComponentType<T>;
   props?: Omit<T, "onClose">;
 }

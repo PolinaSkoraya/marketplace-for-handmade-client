@@ -81,7 +81,7 @@ class Login extends Component<{history}> {
                       formState.values.password
                     )
                   }
-                  disabled={formState.invalid}
+                  disabled={formState.invalid || !formState.values.email || !formState.values.password}
                 >
                   <FormattedMessage id="signIn" />
                 </Button>

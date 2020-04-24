@@ -39,6 +39,7 @@ class GoodPage extends Component<{match}> {
 
   render() {
     const { user } = RootStore;
+    const isOwner = user.seller && Boolean(user.goodsOfSeller.filter((good) => this.store.good._id === good._id).length);
 
     return (
       <>
@@ -54,7 +55,7 @@ class GoodPage extends Component<{match}> {
                 <img
                   className={style.goodPage__image}
                   src={this.store.good.image}
-                  alt="good-photo"
+                  alt="good"
                 />
 
                 <div className={style.buttonLike__div}>
@@ -113,6 +114,7 @@ class GoodPage extends Component<{match}> {
                     <Button
                       className={style.buttonAddToBasket}
                       onClick={this.store.addToBasket}
+                      disabled={isOwner}
                     >
                       <FormattedMessage id="addToBasket"/>
                     </Button>
@@ -141,7 +143,7 @@ class GoodPage extends Component<{match}> {
                 {
                   this.store.good.photos.map(photo =>
                       <div className={style.item} key={photo + Math.random()}>
-                        <img src={photo} alt="descPhoto" />
+                        <img src={photo} alt="additional" />
                       </div>
                   )
                 }
@@ -182,7 +184,7 @@ class GoodPage extends Component<{match}> {
                       <img
                         className={style.sellerGoods__image}
                         src={good.image}
-                        alt="good-image"
+                        alt="good"
                       />
                     </NavLink>
                   </div>

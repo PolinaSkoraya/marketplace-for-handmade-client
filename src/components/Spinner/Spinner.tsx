@@ -1,9 +1,9 @@
 import React from "react";
-
+import classNames from "classnames";
 import style from "./style.module.scss";
 
-const Spinner = () => (
-  <div className={style.container}>
+const Spinner = (props) => (
+  <div className={classNames(style.container, {[style.inComponent]: props.inComponent})}>
     <div className={style.spinner}>
       <div className={style.circle}>
         <span className={style.line}/>

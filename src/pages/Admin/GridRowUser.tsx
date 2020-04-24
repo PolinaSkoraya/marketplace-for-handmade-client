@@ -5,18 +5,17 @@ import { FormattedMessage } from "react-intl";
 import Button from "../../components/Button/Button";
 import classNames from "classnames";
 import {Roles} from "../../stores/helpers/roles";
+import {IUser} from "../../stores/helpers/interfaces";
 
 @observer
 class GridRowUser extends Component<{
-  user: any;
+  user: IUser;
   deleteUser: (userId) => void;
 }> {
   render() {
-      console.log(this.props.user);
-
       return (
       <div className={style.gridRow}>
-        <div className="grid-column grid-column-0">
+        <div>
           <Button
             className={classNames(style.buttonDeleteUser, style.button)}
             onClick={() => this.props.deleteUser(this.props.user._id)}

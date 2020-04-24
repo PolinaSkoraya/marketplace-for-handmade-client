@@ -18,7 +18,7 @@ export enum GoodsContainerType {
 interface Props {
   title?: any;
   goods: IGood[];
-  goodsContainerType?: any;
+  goodsContainerType?: GoodsContainerType;
   updateGood?: (id: string) => void;
 }
 

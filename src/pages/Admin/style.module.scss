@@ -4,18 +4,17 @@
 .adminPage {
   font-size: 14px;
   padding: 9vh 3% 0 3%;
-  min-width: 1200px;
 }
 
 .gridContainer {
-  display: grid;
   border: 1px solid black;
   margin: 0 40px 15px 40px;
+  overflow: scroll;
 }
 
 .gridRow {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(5, minmax(200px, 1fr));
   border-bottom: 1px solid gray;
   padding: 10px 5px;
 }
@@ -44,11 +43,8 @@
 }
 
 @media (max-width: 400px) {
-  .tableWrap {
-    width: 500px;
-    height: 500px;
-    overflow: scroll;
+  .gridContainer {
+    margin: 0 15px 15px 15px;
   }
-
 }
 

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { observer } from "mobx-react";
 import RootStore from "../../stores/RootStore";
 import GoodStore from "../../stores/GoodStore";
-import { action, observable } from "mobx";
+import { observable } from "mobx";
 import { FaRegSquare } from "react-icons/fa";
 import { MdDone } from "react-icons/md";
 import { ROUTES } from "../../routes/routes";
@@ -33,19 +33,21 @@ class Order extends Component<Props> {
       .then((response) => (this.sellerName = response));
   }
 
-  @action
-  async doneOrder(user, good) {
-    await user.deleteOrder(good.idOrder);
-  }
+  doneOrder = (orderId) => async () => {
+    await RootStore.user.deleteOrder(orderId);
+  };
+
+  accept = (orderId) => async () => {
+    await RootStore.user.acceptOrder(orderId);
+  };
 
   render() {
-    const { user } = RootStore;
     const { idSeller, good, type, accepted } = this.props;
 
     return (
       <div className={classNames(style.order, {[style.order_dark]: accepted} )} id={good._id + good.idOrder}>
         <div className={style.order__image}>
-          <img src={good.image} alt="knitting" />
+          <img src={good.image} alt="order" />
         </div>
 
         <div className={style.order__about}>
@@ -79,7 +81,7 @@ class Order extends Component<Props> {
                     <Button
                       styleType="small"
                       className={style.order__statusButton}
-                      onClick={() => user.deleteOrder(good.idOrder)}
+                      onClick={this.doneOrder(good.idOrder)}
                     >
                       <IconContext.Provider
                         value={{ className: style.doneIcon }}
@@ -99,7 +101,7 @@ class Order extends Component<Props> {
                     <Button
                       styleType="small"
                       className={style.order__statusButton}
-                      onClick={() => user.acceptOrder(good.idOrder)}
+                      onClick={this.accept(good.idOrder)}
                     >
                       <IconContext.Provider
                         value={{ className: style.acceptIcon }}

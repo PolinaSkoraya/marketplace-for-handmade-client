@@ -104,7 +104,7 @@ class SellerProfile extends Component {
                     <div className={style.logo}>
                       <img
                           src={user.logoURL}
-                          alt="image"
+                          alt="logo"
                           className={style.formLogo}
                       />
                     </div>
@@ -112,7 +112,7 @@ class SellerProfile extends Component {
               </div>
             </div>
 
-            <Button onClick={user.setSellerRole}>
+            <Button onClick={user.setSellerRole} disabled={!user.newShopName || !user.newShopDescription || !user.logoURL}>
               <FormattedMessage id="startSelling"/>
             </Button>
           </div>

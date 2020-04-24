@@ -9,7 +9,7 @@ import classNames from "classnames";
 import ShopStore from "../../stores/ShopStore";
 import Button from "../../components/Button/Button";
 import { MdCancel } from "react-icons/md";
-import { goodsCategories } from "../../stores/helpers/interfaces";
+import { GoodsCategories } from "../../stores/helpers/interfaces";
 import RootStore from "../../stores/RootStore";
 import "react-toastify/dist/ReactToastify.css";
 import { Form, Text, TextArea } from "informed";
@@ -42,7 +42,7 @@ class SellerPage extends Component<{match}> {
     console.log(this.store.photosURLS);
     console.log(this.store.imageURL);
 
-    const options = Array.from(Object.values(goodsCategories));
+    const options = Array.from(Object.values(GoodsCategories));
 
     return (
       <div className={style.sellerPage}>
@@ -51,7 +51,7 @@ class SellerPage extends Component<{match}> {
             <div className={style.sellerPage__logo}>
               <img
                 src={this.store.seller.logo}
-                alt="shop logo"
+                alt="shop-logo"
                 className={style.sellerPage__logoImg}
               />
             </div>
@@ -158,16 +158,13 @@ class SellerPage extends Component<{match}> {
                       </label>
 
                       <Dropdown
-                        onChange={(event) =>
-                          (formState.values.newGoodCategory = event.value)
-                        }
+                        onChange={(event) => formState.values.newGoodCategory = event.value}
                         options={options}
                         placeholder="Choose category"
                         arrowClassName={dropdownStyle.dropArrow}
                         controlClassName={dropdownStyle.dropControl}
                         menuClassName={dropdownStyle.dropMenu}
                         className={dropdownStyle.drop}
-                        value={options[0]}
                       />
                     </div>
 
@@ -192,7 +189,7 @@ class SellerPage extends Component<{match}> {
                             <div className={style.imageWrap} key={url}>
                               <img
                                 src={url}
-                                alt="image"
+                                alt="good"
                                 className={style.formImage}
                               />
                             </div>

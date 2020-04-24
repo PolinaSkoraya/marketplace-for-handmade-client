@@ -18,7 +18,11 @@ interface Props {
 class Pagination extends Component<Props> {
   @observable array: number[] = [];
 
-  componentDidUpdate(prevProps: Readonly<Props>): void {
+  componentDidMount(): void {
+      this.createArray();
+  }
+
+    componentDidUpdate(prevProps: Readonly<Props>): void {
     if (this.props.numberOfPages !== prevProps.numberOfPages) {
       this.createArray();
     }
@@ -38,7 +42,7 @@ class Pagination extends Component<Props> {
       setPage,
     } = this.props;
 
-    return (
+      return (
       <div className={style.pagination}>
         <Button
           styleType="small"

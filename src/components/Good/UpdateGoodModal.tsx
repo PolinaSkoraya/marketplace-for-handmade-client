@@ -9,7 +9,7 @@ import Button from "../Button/Button";
 import UpdateGoodForm from "./UpdateGoodForm";
 import {
   IGood,
-  goodsCategories,
+  GoodsCategories,
 } from "../../stores/helpers/interfaces";
 import style from "./style.module.scss";
 import classNames from "classnames";
@@ -116,10 +116,10 @@ class UpdateGoodModal extends Component<Props> {
                 className={classNames(style.input, style.updateGoodForm__input)}
                 field="goodCategory"
               >
-                <option value={goodsCategories.art}>art</option>
-                <option value={goodsCategories.accessories}>accessories</option>
-                <option value={goodsCategories.homeware}>homeware</option>
-                <option value={goodsCategories.toys}>toys</option>
+                <option value={GoodsCategories.art}>art</option>
+                <option value={GoodsCategories.accessories}>accessories</option>
+                <option value={GoodsCategories.homeware}>homeware</option>
+                <option value={GoodsCategories.toys}>toys</option>
               </Select>
 
               <Button

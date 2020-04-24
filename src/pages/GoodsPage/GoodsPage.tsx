@@ -7,7 +7,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import { IconContext } from "react-icons";
 import { FiSearch } from "react-icons/fi";
 import { MdCancel } from "react-icons/md";
-import { goodsCategories } from "../../stores/helpers/interfaces";
+import { GoodsCategories } from "../../stores/helpers/interfaces";
 import Button from "../../components/Button/Button";
 import classNames from "classnames";
 import { FormattedMessage } from "react-intl";
@@ -15,6 +15,7 @@ import { DebounceInput } from "react-debounce-input";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import dropdownStyle from "./dropdownStyle.module.scss";
+import Spinner from "../../components/Spinner/Spinner";
 
 @observer
 class GoodsPage extends Component {
@@ -26,7 +27,7 @@ class GoodsPage extends Component {
   }
 
   render() {
-    const options = Array.from(Object.values(goodsCategories));
+    const options = Array.from(Object.values(GoodsCategories));
 
     return (
         <div className={style.goodsPage}>
@@ -70,24 +71,29 @@ class GoodsPage extends Component {
               value={this.store.searchCategory}
             />
           </div>
+          {
+            this.store.isLoading ? <Spinner inComponent/> :
+                <>
+                  {Boolean(this.store.goods.length) ? (
+                      <>
+                        <GoodsContainer goods={this.store.goods} goodsContainerType={GoodsContainerType.goods} />
 
-          {Boolean(this.store.goods.length) ? (
-            <>
-              <GoodsContainer goods={this.store.goods} goodsContainerType={GoodsContainerType.goods} />
+                        <Pagination
+                            currentPage={this.store.currentPage}
+                            nextPage={this.store.nextPage}
+                            numberOfPages={this.store.numberOfPages}
+                            previousPage={this.store.previousPage}
+                            setPage={this.store.setPage}
+                        />
+                      </>
+                  ) : (
+                      <div className={style.messageNotFound}>
+                        <FormattedMessage id="notFound"/>
+                      </div>
+                  )}
+                </>
+          }
 
-              <Pagination
-                currentPage={this.store.currentPage}
-                nextPage={this.store.nextPage}
-                numberOfPages={this.store.numberOfPages}
-                previousPage={this.store.previousPage}
-                setPage={this.store.setPage}
-              />
-            </>
-          ) : (
-            <div className={style.messageNotFound}>
-              <FormattedMessage id="notFound"/>
-            </div>
-          )}
         </div>
     );
   }

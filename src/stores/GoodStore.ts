@@ -106,13 +106,11 @@ class GoodStore {
 
   @computed
   get isInBasket() {
-    // @ts-ignore
     return user.basket.includes(this.good._id);
   }
 
   @computed
   get isLiked() {
-    // @ts-ignore
     return user.likes.includes(this.good._id);
   }
 }

@@ -6,26 +6,33 @@ import {
   getUserOrders,
   getUsers,
 } from "../http/services";
-import { IGood } from "./helpers/interfaces";
+import {IGood, ISeller, IUser} from "./helpers/interfaces";
 import ModalStore from "./ModalStore";
 import WarningModal from "../components/WarningModal/WarningModal";
 
 class AdminStore {
   @observable goods: IGood[] = [];
-  @observable users: any[] = [];
-  @observable sellers: any[] = [];
+  @observable users: IUser[] = [];
+  @observable sellers: ISeller[] = [];
 
   @action.bound
   async init() {
     try {
-      let responseGoods = await getAllGoods();
-      let responseUsers = await getUsers();
-      let responseSellers = await getSellers();
-      this.goods = responseGoods.data;
-      this.users = responseUsers.data;
-      this.sellers = responseSellers.data;
+      const response = await Promise.all ([
+        getAllGoods(),
+        getUsers(),
+        getSellers()
+      ]);
+      this.goods = response[0].data;
+      this.users = response[1].data;
+      this.sellers = response[2].data;
 
-      await Promise.all(
+      // const res = await this.users.map(async (user) => await getUserOrders(user._id));
+      // this.users.forEach((user, index) => {
+      //   // user.orders = res[0];
+      // });
+
+      await Promise.all (
           this.users.map(async (user) => {
             const orders = await getUserOrders(user._id);
             user.orders = orders.data;

@@ -8,7 +8,6 @@ import {instance} from "../http/instance";
 
 class Localization {
   @observable.shallow messages: Record<string, string> = {};
-  // @ts-ignore
   @observable intl: IntlShape;
 
   @observable private _locale: string;

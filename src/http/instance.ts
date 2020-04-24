@@ -13,9 +13,9 @@ const instance = axios.create({
 instance.interceptors.response.use(undefined,
   function (error) {
     if (error?.response?.status === 500) {
-      let {isServerError} = RootStore;
-      isServerError = true;
+      RootStore.isServerError = true;
     }
+
     return Promise.reject(error);
   }
 );

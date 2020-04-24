@@ -1,5 +1,3 @@
-import * as Yup from "yup";
-
 export const validateLength = (value) => {
   return !value || value.length < 6
     ? "must be longer than 5 characters"
@@ -18,8 +16,3 @@ export const validateEmail = (value) => {
   : undefined
 };
 
-
-export const SignupSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string().min(6, "Too Short!").required("Required"),
-});

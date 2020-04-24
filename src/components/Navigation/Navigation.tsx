@@ -17,7 +17,7 @@ import {action, observable} from "mobx";
 import {FiMenu} from "react-icons/fi"
 
 @observer
-class Navigation extends Component {
+class Navigation extends Component<{history}> {
   @observable hideMenu = true;
 
   @action.bound
@@ -28,8 +28,8 @@ class Navigation extends Component {
   async logOut(user) {
     await user.logOutUser();
 
-    let props: any = this.props;
-    props.history.push("/");
+    const {history} = this.props;
+    history.push("/");
   }
 
   setLocale = (localization, lang) => () => {
@@ -40,8 +40,7 @@ class Navigation extends Component {
   render() {
     const { user } = RootStore;
     const { localization } = RootStore;
-
-    const props: any = this.props;
+    const {history} = this.props;
 
     return (
       <>
@@ -75,7 +74,7 @@ class Navigation extends Component {
               to={ROUTES.goods.goods}
               className={classNames(style.navigation__link, style.navigation__link_full, {
                 [style.activeLink]:
-                  props.history.location.pathname === ROUTES.goods.goods,
+                  history.location.pathname === ROUTES.goods.goods,
               })}
             >
               <FormattedMessage id="goods" />
@@ -87,7 +86,7 @@ class Navigation extends Component {
                     to={ROUTES.admin}
                     className={classNames(style.navigation__link, style.navigation__link_full, {
                       [style.activeLink]:
-                      props.history.location.pathname === ROUTES.admin,
+                      history.location.pathname === ROUTES.admin,
                     })}
                 >
                   Admin
@@ -105,12 +104,12 @@ class Navigation extends Component {
                 <div
                   className={classNames(style.dropbtn, {
                     [style.activeLink]:
-                      props.history.location.pathname === ROUTES.sellers.sellers + user.seller?.id ||
-                      props.history.location.pathname === ROUTES.sellers.sellers,
+                      history.location.pathname === ROUTES.sellers.sellers + user.seller?.id ||
+                      history.location.pathname === ROUTES.sellers.sellers,
                   })}
                 >
                   {
-                    props.history.location.pathname === ROUTES.sellers.sellers ?
+                    history.location.pathname === ROUTES.sellers.sellers ?
                         <FormattedMessage id="orders"/> :
                         <FormattedMessage id="myShop"/>
                   }
@@ -150,7 +149,7 @@ class Navigation extends Component {
                 <div
                   className={classNames(style.basketButtons, {
                     [style.activeLink]:
-                      props.history.location.pathname ===
+                      history.location.pathname ===
                       ROUTES.users.users + user.id,
                   })}
                 >
@@ -175,7 +174,7 @@ class Navigation extends Component {
                 to={ROUTES.users.login}
                 className={classNames(style.navigation__link, style.navigation__link_full, {
                   [style.activeLink]:
-                    props.history.location.pathname === ROUTES.users.login,
+                    history.location.pathname === ROUTES.users.login,
                 })}
               >
                 <FormattedMessage id="signIn" />

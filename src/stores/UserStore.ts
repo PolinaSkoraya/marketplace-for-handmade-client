@@ -1,25 +1,26 @@
-import { action, computed, observable } from "mobx";
-import { instance } from "../http/instance";
-import { URLS } from "../http/urls";
+import {action, computed, observable} from "mobx";
+import {instance} from "../http/instance";
+import {URLS} from "../http/urls";
 import {
   deleteGoodFromBasket,
   deleteOrders,
-  getUserById,
   getGoodsInBasket,
   getGoodsOfSeller,
   getLikedGoods,
   getSellerOrders,
   getShopByUserId,
+  getUserById,
   getUserOrders,
   postGood,
   postOrder,
   postShop,
   updateOrderState,
-  updateUserRole, uploadImages,
+  updateUserRole,
+  uploadImages,
 } from "../http/services";
 import jwtDecode from "jwt-decode";
 import {IGood, ISeller} from "./helpers/interfaces";
-import { Roles } from "./helpers/roles";
+import {Roles} from "./helpers/roles";
 
 const TOKEN = "token";
 
@@ -62,7 +63,7 @@ class UserStore {
     notCreated: [],
   };
 
-  @observable seller: Seller | null | undefined;
+  @observable seller: Seller | null;
   @observable goodsOfSeller: IGood[] = [];
   @observable ordersOfSeller: IGood[] = [];
 
@@ -188,7 +189,7 @@ class UserStore {
   @action.bound
   async removeFromBasket(idGood) {
     try {
-      let response = await deleteGoodFromBasket(this.id, idGood);
+      const response = await deleteGoodFromBasket(this.id, idGood);
 
       this.basket = response.data.basket;
       this.goodsInBasket = this.goodsInBasket.filter(
@@ -240,11 +241,7 @@ class UserStore {
 
   @computed
   get basketCost() {
-    let cost = 0;
-    this.goodsInBasket.forEach((good) => {
-      cost += good.price;
-    });
-    return cost;
+    return this.goodsInBasket.reduce((sum, good) => sum + good.price, 0);
   }
 
   @action.bound
@@ -315,9 +312,10 @@ class UserStore {
   @action
   async addOrder(idUser, idGood, idSeller) {
     try {
-      await postOrder(idUser, idGood, idSeller);
-      await this.removeFromBasket(idGood);
-      await this.getOrders(this.id);
+       await postOrder(idUser, idGood, idSeller);
+
+       this.removeFromBasket(idGood);
+       this.getOrders(this.id);
 
     } catch (error) {
     }
@@ -348,7 +346,6 @@ class UserStore {
     try {
       await postGood(good);
     } catch (error) {
-      // @ts-ignore
       this.errors.notCreated.push(error);
     }
   }

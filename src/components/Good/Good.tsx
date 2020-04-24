@@ -75,15 +75,6 @@ class Good extends Component<Props> {
             )}
           {goodsContainerType === GoodsContainerType.basket && (
             <>
-              <Button
-                styleType="small"
-                id={good.name + "-remove"}
-                className="removeButton"
-                onClick={this.deleteGood(user, good._id)}
-              >
-                <FaTrash />
-              </Button>
-
               <div className={style.tooltip}>
                 <Button
                     styleType="small"
@@ -99,6 +90,15 @@ class Good extends Component<Props> {
                   <FormattedMessage id="pay"/>
                 </span>
               </div>
+
+              <Button
+                  styleType="small"
+                  id={good.name + "-remove"}
+                  className="removeButton"
+                  onClick={this.deleteGood(user, good._id)}
+              >
+                <FaTrash />
+              </Button>
             </>
           )}
         </div>
@@ -108,7 +108,7 @@ class Good extends Component<Props> {
             className={style.good__linkImage}
             to={ROUTES.goods.goods + good._id}
           >
-            <img src={good.image} alt="knitting" />
+            <img src={good.image} alt="good" />
           </NavLink>
         </div>
 

@@ -1,6 +1,6 @@
 import { action, observable } from "mobx";
 import {getGoodsOfSeller, getSellerById, uploadImages} from "../http/services";
-import { IGood } from "./helpers/interfaces";
+import {IGood} from "./helpers/interfaces";
 import { toast } from "react-toastify";
 
 class ShopStore {
@@ -19,6 +19,8 @@ class ShopStore {
   photos: string[] = [];
 
   @observable goodsOfSeller: IGood[] = [];
+
+  @observable formStateCategory = "";
 
   @action.bound
   async initSeller(id) {
@@ -63,7 +65,7 @@ class ShopStore {
 
       if (user.errors.notCreated.length !== 0) {
         user.errors.notCreated.pop();
-        throw Error("good wasn't created");
+        throw Error("good wasn't created, check internet connection");
       }
     } catch (error) {
       toast.error(error.message, {

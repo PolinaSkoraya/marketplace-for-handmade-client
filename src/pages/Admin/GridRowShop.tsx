@@ -4,17 +4,18 @@ import { observable } from "mobx";
 import { getSellerOrders, getUserById } from "../../http/services";
 import style from "./style.module.scss";
 import {FormattedMessage} from "react-intl";
+import {ISeller} from "../../stores/helpers/interfaces";
 
 @observer
-class GridRowShop extends Component<{ seller: any }> {
+class GridRowShop extends Component<{ seller: ISeller }> {
   @observable orders;
   @observable owner;
 
   async componentDidMount() {
-    let response = await getSellerOrders(this.props.seller.id);
+    const response = await getSellerOrders(this.props.seller._id);
     this.orders = response.data;
 
-    let responseUser = await getUserById(this.props.seller.idUser);
+    const responseUser = await getUserById(this.props.seller.idUser);
     this.owner = responseUser.data.name;
   }
 
@@ -31,10 +32,10 @@ class GridRowShop extends Component<{ seller: any }> {
         <div>
           <div>
             {
-              this.orders?.map((order) => (
+              this.orders?.map((order, index) => (
                 <ul
                     className={style.orderList}
-                    key={order.id}
+                    key={index}
                 >
                   <li>
                       <FormattedMessage id="name"/>

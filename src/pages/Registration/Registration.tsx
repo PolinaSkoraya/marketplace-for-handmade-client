@@ -82,7 +82,10 @@ class Registration extends Component<{history}> {
 
               <Button
                 onClick={this.register(formState.values)}
-                disabled={formState.invalid && formState.values.length === 3}
+                disabled={formState.invalid
+                            || !formState.values.nameForRegistration
+                            || !formState.values.email
+                            || !formState.values.password}
                 className={style.buttonSign}
               >
                 <FormattedMessage id="register" />

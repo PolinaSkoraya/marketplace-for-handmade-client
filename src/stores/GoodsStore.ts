@@ -11,6 +11,7 @@ class GoodsStore {
   @observable searchName = "";
   @observable showReset = false;
   @observable searchCategory = "";
+  @observable isLoading = false;
 
   @action.bound
   sortByLikes() {
@@ -21,6 +22,7 @@ class GoodsStore {
 
   @action.bound
   async search() {
+    this.isLoading = true;
     this.showReset = true;
     const config = {
       page: this.currentPage,
@@ -32,8 +34,9 @@ class GoodsStore {
       this.goods = response.data.docs;
       this.numberOfPages = response.data.totalPages;
       this.sortByLikes();
-
     } catch (error) {
+    } finally {
+      this.isLoading = false;
     }
   }
 

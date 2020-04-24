@@ -1,4 +1,4 @@
-enum goodsCategories {
+enum GoodsCategories {
   art = "ART",
   accessories = "ACCESSORIES",
   homeware = "HOMEWARE",
@@ -29,5 +29,17 @@ interface ISeller {
   idUser: string
 }
 
+interface IUser {
+  _id: string;
+  basket: string[];
+  email: string,
+  likedGoods: string[],
+  name: string,
+  orders?: any,
+  password: string,
+  roles: string[]
+}
+
+
 // @ts-ignore
-export { IGood, ISeller, goodsCategories };
+export { IGood, ISeller, GoodsCategories, IUser };

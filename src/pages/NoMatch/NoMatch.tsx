@@ -6,7 +6,7 @@ function NoMatch() {
   return (
     <div className={style.page}>
       <div className={style.page__iconWrapper}>
-        <img src={icon} alt="img404" />
+        <img src={icon} alt="404" />
       </div>
     </div>
   );

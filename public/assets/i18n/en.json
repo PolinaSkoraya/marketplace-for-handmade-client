@@ -1,7 +1,7 @@
 {
   "hello": "Welcome, {name}",
   "basketCost": "Basket cost: {basketCost}$",
-  "price": "price",
+  "price": "price ",
   "shop": "Shop {shopName}",
   "shopJ": "Shop",
   "description": "Description",
@@ -25,7 +25,7 @@
   "incorrectEmOrPass": "Incorrect email or password",
   "acceptOrder": "Accept order",
   "doneOrder": "Done order",
-  "status": "Status",
+  "status": "Status ",
   "users": "Users",
   "shops": "Shops",
   "NO": "NO",
