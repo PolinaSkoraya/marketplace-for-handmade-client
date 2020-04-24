@@ -59,6 +59,7 @@ class GoodStore {
         price: payload.price,
         category: payload.goodCategory,
       };
+
       const responseGood = await updateGood(payload.id, newGood);
       this.good = responseGood.data;
     } catch (error) {

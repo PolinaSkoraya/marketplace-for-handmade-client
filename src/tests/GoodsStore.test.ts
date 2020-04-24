@@ -23,3 +23,11 @@ it("pagination next page", async function () {
     expect(store.currentPage).toEqual(4);
 });
 
+it("pagination reset goods", async function () {
+    const store = new GoodsStore();
+    await store.setPage(3);
+    await store.resetGoods();
+
+    expect(store.currentPage).toEqual(1);
+});
+

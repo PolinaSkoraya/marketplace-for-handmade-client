@@ -62,6 +62,7 @@ export class ModalStoreModel {
       }
     } else {
     }
+
     this.modalList.pop();
   }
 

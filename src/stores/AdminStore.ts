@@ -23,14 +23,10 @@ class AdminStore {
         getUsers(),
         getSellers()
       ]);
+
       this.goods = response[0].data;
       this.users = response[1].data;
       this.sellers = response[2].data;
-
-      // const res = await this.users.map(async (user) => await getUserOrders(user._id));
-      // this.users.forEach((user, index) => {
-      //   // user.orders = res[0];
-      // });
 
       await Promise.all (
           this.users.map(async (user) => {

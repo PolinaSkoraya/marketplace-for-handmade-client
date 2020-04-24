@@ -33,7 +33,6 @@ class WarningModal extends Component<Props> {
       cancel = "NO",
       submit = "YES",
       className,
-      type = "warning",
       ...props
     } = this.props;
 
